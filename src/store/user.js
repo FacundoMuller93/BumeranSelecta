@@ -7,6 +7,8 @@ const userInitialState = {
     error: ""
 }
 
+export const sendRegisterRequest = createAsyncThunk("REGISTER", usersService.userRegisterService)
+
 export const sendLoginRequest = createAsyncThunk("LOGIN", usersService.userLoginService)
 
 export const sendLogoutRequest = createAsyncThunk("LOGOUT", usersService.userLogoutService)
@@ -17,6 +19,17 @@ const userSlice = createSlice({
     name:"user",
     initialState: userInitialState,
     extraReducers: {
+        [sendRegisterRequest.pending]: (state, action) => {
+            state.loading = true
+        },
+        [sendRegisterRequest.fulfilled]: (state, action) => {
+            state.data = action.payload
+            state.loading = false
+        },
+        [sendRegisterRequest.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        },
         [sendLoginRequest.pending]: (state, action) => {
             state.loading = true
         },

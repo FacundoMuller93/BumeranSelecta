@@ -4,9 +4,9 @@ export const allRecruitersServices = async () => {
   const allRecruiters = await axios({
     method: "GET",
     // withCredentials: true,
-    url: "http://",
+    url: `https://fakestoreapi.com/users`,
   })
-  return allRecruiters
+  return allRecruiters.data
 }
 
 export const singleRecruiterServices = async id => {
