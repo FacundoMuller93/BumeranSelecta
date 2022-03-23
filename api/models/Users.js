@@ -6,13 +6,24 @@ class Users extends Model {
 
 
 }
-
+//agregar los campos , tipo de dato fecha 
 Users.init(
     {
-        // Model attributes are defined here
-        username: {
+        //Model attributes are defined here
+        firstName: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        surname: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
         },
         password: {
             type: DataTypes.STRING,
@@ -22,6 +33,15 @@ Users.init(
                 min: 8
             },
         },
+        country: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        age: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+
         salt: {
             type: DataTypes.STRING,
             allowNull: true,

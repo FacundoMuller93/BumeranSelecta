@@ -5,7 +5,7 @@ const db = require("../config/db");
 class Recruiters extends Model {
 
 }
-
+//tipos de datos text y array
 Recruiters.init(
     {
         // Model attributes are defined here
