@@ -67,4 +67,4 @@ const recruiterSlice = createSlice({
     }
 })
 
-export default recruiterSlice
+export default recruiterSlice.reducer
