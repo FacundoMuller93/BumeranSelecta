@@ -1,14 +1,14 @@
 const User = require('../models/Users')
 
 exports.register = (req, res) => {
-    const { name, lastname, email, password } = req.body;
-    const roleId = 1;
+    const { firstName, surname, age, country, email, password } = req.body;
     User.create({
-        name,
-        lastname,
+        firstName,
+        surname,
+        age,
+        country,
         email,
         password,
-        roleId,
     }).then(user => {
         res.status(201).send(user);
     });
