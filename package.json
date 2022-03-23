@@ -15,6 +15,7 @@
     "cookie-parser": "^1.4.6",
     "express-session": "^1.17.2",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
     "react": "^17.0.2",
@@ -32,8 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "client": "react-scripts start",
-    "postinstall": "createdb bumeranSelecta"
+    "client": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
