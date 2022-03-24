@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const cors = require("cors")
 
 require('dotenv').config()
 
@@ -9,15 +10,13 @@ const db = require("./config/db");
 const User = require('./models/Users');
 const { SESSION_SECRET, SERVER_PORT } = process.env
 
-// const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const sessions = require('express-session');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
+app.use(cors())
 app.use(morgan('tiny'));
 app.use(cookieParser());
 
