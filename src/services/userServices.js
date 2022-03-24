@@ -14,15 +14,20 @@ export const userRegisterService = async ({
 
 export const userLoginService = async ({ email, password }) => {
   const loginUser = await axios.post("http://localhost:3001/api/user/login", { email, password })
-  return loginUser
+  return loginUser.data
 }
 
 export const userLogoutService = async () => {
   const logoutUser = await axios.post("http://localhost:3001/api/user/logout")
-  return logoutUser
+  return logoutUser.data
 }
 
-export const persistUserService = async () => {
-  const persist = await axios.get("http://localhost:3001/api/user/me")
-  return persist
-}
+// export const persistUserService = async () => {
+//   const persist = await axios.get("http://localhost:3001/api/user/me")
+//   console.log(persist)
+//   return persist.data
+// }
+
+export const persistUserService = () => {
+  return axios.get("http://localhost:3001/api/user/me").then((res) => res.data);
+};
