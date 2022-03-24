@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-
+const cors = require('cors');
 require('dotenv').config()
 
 const routes = require('./routes');
@@ -18,6 +18,7 @@ const localStrategy = require('passport-local').Strategy;
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json())
+app.use(cors());
 app.use(morgan('tiny'));
 app.use(cookieParser());
 

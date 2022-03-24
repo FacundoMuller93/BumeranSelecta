@@ -3,6 +3,7 @@ import {Form, Button} from 'react-bootstrap';
 import useInput from '../hooks/useInput';
 import { useDispatch } from "react-redux";
 import {useNavigate} from 'react-router-dom';
+import sendRegisterRequest from '../store/user';
 
 const RegisterForm = () => {
 
@@ -20,14 +21,14 @@ const RegisterForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-            // dispatch(sendRegisterRequest({
-            //     firstName : firstName.value,
-            //     surname : surname.value,
-            //     age : age.value,
-            //     country : country.value,
-            //     email : email.value,
-            //     password : password.value
-            // }));
+            dispatch(sendRegisterRequest({
+                firstName : firstName.value,
+                surname : surname.value,
+                age : age.value,
+                country : country.value,
+                email : email.value,
+                password : password.value
+            }));
             navigate("/login")
     }
 
@@ -48,7 +49,7 @@ const RegisterForm = () => {
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Control {...country} type="email" placeholder="Ingrese su nacionalidad" />
+    <Form.Control {...country} type="text" placeholder="Ingrese su nacionalidad" />
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicEmail">

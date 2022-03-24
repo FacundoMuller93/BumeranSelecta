@@ -11,7 +11,7 @@ export const userRegisterService = async ({
 }) => {
   const register = await axios({
     method: "POST",
-    data: { firstName, surname, age, country, email, password },
+    data: { firstName: firstName, surname: surname, age: age, country: country, email: email, password: password },
     // withCredentials: true,
     url: "http://localhost:3001/api/user/register",
   })
