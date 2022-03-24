@@ -2,25 +2,28 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 
+require('dotenv').config()
+
 const routes = require('./routes');
 const db = require("./config/db");
-const { User } = require('./models');
+const User = require('./models/Users');
+const { SESSION_SECRET, SERVER_PORT } = process.env
 
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const sessions = require('express-session');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json())
 app.use(morgan('tiny'));
 app.use(cookieParser());
 
 app.use(
     sessions({
-        secret: 'bumeranSelecta',
+        secret: SESSION_SECRET,
         resave: true,
         saveUninitialized: true,
         cookie: { _expires: 60000000000000 },
@@ -44,7 +47,7 @@ passport.use(
                         return done(null, false);
                     }
 
-                    user.setHash(password, user.salt).then(hash => {
+                    user.hash(password, user.salt).then(hash => {
                         if (hash !== user.password) {
                             return done(null, false);
                         }
@@ -76,10 +79,8 @@ app.use(function (err, req, res, next) {
 
 app.use('/api', routes);
 
-const port = 3001;
-
 db.sync({ force: false }).then(() => {
-    app.listen(port, function () {
-        console.log(`Listening on port http://localhost:${port}`);
+    app.listen(SERVER_PORT, function () {
+        console.log(`Listening on port http://localhost:${SERVER_PORT}`);
     });
 });
