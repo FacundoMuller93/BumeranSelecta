@@ -1,10 +1,12 @@
 const { Model, DataTypes } = require("sequelize");
 const db = require("../config/db");
 
+const bcrypt = require("bcrypt")
 
 class Users extends Model {
-
-
+    hash(password, salt) {
+        return bcrypt.hash(password, salt)
+      }
 }
 //agregar los campos , tipo de dato fecha 
 Users.init(
@@ -57,6 +59,18 @@ Users.init(
         modelName: "users", // We need to choose the model name
     }
 );
+
+Users.beforeCreate(user => {
+    return bcrypt
+      .genSalt(16)
+      .then(salt => {
+        user.salt = salt
+        return user.hash(user.password, salt)
+      })
+      .then(hash => {
+        user.password = hash
+      })
+  })
 
 
 // the defined model is the class itself
