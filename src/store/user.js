@@ -13,7 +13,7 @@ export const sendLoginRequest = createAsyncThunk("LOGIN", usersService.userLogin
 
 export const sendLogoutRequest = createAsyncThunk("LOGOUT", usersService.userLogoutService)
 
-export const persistUser = createAsyncThunk("LOGOUT", usersService.persistUserService)
+export const persistUser = createAsyncThunk("PERSIST", usersService.persistUserService)
 
 const userSlice = createSlice({
     name:"user",

@@ -3,7 +3,7 @@ import {Form, Button} from 'react-bootstrap';
 import useInput from '../hooks/useInput';
 import { useDispatch } from "react-redux";
 import {useNavigate} from 'react-router-dom';
-import sendRegisterRequest from '../store/user';
+import { sendRegisterRequest } from '../store/user';
 
 const RegisterForm = () => {
 
@@ -19,9 +19,9 @@ const RegisterForm = () => {
   
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-            dispatch(sendRegisterRequest({
+            await dispatch(sendRegisterRequest({
                 firstName : firstName.value,
                 surname : surname.value,
                 age : age.value,
