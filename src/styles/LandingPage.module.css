@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    justify-content: center;
+    padding-top: 8%;
+    gap: 5%;
+}
+
+.txtContainer{
+    width: 20%;
+}
+
+.txt{
+    padding-right: 10%;
+    font-weight: 300;
+}

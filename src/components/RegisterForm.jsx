@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Form, Button} from 'react-bootstrap';
 import useInput from '../hooks/useInput';
 import { useDispatch } from "react-redux";
