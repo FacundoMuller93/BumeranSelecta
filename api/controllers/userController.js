@@ -1,23 +1,22 @@
 const User = require("../models/Users")
 
 exports.register = (req, res) => {
-  const { firstName, surname, age, country, email, password } = req.body
-  User.findAll({ where: { email: email } }).then(data => {
-    if (data[0]) res.status(400).send(false)
-    else {
-      User.create({
-        firstName,
-        surname,
-        age,
-        country,
-        email,
-        password,
-      })
-        .then(user => res.status(201).send(user))
-        .catch(() => res.status(404))
-    }
-  })
-}
+  const { firstName, surname, age, country, email, password } = req.body;
+  User.findOrCreate({
+    where: { email },
+    defaults: {
+      firstName,
+      surname,
+      age,
+      country,
+      email,
+      password,
+    },
+  }).then(data => {
+    if (data[1]) res.status(201).send(data[0]);
+    else res.status(400).send(data[1])
+  });
+};
 
 exports.login = (req, res) => {
   res.send(req.user)
