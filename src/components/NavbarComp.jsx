@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { persistUser} from "../store/user";
 import { sendLogoutRequest} from "../store/user";
-import styles from "../styles/NavbarComp.module.css"
+import styles from "../assets/styles/NavbarComp.module.scss"
 
 const NavbarComp = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const handleLogOut = () => {
           <Nav.Link >
             <Link className={styles.menu} to="/">Home</Link>
           </Nav.Link>
-          <Nav.Link>
+          <Nav.Link to="/recruiters">
             <Link className={styles.menu} to="/recruiters">Reclutadores</Link>
           </Nav.Link>
           <Nav.Link>
