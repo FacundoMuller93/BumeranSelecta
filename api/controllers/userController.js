@@ -22,11 +22,6 @@ exports.login = (req, res) => {
   res.send(req.user)
 }
 
-exports.me = (req, res) => {
-  if (!req.user) return res.sendStatus(401)
-  res.send(req.user)
-}
-
 exports.logout = (req, res) => {
   req.logOut()
   res.sendStatus(200)

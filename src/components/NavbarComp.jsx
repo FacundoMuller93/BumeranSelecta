@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { persistUser} from "../store/user";
 import { sendLogoutRequest} from "../store/user";
-import styles from "../styles/NavbarComp.module.css"
+import styles from "../assets/styles/NavbarComp.module.scss"
 
 const NavbarComp = () => {
   const dispatch = useDispatch();
@@ -13,9 +12,6 @@ const NavbarComp = () => {
     state.user
   );
 
-  useEffect(() => {
-    dispatch(persistUser());
-  }, [dispatch]);
 console.log(user.data.id)
 
 const handleLogOut = () => {
@@ -36,7 +32,7 @@ const handleLogOut = () => {
           <Nav.Link >
             <Link className={styles.menu} to="/">Home</Link>
           </Nav.Link>
-          <Nav.Link>
+          <Nav.Link to="/recruiters">
             <Link className={styles.menu} to="/recruiters">Reclutadores</Link>
           </Nav.Link>
           <Nav.Link>

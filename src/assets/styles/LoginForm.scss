@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+
+.title {
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+.formLogin {
+  .inputLogin {
+    height: 2.8rem;
+    border-color: #cacaca;
+
+    &:focus {
+      border: 1px solid #818a91;
+      box-shadow: 0 0 0px 0 rgb(0 0 0 / 30%);
+      transition: box-shadow 500ms;
+    }
+  }
+
+  .buttonLogin {
+    background-color: #fe0068;
+    border: none;
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    height: 3rem;
+
+    &:hover {
+      background-color: #fe0068;
+    }
+  }
+}

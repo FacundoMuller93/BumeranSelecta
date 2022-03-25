@@ -15,9 +15,9 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 
 app.use(express.json())
-app.use(cors());
 app.use(morgan('tiny'));
 app.use(cookieParser());
+app.use(cors());
 
 app.use(
     sessions({
@@ -37,19 +37,16 @@ passport.use(
             usernameField: 'email',
             passwordField: 'password',
         },
-
         function (email, password, done) {
             User.findOne({ where: { email } })
                 .then(user => {
                     if (!user) {
                         return done(null, false);
                     }
-
                     user.hash(password, user.salt).then(hash => {
                         if (hash !== user.password) {
                             return done(null, false);
                         }
-
                         return done(null, user);
                     });
                 })

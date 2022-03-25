@@ -21,13 +21,3 @@ export const userLogoutService = async () => {
   const logoutUser = await axios.post("http://localhost:3001/api/user/logout")
   return logoutUser.data
 }
-
-// export const persistUserService = async () => {
-//   const persist = await axios.get("http://localhost:3001/api/user/me")
-//   console.log(persist)
-//   return persist.data
-// }
-
-export const persistUserService = () => {
-  return axios.get("http://localhost:3001/api/user/me").then((res) => res.data);
-};
