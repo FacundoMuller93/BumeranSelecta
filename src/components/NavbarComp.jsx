@@ -12,7 +12,6 @@ const NavbarComp = () => {
     state.user
   );
 
-console.log(user.data.id)
 
 const handleLogOut = () => {
   dispatch(sendLogoutRequest());
