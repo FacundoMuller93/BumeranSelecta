@@ -7,12 +7,12 @@ import RegisterForm from './components/RegisterForm';
 import Recruiters from './components/Recruiters';
 import Searchs from './components/Searchs';
 import Reports from './components/Reports';
-
+import SpinnerComp from './commons/Spinner'
 const App = () => {
   return (
     <div >
       <NavbarComp/>
-     
+     <SpinnerComp/>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
         <Route path="/register" element={<RegisterForm/>} />
