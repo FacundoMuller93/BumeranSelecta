@@ -124,12 +124,15 @@ body {
 
 .position{
    position: absolute;
-    top: 50%;
-    left: 46%;
-}
-
-.fondo{
-    width: 100vw;
-    height: 100vh;
+    top: 40%;
+    left: 48%;
     background: white;
 }
+.fondo{
+    background: white;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
+
+
