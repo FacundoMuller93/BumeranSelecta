@@ -22,16 +22,27 @@ Recruiters.init(
             allowNull: true
         },
         description_rec: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true,
         },
         area_rec: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            get() {
+                return this.getDataValue('area_rec').split(',')
+            }
+        },
+        rating: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: 0
         },
         active_searchs: {
             type: DataTypes.STRING,
             allowNull: true,
+            get() {
+                return this.getDataValue('active_searchs').split(',')
+            }
         },
         status_rec: {
             type: DataTypes.STRING,
