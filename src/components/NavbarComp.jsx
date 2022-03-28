@@ -30,10 +30,11 @@ const handleLogOut = () => {
           </Link>
         </Navbar.Brand>
 
-        {/* Navbar Menu */}
         <div className="d-none d-lg-block">
           <Nav className="ms-auto my-2 my-lg-0">
-            <Nav.Link>
+            {user.data.id ? (
+              <Nav className="me-auto">
+                            <Nav.Link>
               <Link className={styles.menu} to="/">
                 Home
               </Link>
@@ -53,16 +54,14 @@ const handleLogOut = () => {
                 Reportes
               </Link>
             </Nav.Link>
-            {user.data.id ? (
-              <Nav className="me-auto">
-                <Nav.Link>
-                  <Link className={styles.menu} onClick={handleLogOut} to="/">
-                    Cerrar Sesión
-                  </Link>
-                </Nav.Link>
                 <Nav.Link>
                   <Link className={styles.menu} to="/profile">
                     Mi Perfil
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link className={styles.menu} onClick={handleLogOut} to="/">
+                    Cerrar Sesión
                   </Link>
                 </Nav.Link>
                 <Nav.Link>
