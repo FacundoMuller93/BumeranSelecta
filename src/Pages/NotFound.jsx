@@ -8,7 +8,7 @@ const NotFound = () => {
         <img src="https://www.bumeran.com.ar/candidate/static/media/error-page-404.5d3d2368.svg" alt="Not found" />
         <div>
         <p className={styles.title}>La sección que buscas no existe</p>
-        <p className={styles.paragraph}>Haz click <Link to="/">aqui</Link> para regresar a la página principal.</p>
+        <p className={styles.paragraph}>Haz click <Link to="/">aqui</Link> para regresar a la página principal</p>
         </div>
         </div>
     )
