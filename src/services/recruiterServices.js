@@ -4,7 +4,7 @@ export const allRecruitersServices = async () => {
   const allRecruiters = await axios({
     method: "GET",
     // withCredentials: true,
-    url: `https://fakestoreapi.com/users`,
+    url: "http://localhost:3001/api/recruiter/",
   })
   return allRecruiters.data
 }
@@ -29,10 +29,7 @@ export const editRecruiterServices = async id => {
 }
 
 export const deleteRecruiterServices = async id => {
-    const deleteRecruiter = await axios({
-      method: "DELETE",
-      // withCredentials: true,
-      url: `http://${id}`,
-    })
-    return deleteRecruiter
+    const deleteRecruiter = await axios.delete(`http://localhost:3001/api/recruiter/${id}`
+    )
+    return deleteRecruiter.data
   }

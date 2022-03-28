@@ -57,6 +57,7 @@ const recruiterSlice = createSlice({
             state.loading = true
         },
         [deleteRecruiter.fulfilled]: (state, action) => {
+            state.data = state.data.filter((recruiter) => recruiter.id !== action.payload)
             state.singleRecruiter = {}
             state.loading = false
         },
