@@ -10,11 +10,12 @@ import Searchs from './components/Searchs';
 import Reports from './components/Reports';
 import NotFound from './Pages/NotFound';
 
+import SpinnerComp from './commons/Spinner'
 const App = () => {
   return (
     <div >
       <NavbarComp/>
-     
+     <SpinnerComp/>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
         <Route path="/register" element={<RegisterForm/>} />
