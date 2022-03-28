@@ -11,9 +11,9 @@ const SpinnerComp = () => {
   const recruiter = useSelector(state => state.recruiter)
 
   useEffect(() => {
-    console.log("------------->", user.loading)
     setState(user.loading)
   }, [user])
+  
 
 
   return (
