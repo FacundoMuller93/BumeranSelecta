@@ -1,18 +1,16 @@
-import React from 'react';
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
-import {Button} from 'react-bootstrap';
-import styles from '../assets/styles/EditRecruiter.module.scss';
-import {editRecruiter} from "../store/recruiters";
-import { useDispatch, useSelector} from "react-redux";
+import { Button } from "react-bootstrap";
+import styles from "../assets/styles/EditRecruiter.module.scss";
+import { editRecruiter } from "../store/recruiters";
+import { useDispatch, useSelector } from "react-redux";
 
 const EditRecruiter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const recruiter = useSelector(state => 
-    state.recruiter.singleRecruiter
-  );
+  const recruiter = useSelector((state) => state.recruiter.singleRecruiter);
 
   const name = useInput(recruiter.name);
   const surname = useInput(recruiter.surname);
@@ -26,15 +24,28 @@ const EditRecruiter = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(editRecruiter({id: recruiter.id, name : name.value, surname : surname.value, country : country.value, description_rec : description_rec.value, area_rec : area_rec.value, active_searchs :active_searchs.value, status_rec : status_rec.value}))
-    navigate("/recruiters")
+    await dispatch(
+      editRecruiter({
+        id: recruiter.id,
+        name: name.value,
+        surname: surname.value,
+        country: country.value,
+        description_rec: description_rec.value,
+        area_rec: area_rec.value,
+        active_searchs: active_searchs.value,
+        status_rec: status_rec.value,
+      })
+    );
+    navigate("/recruiters");
   };
 
   if (!recruiter.id) return <div></div>;
 
   return (
     <div>
-      <h2 className="fs-4 mb-3 text-center text-uppercase">Editar Reclutador </h2>
+      <h2 className="fs-4 mb-3 text-center text-uppercase">
+        Editar Reclutador{" "}
+      </h2>
       <section className="container mt-5">
         <div className="card">
           <div className="card-body">
@@ -103,8 +114,15 @@ const EditRecruiter = () => {
                 />
               </div>
               <div className="col-12 modal-footer">
-              <Link to="/recruiters"><Button className={styles.bg} variant="primary">Volver</Button>{' '}</Link>
-                <button type="submit" className={`btn btn-primary pe-2 ${styles.bg}`}>
+                <Link to="/recruiters">
+                  <Button className={styles.bg} variant="primary">
+                    Volver
+                  </Button>{" "}
+                </Link>
+                <button
+                  type="submit"
+                  className={`btn btn-primary pe-2 ${styles.bg}`}
+                >
                   Aceptar
                 </button>
               </div>
@@ -112,8 +130,8 @@ const EditRecruiter = () => {
           </div>
         </div>
       </section>
-      </div>
-      )
-}
+    </div>
+  );
+};
 
 export default EditRecruiter;

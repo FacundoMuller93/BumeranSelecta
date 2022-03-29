@@ -30,13 +30,13 @@ exports.add = (req, res) => {
 
 exports.getAll = (req, res) => {
     Recruiter.findAll({ include: Searchs })
-        .then(data => res.status(201).send(data))
+        .then(data => res.status(200).send(data))
 };
 
 exports.getById = (req, res) => {
     const { id } = req.params;
     Recruiter.findOne({ where: { id }, include: Searchs })
-        .then(data => res.status(201).send(data))
+        .then(data => res.status(200).send(data))
 };
 
 
@@ -46,10 +46,11 @@ exports.update = (req, res) => {
         {
             where: { id },
             returning: true,
-            plaint: true,
+            plain: true,
         })
         .then(data => res.status(201).send(data))
 };
+
 
 exports.delete = (req, res) => {
     const { id } = req.params;

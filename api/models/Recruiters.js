@@ -45,7 +45,7 @@ Recruiters.init(
             // }
         },
         status_rec: {
-            type: DataTypes.STRING,
+            type: DataTypes.BOOLEAN,
             allowNull: true
         }
     },
