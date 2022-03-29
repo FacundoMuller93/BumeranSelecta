@@ -1,60 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import useInput from "../hooks/useInput";
 import { Button } from "react-bootstrap";
 import styles from "../assets/styles/EditRecruiter.module.scss";
+import { editRecruiter } from "../store/recruiters";
+import { useDispatch, useSelector } from "react-redux";
 
 const EditRecruiter = () => {
-  //obtener id del usuario a partir de la url
-  let currentURL = window.location.href;
-  let arrayURL = currentURL.split("/");
-  let reducedURL = [];
-
-  for (let i = 0; i < arrayURL.length; i++) {
-    if (i === arrayURL.length - 1) {
-      reducedURL.push(arrayURL[i]);
-    }
-  }
-
-  let recruiterId = parseInt(reducedURL);
-  console.log(recruiterId);
-
-  //axios trayendo info del recruiter
-
-  const [recruiterInfo, setRecruiterInfo] = useState();
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/recruiter/${recruiterId}`)
-      .then((res) => res.data)
-      .then((product) => {
-        setRecruiterInfo(product);
-        name.setValue(product.name);
-        surname.setValue(product.surname);
-        country.setValue(product.country);
-        description_rec.setValue(product.description_rec);
-        area_rec.setValue(product.area_rec);
-        active_searchs.setValue(product.active_searchs);
-        status_rec.setValue(product.status_rec);
-      });
-  }, []);
-
-  //envio del recruiter editado al servidor
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const name = useInput();
-  const surname = useInput();
-  const country = useInput();
-  const description_rec = useInput();
-  const area_rec = useInput();
-  const active_searchs = useInput();
-  const status_rec = useInput();
+  const recruiter = useSelector((state) => state.recruiter.singleRecruiter);
 
-  const handleSubmit = (e) => {
+  const name = useInput(recruiter.name);
+  const surname = useInput(recruiter.surname);
+  const country = useInput(recruiter.country);
+  const description_rec = useInput(recruiter.description_rec);
+  const area_rec = useInput(recruiter.area_rec);
+  const active_searchs = useInput(recruiter.active_searchs);
+  const status_rec = useInput(recruiter.status_rec);
+
+  //envio del recruiter editado al servidor
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .put(`http://localhost:3001/api/recruiter/${recruiterId}`, {
+    await dispatch(
+      editRecruiter({
+        id: recruiter.id,
         name: name.value,
         surname: surname.value,
         country: country.value,
@@ -63,11 +35,11 @@ const EditRecruiter = () => {
         active_searchs: active_searchs.value,
         status_rec: status_rec.value,
       })
-      .then((res) => res.data);
+    );
     navigate("/recruiters");
   };
 
-  if (!recruiterInfo) return <div></div>;
+  if (!recruiter.id) return <div></div>;
 
   return (
     <div>
