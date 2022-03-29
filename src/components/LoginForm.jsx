@@ -27,7 +27,7 @@ const LoginForm = () => {
   return (
     <div className="d-flex justify-content-center container-fluid">
       <img
-        className="mt-5 pt-5 ms-1 pe-5"
+        className="mt-5 pt-5 ms-1 pe-5 d-none d-lg-block"
         src="https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/contactos.png"
         alt=""
       />
