@@ -1,25 +1,21 @@
-import { Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
+import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { sendLogoutRequest} from "../store/user";
-import styles from "../assets/styles/NavbarComp.module.scss"
+import { sendLogoutRequest } from "../store/user";
+import styles from "../assets/styles/NavbarComp.module.scss";
 
 const NavbarComp = () => {
   const dispatch = useDispatch();
 
-  const user = useSelector(state => 
-    state.user
-  );
+  const user = useSelector((state) => state.user);
 
-
-const handleLogOut = () => {
-  dispatch(sendLogoutRequest());
-};
-
+  const handleLogOut = () => {
+    dispatch(sendLogoutRequest());
+  };
+  console.log("Prueba");
   return (
     <Navbar expand="lg">
       <Container fluid className="">
-        
         {/* Navbar Logo */}
         <Navbar.Brand className="ms-4">
           <Link to="/">
@@ -34,26 +30,26 @@ const handleLogOut = () => {
           <Nav className="ms-auto my-2 my-lg-0">
             {user.data.id ? (
               <Nav className="me-auto">
-                            <Nav.Link>
-              <Link className={styles.menu} to="/">
-                Home
-              </Link>
-            </Nav.Link>
-            <Nav.Link to="/recruiters">
-              <Link className={styles.menu} to="/recruiters">
-                Reclutadores
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link className={styles.menu} to="/searchs">
-                Búsquedas
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link className={styles.menu} to="/reports">
-                Reportes
-              </Link>
-            </Nav.Link>
+                <Nav.Link>
+                  <Link className={styles.menu} to="/">
+                    Home
+                  </Link>
+                </Nav.Link>
+                <Nav.Link to="/recruiters">
+                  <Link className={styles.menu} to="/recruiters">
+                    Reclutadores
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link className={styles.menu} to="/searchs">
+                    Búsquedas
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link className={styles.menu} to="/reports">
+                    Reportes
+                  </Link>
+                </Nav.Link>
                 <Nav.Link>
                   <Link className={styles.menu} to="/profile">
                     Mi Perfil
@@ -84,7 +80,6 @@ const handleLogOut = () => {
             )}
           </Nav>
         </div>
-
 
         {/* Navbar Responsive (Offcanvas-menu-lateral) */}
         <Navbar.Toggle aria-controls="offcanvasNavbar" />
