@@ -1,3 +1,4 @@
+const { Searchs } = require('../models');
 const Recruiter = require('../models/Recruiters');
 
 exports.add = (req, res) => {
@@ -28,15 +29,16 @@ exports.add = (req, res) => {
 };
 
 exports.getAll = (req, res) => {
-    Recruiter.findAll()
+    Recruiter.findAll({ include: Searchs })
         .then(data => res.status(201).send(data))
 };
 
 exports.getById = (req, res) => {
     const { id } = req.params;
-    Recruiter.findOne({ where: { id } })
+    Recruiter.findOne({ where: { id }, include: Searchs })
         .then(data => res.status(201).send(data))
 };
+
 
 exports.update = (req, res) => {
     const { id } = req.params;
