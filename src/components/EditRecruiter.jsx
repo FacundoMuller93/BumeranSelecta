@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useInput from "../hooks/useInput";
-import {Button} from 'react-bootstrap';
-import styles from '../assets/styles/EditRecruiter.module.scss';
+import { Button } from "react-bootstrap";
+import styles from "../assets/styles/EditRecruiter.module.scss";
 
 const EditRecruiter = () => {
   //obtener id del usuario a partir de la url
@@ -18,7 +18,7 @@ const EditRecruiter = () => {
   }
 
   let recruiterId = parseInt(reducedURL);
-  console.log(recruiterId)
+  console.log(recruiterId);
 
   //axios trayendo info del recruiter
 
@@ -61,17 +61,19 @@ const EditRecruiter = () => {
         description_rec: description_rec.value,
         area_rec: area_rec.value,
         active_searchs: active_searchs.value,
-        status_rec: status_rec.value
+        status_rec: status_rec.value,
       })
       .then((res) => res.data);
-      navigate("/recruiters")
+    navigate("/recruiters");
   };
 
   if (!recruiterInfo) return <div></div>;
 
   return (
     <div>
-      <h2 className="fs-4 mb-3 text-center text-uppercase">Editar Reclutador </h2>
+      <h2 className="fs-4 mb-3 text-center text-uppercase">
+        Editar Reclutador{" "}
+      </h2>
       <section className="container mt-5">
         <div className="card">
           <div className="card-body">
@@ -140,8 +142,15 @@ const EditRecruiter = () => {
                 />
               </div>
               <div className="col-12 modal-footer">
-              <Link to="/recruiters"><Button className={styles.bg} variant="primary">Volver</Button>{' '}</Link>
-                <button type="submit" className={`btn btn-primary pe-2 ${styles.bg}`}>
+                <Link to="/recruiters">
+                  <Button className={styles.bg} variant="primary">
+                    Volver
+                  </Button>{" "}
+                </Link>
+                <button
+                  type="submit"
+                  className={`btn btn-primary pe-2 ${styles.bg}`}
+                >
                   Aceptar
                 </button>
               </div>
@@ -149,8 +158,8 @@ const EditRecruiter = () => {
           </div>
         </div>
       </section>
-      </div>
-      )
-}
+    </div>
+  );
+};
 
 export default EditRecruiter;
