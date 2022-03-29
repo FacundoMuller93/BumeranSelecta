@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {Button} from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux";
-import {getAllRecruiters, deleteRecruiter} from "../store/recruiters";
+import {getAllRecruiters, deleteRecruiter, getSingleRecruiter} from "../store/recruiters";
 import styles from '../assets/styles/Recruiters.module.scss';
 
 const Recruiters = () => {
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const recruiter = useSelector(state => 
@@ -19,17 +19,28 @@ const Recruiters = () => {
 
 
     //eliminar recruiter
-    const handleDelete = async (e, userId) => {
+    const handleDelete = async (e, recruiterId) => {
         e.preventDefault();
-        await dispatch(deleteRecruiter(userId))
+        await dispatch(deleteRecruiter(recruiterId))
         dispatch(getAllRecruiters())
         };
+
+    //editar recruiter
+    const handleEdit = async (e, recruiterId) => {
+        e.preventDefault();
+        await dispatch(getSingleRecruiter(recruiterId))
+        navigate(`/recruiter/${recruiterId}`)
+    }
+    
 
 
     return (
         <div className="container-fluid px-4">
         <div className="row my-5">
-            <h3 className="fs-4 mb-3">Lista de Reclutadores <Link to="/addRecruiter"><Button className={`rounded-pill ${styles.btn}`} >Agregar Reclutador</Button></Link>{' '}</h3>
+            <div className={styles.titleContainer}>
+            <h3 className={`fs-4 mb-3 ${styles.title}`}>Lista de Reclutadores</h3>
+            <Link to="/addRecruiter"><Button className={`rounded-pill ${styles.btn}`} >Agregar Reclutador</Button></Link>{' '}
+            </div>
             <div className="col">
                 <table className="table bg-white rounded shadow-sm  table-hover">
                     <thead>
@@ -51,7 +62,7 @@ const Recruiters = () => {
                                  <td>{recruiter.country}</td>
                                  <td>{recruiter.status_rec}</td>
                                  <td>{recruiter.description_rec}</td>
-                                 <td><Link to={`/recruiter/${recruiter.id}`}><Button className={`rounded-pill ${styles.bg}`} >Editar</Button></Link></td>
+                                 <td><button onClick={(e) => handleEdit(e, recruiter.id)}className={`btn btn-danger rounded-pill ${styles.bg}`} >Editar</button></td>
                                  <td><button onClick={(e)=> handleDelete(e, recruiter.id)} className={`btn btn-danger rounded-pill ${styles.bg}`}>Eliminar</button></td>
                                  </tr>
                                 </>

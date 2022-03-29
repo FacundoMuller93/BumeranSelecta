@@ -28,9 +28,9 @@ Recruiters.init(
         area_rec: {
             type: DataTypes.STRING,
             allowNull: true,
-            get() {
-                return this.getDataValue('area_rec').split(',')
-            }
+            // get() {
+            //     return this.getDataValue('area_rec').split(',')
+            // }
         },
         rating: {
             type: DataTypes.INTEGER,
@@ -40,9 +40,9 @@ Recruiters.init(
         active_searchs: {
             type: DataTypes.STRING,
             allowNull: true,
-            get() {
-                return this.getDataValue('active_searchs').split(',')
-            }
+            // get() {
+            //     return this.getDataValue('active_searchs').split(',')
+            // }
         },
         status_rec: {
             type: DataTypes.STRING,
