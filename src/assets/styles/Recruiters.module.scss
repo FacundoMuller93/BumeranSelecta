@@ -8,11 +8,16 @@ width: 100%;
 }
 
 .btn{
-    background-color: rgb(233, 0, 102);
-    border-color: rgb(233, 0, 102);
+    background-color: rgb(233, 0, 102) !important;
+    border-color: rgb(233, 0, 102) !important;
 }
 
 .bg{
-    background-color: rgb(10, 38, 238);
-    border-color: rgb(10, 38, 238);
+    background-color: rgb(10, 38, 238) !important;
+    border-color: rgb(10, 38, 238) !important;
+}
+
+.titleContainer{
+    display: flex;
+    gap: 1%;
 }

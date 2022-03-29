@@ -10,6 +10,8 @@ const recruitersInitialState = {
 
 export const getAllRecruiters = createAsyncThunk("GET_ALL_RECRUITERS", recruiterService.allRecruitersServices)
 
+export const addRecruiter = createAsyncThunk("ADD_RECRUITER", recruiterService.addRecruiterServices)
+
 export const getSingleRecruiter = createAsyncThunk("GET_RECRUITER", recruiterService.singleRecruiterServices)
 
 export const editRecruiter = createAsyncThunk("EDIT_RECRUITER", recruiterService.editRecruiterServices)
@@ -46,7 +48,6 @@ const recruiterSlice = createSlice({
             state.loading = true
         },
         [editRecruiter.fulfilled]: (state, action) => {
-            state.singleRecruiter = action.payload
             state.loading = false
         },
         [editRecruiter.rejected]: (state, action) => {
@@ -62,6 +63,18 @@ const recruiterSlice = createSlice({
             state.loading = false
         },
         [deleteRecruiter.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        },
+        [addRecruiter.pending]: (state, action) => {
+            state.loading = true
+        },
+        [addRecruiter.fulfilled]: (state, action) => {
+            state.data = [...state.data, action.payload]
+            state.singleRecruiter = action.payload
+            state.loading = false
+        },
+        [addRecruiter.rejected]: (state, action) => {
             state.loading = false
             state.error = action.error.message
         },
