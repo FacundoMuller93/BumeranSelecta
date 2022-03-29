@@ -14,26 +14,33 @@ Searchs.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        area_ser: {
+        area_search: {
             type: DataTypes.STRING,
             allowNull: false,
+            get() {
+                return this.getDataValue('area_search').split(',')
+            }
         },
         position: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        description_ser: {
+        description_search: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         vacancies: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
-        state_ser: {
+        state_search: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: "iniciada"
         },
+        lapse_search: {
+            type: DataTypes.STRING
+        }
+
     },
     {
         // Other model options go here

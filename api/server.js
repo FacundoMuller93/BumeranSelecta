@@ -6,7 +6,11 @@ require('dotenv').config()
 
 const routes = require('./routes');
 const db = require("./config/db");
-const User = require('./models/Users');
+//Tema asociaciones://///////////////////
+//const User = require('./models/Users');
+require('./config/associations');
+/////////////////////////////////////////
+
 const { SESSION_SECRET, SERVER_PORT } = process.env
 
 const cookieParser = require('cookie-parser');
