@@ -1,25 +1,21 @@
-import { Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
+import { Container, Nav, Navbar, NavItem, Offcanvas, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { sendLogoutRequest} from "../store/user";
-import styles from "../assets/styles/NavbarComp.module.scss"
+import { sendLogoutRequest } from "../store/user";
+import styles from "../assets/styles/NavbarComp.module.scss";
 
 const NavbarComp = () => {
   const dispatch = useDispatch();
 
-  const user = useSelector(state => 
-    state.user
-  );
+  const user = useSelector((state) => state.user);
 
-
-const handleLogOut = () => {
-  dispatch(sendLogoutRequest());
-};
+  const handleLogOut = () => {
+    dispatch(sendLogoutRequest());
+  };
 
   return (
     <Navbar expand="lg">
       <Container fluid className="">
-        
         {/* Navbar Logo */}
         <Navbar.Brand className="ms-4">
           <Link to="/">
@@ -30,11 +26,10 @@ const handleLogOut = () => {
           </Link>
         </Navbar.Brand>
 
+        {/* Navbar Menu */}
         <div className="d-none d-lg-block">
           <Nav className="ms-auto my-2 my-lg-0">
-            {user.data.id ? (
-              <Nav className="me-auto">
-                            <Nav.Link>
+            <Nav.Link>
               <Link className={styles.menu} to="/">
                 Home
               </Link>
@@ -54,19 +49,21 @@ const handleLogOut = () => {
                 Reportes
               </Link>
             </Nav.Link>
-                <Nav.Link>
-                  <Link className={styles.menu} to="/profile">
-                    Mi Perfil
-                  </Link>
-                </Nav.Link>
+            {user.data.id ? (
+              <Nav className="me-auto">
                 <Nav.Link>
                   <Link className={styles.menu} onClick={handleLogOut} to="/">
                     Cerrar Sesión
                   </Link>
                 </Nav.Link>
                 <Nav.Link>
-                  Bienvenido {`${user.data.firstName} ${user.data.surname}`}
+                  <Link className={styles.menu} to="/profile">
+                    Mi Perfil
+                  </Link>
                 </Nav.Link>
+                <NavItem className={styles.welcomeName}>
+                  Bienvenido {`${user.data.firstName} ${user.data.surname}`}
+                </NavItem>
               </Nav>
             ) : (
               <Nav className="me-auto">
@@ -85,65 +82,70 @@ const handleLogOut = () => {
           </Nav>
         </div>
 
-
         {/* Navbar Responsive (Offcanvas-menu-lateral) */}
         <Navbar.Toggle aria-controls="offcanvasNavbar" />
         <Navbar.Offcanvas
-          className="w-50"
+          className={styles.sizeOffCanvas}
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
           placement="end"
         >
-          <Offcanvas.Header closeButton className="">
-            <Offcanvas.Title id="offcanvasNavbarLabel"></Offcanvas.Title>
+          <Offcanvas.Header closeButton className={styles.offcanvasHeader} > 
           </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
+          <Offcanvas.Body className={styles.boxOffCanvas}>
+            <Nav className="justify-content-end flex-grow-1">
               <Nav.Link>
-                <Link className={styles.menu} to="/">
+                <Link className={styles.linkOffCanvas} to="/">
                   Home
                 </Link>
               </Nav.Link>
+              <NavDropdown.Divider className={styles.divider}/>
               <Nav.Link to="/recruiters">
-                <Link className={styles.menu} to="/recruiters">
+                <Link className={styles.linkOffCanvas} to="/recruiters">
                   Reclutadores
                 </Link>
               </Nav.Link>
+              <NavDropdown.Divider className={styles.divider}/>
               <Nav.Link>
-                <Link className={styles.menu} to="/searchs">
+                <Link className={styles.linkOffCanvas} to="/searchs">
                   Búsquedas
                 </Link>
               </Nav.Link>
+              <NavDropdown.Divider className={styles.divider}/>
               <Nav.Link>
-                <Link className={styles.menu} to="/reports">
+                <Link className={styles.linkOffCanvas} to="/reports">
                   Reportes
                 </Link>
               </Nav.Link>
+              <NavDropdown.Divider className={styles.divider}/>
               {user.data.id ? (
-                <Nav className="me-auto">
+                <Nav>
                   <Nav.Link>
-                    <Link className={styles.menu} onClick={handleLogOut} to="/">
+                    <Link className={styles.linkOffCanvas} onClick={handleLogOut} to="/">
                       Cerrar Sesión
                     </Link>
                   </Nav.Link>
+                  <NavDropdown.Divider className={styles.divider}/>
                   <Nav.Link>
-                    <Link className={styles.menu} to="/profile">
+                    <Link className={styles.linkOffCanvas} to="/profile">
                       Mi Perfil
                     </Link>
                   </Nav.Link>
-                  <Nav.Link>
+                  <NavDropdown.Divider className={styles.divider}/>
+                  <NavItem className={styles.welcomeName}>
                     Bienvenido {`${user.data.firstName} ${user.data.surname}`}
-                  </Nav.Link>
+                  </NavItem>
                 </Nav>
               ) : (
-                <Nav className="me-auto">
+                <Nav>
                   <Nav.Link>
-                    <Link className={styles.menu} to="/login">
+                    <Link className={styles.linkOffCanvas} to="/login">
                       Iniciar Sesión
                     </Link>
                   </Nav.Link>
+                  <NavDropdown.Divider className={styles.divider}/>
                   <Nav.Link>
-                    <Link className={styles.menu} to="/register">
+                    <Link className={styles.linkOffCanvas} to="/register">
                       Registrarse
                     </Link>
                   </Nav.Link>
