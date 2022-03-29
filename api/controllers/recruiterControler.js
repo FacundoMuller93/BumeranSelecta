@@ -44,7 +44,7 @@ exports.update = (req, res) => {
         {
             where: { id },
             returning: true,
-            plaint: true,
+            plain: true,
         })
         .then(data => res.status(201).send(data))
 };
