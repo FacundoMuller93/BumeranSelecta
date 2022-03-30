@@ -10,6 +10,7 @@ import EditRecruiter from './components/EditRecruiter';
 import Rating from './Pages/Rating';
 import Searchs from './components/Searchs';
 import Reports from './components/Reports';
+import ForgotPassword from './components/ForgotPassword';
 import NotFound from './Pages/NotFound';
 
 import SpinnerComp from './commons/Spinner'
@@ -28,6 +29,7 @@ const App = () => {
         <Route path={"/recruiter/:id"} element={<EditRecruiter/>} />
         <Route path="/addRecruiter" element={<AddRecruiter/>} />
         <Route path="/rating" element={<Rating/>}/>
+        <Route path="/forgotPass" element={<ForgotPassword/>}/>
         <Route path="*" element={<NotFound replace to="/" />} />
       </Routes>
     </div>

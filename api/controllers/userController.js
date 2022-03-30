@@ -26,3 +26,12 @@ exports.logout = (req, res) => {
   req.logOut()
   res.sendStatus(200)
 }
+
+exports.find = (req, res) => {
+  const { email } = req.params
+  console.log("CONTR_MAIL", email)
+  User.findOne({
+    where: { email }
+  })
+  .then(data => res.status(200).send(data))
+}

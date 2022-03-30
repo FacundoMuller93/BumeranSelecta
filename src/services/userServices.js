@@ -21,3 +21,9 @@ export const userLogoutService = async () => {
   const logoutUser = await axios.post("http://localhost:3001/api/user/logout")
   return logoutUser.data
 }
+
+export const getUserService = async ({ email }) => {
+  const getUser = await axios.get(`http://localhost:3001/api/user/find/${email.value}`)
+  console.log("AXIOS_USER", getUser)
+  return getUser.data
+}
