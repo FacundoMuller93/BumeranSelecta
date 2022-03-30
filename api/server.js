@@ -7,7 +7,7 @@ require('dotenv').config()
 const routes = require('./routes');
 const db = require("./config/db");
 //Tema asociaciones://///////////////////
-//const User = require('./models/Users');
+const User = require('./models/Users');
 require('./config/associations');
 /////////////////////////////////////////
 

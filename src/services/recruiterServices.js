@@ -15,9 +15,9 @@ export const singleRecruiterServices = async id => {
   return singleRecruiter.data
 }
 
-export const editRecruiterServices = async ({id, name, surname, country, description_rec, area_rec, active_searchs, status_rec}) => {
+export const editRecruiterServices = async ({id, name, surname, country, description_rec, area_rec, active_searchs, status_rec, rating}) => {
   const editRecruiter = await axios.put( 
-    `http://localhost:3001/api/recruiter/${id}`, {name: name, surname: surname, country: country, description_rec: description_rec, area_rec: area_rec, active_searchs: active_searchs, status_rec: status_rec}
+    `http://localhost:3001/api/recruiter/${id}`, {name: name, surname: surname, country: country, description_rec: description_rec, area_rec: area_rec, active_searchs: active_searchs, status_rec: status_rec, rating: rating}
   )
   return editRecruiter.data
 }
