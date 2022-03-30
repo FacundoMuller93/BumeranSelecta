@@ -56,11 +56,6 @@ const NavbarComp = () => {
                     Cerrar Sesión
                   </Link>
                 </Nav.Link>
-                <Nav.Link>
-                  <Link className={styles.menu} to="/profile">
-                    Mi Perfil
-                  </Link>
-                </Nav.Link>
                 <NavItem className={styles.welcomeName}>
                   Bienvenido {`${user.data.firstName} ${user.data.surname}`}
                 </NavItem>
@@ -123,12 +118,6 @@ const NavbarComp = () => {
                   <Nav.Link>
                     <Link className={styles.linkOffCanvas} onClick={handleLogOut} to="/">
                       Cerrar Sesión
-                    </Link>
-                  </Nav.Link>
-                  <NavDropdown.Divider className={styles.divider}/>
-                  <Nav.Link>
-                    <Link className={styles.linkOffCanvas} to="/profile">
-                      Mi Perfil
                     </Link>
                   </Nav.Link>
                   <NavDropdown.Divider className={styles.divider}/>
