@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
 .title {
   font-family: "Poppins", sans-serif;
@@ -6,10 +6,16 @@
 
 .formLogin {
   .inputLogin {
-    height: 2.8rem;
-    border-color: #cacaca;
+    background-color: #ffffff;
+    border-color: #CACACA;
+    border-radius: 100px 100px 100px 100px;
+    font-family: "Poppins", Sans-serif;
+    font-size: 16px;
+    line-height: 2.2em;
+    color: #27273A;
 
     &:focus {
+      background-color: #ffffff;
       border: 1px solid #818a91;
       box-shadow: 0 0 0px 0 rgb(0 0 0 / 30%);
       transition: box-shadow 500ms;
@@ -17,11 +23,13 @@
   }
 
   .buttonLogin {
-    background-color: #fe0068;
-    border: none;
+    background-color: #FE0068;
     color: #ffffff;
+    border: none;
     font-family: "Roboto", sans-serif;
+    font-weight: 500;
     height: 3rem;
+    border-radius: 100px 100px 100px 100px;
 
     &:hover {
       background-color: #fe0068;

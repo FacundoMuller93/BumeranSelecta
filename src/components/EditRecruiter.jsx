@@ -1,32 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import useInput from "../hooks/useInput";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import styles from "../assets/styles/EditRecruiter.module.scss";
-import { editRecruiter } from "../store/recruiters";
-import { useDispatch, useSelector } from "react-redux";
 
 const EditRecruiter = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  //obtener id del usuario a partir de la url
+  let currentURL = window.location.href;
+  let arrayURL = currentURL.split("/");
+  let reducedURL = [];
 
-  const recruiter = useSelector((state) => state.recruiter.singleRecruiter);
+  for (let i = 0; i < arrayURL.length; i++) {
+    if (i === arrayURL.length - 1) {
+      reducedURL.push(arrayURL[i]);
+    }
+  }
 
-  const name = useInput(recruiter.name);
-  const surname = useInput(recruiter.surname);
-  const country = useInput(recruiter.country);
-  const description_rec = useInput(recruiter.description_rec);
-  const area_rec = useInput(recruiter.area_rec);
-  const active_searchs = useInput(recruiter.active_searchs);
-  const status_rec = useInput(recruiter.status_rec);
+  let recruiterId = parseInt(reducedURL);
+  console.log(recruiterId);
+
+  //axios trayendo info del recruiter
+
+  const [recruiterInfo, setRecruiterInfo] = useState();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/recruiter/${recruiterId}`)
+      .then((res) => res.data)
+      .then((product) => {
+        setRecruiterInfo(product);
+        name.setValue(product.name);
+        surname.setValue(product.surname);
+        country.setValue(product.country);
+        description_rec.setValue(product.description_rec);
+        area_rec.setValue(product.area_rec);
+        active_searchs.setValue(product.active_searchs);
+        status_rec.setValue(product.status_rec);
+      });
+  }, []);
 
   //envio del recruiter editado al servidor
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const name = useInput();
+  const surname = useInput();
+  const country = useInput();
+  const description_rec = useInput();
+  const area_rec = useInput();
+  const active_searchs = useInput();
+  const status_rec = useInput();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await dispatch(
-      editRecruiter({
-        id: recruiter.id,
+    axios
+      .put(`http://localhost:3001/api/recruiter/${recruiterId}`, {
         name: name.value,
         surname: surname.value,
         country: country.value,
@@ -35,101 +63,146 @@ const EditRecruiter = () => {
         active_searchs: active_searchs.value,
         status_rec: status_rec.value,
       })
-    );
+      .then((res) => res.data);
     navigate("/recruiters");
   };
 
-  if (!recruiter.id) return <div></div>;
+  if (!recruiterInfo) return <div></div>;
 
   return (
-    <div>
-      <h2 className="fs-4 mb-3 text-center text-uppercase">
-        Editar Reclutador{" "}
-      </h2>
-      <section className="container mt-5">
-        <div className="card">
-          <div className="card-body">
-            <form onSubmit={handleSubmit} className="row g-3">
-              <div className="col-md-6">
-                <input
-                  {...name}
-                  placeholder="Nombre"
-                  type="text"
-                  className="form-control rounded-pill"
-                  id="inputEmail4"
-                />
-              </div>
-              <div className="col-md-6">
-                <input
-                  {...surname}
-                  type="text"
-                  className="form-control rounded-pill"
-                  id="inputPassword4"
-                  placeholder="Apellido"
-                />
-              </div>
-              <div className="col-md-6">
-                <input
-                  {...country}
-                  type="text"
-                  className="form-control rounded-pill"
-                  id="inputEmail4"
-                  placeholder="País"
-                />
-              </div>
-              <div className="col-md-6">
-                <input
-                  {...description_rec}
-                  placeholder="Descripción"
-                  type="text"
-                  className="form-control rounded-pill"
-                  id="inputPassword4"
-                />
-              </div>
-              <div className="col-12">
-                <input
-                  {...area_rec}
-                  placeholder="Áreas"
-                  type="text"
-                  className="form-control rounded-pill"
-                  id="inputAddress"
-                />
-              </div>
-              <div className="col-12">
-                <input
-                  {...active_searchs}
-                  placeholder="Búsquedas activas"
-                  type="text"
-                  className="form-control"
-                  id="inputAddress2"
-                />
-              </div>
-              <div className="col-12">
-                <input
-                  {...status_rec}
-                  placeholder="Estado"
-                  type="text"
-                  className="form-control rounded-pill"
-                  id="inputAddress2"
-                />
-              </div>
-              <div className="col-12 modal-footer">
-                <Link to="/recruiters">
-                  <Button className={styles.bg} variant="primary">
-                    Volver
-                  </Button>{" "}
-                </Link>
-                <button
-                  type="submit"
-                  className={`btn btn-primary pe-2 ${styles.bg}`}
-                >
-                  Aceptar
-                </button>
-              </div>
-            </form>
+    <div className="container d-flex flex-column align-items-center">
+      <div className="row mt-lg-5 mb-5 fs-4 title d-flex justify-content-center">
+        Editar Reclutador
+      </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="w-75 formLogin d-flex flex-column "
+      >
+        <div className="row d-flex justify-content-center">
+          <div className="col-12 col-lg-6">
+            <Form.Group
+              className="w-100 pe-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...name}
+                placeholder="Nombre"
+                type="text"
+                className="inputLogin"
+                id="inputEmail4"
+              />
+            </Form.Group>
+          </div>
+
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 ps-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...surname}
+                placeholder="Apellido"
+                type="text"
+                className="inputLogin"
+                id="inputPassword4"
+              />
+            </Form.Group>
           </div>
         </div>
-      </section>
+
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 pe-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...country}
+                placeholder="País"
+                type="text"
+                className="inputLogin"
+                id="inputPassword4"
+              />
+            </Form.Group>
+          </div>
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 pe-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...description_rec}
+                placeholder="Descripción"
+                type="text"
+                className="inputLogin"
+                id="inputPassword4"
+              />
+            </Form.Group>
+          </div>
+        </div>
+
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 ps-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...area_rec}
+                placeholder="Área"
+                type="text"
+                className="inputLogin"
+                id="inputPassword4"
+              />
+            </Form.Group>
+          </div>
+
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 ps-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...status_rec}
+                type="text"
+                className="inputLogin"
+                id="inputPassword4"
+                placeholder="Activo/Inactivo"
+              />
+            </Form.Group>
+          </div>
+        </div>
+
+        <div className="col-lg-12">
+          <Form.Group className="w-100 pe-lg-1 pb-3" controlId="formBasicEmail">
+            <Form.Control
+              {...active_searchs}
+              type="text"
+              className="inputLogin"
+              id="inputAddress"
+              placeholder="Búsquedas activas separadas por comas"
+            />
+          </Form.Group>
+        </div>
+
+        <div className="col-12 modal-footer">
+          <Link to="/recruiters">
+            <Button
+              className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin"
+              variant="primary"
+            >
+              Volver
+            </Button>{" "}
+          </Link>
+          <button
+            type="submit"
+            className={`${styles.buttonsEditRecruiter} mt-5 w-lg-25 px-5 px-lg-5 `}
+          >
+            Aceptar
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
