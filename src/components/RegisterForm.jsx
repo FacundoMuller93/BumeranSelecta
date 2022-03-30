@@ -1,69 +1,146 @@
-import React from 'react';
-import {Form, Button} from 'react-bootstrap';
-import useInput from '../hooks/useInput';
+import React from "react";
+import { Form, Button } from "react-bootstrap";
+import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
-import {useNavigate} from 'react-router-dom';
-import { sendRegisterRequest } from '../store/user';
+import { useNavigate } from "react-router-dom";
+import { sendRegisterRequest } from "../store/user";
 
 const RegisterForm = () => {
+  const firstName = useInput();
+  const surname = useInput();
+  const age = useInput();
+  const country = useInput();
+  const email = useInput();
+  const password = useInput();
 
-    const firstName = useInput();
-    const surname = useInput();
-    const age = useInput();
-    const country = useInput();
-    const email = useInput();
-    const password = useInput();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
-  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await dispatch(
+      sendRegisterRequest({
+        firstName: firstName.value,
+        surname: surname.value,
+        age: age.value,
+        country: country.value,
+        email: email.value,
+        password: password.value,
+      })
+    );
+    navigate("/login");
+  };
 
+  return (
+    <div className="container d-flex flex-column align-items-center">
+      <div className="row mt-lg-5 mb-5 fs-4 title d-flex justify-content-center">
+        Crear una Cuenta
+      </div>
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-            await dispatch(sendRegisterRequest({
-                firstName : firstName.value,
-                surname : surname.value,
-                age : age.value,
-                country : country.value,
-                email : email.value,
-                password : password.value
-            }));
-            navigate("/login")
-    }
+      <Form
+        onSubmit={handleSubmit}
+        className="w-75 formLogin d-flex flex-column "
+      >
+        <div className="row d-flex justify-content-center">
+          <div className="col-12 col-lg-6">
+            <Form.Group
+              className="w-100 pe-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...firstName}
+                type="text"
+                placeholder="Nombre"
+                className="inputLogin"
+              />
+            </Form.Group>
+          </div>
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 ps-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...surname}
+                className="inputLogin"
+                type="text"
+                placeholder="Apellido"
+              />
+            </Form.Group>
+          </div>
+        </div>
 
-    return (
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 pe-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...age}
+                type="number"
+                placeholder="Edad"
+                className="inputLogin"
+              />
+            </Form.Group>
+          </div>
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 ps-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...country}
+                type="text"
+                placeholder="Nacionalidad"
+                className="rounded-pill inputLogin"
+              />
+            </Form.Group>
+          </div>
+        </div>
 
-<Form onSubmit={handleSubmit}>
-    <div>Crear una cuenta</div>
-    <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Control {...firstName} type="text" placeholder="Ingrese su nombre" />
-  </Form.Group>
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 pe-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...email}
+                type="email"
+                placeholder="Email"
+                className="inputLogin"
+              />
+            </Form.Group>
+          </div>
+          <div className="col-lg-6">
+            <Form.Group
+              className="w-100 ps-lg-1 pb-3"
+              controlId="formBasicEmail"
+            >
+              <Form.Control
+                {...password}
+                type="password"
+                placeholder="Contraseña"
+                className="inputLogin"
+              />
+            </Form.Group>
+          </div>
+        </div>
 
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Control {...surname} type="text" placeholder="Ingrese su apellido" />
-  </Form.Group>
-
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Control {...age} type="number" placeholder="Ingrese su edad" />
-  </Form.Group>
-
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Control {...country} type="text" placeholder="Ingrese su nacionalidad" />
-  </Form.Group>
-
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Control {...email} type="email" placeholder="Ingrese su email" />
-  </Form.Group>
-
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Control {...password} type="password" placeholder="Ingrese su contraseña" />
-  </Form.Group>
-  <Button variant="primary" type="submit">
-    Registrarse
-  </Button>
-</Form>
-    )
-}
+        <div className="row">
+          <div className="d-flex justify-content-center">
+            <Button
+              className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin"
+              type="submit"
+            >
+              Registrarse
+            </Button>
+          </div>
+        </div>
+      </Form>
+    </div>
+  );
+};
 
 export default RegisterForm;

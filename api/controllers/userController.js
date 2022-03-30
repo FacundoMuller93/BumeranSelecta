@@ -35,3 +35,17 @@ exports.find = (req, res) => {
   })
   .then(data => res.status(200).send(data))
 }
+
+exports.edit = (req, res) => {
+  const { id } = req.params
+  User.update(req.body,
+    {
+      where: { id },
+      returning: true,
+      plain: true,
+  })
+  .then(data => {
+    if (data[1]) res.status(201).send(data[0]);
+    else res.status(400).send(data[1])
+  })
+}
