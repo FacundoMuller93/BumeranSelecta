@@ -1,11 +1,14 @@
-.btn{
-    background-color: rgb(233, 0, 102) !important;
-    border-color: rgb(233, 0, 102) !important;
-    border-radius: 8px !important;
-}
-
-.bg{
-    background-color: rgb(10, 38, 238) !important;
-    border-color: rgb(10, 38, 238) !important;
-    border-radius: 8px !important;
-}
+.buttonsEditRecruiter {
+    background-color: #0a26ee;
+    color: #ffffff;
+    border: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    height: 3rem;
+    border-radius: 100px 100px 100px 100px;
+  
+    &:hover {
+      background-color: #0a26ee;;
+    }
+  }
+  

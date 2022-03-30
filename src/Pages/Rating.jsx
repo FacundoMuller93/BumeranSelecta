@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import styles from "../assets/styles/Rating.module.scss";
-import { useDispatch} from "react-redux";
-import {editRecruiter} from "../store/recruiters";
+import { useDispatch } from "react-redux";
+import { editRecruiter } from "../store/recruiters";
 import { useNavigate } from "react-router-dom";
 
 const Rating = () => {
@@ -11,15 +11,13 @@ const Rating = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(rating)
-
-  
+  console.log(rating);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(editRecruiter({id: 3 ,rating: rating * 2}))
-    navigate("/searchs")
-  }
+    await dispatch(editRecruiter({ id: 3, rating: rating * 2 }));
+    navigate("/searchs");
+  };
 
   return (
     <div className={styles.container}>
@@ -47,7 +45,7 @@ const Rating = () => {
         );
       })}
       <form onSubmit={handleSubmit}>
-        <div  className={styles.totalCandidates}>Total de Candidatos: 20</div>
+        <div className={styles.totalCandidates}>Total de Candidatos: 20</div>
         <button
           type="submit"
           className={`btn btn-danger rounded-pill ${styles.bg}`}
