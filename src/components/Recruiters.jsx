@@ -50,18 +50,20 @@ const Recruiters = () => {
                             <th scope="col">País</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Comentario</th>
+                            <th scope="col">Rating</th>
                         </tr>
                     </thead>
                     <tbody className={styles.tbodyContainer} >
-                        {recruiter.map((recruiter) => {
+                        {recruiter.map((recruiter, i) => {
                              return (
                                  <>
-                                 <tr className={styles.userContainer}>
-                                 <th scope="row">{recruiter.id}</th>
+                                 <tr key={i} className={styles.userContainer}>
+                                 <th scope="row">{i + 1}</th>
                                  <td>{`${recruiter.name} ${recruiter.surname}`}</td>
                                  <td>{recruiter.country}</td>
                                  <td>{recruiter.status_rec}</td>
                                  <td>{recruiter.description_rec}</td>
+                                 <td>{recruiter.rating}</td>
                                  <td><button onClick={(e) => handleEdit(e, recruiter.id)}className={`btn btn-danger rounded-pill ${styles.bg}`} >Editar</button></td>
                                  <td><button onClick={(e)=> handleDelete(e, recruiter.id)} className={`btn btn-danger rounded-pill ${styles.bg}`}>Eliminar</button></td>
                                  </tr>
