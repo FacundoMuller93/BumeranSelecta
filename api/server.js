@@ -10,7 +10,6 @@ const db = require("./config/db");
 const User = require('./models/Users');
 require('./config/associations');
 /////////////////////////////////////////
-
 const { SESSION_SECRET, SERVER_PORT } = process.env
 
 const cookieParser = require('cookie-parser');
@@ -78,7 +77,7 @@ app.use(function (err, req, res, next) {
 
 app.use('/api', routes);
 
-db.sync({ force: false }).then(() => {
+db.sync({ force:  false }).then(() => {
     app.listen(SERVER_PORT, function () {
         console.log(`Listening on port http://localhost:${SERVER_PORT}`);
     });

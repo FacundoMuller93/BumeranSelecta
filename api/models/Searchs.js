@@ -17,9 +17,6 @@ Searchs.init(
         area_search: {
             type: DataTypes.STRING,
             allowNull: false,
-            // get() {
-            //     return this.getDataValue('area_search').split(',')
-            // }
         },
         position: {
             type: DataTypes.STRING,
