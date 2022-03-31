@@ -28,9 +28,7 @@ Recruiters.init(
         area_rec: {
             type: DataTypes.STRING,
             allowNull: true,
-            // get() {
-            //     return this.getDataValue('area_rec').split(',')
-            // }
+
         },
         rating: {
             type: DataTypes.DECIMAL(10, 1),
@@ -44,14 +42,9 @@ Recruiters.init(
         active_searchs: {
             type: DataTypes.STRING,
             allowNull: true,
-            // get() {
-            //     return this.getDataValue('active_searchs').split(',')
-            // }
+
         },
-        status_rec: {
-            type: DataTypes.BOOLEAN,
-            allowNull: true
-        }
+
     },
     {
         // Other model options go here
