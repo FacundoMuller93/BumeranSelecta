@@ -17,9 +17,6 @@ Searchs.init(
         area_search: {
             type: DataTypes.STRING,
             allowNull: false,
-            // get() {
-            //     return this.getDataValue('area_search').split(',')
-            // }
         },
         position: {
             type: DataTypes.STRING,
@@ -35,7 +32,7 @@ Searchs.init(
         },
         state_search: {
             type: DataTypes.STRING,
-            defaultValue: "iniciada"
+            defaultValue: "pendiente"
         },
         lapse_search: {
             type: DataTypes.STRING
