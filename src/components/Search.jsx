@@ -28,8 +28,8 @@ const Search = () => {
         <div className="container-fluid px-4">
             <div className="row my-5">
                 <div className={styles.titleContainer}>
-                    <h3 className={`fs-4 mb-3 ${styles.title}`}>Lista de busquedas</h3>
-                    <Link to="/addSearch"><Button className={`rounded-pill ${styles.btn}`} >Agregar Busqueda</Button></Link>{' '}
+                    <h3 className={` mb-5 fs-4 title ${styles.title}`}>Lista de busquedas</h3>
+                    <Link to="/addSearch"><Button className={`w-lg-25  px-5 px-lg-4 ${styles.addSearchBtn}`} >Agregar Busqueda</Button></Link>{' '}
                 </div>
                 <div className="col">
                     <table className="table bg-white rounded shadow-sm  table-hover">
@@ -55,7 +55,7 @@ const Search = () => {
                                         <td>{search.vacancies}</td>
                                         <td>{search.lapse_search.replace(" ", " a las ")}hs</td>
                                         <td>{search.description_search}</td>
-                                        <td><button onClick={(e) => handleDelete(e, search.id)} className={`btn btn-danger rounded-pill ${styles.bg}`}>Eliminar</button></td>
+                                        <td><button onClick={(e) => handleDelete(e, search.id)} className={`w-lg-25 px-4 px-lg-5 ${styles.buttonDeleteRecruiter}`}>Eliminar</button></td>
                                     </tr>
                                 )
                             })}

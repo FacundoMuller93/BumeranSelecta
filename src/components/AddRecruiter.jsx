@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import styles from "../assets/styles/AddRecruiter.module.scss";
+import { getAllRecruiters } from "../store/recruiters";
+import { useDispatch } from "react-redux";
 
 const AddRecruiter = () => {
   //axios para crear producto
@@ -16,6 +18,7 @@ const AddRecruiter = () => {
   const status_rec = useInput();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +34,7 @@ const AddRecruiter = () => {
       })
       .then((res) => res.data)
       .then((newRecruiter) => console.log(newRecruiter));
+      dispatch(getAllRecruiters())
     navigate("/Recruiters");
   };
 

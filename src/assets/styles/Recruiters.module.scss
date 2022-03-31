@@ -14,7 +14,7 @@
 }
 
 .buttonDeleteRecruiter {
-  background-color: #fe0068;
+  background-color: #fe0068 !important;
   color: #ffffff;
   border: none;
   font-family: "Poppins", sans-serif;
@@ -28,6 +28,30 @@
 }
 
 .buttonsAddRecruiter {
+  background-color: #0a26ee !important;
+  color: #ffffff;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  height: 3rem;
+  border-radius: 100px 100px 100px 100px !important;
+
+  &:hover {
+    background-color: #0a26ee;
+  }
+}
+
+.titleContainer{
+  display: flex;
+  gap: 6%;
+  padding-bottom: 3%;
+}
+
+.title{
+  padding-left: 4%;
+}
+
+.addSearchBtn{
   background-color: #0a26ee !important;
   color: #ffffff;
   border: none;
