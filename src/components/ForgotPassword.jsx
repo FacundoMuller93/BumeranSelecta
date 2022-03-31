@@ -1,11 +1,16 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Form, Button } from "react-bootstrap"
 import useInput from "../hooks/useInput"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import "../assets/styles/LoginForm.scss"
 
-import { getUserRequest, sendRegisterRequest } from "../store/user"
+import {
+  getUserRequest,
+  sendRegisterRequest,
+  sendLogoutRequest,
+  deleteUserRequest,
+} from "../store/user"
 
 const ForgotPassword = () => {
   const user = useSelector(state => state.user.data)
@@ -22,12 +27,31 @@ const ForgotPassword = () => {
   }
 
   const handlePassSubmit = async e => {
-    // e.preventDefault()
-    if (password !== passCheck) (alert("La contraseña debe ser igual."))
-    await dispatch(getUserRequest({ email }))
+    e.preventDefault()
+    // if (password !== passCheck) (alert("La contraseña debe ser igual."))
+    const firstName = user.firstName
+    const surname = user.surname
+    const age = String(user.age)
+    const country = user.country
+    const email = user.email
+    const passW = password.value
+    const id = user.id
+    await dispatch(sendLogoutRequest())
+    dispatch(deleteUserRequest({ id: id }))
+    await dispatch(
+      sendRegisterRequest({
+        firstName: firstName,
+        surname: surname,
+        age: age,
+        country: country,
+        email: email,
+        password: passW,
+      })
+    )
+    navigate("/")
   }
 
-//   console.log("USER", user)
+  //   console.log("USER", user)
 
   return (
     <>
@@ -68,7 +92,6 @@ const ForgotPassword = () => {
             onSubmit={handlePassSubmit}
             className="text-center mt-4 pt-5 ms-5 w-50 formLogin"
           >
-
             <div className="fs-5 title">Olvidé mi Contraseña</div>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -89,9 +112,10 @@ const ForgotPassword = () => {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-
-            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="formBasicCheckbox"
+            ></Form.Group>
             <Button
               type="submit"
               className=" rounded-pill px-5 mt-3 buttonLogin"

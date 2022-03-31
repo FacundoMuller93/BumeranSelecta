@@ -28,18 +28,16 @@ export const userLoginService = async ({ email, password }) => {
 };
 
 export const userLogoutService = async () => {
-<<<<<<< HEAD
   const logoutUser = await axios.post("http://localhost:3001/api/user/logout")
   return logoutUser.data
 }
 
 export const getUserService = async ({ email }) => {
   const getUser = await axios.get(`http://localhost:3001/api/user/find/${email.value}`)
-  console.log("AXIOS_USER", getUser)
   return getUser.data
 }
-=======
-  const logoutUser = await axios.post("http://localhost:3001/api/user/logout");
-  return logoutUser.data;
-};
->>>>>>> 37f909a60cae35f6a98b557390e20a76df50637d
+
+export const deleteUserService = async ({ id }) => {
+  const deleteUser = await axios.delete(`http://localhost:3001/api/user/delete/${id}`)
+  return deleteUser.data
+}

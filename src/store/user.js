@@ -24,8 +24,9 @@ export const sendLogoutRequest = createAsyncThunk(
 
 export const getUserRequest = createAsyncThunk("GET_USER", usersService.getUserService)
 
+export const deleteUserRequest = createAsyncThunk("DELETE_USER", usersService.deleteUserService)
+
 const userSlice = createSlice({
-<<<<<<< HEAD
     name:"user",
     initialState: userInitialState,
     extraReducers: {
@@ -73,47 +74,18 @@ const userSlice = createSlice({
             state.loading = false
             state.error = action.error.message
         },
+        [deleteUserRequest.pending]: (state, action) => {
+            state.loading = true
+        },
+        [deleteUserRequest.fulfilled]: (state, action) => {
+            state.data = {}
+            state.loading = false
+        },
+        [deleteUserRequest.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        },
     }
 })
-=======
-  name: "user",
-  initialState: userInitialState,
-  extraReducers: {
-    [sendRegisterRequest.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [sendRegisterRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.loading = false;
-    },
-    [sendRegisterRequest.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.error.message;
-    },
-    [sendLoginRequest.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [sendLoginRequest.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      state.loading = false;
-    },
-    [sendLoginRequest.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.error.message;
-    },
-    [sendLogoutRequest.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [sendLogoutRequest.fulfilled]: (state, action) => {
-      state.data = {};
-      state.loading = false;
-    },
-    [sendLogoutRequest.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.error.message;
-    },
-  },
-});
->>>>>>> 37f909a60cae35f6a98b557390e20a76df50637d
 
 export default userSlice.reducer;
