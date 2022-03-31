@@ -63,11 +63,6 @@ const NavbarComp = () => {
                     Cerrar Sesión
                   </Link>
                 </Nav.Link>
-                <Nav.Link>
-                  <Link className={styles.menu} to="/profile">
-                    Mi Perfil
-                  </Link>
-                </Nav.Link>
                 <NavItem className={styles.welcomeName}>
                   Bienvenido {`${user.data.firstName} ${user.data.surname}`}
                 </NavItem>
@@ -139,11 +134,6 @@ const NavbarComp = () => {
                     </Link>
                   </Nav.Link>
                   <NavDropdown.Divider className={styles.divider} />
-                  <Nav.Link>
-                    <Link className={styles.linkOffCanvas} to="/profile">
-                      Mi Perfil
-                    </Link>
-                  </Nav.Link>
                   <NavDropdown.Divider className={styles.divider} />
                   <NavItem className={styles.welcomeName}>
                     Bienvenido {`${user.data.firstName} ${user.data.surname}`}
