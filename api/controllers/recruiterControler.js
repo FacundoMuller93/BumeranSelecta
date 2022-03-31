@@ -8,8 +8,6 @@ exports.add = (req, res) => {
         country,
         description_rec,
         area_rec,
-        active_searchs,
-        status_rec
     } = req.body;
     Recruiter.findOrCreate({
         where: { name },
@@ -19,8 +17,6 @@ exports.add = (req, res) => {
             country,
             description_rec,
             area_rec,
-            active_searchs,
-            status_rec,
         },
     }).then(data => {
         if (data[1]) res.status(201).send(data[0]);

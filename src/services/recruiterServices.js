@@ -23,8 +23,6 @@ export const editRecruiterServices = async ({
   country,
   description_rec,
   area_rec,
-  active_searchs,
-  status_rec,
   rating,
 }) => {
   const editRecruiter = await axios.put(
@@ -35,8 +33,6 @@ export const editRecruiterServices = async ({
       country: country,
       description_rec: description_rec,
       area_rec: area_rec,
-      active_searchs: active_searchs,
-      status_rec: status_rec,
       rating: rating,
     }
   );
@@ -56,8 +52,6 @@ export const addRecruiterServices = async ({
   country,
   description_rec,
   area_rec,
-  active_searchs,
-  status_rec,
 }) => {
   const addRecruiter = await axios.post(
     "http://localhost:3001/api/recruiter/add",
@@ -67,8 +61,6 @@ export const addRecruiterServices = async ({
       country: country,
       description_rec: description_rec,
       area_rec: area_rec,
-      active_searchs: active_searchs,
-      status_rec: status_rec,
     }
   );
   return addRecruiter.data;
