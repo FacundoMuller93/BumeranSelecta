@@ -67,10 +67,10 @@ const LoginForm = () => {
             className="mb-3"
             controlId="formBasicCheckbox"
           ></Form.Group>
+          <Link className="forgotPass" to="/forgotPass">Olvidé mi contraseña</Link>
           <Button type="submit" className="px-5 mt-3 buttonLogin">
             Enviar
           </Button>
-          <Link to="/forgotPass">Olvidé mi contraseña</Link>
         </Form>
       </div>
     </div>

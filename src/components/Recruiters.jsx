@@ -49,20 +49,20 @@ const Recruiters = () => {
                 </th>
                 <th scope="col">Nombre y Apellido</th>
                 <th scope="col">País</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Comentario</th>
+                <th scope="col">Área</th>
+                <th scope="col">Rating</th>
               </tr>
             </thead>
             <tbody className={styles.tbodyContainer}>
-              {recruiter.map((recruiter) => {
+              {recruiter.map((recruiter, i) => {
                 return (
                   <>
                     <tr>
-                      <th scope="row">{recruiter.id}</th>
+                      <th scope="row">{i + 1}</th>
                       <td>{`${recruiter.name} ${recruiter.surname}`}</td>
                       <td>{recruiter.country}</td>
-                      <td>{recruiter.status_rec}</td>
-                      <td>{recruiter.description_rec}</td>
+                      <td>{recruiter.area_rec}</td>
+                      <td>{recruiter.rating}</td>
                       <td>
                         <Link to={`/recruiter/${recruiter.id}`}>
                           <Button
