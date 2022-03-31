@@ -12,26 +12,23 @@ Searchs.init(
         // Model attributes are defined here
         country: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         area_search: {
             type: DataTypes.STRING,
-            allowNull: false,
-            get() {
-                return this.getDataValue('area_search').split(',')
-            }
+            allowNull: true,
         },
         position: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         description_search: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         vacancies: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
         },
         state_search: {
             type: DataTypes.STRING,

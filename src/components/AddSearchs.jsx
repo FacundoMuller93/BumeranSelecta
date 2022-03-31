@@ -4,33 +4,45 @@ import { Button } from "react-bootstrap"
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Toast from 'react-bootstrap/Toast'
-import axios from 'axios'
+import { useDispatch } from "react-redux"
+import { getAllSearch, addSearch } from "../store/searchs";
+import { useNavigate } from "react-router-dom";
+
 
 import useInput from "../hooks/useInput";
 import "../assets/styles/Search.scss"
 import arr from "../hooks/array"
 
-const Searchs = () => {
+const AddSearchs = () => {
     const [show, setShow] = useState(false);
+    const [validation, setValidation] = useState(true)
     const country = useInput();
     const area_ser = useInput();
     const position = useInput();
     const description_ser = useInput();
     const vacancies = useInput();
     const lapse_search = useInput();
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3001/api/search/add",
-            {
-                description_ser: description_ser.value,
+        let data = [country.value, area_ser.value, position.value, description_ser.value, vacancies.value, lapse_search.value]
+        let state=false
+        data.forEach( element =>{ if(element == "") {state=true} });
+        if ( state ) setValidation(false)
+        else {
+             await dispatch(addSearch({
+                description_search: description_ser.value,
                 country: country.value,
-                area_ser: area_ser.value,
+                area_search: area_ser.value,
                 position: position.value,
-                vacancies: vacancies.value,
-                state_ser: lapse_search.value
-            })
-            await setShow(true)
+                vacancies: parseInt(vacancies.value),
+                lapse_search: (lapse_search.value).replace("T", " ")
+            }))
+            dispatch(getAllSearch())
+            navigate("/searchs")
+        }
     };
 
     return (
@@ -42,34 +54,43 @@ const Searchs = () => {
                     </div>
                     <Form onSubmit={handleSubmit} className=" mt-4 pt-5 formLogin w-100" id="formSearch">
                         <Row className="mb-3">
-                            <Form.Group className="col-md-6" controlId="formGridEmail">
-
-                                <Form.Control className="inputLogin rounded-pill" {...country} placeholder="País" />
+                            <Form.Group className="col-md-6 top" controlId="formGridState">
+                                <Form.Select className={(country.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...country}>
+                                    <option selected disabled value="" >Países</option>
+                                    {arr.country.map(i => (
+                                        <option >{i}</option>
+                                    ))}
+                                </Form.Select>
                             </Form.Group>
 
-                            <Form.Group className="col-md-6 top" controlId="formGridPassword">
-                                <Form.Control className="inputLogin rounded-pill" {...area_ser} placeholder="Area" />
+                            <Form.Group className="col-md-6 top" controlId="formGridState">
+                                <Form.Select className={(area_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...area_ser}>
+                                    <option selected disabled value="" >Area</option>
+                                    {arr.area.map(i => (
+                                        <option >{i}</option>
+                                    ))}
+                                </Form.Select>
                             </Form.Group>
                         </Row>
 
-                        <Form.Group className="mb-3" controlId="formGridAddress1">
-                            <Form.Control className="inputLogin rounded-pill" {...description_ser} placeholder="Descripción" />
+                        <Form.Group className="mb-3" controlId="formGridAddress2">
+                            <Form.Control className={(position.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...position} placeholder="Posición" />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formGridAddress2">
-                            <Form.Control className="inputLogin rounded-pill" {...position} placeholder="Posición" />
+                        <Form.Group className="mb-3" controlId="formGridAddress1">
+                            <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...description_ser} placeholder="Descripción" />
                         </Form.Group>
 
                         <Row className="mb-3">
 
                             <Form.Group className="col-md-6" controlId="formGridCity">
-                                <Form.Control className="inputLogin rounded-pill" {...lapse_search} type="datetime-local" placeholder="Mes" />
+                                <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...lapse_search} type="datetime-local" />
                             </Form.Group>
 
                             <Form.Group className="col-md-6 top" controlId="formGridState">
-                                <Form.Select className="inputLogin rounded-pill" {...vacancies}>
-                                    <option >Vacantes</option>
-                                    {arr().map(i => (
+                                <Form.Select className={(vacancies.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...vacancies}>
+                                    <option selected disabled value="" >Vacantes</option>
+                                    {arr.vacancies().map(i => (
                                         <option >{i}</option>
                                     ))}
                                 </Form.Select>
@@ -105,17 +126,10 @@ const Searchs = () => {
                 </div>
             </div>
 
-
-
-
-
-
-
-
         </>
     );
 };
 
-export default Searchs;
+export default AddSearchs;
 
 

@@ -38,7 +38,18 @@
       margin-top: 16px;
     }
   }
+  .err{
+    height: 2.8rem;
+    border: 2px solid #fe0000;
+
+    &:focus {
+      border: 2px solid #fe0000;
+      box-shadow: 0 0 0px 0 rgb(0 0 0 / 30%);
+      transition: box-shadow 500ms;
+    }
+  }
 }
+
 
 
 .imgContainer{

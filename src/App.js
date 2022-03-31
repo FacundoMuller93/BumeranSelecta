@@ -8,7 +8,8 @@ import Recruiters from './components/Recruiters';
 import AddRecruiter from './components/AddRecruiter';
 import EditRecruiter from './components/EditRecruiter';
 import Rating from './Pages/Rating';
-import Searchs from './components/Searchs';
+import Search from './components/Search';
+import AddSearchs from './components/AddSearchs';
 import Reports from './components/Reports';
 import NotFound from './Pages/NotFound';
 
@@ -23,7 +24,8 @@ const App = () => {
         <Route path="/register" element={<RegisterForm/>} />
         <Route path="/login" element={<LoginForm/>} />
         <Route path="/recruiters" element={<Recruiters/>} />
-        <Route path="/searchs" element={<Searchs/>} />
+        <Route path="/searchs" element={<Search/>} />
+        <Route path="/addSearch" element={<AddSearchs />} />
         <Route path="/reports" element={<Reports/>} />
         <Route path={"/recruiter/:id"} element={<EditRecruiter/>} />
         <Route path="/addRecruiter" element={<AddRecruiter/>} />
