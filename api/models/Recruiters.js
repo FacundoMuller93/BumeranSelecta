@@ -33,9 +33,13 @@ Recruiters.init(
             // }
         },
         rating: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DECIMAL(10, 1),
             allowNull: true,
-            defaultValue: 0
+            defaultValue: 1,
+            validate: {
+                max: 10,
+                min: 1
+            }
         },
         active_searchs: {
             type: DataTypes.STRING,
@@ -45,7 +49,7 @@ Recruiters.init(
             // }
         },
         status_rec: {
-            type: DataTypes.STRING,
+            type: DataTypes.BOOLEAN,
             allowNull: true
         }
     },

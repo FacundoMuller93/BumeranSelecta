@@ -36,6 +36,10 @@ Searchs.init(
         },
         lapse_search: {
             type: DataTypes.STRING
+        },
+        candidates: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         }
 
     },

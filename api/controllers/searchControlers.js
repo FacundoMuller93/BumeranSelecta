@@ -27,6 +27,6 @@ exports.delete = (req, res) => {
 
 exports.getAll = (req, res) => {
     Searchs.findAll({ include: Recruiters })
-        .then(data => res.status(201).send(data))
+        .then(data => res.status(200).send(data))
 };
 

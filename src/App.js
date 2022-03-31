@@ -1,5 +1,5 @@
-import './App.scss';
-import NavbarComp from './components/NavbarComp';
+import "./App.scss";
+import NavbarComp from "./components/NavbarComp";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from './Pages/LandingPage';
 import LoginForm from './components/LoginForm';
@@ -13,12 +13,12 @@ import AddSearchs from './components/AddSearchs';
 import Reports from './components/Reports';
 import NotFound from './Pages/NotFound';
 
-import SpinnerComp from './commons/Spinner'
+import SpinnerComp from "./commons/Spinner";
 const App = () => {
   return (
-    <div >
-      <NavbarComp/>
-     <SpinnerComp/>
+    <div>
+      <NavbarComp />
+      <SpinnerComp />
       <Routes>
         <Route path="/" element={<LandingPage/>} />
         <Route path="/register" element={<RegisterForm/>} />
@@ -34,6 +34,6 @@ const App = () => {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;

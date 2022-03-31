@@ -1,4 +1,11 @@
-import { Container, Nav, Navbar, NavItem, Offcanvas, NavDropdown } from "react-bootstrap";
+import {
+  Container,
+  Nav,
+  Navbar,
+  NavItem,
+  Offcanvas,
+  NavDropdown,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../store/user";
@@ -90,8 +97,10 @@ const NavbarComp = () => {
           aria-labelledby="offcanvasNavbarLabel"
           placement="end"
         >
-          <Offcanvas.Header closeButton className={styles.offcanvasHeader} > 
-          </Offcanvas.Header>
+          <Offcanvas.Header
+            closeButton
+            className={styles.offcanvasHeader}
+          ></Offcanvas.Header>
           <Offcanvas.Body className={styles.boxOffCanvas}>
             <Nav className="justify-content-end flex-grow-1">
               <Nav.Link>
@@ -99,39 +108,43 @@ const NavbarComp = () => {
                   Home
                 </Link>
               </Nav.Link>
-              <NavDropdown.Divider className={styles.divider}/>
+              <NavDropdown.Divider className={styles.divider} />
               <Nav.Link to="/recruiters">
                 <Link className={styles.linkOffCanvas} to="/recruiters">
                   Reclutadores
                 </Link>
               </Nav.Link>
-              <NavDropdown.Divider className={styles.divider}/>
+              <NavDropdown.Divider className={styles.divider} />
               <Nav.Link>
                 <Link className={styles.linkOffCanvas} to="/searchs">
                   Búsquedas
                 </Link>
               </Nav.Link>
-              <NavDropdown.Divider className={styles.divider}/>
+              <NavDropdown.Divider className={styles.divider} />
               <Nav.Link>
                 <Link className={styles.linkOffCanvas} to="/reports">
                   Reportes
                 </Link>
               </Nav.Link>
-              <NavDropdown.Divider className={styles.divider}/>
+              <NavDropdown.Divider className={styles.divider} />
               {user.data.id ? (
                 <Nav>
                   <Nav.Link>
-                    <Link className={styles.linkOffCanvas} onClick={handleLogOut} to="/">
+                    <Link
+                      className={styles.linkOffCanvas}
+                      onClick={handleLogOut}
+                      to="/"
+                    >
                       Cerrar Sesión
                     </Link>
                   </Nav.Link>
-                  <NavDropdown.Divider className={styles.divider}/>
+                  <NavDropdown.Divider className={styles.divider} />
                   <Nav.Link>
                     <Link className={styles.linkOffCanvas} to="/profile">
                       Mi Perfil
                     </Link>
                   </Nav.Link>
-                  <NavDropdown.Divider className={styles.divider}/>
+                  <NavDropdown.Divider className={styles.divider} />
                   <NavItem className={styles.welcomeName}>
                     Bienvenido {`${user.data.firstName} ${user.data.surname}`}
                   </NavItem>
@@ -143,7 +156,7 @@ const NavbarComp = () => {
                       Iniciar Sesión
                     </Link>
                   </Nav.Link>
-                  <NavDropdown.Divider className={styles.divider}/>
+                  <NavDropdown.Divider className={styles.divider} />
                   <Nav.Link>
                     <Link className={styles.linkOffCanvas} to="/register">
                       Registrarse

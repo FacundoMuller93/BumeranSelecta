@@ -1,21 +1,21 @@
-import { useEffect } from "react"
-import { Table } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react";
+import { Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getAllRecruiters } from "../store/recruiters"
-import SpinnerComp from "./Spinner"
+import { getAllRecruiters } from "../store/recruiters";
+import SpinnerComp from "./Spinner";
 
 const SearchList = () => {
-  const searchResult = useSelector(state => state.recruiter)
-  const dispatch = useDispatch()
+  const searchResult = useSelector((state) => state.recruiter);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllRecruiters())
-  }, [])
+    dispatch(getAllRecruiters());
+  }, []);
 
-//   console.log("LIST", searchResult)
+  //   console.log("LIST", searchResult)
 
-  if (searchResult.loading) return (<SpinnerComp />)
+  if (searchResult.loading) return <SpinnerComp />;
 
   return (
     <>
@@ -33,7 +33,7 @@ const SearchList = () => {
           </tr>
         </thead>
         <tbody>
-          {searchResult.data.map(recruiter => (
+          {searchResult.data.map((recruiter) => (
             <tr key={recruiter.id}>
               <td>{recruiter.id}</td>
               <td>{recruiter.name.firstname}</td>
@@ -48,7 +48,7 @@ const SearchList = () => {
         </tbody>
       </Table>
     </>
-  )
-}
+  );
+};
 
-export default SearchList
+export default SearchList;
