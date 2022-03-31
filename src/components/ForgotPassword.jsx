@@ -52,8 +52,6 @@ const ForgotPassword = () => {
     navigate("/")
   }
 
-    // console.log("USER", user)
-
   return (
     <>
       <div className="d-flex justify-content-center container-fluid">
