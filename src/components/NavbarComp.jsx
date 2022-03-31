@@ -19,6 +19,7 @@ const NavbarComp = () => {
   const handleLogOut = () => {
     dispatch(sendLogoutRequest());
   };
+  
 
   return (
     <Navbar expand="lg">
@@ -36,7 +37,10 @@ const NavbarComp = () => {
         {/* Navbar Menu */}
         <div className="d-none d-lg-block">
           <Nav className="ms-auto my-2 my-lg-0">
-            <Nav.Link>
+            
+            {user.data.id ? (
+              <>
+              <Nav.Link>
               <Link className={styles.menu} to="/">
                 Home
               </Link>
@@ -56,7 +60,6 @@ const NavbarComp = () => {
                 Reportes
               </Link>
             </Nav.Link>
-            {user.data.id ? (
               <Nav className="me-auto">
                 <Nav.Link>
                   <Link className={styles.menu} onClick={handleLogOut} to="/">
@@ -67,6 +70,7 @@ const NavbarComp = () => {
                   Bienvenido {`${user.data.firstName} ${user.data.surname}`}
                 </NavItem>
               </Nav>
+              </>
             ) : (
               <Nav className="me-auto">
                 <Nav.Link>
@@ -98,7 +102,10 @@ const NavbarComp = () => {
           ></Offcanvas.Header>
           <Offcanvas.Body className={styles.boxOffCanvas}>
             <Nav className="justify-content-end flex-grow-1">
-              <Nav.Link>
+              <NavDropdown.Divider className={styles.divider} />
+              {user.data.id ? (
+                <Nav>
+                    <Nav.Link>
                 <Link className={styles.linkOffCanvas} to="/">
                   Home
                 </Link>
@@ -121,9 +128,6 @@ const NavbarComp = () => {
                   Reportes
                 </Link>
               </Nav.Link>
-              <NavDropdown.Divider className={styles.divider} />
-              {user.data.id ? (
-                <Nav>
                   <Nav.Link>
                     <Link
                       className={styles.linkOffCanvas}
