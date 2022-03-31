@@ -35,7 +35,19 @@
       background-color: #fe0068;
     }
   }
+  .err{
+  font-size: 16px;
+  line-height: 2.2em;
+  border: 2px solid #fe0000;
+
+    &:focus {
+      border: 2px solid #fe0000;
+      box-shadow: 0 0 0px 0 rgb(0 0 0 / 30%);
+      transition: box-shadow 500ms;
+    }
 }
+}
+
 
 .forgotPass{
   text-decoration: none;
