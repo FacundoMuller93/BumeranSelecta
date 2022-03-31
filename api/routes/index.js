@@ -9,4 +9,4 @@ router.use('/user', user)
 router.use('/recruiter', recruiter)
 router.use('/search', search)
 
-module.exports = router; 
+module.exports = router;
