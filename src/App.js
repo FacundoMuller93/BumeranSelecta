@@ -12,8 +12,10 @@ import Search from './components/Search';
 import AddSearchs from './components/AddSearchs';
 import Reports from './components/Reports';
 import NotFound from './Pages/NotFound';
+import ForgotPassword from './components/ForgotPassword';
 
 import SpinnerComp from "./commons/Spinner";
+
 const App = () => {
   return (
     <div>
@@ -30,6 +32,7 @@ const App = () => {
         <Route path={"/recruiter/:id"} element={<EditRecruiter/>} />
         <Route path="/addRecruiter" element={<AddRecruiter/>} />
         <Route path="/rating" element={<Rating/>}/>
+        <Route path="/forgotPass" element={<ForgotPassword/>}/>
         <Route path="*" element={<NotFound replace to="/" />} />
       </Routes>
     </div>
