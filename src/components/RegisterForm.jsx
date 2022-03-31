@@ -28,7 +28,7 @@ const RegisterForm = () => {
         password: password.value,
       })
     );
-    navigate("/login");
+    navigate("/");
   };
 
   return (

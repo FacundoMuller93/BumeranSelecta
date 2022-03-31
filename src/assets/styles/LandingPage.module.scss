@@ -1,17 +1,32 @@
 .container{
     display: flex;
     justify-content: center;
-    padding-top: 8%;
-    gap: 5%;
+    gap: 1%;
 }
 
 .txtContainer{
-    width: 20%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 .txt{
-    padding-right: 10%;
     font-weight: 300;
 }
 
+.paragraphs{
+    text-align: left;
+}
 
+.message{
+    font-weight: 700
+}
+
+.secondContainer{
+    padding-top: 9%;
+    padding-left: 10%;
+}
+
+.picture{
+    max-width: 30%;
+}

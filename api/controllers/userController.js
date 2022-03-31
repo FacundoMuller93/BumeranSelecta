@@ -26,3 +26,17 @@ exports.logout = (req, res) => {
   req.logOut()
   res.sendStatus(200)
 }
+
+exports.find = (req, res) => {
+  const { email } = req.params
+  User.findOne({
+    where: { email }
+  })
+  .then(data => res.status(200).send(data))
+}
+
+exports.delete = (req, res) => {
+  const { id } = req.params;
+  User.destroy({ where: { id } })
+      .then(() => res.sendStatus(202))
+}
