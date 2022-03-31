@@ -24,6 +24,7 @@ const ForgotPassword = () => {
   const handleEmailSubmit = async e => {
     e.preventDefault()
     await dispatch(getUserRequest({ email }))
+    // if (user === "") alert("El usuario no existe")
   }
 
   const handlePassSubmit = async e => {
@@ -37,7 +38,7 @@ const ForgotPassword = () => {
     const passW = password.value
     const id = user.id
     await dispatch(sendLogoutRequest())
-    dispatch(deleteUserRequest({ id: id }))
+    await dispatch(deleteUserRequest({ id: id }))
     await dispatch(
       sendRegisterRequest({
         firstName: firstName,
@@ -51,7 +52,7 @@ const ForgotPassword = () => {
     navigate("/")
   }
 
-  //   console.log("USER", user)
+    // console.log("USER", user)
 
   return (
     <>

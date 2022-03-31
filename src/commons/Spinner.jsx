@@ -4,17 +4,17 @@ import Spinner from "react-bootstrap/Spinner";
 import "../assets/styles/Spinner.scss";
 
 const SpinnerComp = () => {
-  const [state, setState] = useState(false);
-  const user = useSelector((state) => state.user);
-  const recruiter = useSelector((state) => state.recruiter);
+  // const [state, setState] = useState(false);
+  const user = useSelector((state) => state.user.loading);
+  const recruiter = useSelector((state) => state.recruiter.loading);
 
-  useEffect(() => {
-    setState(user.loading);
-  }, [user]);
+  // useEffect(() => {
+  //   setState(user.loading);
+  // }, [user]);
 
   return (
     <>
-      {state ? (
+      {user || recruiter ? (
         <div className="fondo">
           <Spinner className="position">
             <div className="loader Loader__LoaderComponent-sc-1k8x2o2-1 giEtmK">

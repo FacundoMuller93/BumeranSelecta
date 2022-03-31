@@ -8,14 +8,14 @@ import Recruiters from './components/Recruiters';
 import AddRecruiter from './components/AddRecruiter';
 import EditRecruiter from './components/EditRecruiter';
 import Rating from './Pages/Rating';
-import Reports from './components/Reports';
-import ForgotPassword from './components/ForgotPassword';
 import Search from './components/Search';
 import AddSearchs from './components/AddSearchs';
 import Reports from './components/Reports';
 import NotFound from './Pages/NotFound';
+import ForgotPassword from './components/ForgotPassword';
 
 import SpinnerComp from "./commons/Spinner";
+
 const App = () => {
   return (
     <div>

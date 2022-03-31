@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
@@ -69,6 +70,7 @@ const LoginForm = () => {
           <Button type="submit" className="px-5 mt-3 buttonLogin">
             Enviar
           </Button>
+          <Link to="/forgotPass">Olvidé mi contraseña</Link>
         </Form>
       </div>
     </div>
