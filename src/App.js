@@ -13,7 +13,6 @@ import AddSearchs from './components/AddSearchs';
 import Reports from './components/Reports';
 import NotFound from './Pages/NotFound';
 import ForgotPassword from './components/ForgotPassword';
-
 import SpinnerComp from "./commons/Spinner";
 
 const App = () => {
