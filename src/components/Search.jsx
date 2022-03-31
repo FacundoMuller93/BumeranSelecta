@@ -36,6 +36,7 @@ const Search = () => {
                         <thead>
                             <tr>
                                 <th scope="col" width="50">#</th>
+                                <th scope="col">Estado</th>
                                 <th scope="col">País</th>
                                 <th scope="col">Area</th>
                                 <th scope="col">Posición</th>
@@ -48,7 +49,8 @@ const Search = () => {
                             {search.map((search, i) => {
                                 return (
                                     <tr className={styles.userContainer}>
-                                        <th scope="row">{i + 1}</th>
+                                        <th scope="row">{i + 1}</th>                                       
+                                        <td>{search.state_search}</td>
                                         <td>{search.country}</td>
                                         <td>{search.area_search}</td>
                                         <td>{search.position}</td>
