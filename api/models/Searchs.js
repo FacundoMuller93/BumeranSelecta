@@ -32,7 +32,7 @@ Searchs.init(
         },
         state_search: {
             type: DataTypes.STRING,
-            defaultValue: "iniciada"
+            defaultValue: "pendiente"
         },
         lapse_search: {
             type: DataTypes.STRING
