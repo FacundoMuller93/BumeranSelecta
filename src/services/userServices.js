@@ -33,8 +33,16 @@ export const userLogoutService = async () => {
 }
 
 export const getUserService = async ({ email }) => {
-  const getUser = await axios.get(`http://localhost:3001/api/user/find/${email.value}`)
-  return getUser.data
+  // console.log("MAIL", email)
+  try {
+    const getUser = await axios.get(`http://localhost:3001/api/user/find/${email.value}`)
+    // console.log("GETUSER", getUser)
+    return getUser.data
+  }
+  catch(error){
+    console.log("ERROR", error)
+    // alert("El usuario no existe", error)
+  }
 }
 
 export const deleteUserService = async ({ id }) => {

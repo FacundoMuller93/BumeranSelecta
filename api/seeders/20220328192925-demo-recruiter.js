@@ -4,13 +4,13 @@ const fakeRecruiters = require("./fake_recruiters.json")
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
-      "Recruiters", fakeRecruiters,
+      "recruiters", fakeRecruiters,
       {}
     )
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Recruiters', null, {});
+    await queryInterface.bulkDelete('recruiters', null, {});
   },
 }
 

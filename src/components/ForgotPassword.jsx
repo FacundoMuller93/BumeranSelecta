@@ -24,9 +24,9 @@ const ForgotPassword = () => {
   const handleEmailSubmit = async e => {
     e.preventDefault()
     await dispatch(getUserRequest({ email }))
-    // if (user === "") alert("El usuario no existe")
+    // if (user.id) {alert("El usuario no existe"); navigate("/register")}
   }
-
+  
   const handlePassSubmit = async e => {
     e.preventDefault()
     // if (password !== passCheck) (alert("La contraseña debe ser igual."))
@@ -48,22 +48,22 @@ const ForgotPassword = () => {
         email: email,
         password: passW,
       })
-    )
-    navigate("/")
-  }
-
-  return (
-    <>
+      )
+      navigate("/")
+    }
+    console.log("USER", user)
+    return (
+      <>
       <div className="d-flex justify-content-center container-fluid">
         <img
           className="mt-5 pt-5 ms-1 pe-5 d-none d-lg-block"
           src="https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/contactos.png"
           alt=""
-        />
+          />
         {!user.id ? (
           <Form
-            onSubmit={handleEmailSubmit}
-            className="text-center mt-4 pt-5 ms-5 w-50 formLogin"
+          onSubmit={handleEmailSubmit}
+          className="text-center mt-4 pt-5 ms-5 w-50 formLogin"
           >
             <div className="fs-5 title">Olvidé mi Contraseña</div>
             <Form.Group className="mb-3" controlId="formBasicEmail">
