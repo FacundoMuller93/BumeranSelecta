@@ -186,22 +186,24 @@ const EditRecruiter = () => {
           </Form.Group>
         </div>
 
-        <div className="col-12 modal-footer">
-          <Link to="/recruiters">
-            <Button
-              className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin"
-              variant="primary"
+        <div className="row mb-5">
+          <div className="col-6 text-end">
+            <Link to="/recruiters">
+              <Button className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin">
+                Volver
+              </Button>{" "}
+            </Link>
+          </div>
+          <div className="col-6">
+            <button
+              type="submit"
+              className={`${styles.buttonsEditRecruiter} mt-5 w-lg-25 px-5 px-lg-5 `}
             >
-              Volver
-            </Button>{" "}
-          </Link>
-          <button
-            type="submit"
-            className={`${styles.buttonsEditRecruiter} mt-5 w-lg-25 px-5 px-lg-5 `}
-          >
-            Aceptar
-          </button>
+              Aceptar
+            </button>
+          </div>
         </div>
+       
       </form>
     </div>
   );
