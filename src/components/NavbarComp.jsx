@@ -22,7 +22,7 @@ const NavbarComp = () => {
   
 
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" sticky="top" bg="white">
       <Container fluid className="">
         {/* Navbar Logo */}
         <Navbar.Brand className="ms-4">
@@ -128,6 +128,7 @@ const NavbarComp = () => {
                   Reportes
                 </Link>
               </Nav.Link>
+                    <NavDropdown.Divider className={styles.divider} />
                   <Nav.Link>
                     <Link
                       className={styles.linkOffCanvas}
@@ -137,7 +138,6 @@ const NavbarComp = () => {
                       Cerrar Sesión
                     </Link>
                   </Nav.Link>
-                  <NavDropdown.Divider className={styles.divider} />
                   <NavDropdown.Divider className={styles.divider} />
                   <NavItem className={styles.welcomeName}>
                     Bienvenido {`${user.data.firstName} ${user.data.surname}`}
