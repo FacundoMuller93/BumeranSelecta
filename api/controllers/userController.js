@@ -33,8 +33,7 @@ exports.find = async (req, res) => {
   const findUser =  await User.findOne({
           where: { email }
     })
-    // console.log("FINDUSER", findUser)
-    if (!findUser) return res.status(404).send("error")
+    if (!findUser) return res.status(404).send(console.log("=== ERROR ==> El usuario no existe."))
     res.status(200).send(findUser)
   }
   catch(error) {

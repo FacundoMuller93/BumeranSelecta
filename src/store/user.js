@@ -36,6 +36,7 @@ const userSlice = createSlice({
         [sendRegisterRequest.fulfilled]: (state, action) => {
             state.data = action.payload
             state.loading = false
+            state.error = ""
         },
         [sendRegisterRequest.rejected]: (state, action) => {
             state.loading = false
@@ -47,6 +48,7 @@ const userSlice = createSlice({
         [sendLoginRequest.fulfilled]: (state, action) => {
             state.data = action.payload
             state.loading = false
+            state.error = ""
         },
         [sendLoginRequest.rejected]: (state, action) => {
             state.loading = false
@@ -58,6 +60,7 @@ const userSlice = createSlice({
         [sendLogoutRequest.fulfilled]: (state, action) => {
             state.data = {}
             state.loading = false
+            state.error = ""
         },
         [sendLogoutRequest.rejected]: (state, action) => {
             state.loading = false
@@ -69,6 +72,7 @@ const userSlice = createSlice({
         [getUserRequest.fulfilled]: (state, action) => {
             state.data = action.payload
             state.loading = false
+            state.error = ""
         },
         [getUserRequest.rejected]: (state, action) => {
             state.loading = false
@@ -80,6 +84,7 @@ const userSlice = createSlice({
         [deleteUserRequest.fulfilled]: (state, action) => {
             state.data = {}
             state.loading = false
+            state.error = ""
         },
         [deleteUserRequest.rejected]: (state, action) => {
             state.loading = false

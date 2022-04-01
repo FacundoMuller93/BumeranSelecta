@@ -3,7 +3,9 @@ import { Form, Button } from "react-bootstrap"
 import useInput from "../hooks/useInput"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+
 import "../assets/styles/LoginForm.scss"
+import { alertWrongMail } from "../utils/alerts"
 
 import {
   getUserRequest,
@@ -24,7 +26,7 @@ const ForgotPassword = () => {
   const handleEmailSubmit = async e => {
     e.preventDefault()
     await dispatch(getUserRequest({ email }))
-    // if (user.id) {alert("El usuario no existe"); navigate("/register")}
+    if (user.id) alert("El usuario no existe"); navigate("/register")
   }
   
   const handlePassSubmit = async e => {
@@ -51,7 +53,7 @@ const ForgotPassword = () => {
       )
       navigate("/")
     }
-    console.log("USER", user)
+    // console.log("USER", user)
     return (
       <>
       <div className="d-flex justify-content-center container-fluid">
