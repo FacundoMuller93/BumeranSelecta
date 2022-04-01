@@ -64,10 +64,10 @@ const ForgotPassword = () => {
           />
         {!user.id ? (
           <Form
-          onSubmit={handleEmailSubmit}
-          className="text-center mt-4 pt-5 ms-5 w-50 formLogin"
+            onSubmit={handleEmailSubmit}
+            className="text-center mt-5 pt-5 ms-5 w-50 formLogin"
           >
-            <div className="fs-5 title">Olvidé mi Contraseña</div>
+            <div className="fs-5 title mt-5">Olvidé mi Contraseña</div>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
                 {...email}
@@ -91,9 +91,9 @@ const ForgotPassword = () => {
         ) : (
           <Form
             onSubmit={handlePassSubmit}
-            className="text-center mt-4 pt-5 ms-5 w-50 formLogin"
+            className="text-center mt-5 pt-5 ms-5 w-50 formLogin"
           >
-            <div className="fs-5 title">Olvidé mi Contraseña</div>
+            <div className="fs-5 mt-4 mb-4 title">Olvidé mi Contraseña</div>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control
