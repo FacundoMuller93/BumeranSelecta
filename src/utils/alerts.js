@@ -5,7 +5,5 @@ export const alertWrongMail = (navigate) => {
         title: `El usuario no existe`,
         confirmButtonText: 'Crear cuenta',
       })
-      .then((result) => navigate("/register")
-
-      )
+      .then((result) => navigate("/register"))
 }

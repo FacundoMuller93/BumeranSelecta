@@ -1,55 +1,66 @@
-const { Searchs } = require('../models');
-const Recruiter = require('../models/Recruiters');
+const { Searchs } = require("../models")
+const Recruiter = require("../models/Recruiters")
 
 exports.add = (req, res) => {
-    const {
+  const { name, surname, country, description_rec, area_rec } = req.body
+  try {
+    Recruiter.findOrCreate({
+      where: { name },
+      defaults: {
         name,
         surname,
         country,
         description_rec,
         area_rec,
-    } = req.body;
-    Recruiter.findOrCreate({
-        where: { name },
-        defaults: {
-            name,
-            surname,
-            country,
-            description_rec,
-            area_rec,
-        },
+      },
     }).then(data => {
-        if (data[1]) res.status(201).send(data[0]);
-        else res.status(400).send(data[1])
-    });
-};
+      if (data[1]) res.status(201).send(data[0])
+      else res.status(400).send(data[1])
+    })
+  } catch (error) {
+    console.log("ERROR: ", error)
+  }
+}
 
 exports.getAll = (req, res) => {
-    Recruiter.findAll({ include: Searchs })
-        .then(data => res.status(200).send(data))
-};
+  try {
+    Recruiter.findAll({ include: Searchs }).then(data =>
+      res.status(200).send(data)
+    )
+  } catch (error) {
+    console.log("ERROR: ", error)
+  }
+}
 
 exports.getById = (req, res) => {
-    const { id } = req.params;
-    Recruiter.findOne({ where: { id }, include: Searchs })
-        .then(data => res.status(200).send(data))
-};
-
+  const { id } = req.params
+  try {
+    Recruiter.findOne({ where: { id }, include: Searchs }).then(data =>
+      res.status(200).send(data)
+    )
+  } catch (error) {
+    console.log("ERROR: ", error)
+  }
+}
 
 exports.update = (req, res) => {
-    const { id } = req.params;
-    Recruiter.update(req.body,
-        {
-            where: { id },
-            returning: true,
-            plain: true,
-        })
-        .then(data => res.status(201).send(data))
-};
-
+  const { id } = req.params
+  try {
+    Recruiter.update(req.body, {
+      where: { id },
+      returning: true,
+      plain: true,
+    }).then(data => res.status(201).send(data))
+  } catch (error) {
+    console.log("ERROR: ", error)
+  }
+}
 
 exports.delete = (req, res) => {
-    const { id } = req.params;
-    Recruiter.destroy({ where: { id } })
-        .then(() => res.sendStatus(202))
-};
+  const { id } = req.params
+  try {
+    Recruiter.destroy({ where: { id } }).then(() => res.sendStatus(202))
+  } catch (error) {
+    console.log("ERROR: ", error)
+  }
+}
