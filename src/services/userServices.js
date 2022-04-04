@@ -1,4 +1,5 @@
 import axios from "axios"
+import { alertWrongMail } from "../utils/alerts"
 
 export const userRegisterService = async ({
   firstName,
@@ -32,13 +33,14 @@ export const userLogoutService = async () => {
   return logoutUser.data
 }
 
-export const getUserService = async ({ email }) => {
+export const getUserService = async ({ email, navigate }) => {
   try {
     const getUser = await axios.get(
       `http://localhost:3001/api/user/find/${email.value}`
     )
     return getUser.data
   } catch (error) {
+    alertWrongMail(navigate)
     throw error
   }
 }
