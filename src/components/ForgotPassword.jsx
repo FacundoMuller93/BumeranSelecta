@@ -21,9 +21,9 @@ const ForgotPassword = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleEmailSubmit = async e => {
+  const handleEmailSubmit = e => {
       e.preventDefault()
-      await dispatch(getUserRequest({ email }))
+      dispatch(getUserRequest({ email, navigate }))
   }
   
   const handlePassSubmit = async e => {
@@ -49,7 +49,7 @@ const ForgotPassword = () => {
       )
       navigate("/")
     }
-    console.log("USER", user)
+
     return (
       <>
       <div className="d-flex justify-content-center container-fluid">
