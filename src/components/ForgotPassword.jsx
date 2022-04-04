@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 import "../assets/styles/LoginForm.scss"
-import { alertWrongMail } from "../utils/alerts"
 
 import {
   getUserRequest,
@@ -18,20 +17,17 @@ const ForgotPassword = () => {
   const user = useSelector(state => state.user.data)
   const email = useInput()
   const password = useInput()
-  const passCheck = useInput()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleEmailSubmit = async e => {
-    e.preventDefault()
-    await dispatch(getUserRequest({ email }))
-    if (user.id) alert("El usuario no existe"); navigate("/register")
+      e.preventDefault()
+      await dispatch(getUserRequest({ email }))
   }
   
   const handlePassSubmit = async e => {
     e.preventDefault()
-    // if (password !== passCheck) (alert("La contraseña debe ser igual."))
     const firstName = user.firstName
     const surname = user.surname
     const age = String(user.age)
@@ -53,7 +49,7 @@ const ForgotPassword = () => {
       )
       navigate("/")
     }
-    // console.log("USER", user)
+    console.log("USER", user)
     return (
       <>
       <div className="d-flex justify-content-center container-fluid">
@@ -100,15 +96,6 @@ const ForgotPassword = () => {
                 {...password}
                 type="password"
                 placeholder="Contraseña"
-                className="rounded-pill inputLogin"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Control
-                {...passCheck}
-                type="password"
-                placeholder="Confirme Contraseña"
                 className="rounded-pill inputLogin"
               />
             </Form.Group>
