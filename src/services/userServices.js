@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "axios"
+import { alertWrongMail } from "../utils/alerts"
 
 export const userRegisterService = async ({
   firstName,
@@ -15,29 +16,38 @@ export const userRegisterService = async ({
     country: country,
     email: email,
     password: password,
-  });
-  return register.data;
-};
+  })
+  return register.data
+}
 
 export const userLoginService = async ({ email, password }) => {
   const loginUser = await axios.post("http://localhost:3001/api/user/login", {
     email,
     password,
-  });
-  return loginUser.data;
-};
+  })
+  return loginUser.data
+}
 
 export const userLogoutService = async () => {
   const logoutUser = await axios.post("http://localhost:3001/api/user/logout")
   return logoutUser.data
 }
 
-export const getUserService = async ({ email }) => {
-  const getUser = await axios.get(`http://localhost:3001/api/user/find/${email.value}`)
-  return getUser.data
+export const getUserService = async ({ email, navigate }) => {
+  try {
+    const getUser = await axios.get(
+      `http://localhost:3001/api/user/find/${email.value}`
+    )
+    return getUser.data
+  } catch (error) {
+    alertWrongMail(navigate)
+    throw error
+  }
 }
 
 export const deleteUserService = async ({ id }) => {
-  const deleteUser = await axios.delete(`http://localhost:3001/api/user/delete/${id}`)
+  const deleteUser = await axios.delete(
+    `http://localhost:3001/api/user/delete/${id}`
+  )
   return deleteUser.data
 }

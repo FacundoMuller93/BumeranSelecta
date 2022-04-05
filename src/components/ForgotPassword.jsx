@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap"
 import useInput from "../hooks/useInput"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+
 import "../assets/styles/LoginForm.scss"
 
 import {
@@ -16,20 +17,17 @@ const ForgotPassword = () => {
   const user = useSelector(state => state.user.data)
   const email = useInput()
   const password = useInput()
-  const passCheck = useInput()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleEmailSubmit = async e => {
-    e.preventDefault()
-    await dispatch(getUserRequest({ email }))
-    // if (user === "") alert("El usuario no existe")
+  const handleEmailSubmit = e => {
+      e.preventDefault()
+      dispatch(getUserRequest({ email, navigate }))
   }
-
+  
   const handlePassSubmit = async e => {
     e.preventDefault()
-    // if (password !== passCheck) (alert("La contraseña debe ser igual."))
     const firstName = user.firstName
     const surname = user.surname
     const age = String(user.age)
@@ -48,18 +46,18 @@ const ForgotPassword = () => {
         email: email,
         password: passW,
       })
-    )
-    navigate("/")
-  }
+      )
+      navigate("/")
+    }
 
-  return (
-    <>
+    return (
+      <>
       <div className="d-flex justify-content-center container-fluid">
         <img
           className="mt-5 pt-5 ms-1 pe-5 d-none d-lg-block"
           src="https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/contactos.png"
           alt=""
-        />
+          />
         {!user.id ? (
           <Form
             onSubmit={handleEmailSubmit}
@@ -98,15 +96,6 @@ const ForgotPassword = () => {
                 {...password}
                 type="password"
                 placeholder="Contraseña"
-                className="rounded-pill inputLogin"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Control
-                {...passCheck}
-                type="password"
-                placeholder="Confirme Contraseña"
                 className="rounded-pill inputLogin"
               />
             </Form.Group>
