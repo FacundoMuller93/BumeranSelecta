@@ -27,12 +27,18 @@ exports.logout = (req, res) => {
   res.sendStatus(200)
 }
 
-exports.find = (req, res) => {
+exports.find = async (req, res) => {
   const { email } = req.params
-  User.findOne({
-    where: { email }
-  })
-  .then(data => res.status(200).send(data))
+  try {
+  const findUser =  await User.findOne({
+          where: { email }
+    })
+    if (!findUser) return res.status(404).send(console.log("=== ERROR ==> El usuario no existe."))
+    res.status(200).send(findUser)
+  }
+  catch(error) {
+    res.status(404).send(error)
+  }
 }
 
 exports.delete = (req, res) => {

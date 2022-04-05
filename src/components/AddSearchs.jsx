@@ -7,6 +7,8 @@ import Toast from 'react-bootstrap/Toast'
 import { useDispatch } from "react-redux"
 import { getAllSearch, addSearch } from "../store/searchs";
 import { useNavigate } from "react-router-dom";
+import bumeranArriba from "../assets/img/bumeranArriba.png";
+import bumeranAbajo from "../assets/img/bumeranAbajo.png"
 
 
 import useInput from "../hooks/useInput";
@@ -50,9 +52,9 @@ const AddSearchs = () => {
             <div className="containerSearch ">
                 <div className="containerForm">
                     <div className="pt-2 mb-2 fs-4 mx-5 title d-flex justify-content-center">
-                        Ingreso de busqueda
+                        Ingreso de Busqueda
                     </div>
-                    <Form onSubmit={handleSubmit} className=" mt-4 pt-5 formLogin w-100" id="formSearch">
+                    <Form onSubmit={handleSubmit} className=" mt-4 pt-lg-5 formLogin w-100" id="formSearch">
                         <Row className="mb-3">
                             <Form.Group className="col-md-6 top" controlId="formGridState">
                                 <Form.Select className={(country.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...country}>
@@ -97,7 +99,7 @@ const AddSearchs = () => {
                             </Form.Group>
                         </Row>
 
-                        <Button className=" rounded-pill px-5 mt-3 buttonLogin " variant="primary" type="submit reset">
+                        <Button className=" rounded-pill px-5 mt-3 buttonLogin" type="submit reset">
                             Cargar
                         </Button>
 
@@ -121,8 +123,8 @@ const AddSearchs = () => {
                 </div>
 
                 <div className="imgContainer">
-                    <img className="img1" src="img.png" />
-                    <img className="img2" src="img 2.png" />
+                    <img className="img1" src={bumeranArriba} />
+                    <img className="img2" src={bumeranAbajo} />
                 </div>
             </div>
 
@@ -131,5 +133,3 @@ const AddSearchs = () => {
 };
 
 export default AddSearchs;
-
-
