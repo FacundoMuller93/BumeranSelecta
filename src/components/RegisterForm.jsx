@@ -4,6 +4,7 @@ import useInput from "../hooks/useInput";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { sendRegisterRequest } from "../store/user";
+import { alertNewUser } from "../utils/alerts";
 
 const RegisterForm = () => {
   const firstName = useInput();
@@ -28,6 +29,7 @@ const RegisterForm = () => {
         password: password.value,
       })
     );
+    alertNewUser()
     navigate("/");
   };
 
