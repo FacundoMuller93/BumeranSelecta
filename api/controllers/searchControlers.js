@@ -30,6 +30,11 @@ exports.getAll = (req, res) => {
         .then(data => res.status(200).send(data))
 };
 
+exports.getId = (req, res) => {
+    const { id } = req.params;
+    Searchs.findOne({ where: { id } })
+        .then(data => res.status(200).send(data))
+};
 exports.new = (req, res) => {
     Searchs.findAll({where : {state_search : "Nueva"}})
     .then((newSearchs) => res.status(200).send(newSearchs))

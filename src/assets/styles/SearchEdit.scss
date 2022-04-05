@@ -1,0 +1,33 @@
+.containerSearchEdit {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+
+
+
+    .containerForm {
+        margin-top: 6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        text-align: center;
+    }
+
+}
+
+.containerTable {
+    width: 100vw;
+}
+
+.ancho {
+    display: flex;
+}
+.inputRadio{
+    display: block !important;
+}
+input[type=radio] {
+    display: block !important;
+}
