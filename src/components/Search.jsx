@@ -57,6 +57,15 @@ const Search = () => {
                                         <td>{search.vacancies}</td>
                                         <td>{search.lapse_search.replace(" ", " a las ")}hs</td>
                                         <td>{search.description_search}</td>
+                                        <td>
+                                            <Link to={`/search/${search.id}`}>
+                                                <Button
+                                                    className={`${styles.buttonsAddRecruiter} w-lg-25  px-4 px-lg-5 `}
+                                                >
+                                                    Editar
+                                                </Button>
+                                            </Link>
+                                        </td>
                                         <td><button onClick={(e) => handleDelete(e, search.id)} className={`w-lg-25 px-4 px-lg-5 ${styles.buttonDeleteRecruiter}`}>Eliminar</button></td>
                                     </tr>
                                 )

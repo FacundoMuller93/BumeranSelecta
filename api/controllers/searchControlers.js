@@ -30,3 +30,8 @@ exports.getAll = (req, res) => {
         .then(data => res.status(200).send(data))
 };
 
+exports.getId = (req, res) => {
+    const { id } = req.params;
+    Searchs.findOne({ where: { id } })
+        .then(data => res.status(200).send(data))
+};

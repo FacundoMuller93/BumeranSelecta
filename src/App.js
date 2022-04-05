@@ -14,6 +14,7 @@ import Reports from './components/Reports';
 import NotFound from './Pages/NotFound';
 import ForgotPassword from './components/ForgotPassword';
 import SpinnerComp from "./commons/Spinner";
+import EditSearch from "./components/EditSearch";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/login" element={<LoginForm/>} />
         <Route path="/recruiters" element={<Recruiters/>} />
         <Route path="/searchs" element={<Search/>} />
+        <Route path="/search/:id" element={<EditSearch />} />
         <Route path="/addSearch" element={<AddSearchs />} />
         <Route path="/reports" element={<Reports/>} />
         <Route path={"/recruiter/:id"} element={<EditRecruiter/>} />
