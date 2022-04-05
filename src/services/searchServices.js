@@ -35,3 +35,56 @@ export const addSearchServices = async ({ description_search, country, area_sear
         })
     return addSearch.data
 }
+
+export const newSearchsServices = async () => {
+    const pendingSearchs = await axios({
+        method: "GET",
+        // withCredentials: true,
+        url: "http://localhost:3001/api/search/state/new",
+    })
+    return pendingSearchs.data
+}
+
+export const startedSearchsServices = async () => {
+    const activeSearchs = await axios({
+        method: "GET",
+        // withCredentials: true,
+        url: "http://localhost:3001/api/search/state/started",
+    })
+    return activeSearchs.data
+}
+
+export const presentedSearchsServices = async () => {
+    const suspendedSearchs = await axios({
+        method: "GET",
+        // withCredentials: true,
+        url: "http://localhost:3001/api/search/state/presented",
+    })
+    return suspendedSearchs.data
+}
+
+export const revisionSearchsServices = async () => {
+    const suspendedSearchs = await axios({
+        method: "GET",
+        // withCredentials: true,
+        url: "http://localhost:3001/api/search/state/revision",
+    })
+    return suspendedSearchs.data
+}
+
+export const closedSearchsServices = async () => {
+    const suspendedSearchs = await axios({
+        method: "GET",
+        // withCredentials: true,
+        url: "http://localhost:3001/api/search/state/closed",
+    })
+    return suspendedSearchs.data
+}
+
+export const filteredByDateSearchsServices = async ({start_date, end_date}) => {
+    const filteredByDate = await axios.get("http://localhost:3001/api/", {
+        start_date,
+        end_date
+    })
+    return filteredByDate.data
+}

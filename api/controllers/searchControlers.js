@@ -30,3 +30,27 @@ exports.getAll = (req, res) => {
         .then(data => res.status(200).send(data))
 };
 
+exports.new = (req, res) => {
+    Searchs.findAll({where : {state_search : "Nueva"}})
+    .then((newSearchs) => res.status(200).send(newSearchs))
+};
+
+exports.started = (req, res) => {
+    Searchs.findAll({where : {state_search : "Iniciada"}})
+    .then((startedSearchs) => res.status(200).send(startedSearchs))
+};
+
+exports.presented = (req, res) => {
+    Searchs.findAll({where : {state_search : "Presentada"}})
+    .then((presentedSearchs) => res.status(200).send(presentedSearchs))
+};
+
+exports.revision = (req, res) => {
+    Searchs.findAll({where : {state_search : "Suspendida"}})
+    .then((revisionSearchs) => res.status(200).send(revisionSearchs))
+};
+
+exports.closed = (req, res) => {
+    Searchs.findAll({where : {state_search : "Cerrada"}})
+    .then((closedSearchs) => res.status(200).send(closedSearchs))
+};

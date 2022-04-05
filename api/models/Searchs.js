@@ -32,7 +32,7 @@ Searchs.init(
         },
         state_search: {
             type: DataTypes.STRING,
-            defaultValue: "pendiente"
+            defaultValue: "Nueva"
         },
         lapse_search: {
             type: DataTypes.STRING
@@ -40,8 +40,15 @@ Searchs.init(
         candidates: {
             type: DataTypes.INTEGER,
             defaultValue: 0
+        },
+        start_date: {
+            type: DataTypes.STRING,
+            defaultValue: "No definida"
+        },
+        end_date: {
+            type: DataTypes.STRING,
+            defaultValue: "No definida"
         }
-
     },
     {
         // Other model options go here
