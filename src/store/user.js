@@ -5,6 +5,7 @@ const userInitialState = {
   loading: false,
   data: {},
   error: "",
+  passChange: {},
 };
 
 export const sendRegisterRequest = createAsyncThunk(
@@ -70,7 +71,7 @@ const userSlice = createSlice({
             state.loading = true
         },
         [getUserRequest.fulfilled]: (state, action) => {
-            state.data = action.payload
+            state.passChange = action.payload
             state.loading = false
             state.error = ""
         },
@@ -85,6 +86,7 @@ const userSlice = createSlice({
             state.data = {}
             state.loading = false
             state.error = ""
+            state.passChange = {}
         },
         [deleteUserRequest.rejected]: (state, action) => {
             state.loading = false
