@@ -14,6 +14,7 @@ import {
   getFilteredByDate,
 } from "../store/searchs";
 import styles from "../assets/styles/Recruiters.module.scss";
+import { alertDeleteSearch } from "../utils/alerts";
 
 const Search = () => {
   const [validation, setValidation] = useState(true)
@@ -36,7 +37,6 @@ const Search = () => {
     }
   };
 
-
   const dispatch = useDispatch();
 
   const search = useSelector((state) => state.search.data);
@@ -46,10 +46,9 @@ const Search = () => {
   }, []);
 
   //eliminar busqueda
-  const handleDelete = async (e, searchId) => {
+  const handleDelete = (e, searchId) => {
     e.preventDefault();
-    await dispatch(deleteSearch(searchId));
-    dispatch(getAllSearch());
+    alertDeleteSearch({dispatch, deleteSearch, searchId, getAllSearch})
   };
 
   const handleAll = async () => {
