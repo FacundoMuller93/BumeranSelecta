@@ -45,7 +45,7 @@ const Rating = () => {
         );
       })}
       <form onSubmit={handleSubmit}>
-        <div className={styles.totalCandidates}>Total de Candidatos: 20</div>
+        <div className={styles.totalCandidates}>Total de Candidatos Presentados: 20</div>
         <button
           type="submit"
           className={`btn btn-danger rounded-pill ${styles.bg}`}
