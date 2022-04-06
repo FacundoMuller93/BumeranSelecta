@@ -12,4 +12,4 @@ Es un sitio web donde pueden publicarse búsquedas de empleados para diferentes 
 -Asignar reclutadores a búsquedas, así como obtener recomendaciones de reclutadores según calificación promedio, ubicación y otros parámetros
 -Sección de reportes que cuenta con datos útiles para el Administrador de la web
 
-Tecnologías usadas: Javascript, HTML, CSS, Redux, React, React Bootstrap, Sequelize, MySQL ,Express, NodeJS, React Icons, SASS, CSS modules, , etc.
+Tecnologías usadas: Javascript, HTML, CSS, Redux, React, React Bootstrap, Sequelize, MySQL ,Express, NodeJS, React Icons, SASS, CSS modules, etc.
