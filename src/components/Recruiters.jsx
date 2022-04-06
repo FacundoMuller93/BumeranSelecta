@@ -1,13 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { Button, Modal } from "react-bootstrap";
 import { getAllRecruiters, deleteRecruiter } from "../store/recruiters";
 import styles from "../assets/styles/Recruiters.module.scss";
 import Swal from "sweetalert2";
 
 const Recruiters = () => {
   const dispatch = useDispatch();
+
+  //modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+
+  const handleShow = (recruiter) => {
+    console.log(recruiter)
+          setSelected(recruiter)
+          setShow(true)
+        }
+
+
+  const [selected, setSelected] = useState({});
+  //
 
   const recruiter = useSelector((state) => state.recruiter.data);
 
@@ -88,6 +102,7 @@ const Recruiters = () => {
             </thead>
             <tbody className={styles.tbodyContainer}>
               {recruiter.map((recruiter, i) => {
+                
                 return (
                   <>
                     <tr>
@@ -96,7 +111,25 @@ const Recruiters = () => {
                       <td>{recruiter.country}</td>
                       <td>{recruiter.area_rec}</td>
                       <td>{recruiter.rating}</td>
+
+                   
+
                       <td>
+                        <Button
+                          className={`${styles.buttonsAddRecruiter} w-lg-25  px-4 px-lg-5`}
+                          onClick={() => handleShow(recruiter)}
+                        >
+                          Detalles
+                        </Button>
+
+
+                      </td>
+
+
+
+                     
+                      <td>
+                        {" "}
                         <Link to={`/recruiter/${recruiter.id}`}>
                           <i>
                             <svg
@@ -141,6 +174,25 @@ const Recruiters = () => {
                   </>
                 );
               })}
+              {                          
+                        <Modal show={show} size="lg" onHide={handleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Detalles del Reclutador</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <div>Nombre: {`${selected.name} ${selected.surname}`}</div>
+                          <div>País: {selected.country}</div>
+                          <div>Área: {selected.rec_area}</div>
+                          <div>Búsquedas activas: {selected.searchs}</div>
+                          <div>Comentarios: {selected.description_rec}</div>
+                          <div>Calificación Promedio: {selected.rating}</div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Cerrar
+                          </Button>
+                        </Modal.Footer>
+                      </Modal> }
             </tbody>
           </table>
         </div>

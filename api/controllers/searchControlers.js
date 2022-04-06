@@ -1,5 +1,5 @@
-const { Searchs, Recruiters } = require("../models/");
-const { Op } = require("sequelize");
+const { Searchs, Recruiters } = require("../models/")
+const { Op } = require("sequelize")
 
 exports.add = (req, res) => {
   const {
