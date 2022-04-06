@@ -87,6 +87,7 @@ const AddSearchs = () => {
 
                             <Form.Group className="col-md-6" controlId="formGridCity">
                                 <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...lapse_search} type="datetime-local" />
+                                <div>Ingrese el plazo estimado de búsqueda</div>
                             </Form.Group>
 
                             <Form.Group className="col-md-6 top" controlId="formGridState">
