@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch , useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getAllSearch, addSearch, getSingleSearch } from "../store/searchs";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
@@ -18,36 +18,36 @@ const EditSearch = () => {
 
     const search = [
         {
-            id: 1, 
+            id: 1,
             valoracion: 94,
             nombre: "jonatan",
             pais: "Argentina",
             areas: ['Administración, Contabilidad y Finanzas', 'Comercial, Ventas y Negocios', 'Producción y Manufactura'],
         },
         {
-            id:2,
+            id: 2,
             valoracion: 90,
             nombre: "pepe",
             pais: "Argentina",
             areas: ['Oficios y Otros', 'Tecnología, Sistemas y Telecomunicaciones', 'Abastecimiento y Logística'],
         },
         {
-            id:3,
+            id: 3,
             valoracion: 86,
             nombre: "pana",
             pais: "Argentina",
             areas: ['Gastronomía y Turismo', 'Recursos Humanos y Capacitación', 'Salud, Medicina y Farmacia',],
         },
         {
-            id:4,
+            id: 4,
             valoracion: 84,
             nombre: "lala",
             pais: "Argentina",
             areas: ['Gastronomía y Turismo', 'Recursos Humanos y Capacitación', 'Salud, Medicina y Farmacia',],
         },
         {
-            id:5,
-            valoracion: 84,
+            id: 5,
+            valoracion: 80,
             nombre: "lala",
             pais: "Argentina",
             areas: ['Gastronomía y Turismo', 'Recursos Humanos y Capacitación', 'Salud, Medicina y Farmacia',],
@@ -60,7 +60,7 @@ const EditSearch = () => {
     const [validation, setValidation] = useState(true)
     const [recruiter, setRecruiter] = useState({})
     const navigate = useNavigate();
-    const searchId = useSelector(state=> state.search.singleSearch)
+    const searchId = useSelector(state => state.search.singleSearch)
 
     useEffect(() => {
         dispatch(getSingleSearch(id))
@@ -133,7 +133,7 @@ const EditSearch = () => {
                         </Form.Group>
 
                         <Form.Group className="col-md-4" controlId="formGridCity">
-                            <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} type={lapse_search.value? "" : "datetime-local"} {...lapse_search} />
+                            <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} type={lapse_search.value ? "" : "datetime-local"} {...lapse_search} />
                         </Form.Group>
 
                         <Form.Group className="col-md-4 top" controlId="formGridState">
@@ -149,11 +149,11 @@ const EditSearch = () => {
                     <Row className="mb-3">
 
                         <Form.Group className="col-md-6" controlId="formGridAddress1">
-                            <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"}  value={recruiter.nombre} placeholder="Nombre del reclutador" type="disabled"/>
+                            <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiter.nombre} placeholder="Nombre del reclutador" type="disabled" />
                         </Form.Group>
 
                         <Form.Group className="col-md-6" controlId="formGridCity">
-                            <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"}  value={recruiter.valoracion} placeholder="Valoracion del reclutador" />
+                            <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiter.valoracion} placeholder="Valoracion del reclutador" />
                         </Form.Group>
 
                     </Row>
@@ -198,7 +198,7 @@ const EditSearch = () => {
                                                     name="group1"
                                                     type='radio'
                                                     id={1}
-                                                    onClick={()=>setRecruiter(search)}
+                                                    onClick={() => setRecruiter(search)}
                                                 />
                                             </td>
                                         </tr>
