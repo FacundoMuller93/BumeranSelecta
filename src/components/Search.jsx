@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Form, Dropdown } from "react-bootstrap";
 import useInput from "../hooks/useInput";
@@ -11,6 +11,7 @@ import {
   getPresentedSearchs,
   getRevisionSearchs,
   getClosedSearchs,
+  getFilteredByDate,
 } from "../store/searchs";
 import styles from "../assets/styles/Recruiters.module.scss";
 
@@ -18,22 +19,22 @@ const Search = () => {
   const [validation, setValidation] = useState(true)
   const start_date = useInput();
   const end_date = useInput();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = [start_date.value, end_date.value]
-    let state=false
-    data.forEach( element =>{ if(element == "") {state=true} });
-    if ( state ) setValidation(false)
+    let state = false
+    data.forEach(element => { if (element == "") { state = true } });
+    if (state) setValidation(false)
     else {
-        //  await dispatch(addSearch({
-        //     start_date: start_date.value,
-        //     end_date: end_date.value,
-        // }))
-        // dispatch(getAllSearch())
-        // navigate("/searchs")
+      //  await dispatch(addSearch({
+      //     start_date: start_date.value,
+      //     end_date: end_date.value,
+      // }))
+      // dispatch(getAllSearch())
+      // navigate("/searchs")
     }
-};
+  };
 
 
   const dispatch = useDispatch();
@@ -75,6 +76,11 @@ const Search = () => {
     await dispatch(getClosedSearchs());
   };
 
+  const filterDate = async () => {
+    await dispatch(getFilteredByDate( { filter_start: start_date.value, filter_end: end_date.value} ));
+  };
+
+  
   return (
     <div className="container-fluid px-4">
       <div className="row my-5">
@@ -131,7 +137,7 @@ const Search = () => {
                   : "err rounded-pill"
               }
               {...start_date}
-              type="datetime-local"
+              type="date"
             />
           </Form.Group>
 
@@ -145,13 +151,13 @@ const Search = () => {
                   : "err rounded-pill"
               }
               {...end_date}
-              type="datetime-local"
+              type="date"
             />
           </Form.Group>
 
-          <Button className={`w-lg-25  px-5 px-lg-7 ${styles.addSearchBtn}`}>Filtrar por Fecha</Button>{' '}
+          <Button variant="primary" onClick={()=>{filterDate()}} >Primary</Button>{' '}
 
-          </Form>
+        </Form>
 
           </div>
 
@@ -184,6 +190,15 @@ const Search = () => {
                     {/* <td>{search.lapse_search.replace(" ", " a las ")}hs</td> */}
                     <td>{search.start_date}</td>
                     <td>{search.end_date}</td>
+                    <td>
+                      <Link to={`/search/${search.id}`}>
+                        <Button
+                          className={`${styles.buttonsAddRecruiter} w-lg-25  px-5 px-lg-4`}
+                        >
+                          Editar
+                        </Button>
+                      </Link>{" "}
+                    </td>
                     <td>
                       <button
                         onClick={(e) => handleDelete(e, search.id)}

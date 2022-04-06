@@ -4,7 +4,7 @@ import * as searchService from "../services/searchServices"
 const searchsInitialState = {
     loading: false,
     data: [],
-    singleRecruiter: {},
+    singleSearch: {},
     error: ""
 }
 
@@ -13,6 +13,10 @@ export const getAllSearch = createAsyncThunk("GET_ALL_SEARCH", searchService.all
 export const addSearch = createAsyncThunk("ADD_SEARCH", searchService.addSearchServices)
 
 export const deleteSearch = createAsyncThunk("DELETE_SEARCH", searchService.deleteSearchServices)
+
+export const getSingleSearch  = createAsyncThunk("GET_ID_SEARCH",searchService.singleSearchServices);
+
+export const editRecruiter = createAsyncThunk("EDIT_SEARCH", searchService.editSearchServices);
 
 export const getNewSearchs = createAsyncThunk("GET_NEW", searchService.newSearchsServices)
 
@@ -64,6 +68,17 @@ const searchSlice = createSlice({
         [addSearch.rejected]: (state, action) => {
             state.loading = false
             state.error = action.error.message
+        },
+        [getSingleSearch.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [getSingleSearch.fulfilled]: (state, action) => {
+            state.singleSearch = action.payload;
+            state.loading = false;
+        },
+        [getSingleSearch.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
         },
         [getNewSearchs.pending]: (state, action) => {
             state.loading = true

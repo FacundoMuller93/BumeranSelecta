@@ -1,4 +1,5 @@
 const { Searchs, Recruiters } = require("../models/")
+const { Op } = require("sequelize")
 
 exports.add = (req, res) => {
 
@@ -30,27 +31,47 @@ exports.getAll = (req, res) => {
         .then(data => res.status(200).send(data))
 };
 
+exports.getId = (req, res) => {
+    const { id } = req.params;
+    Searchs.findOne({ where: { id } })
+        .then(data => res.status(200).send(data))
+};
 exports.new = (req, res) => {
-    Searchs.findAll({where : {state_search : "Nueva"}})
-    .then((newSearchs) => res.status(200).send(newSearchs))
+    Searchs.findAll({ where: { state_search: "Nueva" } })
+        .then((newSearchs) => res.status(200).send(newSearchs))
 };
 
 exports.started = (req, res) => {
-    Searchs.findAll({where : {state_search : "Iniciada"}})
-    .then((startedSearchs) => res.status(200).send(startedSearchs))
+    Searchs.findAll({ where: { state_search: "Iniciada" } })
+        .then((startedSearchs) => res.status(200).send(startedSearchs))
 };
 
 exports.presented = (req, res) => {
-    Searchs.findAll({where : {state_search : "Presentada"}})
-    .then((presentedSearchs) => res.status(200).send(presentedSearchs))
+    Searchs.findAll({ where: { state_search: "Presentada" } })
+        .then((presentedSearchs) => res.status(200).send(presentedSearchs))
 };
 
 exports.revision = (req, res) => {
-    Searchs.findAll({where : {state_search : "Suspendida"}})
-    .then((revisionSearchs) => res.status(200).send(revisionSearchs))
+    Searchs.findAll({ where: { state_search: "Suspendida" } })
+        .then((revisionSearchs) => res.status(200).send(revisionSearchs))
 };
 
 exports.closed = (req, res) => {
-    Searchs.findAll({where : {state_search : "Cerrada"}})
-    .then((closedSearchs) => res.status(200).send(closedSearchs))
+    Searchs.findAll({ where: { state_search: "Cerrada" } })
+        .then((closedSearchs) => res.status(200).send(closedSearchs))
 };
+
+exports.filterDate = (req, res) => {
+    const { filter_start, filter_end } = req.body
+
+    Searchs.findAll({
+        where: {
+            [Op.and]: [{
+                start_date: { [Op.between]: [filter_start, filter_end] },
+                end_date: { [Op.between]: [filter_start, filter_end] },
+
+            }]
+        }
+    })
+        .then(data => res.status(200).send(data))
+}

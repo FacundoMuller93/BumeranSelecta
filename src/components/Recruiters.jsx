@@ -11,7 +11,15 @@ const Recruiters = () => {
   //modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
+  const handleShow = (recruiter) => {
+    console.log(recruiter)
+          setSelected(recruiter)
+          setShow(true)
+        }
+
+
+  const [selected, setSelected] = useState({});
   //
 
   const recruiter = useSelector((state) => state.recruiter.data);
@@ -73,27 +81,16 @@ const Recruiters = () => {
 
                    
 
-                      <>
+                      <td>
                         <Button
                           className={`${styles.buttonsAddRecruiter} w-lg-25  px-4 px-lg-5`}
-                          onClick={handleShow}
+                          onClick={() => handleShow(recruiter)}
                         >
                           Detalles
                         </Button>
-                        <Modal show={show} size="lg" onHide={handleClose}>
-                        <Modal.Header closeButton>
-                          <Modal.Title>Detalles del Reclutador</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="secondary" onClick={handleClose}>
-                            Cerrar
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
 
-                      </>
+
+                      </td>
 
 
 
@@ -120,7 +117,25 @@ const Recruiters = () => {
                   </>
                 );
               })}
-              {   }
+              {                          
+                        <Modal show={show} size="lg" onHide={handleClose}>
+                        <Modal.Header closeButton>
+                          <Modal.Title>Detalles del Reclutador</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <div>Nombre: {`${selected.name} ${selected.surname}`}</div>
+                          <div>País: {selected.country}</div>
+                          <div>Área: {selected.rec_area}</div>
+                          <div>Búsquedas activas: {selected.searchs}</div>
+                          <div>Comentarios: {selected.description_rec}</div>
+                          <div>Calificación Promedio: {selected.rating}</div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Cerrar
+                          </Button>
+                        </Modal.Footer>
+                      </Modal> }
             </tbody>
           </table>
         </div>
