@@ -82,16 +82,17 @@ const Search = () => {
           <h3 className={` mb-5 fs-4 title ${styles.title}`}>
             Lista de busquedas
           </h3>
-          <Link to="/addSearch">
+        </div>
+
+        <div className={styles.filtersContainer}>
+        <Link to="/addSearch">
             <Button className={`w-lg-25  px-5 px-lg-4 ${styles.addSearchBtn}`}>
               Agregar Búsqueda
             </Button>
           </Link>{" "}
-        </div>
 
-        
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <Dropdown.Toggle className={`w-lg-25  px-5 px-lg-4 ${styles.addSearchBtn}`} id="dropdown-basic">
             Filtrar por Estado
           </Dropdown.Toggle>
 
@@ -117,11 +118,11 @@ const Search = () => {
           </Dropdown.Menu>
         </Dropdown>
 
-        <Form onSubmit={handleSubmit}>
 
-          <div>Filtrar por Fecha:</div>
+        <Form className={`${styles.form} d-flex`} onSubmit={handleSubmit}>
 
-          <div>De Inicio</div>
+          <div>Inicio</div>
+
           <Form.Group className="col-md-6" controlId="formGridCity">
             <Form.Control
               className={
@@ -134,7 +135,8 @@ const Search = () => {
             />
           </Form.Group>
 
-          <div>De Cierre</div>
+          <div>Cierre</div>
+          
           <Form.Group className="col-md-6" controlId="formGridCity">
             <Form.Control
               className={
@@ -147,9 +149,11 @@ const Search = () => {
             />
           </Form.Group>
 
-          <Button variant="primary">Primary</Button>{' '}
+          <Button className={`w-lg-25  px-5 px-lg-7 ${styles.addSearchBtn}`}>Filtrar por Fecha</Button>{' '}
 
           </Form>
+
+          </div>
 
         <div className="col">
           <table className="table bg-white rounded shadow-sm  table-hover">
