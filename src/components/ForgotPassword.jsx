@@ -14,7 +14,7 @@ import {
 } from "../store/user"
 
 const ForgotPassword = () => {
-  const user = useSelector(state => state.user.data)
+  const user = useSelector(state => state.user.passChange)
   const email = useInput()
   const password = useInput()
 
