@@ -9,28 +9,43 @@ export const userRegisterService = async ({
   email,
   password,
 }) => {
-  const register = await axios.post("http://localhost:3001/api/user/register", {
-    firstName: firstName,
-    surname: surname,
-    age: age,
-    country: country,
-    email: email,
-    password: password,
-  })
-  return register.data
+  try {
+    const register = await axios.post(
+      "http://localhost:3001/api/user/register",
+      {
+        firstName: firstName,
+        surname: surname,
+        age: age,
+        country: country,
+        email: email,
+        password: password,
+      }
+    )
+    return register.data
+  } catch (error) {
+    throw error
+  }
 }
 
 export const userLoginService = async ({ email, password }) => {
-  const loginUser = await axios.post("http://localhost:3001/api/user/login", {
-    email,
-    password,
-  })
-  return loginUser.data
+  try {
+    const loginUser = await axios.post("http://localhost:3001/api/user/login", {
+      email,
+      password,
+    })
+    return loginUser.data
+  } catch (error) {
+    throw error
+  }
 }
 
 export const userLogoutService = async () => {
-  const logoutUser = await axios.post("http://localhost:3001/api/user/logout")
-  return logoutUser.data
+  try {
+    const logoutUser = await axios.post("http://localhost:3001/api/user/logout")
+    return logoutUser.data
+  } catch (error) {
+    throw error
+  }
 }
 
 export const getUserService = async ({ email, navigate }) => {
@@ -46,8 +61,12 @@ export const getUserService = async ({ email, navigate }) => {
 }
 
 export const deleteUserService = async ({ id }) => {
-  const deleteUser = await axios.delete(
-    `http://localhost:3001/api/user/delete/${id}`
-  )
-  return deleteUser.data
+  try {
+    const deleteUser = await axios.delete(
+      `http://localhost:3001/api/user/delete/${id}`
+    )
+    return deleteUser.data
+  } catch (error) {
+    throw error
+  }
 }
