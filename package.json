@@ -32,7 +32,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "saas": "^1.0.0",
-    "sequelize": "^6.17.0",
+    "sequelize": "^6.18.0",
     "sweetalert2": "^11.4.8",
     "web-vitals": "^2.1.4"
   },
