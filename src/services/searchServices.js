@@ -114,10 +114,10 @@ export const closedSearchsServices = async () => {
     return suspendedSearchs.data
 }
 
-export const filteredByDateSearchsServices = async ({start_date, end_date}) => {
-    const filteredByDate = await axios.get("http://localhost:3001/api/", {
-        start_date,
-        end_date
+export const filteredByDateSearchsServices = async ({filter_start, filter_end}) => {
+    const filteredByDate = await axios.post("http://localhost:3001/api/search/filter_date", {
+        filter_start: filter_start,
+        filter_end: filter_end,
     })
     return filteredByDate.data
 }
