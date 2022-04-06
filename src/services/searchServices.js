@@ -62,6 +62,7 @@ export const singleSearchServices = async id => {
 
 export const editSearchServices = async ({
   id,
+  idRecruiter,
   description_search,
   country,
   area_search,
@@ -74,6 +75,7 @@ export const editSearchServices = async ({
     const editSearch = await axios.put(
       `http://localhost:3001/api/search/${id}`,
       {
+        idRecruiter: idRecruiter,
         description_search: description_search,
         country: country,
         area_search: area_search,

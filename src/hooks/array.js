@@ -19,20 +19,20 @@ const array =
             'Uruguay'
         ],
     area: [
-        'Administración, Contabilidad y Finanzas',
-        'Comercial, Ventas y Negocios',
-        'Producción y Manufactura',
-        'Oficios y Otros',
-        'Tecnología, Sistemas y Telecomunicaciones',
-        'Abastecimiento y Logística',
-        'Gastronomía y Turismo',
-        'Recursos Humanos y Capacitación',
-        'Salud, Medicina y Farmacia',
+        'Administración',
+        'Comercial',
+        'Producción',
+        'Oficios',
+        'Tecnología',
+        'Logística',
+        'Gastronomía',
+        'Recursos Humanos',
+        'Salud',
         'Ingenierías',
-        'Atención al Cliente, Call Center y Telemarketing',
-        'Marketing y Publicidad',
-        'Ingeniería Civil y Construcción',
-        'Aduana y Comercio Exterior'
+        'Atención al Cliente',
+        'Marketing',
+        'Construcción',
+        'Comercio Exterior'
     ]
 }
 export default array

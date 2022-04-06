@@ -18,17 +18,17 @@ export const getSingleSearch  = createAsyncThunk("GET_ID_SEARCH",searchService.s
 
 export const editRecruiter = createAsyncThunk("EDIT_SEARCH", searchService.editSearchServices);
 
-export const getNewSearchs = createAsyncThunk("GET_NEW", searchService.newSearchsServices)
+export const getNewSearchs = createAsyncThunk("GET_NEW", searchService.newSearchsServices);
 
-export const getStartedSearchs = createAsyncThunk("GET_STARTED", searchService.startedSearchsServices)
+export const getStartedSearchs = createAsyncThunk("GET_STARTED", searchService.startedSearchsServices);
 
-export const getPresentedSearchs = createAsyncThunk("GET_PRESENTED", searchService.presentedSearchsServices)
+export const getPresentedSearchs = createAsyncThunk("GET_PRESENTED", searchService.presentedSearchsServices);
 
-export const getRevisionSearchs = createAsyncThunk("GET_REVISION", searchService.revisionSearchsServices)
+export const getRevisionSearchs = createAsyncThunk("GET_REVISION", searchService.revisionSearchsServices);
 
-export const getClosedSearchs = createAsyncThunk("GET_CLOSED", searchService.closedSearchsServices)
+export const getClosedSearchs = createAsyncThunk("GET_CLOSED", searchService.closedSearchsServices);
 
-export const getFilteredByDate = createAsyncThunk("GET_DATEFILTERED", searchService.filteredByDateSearchsServices)
+export const getFilteredByDate = createAsyncThunk("GET_DATEFILTERED", searchService.filteredByDateSearchsServices);
 
 const searchSlice = createSlice({
     name: "search",

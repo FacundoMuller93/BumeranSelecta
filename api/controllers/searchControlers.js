@@ -106,6 +106,14 @@ exports.closed = (req, res) => {
   }
 };
 
+exports.editSearch = (req, res) => {
+  try {
+    console.log('esta es la data para la actualización', req.body)
+  } catch (error) {
+    console.log("ERROR: ", error)
+  }
+}
+
 exports.filterDate = (req, res) => {
   const { filter_start, filter_end } = req.body;
   try {
