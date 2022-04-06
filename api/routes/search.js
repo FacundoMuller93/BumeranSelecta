@@ -5,6 +5,7 @@ const searchControler = require('../controllers/searchControlers');
 router.post('/add', searchControler.add);
 router.delete('/:id', searchControler.delete);
 router.get('/:id',searchControler.getId);
+router.put('/:id',searchControler.editSearch)
 router.get('/', searchControler.getAll);
 router.post('/filter_date',searchControler.filterDate)
 

@@ -1,6 +1,6 @@
 "use strict"
 const fakeRecruiters = require("./fake_recruiters.json")
-const fakeSearchs = require("./fake_searchs.json")
+const fakeSearchs = require("./fake-searchs.json")
 
 module.exports = {
   async up(queryInterface, Sequelize) {
