@@ -318,7 +318,7 @@ const Search = () => {
               {
                 <Modal show={show} size="lg" onHide={handleClose}>
                   <Modal.Header closeButton>
-                    <Modal.Title className="title ms-auto">Detalles del Reclutador</Modal.Title>
+                    <Modal.Title className="title ms-auto">Detalles de Búsqueda</Modal.Title>
                   </Modal.Header>
                   <Modal.Body className="title">
                     <div className="pt-3 pb-3 ps-2">Posición: {selected.position}</div>
@@ -327,7 +327,7 @@ const Search = () => {
                     <div className="pb-3 ps-2">Descripción: {selected.description_search}</div>
                     <div className="pb-3 ps-2">Vacantes: {selected.vacancies}</div>
                     <div className="pb-3 ps-2">Fecha de Inicio: {selected.start_date}</div>
-                    <div className="pb-3 ps-2">Fecha de Cierre {selected.end_date}</div>
+                    <div className="pb-3 ps-2">Fecha de Cierre: {selected.end_date}</div>
                     <div className="pb-3 ps-2">Estado: {selected.state_search}</div>
 
                   </Modal.Body>
