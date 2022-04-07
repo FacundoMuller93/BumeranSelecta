@@ -171,7 +171,7 @@ const EditRecruiter = () => {
             </Form.Group>
           </div>
 
-          <div className="col-lg-6">
+          {/* <div className="col-lg-6">
             <Form.Group
               className="w-100 ps-lg-1 pb-3"
               controlId="formBasicEmail"
@@ -184,10 +184,10 @@ const EditRecruiter = () => {
                 placeholder="Activo/Inactivo"
               />
             </Form.Group>
-          </div>
+          </div> */}
         </div>
 
-        <div className="col-lg-12">
+        {/* <div className="col-lg-12">
           <Form.Group className="w-100 pe-lg-1 pb-3" controlId="formBasicEmail">
             <Form.Control
               {...active_searchs}
@@ -197,7 +197,7 @@ const EditRecruiter = () => {
               placeholder="Búsquedas activas separadas por comas"
             />
           </Form.Group>
-        </div>
+        </div> */}
 
         <div className="row mb-5">
           <div className="col-6 text-end">
