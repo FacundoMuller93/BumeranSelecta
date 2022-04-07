@@ -15,7 +15,7 @@ const Progress = ({ ranking }) => {
                 <ion-icon name="star"></ion-icon>
             </div>
             <div className="containerBarra">
-                <ProgressBar className="progressBarra" variant="white" now={100 - ranking} />
+                <ProgressBar className="progressBarra" variant="white" now={100 - ranking*10} />
             </div>
         </div>
     )

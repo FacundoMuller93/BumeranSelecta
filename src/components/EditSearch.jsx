@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getAllSearch, getSingleSearch, editRecruiter } from "../store/searchs";
+import { getAllSearch, getSingleSearch, editRecruiter, getAssignment } from "../store/searchs";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
@@ -16,62 +16,43 @@ import styles from '../assets/styles/Recruiters.module.scss';
 
 const EditSearch = () => {
 
-    const recruiter = [
-        {
-            id: 1,
-            valoracion: 94,
-            nombre: "jonatan",
-            pais: "Argentina",
-            areas: ['Administración, Contabilidad y Finanzas', 'Comercial, Ventas y Negocios', 'Producción y Manufactura'],
-        },
-        {
-            id: 2,
-            valoracion: 90,
-            nombre: "pepe",
-            pais: "Argentina",
-            areas: ['Oficios y Otros', 'Tecnología, Sistemas y Telecomunicaciones', 'Abastecimiento y Logística'],
-        },
-        {
-            id: 3,
-            valoracion: 86,
-            nombre: "pana",
-            pais: "Argentina",
-            areas: ['Gastronomía y Turismo', 'Recursos Humanos y Capacitación', 'Salud, Medicina y Farmacia',],
-        },
-        {
-            id: 4,
-            valoracion: 84,
-            nombre: "lala",
-            pais: "Argentina",
-            areas: ['Gastronomía y Turismo', 'Recursos Humanos y Capacitación', 'Salud, Medicina y Farmacia',],
-        },
-        {
-            id: 5,
-            valoracion: 80,
-            nombre: "lala",
-            pais: "Argentina",
-            areas: ['Gastronomía y Turismo', 'Recursos Humanos y Capacitación', 'Salud, Medicina y Farmacia',],
-        }
-    ]
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
     const [validation, setValidation] = useState(true)
     const [recruiterInfo, setRecruiterInfo] = useState({})
-    const navigate = useNavigate();
-    const searchId = useSelector(state => state.search.singleSearch)
+    const [recruiter, setRecruiter] = useState([])
+
+    const country = useInput();
+    const area_ser = useInput();
+    const position = useInput();
+    const description_ser = useInput();
+    const vacancies = useInput();
+    const lapse_search = useInput()
 
     useEffect(() => {
         dispatch(getSingleSearch(id))
-        .then(data => console.log("ESTE ES EL DISPACH", ))
+            .then((data) => {
+                country.setValue(data.payload.country)
+                area_ser.setValue(data.payload.area_search)
+                position.setValue(data.payload.position)
+                description_ser.setValue(data.payload.description_search)
+                vacancies.setValue(data.payload.vacancies)
+                lapse_search.setValue(data.payload.lapse_search)
+                return dispatch(getAssignment({ country: data.payload.country, area_search: data.payload.area_search }))
+                    .then((data) => setRecruiter(data.payload))
+            })
     }, [])
-    
-    const country = useInput(searchId.country ? searchId.country : "");
-    const area_ser = useInput(searchId.area_search ? searchId.area_search : "");
-    const position = useInput(searchId.position ? searchId.position : "");
-    const description_ser = useInput(searchId.description_search ? searchId.description_search : "");
-    const vacancies = useInput(searchId.vacancies ? searchId.vacancies : "");
-    const lapse_search = useInput(searchId.lapse_search ? searchId.lapse_search : "");
+
+    useEffect(() => {
+        dispatch(getAssignment({ country: country.value, area_search: area_ser.value }))
+            .then((data) => setRecruiter(data.payload))
+    }, [area_ser.value, country.value])
+
+    console.log("ESTA ES LA DATA DE LA ASIGNACION", recruiter)
+
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -82,7 +63,7 @@ const EditSearch = () => {
         else {
             await dispatch(editRecruiter({
                 id: id,
-                idRecruiter: recruiterInfo.id,
+                recruiterId: recruiterInfo.id,
                 description_search: description_ser.value,
                 country: country.value,
                 area_search: area_ser.value,
@@ -92,7 +73,6 @@ const EditSearch = () => {
             }))
             dispatch(getAllSearch())
             navigate("/searchs")
-            
         }
     };
 
@@ -100,7 +80,7 @@ const EditSearch = () => {
 
         <div className="containerSearchEdit ">
             <div className="containerForm">
-                <div className="pt-2 mb-2 fs-4 mx-5 title d-flex justify-content-center">
+                <div className="pt-2 mb-0 fs-4 mx-5 title d-flex justify-content-center">
                     Editar de Busqueda
                 </div>
                 <Form onSubmit={handleSubmit} className=" mt-4 pt-lg-5 formLogin w-100" id="formSearch">
@@ -148,15 +128,17 @@ const EditSearch = () => {
                             </Form.Select>
                         </Form.Group>
                     </Row>
-
+                    <div className="pt-2 mb-2 fs-4 mx-5 title d-flex justify-content-center">
+                        Reclutador asignado:
+                    </div>
                     <Row className="mb-3">
 
                         <Form.Group className="col-md-6" controlId="formGridAddress1">
-                            <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo.nombre} placeholder="Nombre del reclutador"  />
+                            <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={`${recruiterInfo.name} ${recruiterInfo.surname}`} placeholder="Nombre del reclutador" />
                         </Form.Group>
 
                         <Form.Group className="col-md-6" controlId="formGridCity">
-                            <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo.valoracion} placeholder="Valoracion del reclutador" />
+                            <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo.rating} placeholder="Valoracion del reclutador" />
                         </Form.Group>
 
                     </Row>
@@ -170,16 +152,17 @@ const EditSearch = () => {
             <div className="container-fluid px-5 containerTable">
                 <div className="row my-3">
                     <div className={styles.titleContainer}>
-                        <h3 className={` mb-5 fs-4 title ${styles.title}`}>Reclutadores</h3>
+                        <h3 className={` mb-0 mt-5  fs-4 title ${styles.title}`}>Candidatos sugeridos:</h3>
                     </div>
                     <div className="col w-100">
                         <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col" width="50">#</th>
-                                    <th scope="col">Valoración</th>
                                     <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
                                     <th scope="col">Areas</th>
+                                    <th scope="col">Valoración</th>
                                     <th scope="col">Selección</th>
                                 </tr>
                             </thead>
@@ -188,13 +171,15 @@ const EditSearch = () => {
                                     return (
                                         <tr className={styles.userContainer}>
                                             <th scope="row">{i + 1}</th>
-                                            <td>  <Progress ranking={recruiter.valoracion} /></td>
-                                            <td>{recruiter.nombre}</td>
+                                            <td>{recruiter.name}</td>
+                                            <td>{recruiter.surname}</td>
                                             <td>
-                                                <tr>{recruiter.areas[0]}</tr>
+                                                <tr>{recruiter.area_rec}</tr>
+                                                {/* <tr>{recruiter.areas[0]}</tr>
                                                 <tr>{recruiter?.areas[1]}</tr>
-                                                <tr>{recruiter?.areas[2]}</tr>
+                                                <tr>{recruiter?.areas[2]}</tr> */}
                                             </td>
+                                            <td>  <Progress ranking={recruiter.rating} /></td>
                                             <td>
                                                 <Form.Check
                                                     className="inputRadio"

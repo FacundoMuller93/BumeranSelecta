@@ -107,12 +107,19 @@ exports.closed = (req, res) => {
 };
 
 exports.editSearch = (req, res) => {
+  const { id } = req.params
   try {
-    console.log('esta es la data para la actualización', req.body)
+    Searchs.update(req.body, {
+      where: { id },
+      returning: true,
+      plain: true,
+    })
+      .then(data => res.status(201).send(data))
   } catch (error) {
     console.log("ERROR: ", error)
   }
 }
+
 
 exports.filterDate = (req, res) => {
   const { filter_start, filter_end } = req.body;
@@ -131,3 +138,22 @@ exports.filterDate = (req, res) => {
     console.log("ERROR: ", error);
   }
 };
+
+exports.assignment = (req, res) => {
+  const { country, area_search } = req.body
+  console.log("--->", req.body)
+  try {
+    Recruiters.findAll({
+      where: {
+        [Op.and]: [
+          {
+            country: { [Op.eq]: [country] },
+            area_rec: { [Op.eq]: [area_search] },
+          },
+        ],
+      },
+    }).then((data) => res.status(200).send(data));
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+}

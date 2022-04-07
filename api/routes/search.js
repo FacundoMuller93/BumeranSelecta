@@ -8,6 +8,7 @@ router.get('/:id',searchControler.getId);
 router.put('/:id',searchControler.editSearch)
 router.get('/', searchControler.getAll);
 router.post('/filter_date',searchControler.filterDate)
+router.post('/assignment', searchControler.assignment)
 
 //agregados por Facu
 router.get('/state/new', searchControler.new)

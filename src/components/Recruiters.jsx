@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
 import { getAllRecruiters, deleteRecruiter } from "../store/recruiters";
 import styles from "../assets/styles/Recruiters.module.scss";
+import Swal from "sweetalert2";
+import Progress from "../commons/Progress"
 import { alertDeleteRecruiter } from "../utils/alerts";
 
 const Recruiters = () => {
@@ -73,7 +75,7 @@ const Recruiters = () => {
                       <td>{`${recruiter.name} ${recruiter.surname}`}</td>
                       <td>{recruiter.country}</td>
                       <td>{recruiter.area_rec}</td>
-                      <td>{recruiter.rating}</td>
+                      <td> <Progress ranking={recruiter.rating}/></td>
 
                       
 
