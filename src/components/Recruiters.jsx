@@ -80,7 +80,7 @@ const Recruiters = () => {
                       
 
                       <td>
-                        <i className={styles.pointerTrash} onClick={() => handleShow(recruiter)}>
+                        <i title="Ver detalles de este reclutador" className={styles.pointerTrash} onClick={() => handleShow(recruiter)}>
                           <svg
                             width="28"
                             height="30"
@@ -144,7 +144,7 @@ const Recruiters = () => {
                       <td>
                         {" "}
                         <Link to={`/recruiter/${recruiter.id}`}>
-                          <i>
+                          <i title="Gestionar reclutador">
                             <svg
                               width="24"
                               height="24"
@@ -166,6 +166,7 @@ const Recruiters = () => {
                         <i
                           onClick={(e) => handleDelete(e, recruiter.id)}
                           className={styles.pointerTrash}
+                          title="Eliminar reclutador"
                         >
                           <svg
                             width="24"
