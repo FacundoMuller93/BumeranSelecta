@@ -69,6 +69,7 @@ export const editSearchServices = async ({
   vacancies,
   lapse_search,
   recruiterId,
+  state_search
 }) => {
   try {
     const editSearch = await axios.put(
@@ -81,6 +82,7 @@ export const editSearchServices = async ({
         vacancies: vacancies,
         lapse_search: lapse_search,
         recruiterId: recruiterId,
+        state_search: state_search,
       }
     )
     return editSearch.data

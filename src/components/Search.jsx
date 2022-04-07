@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Form, Dropdown } from "react-bootstrap";
+import { Button, Form, Dropdown, Modal } from "react-bootstrap";
 import useInput from "../hooks/useInput";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -40,6 +40,19 @@ const Search = () => {
     }
   };
 
+
+  //Modal
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (search) => {
+    setSelected(search);
+    setShow(true);
+  };
+
+  const [selected, setSelected] = useState({});
+
+  //
   const dispatch = useDispatch();
 
   const search = useSelector((state) => state.search.data);
@@ -242,9 +255,70 @@ const Search = () => {
               <div className="col-lg-1">
                 <div className="row">
                   <div className="className col-lg-3">
+                  <td>
+                        <i title="Ver detalles de búsqueda" className={styles.pointerTrash} onClick={() => handleShow(search)}>
+                          <svg
+                            width="28"
+                            height="30"
+                            viewBox="0 0 28 30"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g filter="url(#filter0_d_9934_21817)">
+                              <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M18.3257 14.8987L23.7057 20.2787C23.8948 20.468 24.001 20.7246 24.0009 20.9921C24.0008 21.2596 23.8945 21.5161 23.7052 21.7052C23.516 21.8943 23.2594 22.0005 22.9919 22.0004C22.7244 22.0003 22.4678 21.894 22.2787 21.7047L16.8987 16.3247C15.2905 17.5704 13.268 18.1566 11.2429 17.9641C9.21772 17.7716 7.34198 16.8148 5.99723 15.2884C4.65248 13.7619 3.93973 11.7806 4.004 9.74729C4.06826 7.71402 4.9047 5.7816 6.34315 4.34315C7.7816 2.90469 9.71402 2.06826 11.7473 2.004C13.7806 1.93973 15.7619 2.65248 17.2884 3.99723C18.8148 5.34198 19.7716 7.21772 19.9641 9.24287C20.1566 11.268 19.5704 13.2905 18.3247 14.8987H18.3257ZM12.0007 15.9997C13.592 15.9997 15.1182 15.3676 16.2434 14.2424C17.3686 13.1172 18.0007 11.591 18.0007 9.99974C18.0007 8.40844 17.3686 6.88232 16.2434 5.7571C15.1182 4.63189 13.592 3.99974 12.0007 3.99974C10.4094 3.99974 8.88332 4.63189 7.7581 5.7571C6.63289 6.88232 6.00074 8.40844 6.00074 9.99974C6.00074 11.591 6.63289 13.1172 7.7581 14.2424C8.88332 15.3676 10.4094 15.9997 12.0007 15.9997Z"
+                                fill="#000018"
+                                fill-opacity="0.84"
+                              />
+                            </g>
+                            <defs>
+                              <filter
+                                id="filter0_d_9934_21817"
+                                x="-2"
+                                y="0"
+                                width="32"
+                                height="32"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                />
+                                <feColorMatrix
+                                  in="SourceAlpha"
+                                  type="matrix"
+                                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                  result="hardAlpha"
+                                />
+                                <feOffset dy="4" />
+                                <feGaussianBlur stdDeviation="2" />
+                                <feComposite in2="hardAlpha" operator="out" />
+                                <feColorMatrix
+                                  type="matrix"
+                                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                                />
+                                <feBlend
+                                  mode="normal"
+                                  in2="BackgroundImageFix"
+                                  result="effect1_dropShadow_9934_21817"
+                                />
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="effect1_dropShadow_9934_21817"
+                                  result="shape"
+                                />
+                              </filter>
+                            </defs>
+                          </svg>
+                        </i>
+                      </td>
                     {" "}
                     <Link to={`/search/${search.id}`}>
-                      <i>
+                      <i title="Editar, cambiar estado o asignar reclutador" >
                         <svg
                           width="24"
                           height="24"
@@ -266,6 +340,7 @@ const Search = () => {
                     <i
                       onClick={(e) => handleDelete(e, search.id)}
                       className={styles.pointerTrash}
+                      title="Eliminar búsqueda" 
                     >
                       <svg
                         width="24"
@@ -288,6 +363,23 @@ const Search = () => {
             </div>
           );
         })}
+                      {
+                <Modal show={show} size="lg" onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title className="title ms-auto">Detalles de Búsqueda</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body className="title">
+                    <div className="pt-3 pb-3 ps-2">Posición: {selected.position}</div>
+                    <div className="pb-3 ps-2">País: {selected.country}</div>
+                    <div className="pb-3 ps-2">Área: {selected.area_search}</div>
+                    <div className="pb-3 ps-2">Descripción: {selected.description_search}</div>
+                    <div className="pb-3 ps-2">Vacantes: {selected.vacancies}</div>
+                    <div className="pb-3 ps-2">Fecha de Inicio: {selected.start_date}</div>
+                    <div className="pb-3 ps-2">Fecha de Cierre: {selected.end_date}</div>
+                    <div className="pb-3 ps-2">Estado: {selected.state_search}</div>
+                  </Modal.Body>
+                </Modal>
+              }
       </div>
     </div>
   );
