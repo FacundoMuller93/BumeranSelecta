@@ -146,7 +146,9 @@ exports.filterDate = (req, res) => {
           {
             start_date: { [Op.between]: [filter_start, filter_end] },
             end_date: { [Op.between]: [filter_start, filter_end] },
-          },
+
+          }
+
         ],
       },
     }).then((data) => res.status(200).send(data));
@@ -165,9 +167,16 @@ exports.assignment = (req, res) => {
           {
             country: { [Op.eq]: [country] },
             area_rec: { [Op.eq]: [area_search] },
+            active_searchs: { [Op.lt]: [3] },
+
+
           },
         ],
+
       },
+
+      order: [['rating', 'DESC']]
+
     }).then((data) => res.status(200).send(data));
   } catch (error) {
     console.log("ERROR: ", error);

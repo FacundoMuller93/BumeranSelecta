@@ -40,8 +40,9 @@ Recruiters.init(
             }
         },
         active_searchs: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: true,
+            defaultValue: 0
 
         },
 

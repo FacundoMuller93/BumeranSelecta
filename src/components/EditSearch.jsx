@@ -87,7 +87,6 @@ const EditSearch = () => {
           position: position.value,
           vacancies: parseInt(vacancies.value),
           lapse_search: lapse_search.value,
-          state_search: "Iniciada",
         })
       );
       dispatch(getAllSearch());
