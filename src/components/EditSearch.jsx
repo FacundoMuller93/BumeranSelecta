@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { getAllSearch, getSingleSearch, editRecruiter, getAssignment } from "../store/searchs";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    getAllSearch,
+    getSingleSearch,
+    editRecruiter,
+    getAssignment,
+} from "../store/searchs";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-import Row from 'react-bootstrap/Row'
-import Form from 'react-bootstrap/Form'
-import { Button } from "react-bootstrap"
+import Row from "react-bootstrap/Row";
+import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
 
-import Progress from "../commons/Progress"
-import arr from "../hooks/array"
+import Progress from "../commons/Progress";
+import arr from "../hooks/array";
 import useInput from "../hooks/useInput";
-import "../assets/styles/SearchEdit.scss"
-import styles from '../assets/styles/Recruiters.module.scss';
+import "../assets/styles/SearchEdit.scss";
+import styles from "../assets/styles/Recruiters.module.scss";
 
 const EditSearch = () => {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { id } = useParams();
-    const [validation, setValidation] = useState(true)
-    const [recruiterInfo, setRecruiterInfo] = useState({})
-    const [recruiter, setRecruiter] = useState([])
+    const [validation, setValidation] = useState(true);
+    const [recruiterInfo, setRecruiterInfo] = useState({});
+    const [recruiter, setRecruiter] = useState([]);
 
     const country = useInput();
     const area_ser = useInput();
@@ -32,50 +36,63 @@ const EditSearch = () => {
     const start_date = useInput(null);
 
     useEffect(() => {
-        dispatch(getSingleSearch(id))
-            .then((data) => {
-                country.setValue(data.payload.country)
-                area_ser.setValue(data.payload.area_search)
-                position.setValue(data.payload.position)
-                description_ser.setValue(data.payload.description_search)
-                vacancies.setValue(data.payload.vacancies)
-                lapse_search.setValue(data.payload.lapse_search)
-                return dispatch(getAssignment({ country: data.payload.country, area_search: data.payload.area_search }))
-                    .then((data) => setRecruiter(data.payload))
-            })
-    }, [])
+        dispatch(getSingleSearch(id)).then((data) => {
+            country.setValue(data.payload.country);
+            area_ser.setValue(data.payload.area_search);
+            position.setValue(data.payload.position);
+            description_ser.setValue(data.payload.description_search);
+            vacancies.setValue(data.payload.vacancies);
+            lapse_search.setValue(data.payload.lapse_search);
+            return dispatch(
+                getAssignment({
+                    country: data.payload.country,
+                    area_search: data.payload.area_search,
+                })
+            ).then((data) => setRecruiter(data.payload));
+        });
+    }, []);
 
     useEffect(() => {
-        dispatch(getAssignment({ country: country.value, area_search: area_ser.value }))
-            .then((data) => setRecruiter(data.payload))
-    }, [area_ser.value, country.value])
-
-    console.log("ESTA ES LA DATA DE LA ASIGNACION", recruiter)
-
-
-
+        dispatch(
+            getAssignment({ country: country.value, area_search: area_ser.value })
+        ).then((data) => setRecruiter(data.payload));
+    }, [area_ser.value, country.value]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let data = [country.value, area_ser.value, position.value, description_ser.value, vacancies.value, lapse_search.value]
+        let data = [
+            country.value,
+            area_ser.value,
+            position.value,
+            description_ser.value,
+            vacancies.value,
+            lapse_search.value,
+        ];
         let state = false;
         if (recruiterInfo.id) data.push(start_date.value)
-        data.forEach(element => { if (element == "") { state = true } });
-        if (state) setValidation(false)
-        else {
-            await dispatch(editRecruiter({
-                id: id,
-                recruiterId: recruiterInfo.id,
-                description_search: description_ser.value,
-                country: country.value,
-                area_search: area_ser.value,
-                position: position.value,
-                vacancies: parseInt(vacancies.value),
-                lapse_search: lapse_search.value,
-                start_date: start_date.value
-            }))
-            dispatch(getAllSearch())
-            navigate("/searchs")
+        data.forEach((element) => {
+            if (element == ""||element == null) {
+                state = true;
+            }
+        });
+        if (state) setValidation(false);
+        else { console.log("entra")
+            await dispatch(
+                editRecruiter({
+                    id: id,
+                    recruiterId: recruiterInfo.id,
+                    description_search: description_ser.value,
+                    country: country.value,
+                    area_search: area_ser.value,
+                    position: position.value,
+                    vacancies: parseInt(vacancies.value),
+                    lapse_search: lapse_search.value,
+                    state_search: "Iniciada",
+                    start_date: start_date.value,
+                })
+            );
+            dispatch(getAllSearch());
+            navigate("/searchs");
         }
     };
 
@@ -193,29 +210,29 @@ const EditSearch = () => {
                                                 <tr>{recruiter?.areas[1]}</tr>
                                                 <tr>{recruiter?.areas[2]}</tr> */}
                                             </td>
-                                            <td>  <Progress ranking={recruiter.rating} /></td>
+                                            <td>
+                                                {" "}
+                                                <Progress ranking={recruiter.rating} />
+                                            </td>
                                             <td>
                                                 <Form.Check
                                                     className="inputRadio"
                                                     name="group1"
-                                                    type='radio'
+                                                    type="radio"
                                                     id={1}
                                                     onClick={() => setRecruiterInfo(recruiter)}
                                                 />
                                             </td>
                                         </tr>
-                                    )
+                                    );
                                 })}
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
-        </div >
-
+        </div>
     );
-
 };
 
 export default EditSearch;

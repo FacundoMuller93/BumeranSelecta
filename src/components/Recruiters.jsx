@@ -16,7 +16,6 @@ const Recruiters = () => {
   const handleClose = () => setShow(false);
 
   const handleShow = (recruiter) => {
-    console.log(recruiter);
     setSelected(recruiter);
     setShow(true);
   };
