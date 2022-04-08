@@ -40,7 +40,7 @@ const AddSearchs = () => {
                 area_search: area_ser.value,
                 position: position.value,
                 vacancies: parseInt(vacancies.value),
-                lapse_search: (lapse_search.value).replace("T", " ")
+                lapse_search: (lapse_search.value)
             }))
             dispatch(getAllSearch())
             navigate("/searchs")

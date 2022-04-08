@@ -69,6 +69,7 @@ export const editSearchServices = async ({
   vacancies,
   lapse_search,
   recruiterId,
+  start_date,
 }) => {
   try {
     const editSearch = await axios.put(
@@ -81,6 +82,7 @@ export const editSearchServices = async ({
         vacancies: vacancies,
         lapse_search: lapse_search,
         recruiterId: recruiterId,
+        start_date: start_date,
       }
     )
     return editSearch.data
@@ -174,6 +176,25 @@ export const assignmentSearchsServices = async ({
       }
     )
     return assignment.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const endSearchSearchServices = async ({
+  id,
+  end_date,
+  rating,
+}) => {
+  try {
+    const endSearch = await axios.put(`http://localhost:3001/api/search/end-search/${id}`,
+      {
+        id:id,
+        end_date: end_date,
+        rating: rating,
+      }
+    )
+    return endSearch.data
   } catch (error) {
     throw error
   }

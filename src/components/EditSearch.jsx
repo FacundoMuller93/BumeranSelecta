@@ -28,7 +28,8 @@ const EditSearch = () => {
     const position = useInput();
     const description_ser = useInput();
     const vacancies = useInput();
-    const lapse_search = useInput()
+    const lapse_search = useInput();
+    const start_date = useInput(null);
 
     useEffect(() => {
         dispatch(getSingleSearch(id))
@@ -57,7 +58,8 @@ const EditSearch = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let data = [country.value, area_ser.value, position.value, description_ser.value, vacancies.value, lapse_search.value]
-        let state = false
+        let state = false;
+        if (recruiterInfo.id) data.push(start_date.value)
         data.forEach(element => { if (element == "") { state = true } });
         if (state) setValidation(false)
         else {
@@ -69,7 +71,8 @@ const EditSearch = () => {
                 area_search: area_ser.value,
                 position: position.value,
                 vacancies: parseInt(vacancies.value),
-                lapse_search: (lapse_search.value)
+                lapse_search: lapse_search.value,
+                start_date: start_date.value
             }))
             dispatch(getAllSearch())
             navigate("/searchs")
@@ -80,12 +83,13 @@ const EditSearch = () => {
 
         <div className="containerSearchEdit ">
             <div className="containerForm">
-                <div className="pt-2 mb-0 fs-4 mx-5 title d-flex justify-content-center">
+                <div className=" mb-0 fs-4 mx-5 title d-flex justify-content-center">
                     Editar de Busqueda
                 </div>
-                <Form onSubmit={handleSubmit} className=" mt-4 pt-lg-5 formLogin w-100" id="formSearch">
+                <Form onSubmit={handleSubmit} className="pt-lg-4 formLogin w-100 font-sans-serif" id="formSearch">
                     <Row className="mb-3">
                         <Form.Group className="col-md-4 top" controlId="formGridState">
+                            <Form.Label>País</Form.Label>
                             <Form.Select className={(country.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...country} placeholder={country.value}>
                                 <option selected disabled value="" >Países</option>
                                 {arr.country.map(i => (
@@ -95,6 +99,7 @@ const EditSearch = () => {
                         </Form.Group>
 
                         <Form.Group className="col-md-4 top" controlId="formGridState">
+                            <Form.Label>Area</Form.Label>
                             <Form.Select className={(area_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...area_ser}>
                                 <option selected disabled value="" >Area</option>
                                 {arr.area.map(i => (
@@ -104,22 +109,20 @@ const EditSearch = () => {
                         </Form.Group>
 
                         <Form.Group className="col-md-4" controlId="formGridAddress2">
+                            <Form.Label>Posicion</Form.Label>
                             <Form.Control className={(position.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...position} placeholder="Posición" />
                         </Form.Group>
-
                     </Row>
 
                     <Row className="mb-3">
 
                         <Form.Group className="col-md-4" controlId="formGridAddress1">
+                            <Form.Label>Descripcìon</Form.Label>
                             <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...description_ser} placeholder="Descripción" />
                         </Form.Group>
 
-                        <Form.Group className="col-md-4" controlId="formGridCity">
-                            <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} type={lapse_search.value ? "" : "date"} {...lapse_search} />
-                        </Form.Group>
-
                         <Form.Group className="col-md-4 top" controlId="formGridState">
+                            <Form.Label>Vacantes</Form.Label>
                             <Form.Select className={(vacancies.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...vacancies}>
                                 <option selected disabled value="" >Vacantes</option>
                                 {arr.vacancies().map(i => (
@@ -127,20 +130,31 @@ const EditSearch = () => {
                                 ))}
                             </Form.Select>
                         </Form.Group>
+
+                        <Form.Group className="col-md-4" controlId="formGridCity">
+                            <Form.Label>Tiempo estimado de cierre</Form.Label>
+                            <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} type={lapse_search.value ? "" : "date"} {...lapse_search} />
+                        </Form.Group>
+
                     </Row>
-                    <div className="pt-2 mb-2 fs-4 mx-5 title d-flex justify-content-center">
+                    <div className="pt-4 mb-3 fs-4 mx-5 title d-flex justify-content-center">
                         Reclutador asignado:
                     </div>
                     <Row className="mb-3">
 
-                        <Form.Group className="col-md-6" controlId="formGridAddress1">
-                            <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={`${recruiterInfo.name} ${recruiterInfo.surname}`} placeholder="Nombre del reclutador" />
+                        <Form.Group className="col-md-4" controlId="formGridAddress1">
+                            <Form.Label>Nombre</Form.Label>
+                            <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo.name ? `${recruiterInfo.name} ${recruiterInfo.surname}` : null} placeholder="Nombre del reclutador" />
                         </Form.Group>
 
-                        <Form.Group className="col-md-6" controlId="formGridCity">
+                        <Form.Group className="col-md-4" controlId="formGridCity">
+                            <Form.Label>Valoración</Form.Label>
                             <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo.rating} placeholder="Valoracion del reclutador" />
                         </Form.Group>
-
+                        <Form.Group className="col-md-4" controlId="formGridCity">
+                            <Form.Label>Inicio de busqueda</Form.Label>
+                            <Form.Control className={(start_date.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} type={start_date.value ? "" : "date"} {...start_date} />
+                        </Form.Group>
                     </Row>
 
                     <Button className=" rounded-pill px-5 mt-3 buttonLogin" type="submit reset">
@@ -152,7 +166,7 @@ const EditSearch = () => {
             <div className="container-fluid px-5 containerTable">
                 <div className="row my-3">
                     <div className={styles.titleContainer}>
-                        <h3 className={` mb-0 mt-5  fs-4 title ${styles.title}`}>Candidatos sugeridos:</h3>
+                        <h3 className={` mt-4  fs-4 title ${styles.title}`}>Candidatos sugeridos:</h3>
                     </div>
                     <div className="col w-100">
                         <table className="table">
