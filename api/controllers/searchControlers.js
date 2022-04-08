@@ -182,3 +182,11 @@ exports.assignment = (req, res) => {
     console.log("ERROR: ", error);
   }
 }
+
+exports.endSearch = (req, res) => {
+  try {
+    console.log("--->", req.body)
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+};

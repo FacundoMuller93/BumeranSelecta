@@ -18,6 +18,8 @@ export const getSingleSearch  = createAsyncThunk("GET_ID_SEARCH",searchService.s
 
 export const editRecruiter = createAsyncThunk("EDIT_SEARCH", searchService.editSearchServices);
 
+export const endSearch = createAsyncThunk("END_SEARCH", searchService.endSearchSearchServices);
+
 export const getNewSearchs = createAsyncThunk("GET_NEW", searchService.newSearchsServices);
 
 export const getStartedSearchs = createAsyncThunk("GET_STARTED", searchService.startedSearchsServices);
@@ -156,6 +158,17 @@ const searchSlice = createSlice({
             state.loading = false
         },
         [getAssignment.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        },
+        [endSearch.pending]: (state, action) => {
+            state.loading = true
+        },
+        [endSearch.fulfilled]: (state, action) => {
+            state.data = action.payload
+            state.loading = false
+        },
+        [endSearch.rejected]: (state, action) => {
             state.loading = false
             state.error = action.error.message
         },

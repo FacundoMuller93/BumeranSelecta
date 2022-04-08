@@ -1,5 +1,6 @@
-input[type="radio"] {
-  display: none;
+.inputRadio{
+  height: 0px;
+  width: 0px;
 }
 
 .star {
@@ -9,14 +10,15 @@ input[type="radio"] {
 }
 
 .title {
-  font-family: "Poppins", sans-serif;
   font-size: 1.4rem;
   padding-bottom: 3%;
 }
 
 .container {
   text-align: center;
-  padding-top: 12%;
+  padding-top: 5%;
+  font-family: "Poppins", sans-serif;
+  margin-inline: 20%;
 }
 
 .btn {

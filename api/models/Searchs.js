@@ -39,7 +39,6 @@ Searchs.init(
         },
         candidates: {
             type: DataTypes.INTEGER,
-            defaultValue: 0
         },
         start_date: {
             type: DataTypes.STRING,
@@ -56,6 +55,10 @@ Searchs.init(
         modelName: "searchs", // We need to choose the model name
     }
 );
+
+Searchs.addHook('beforeCreate', search => {
+    search.candidates=(Math.random() * 15).toFixed(0);
+});
 
 
 // the defined model is the class itself
