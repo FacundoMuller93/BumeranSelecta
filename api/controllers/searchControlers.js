@@ -108,13 +108,29 @@ exports.closed = (req, res) => {
 
 exports.editSearch = (req, res) => {
   const { id } = req.params
+  const {description_search, country, area_search, position, vacancies, lapse_search, recruiterId} = req.body
   try {
-    Searchs.update(req.body, {
-      where: { id },
-      returning: true,
-      plain: true,
-    })
+    if (recruiterId){
+      Searchs.update(req.body, {
+        where: { id },
+        returning: true,
+        plain: true,
+      })
       .then(data => res.status(201).send(data))
+    } else {
+      Searchs.update(req.body, {
+        where: { id },
+        returning: true,
+        plain: true,
+        description_search,
+        country,
+        area_search,
+        position,
+        vacancies,
+        lapse_search,
+      })
+      .then(data => res.status(201).send(data))
+    }
   } catch (error) {
     console.log("ERROR: ", error)
   }

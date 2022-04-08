@@ -7,7 +7,7 @@ import {
   getAssignment,
 } from "../store/searchs";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
@@ -228,12 +228,20 @@ const EditSearch = () => {
             </Form.Group>
           </Row>
 
-          <Button
-            className=" rounded-pill px-5 mt-3 buttonLogin"
-            type="submit reset"
-          >
-            Cargar
-          </Button>
+          <div>
+            <Link to="/searchs">
+              <Button className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin">
+                Volver
+              </Button>{" "}
+            </Link>
+
+            <Button
+              className=" rounded-pill px-5 mt-3 buttonLogin"
+              type="submit reset"
+            >
+              Cargar
+            </Button>
+          </div>
         </Form>
       </div>
       <div className="container-fluid px-5 containerTable">

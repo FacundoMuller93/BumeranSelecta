@@ -1,5 +1,5 @@
 "use strict"
-const fakeRecruiters = require("./fake_recruiters.json")
+const fakeRecruiters = require("./fake-recruiters.json")
 const fakeSearchs = require("./fake-searchs.json")
 
 module.exports = {
@@ -14,4 +14,4 @@ module.exports = {
   },
 };
 
-// Seed Recruiters (desde "/api"): npm run seed
+// Para seedear la base de datos (desde "/api"): npm run seed

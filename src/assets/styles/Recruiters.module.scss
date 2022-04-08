@@ -68,7 +68,6 @@
 
 .filtersContainer{
   display: flex;
-  gap: 4%;
 }
 
 .form{
@@ -77,4 +76,8 @@
 
 .pointerTrash {
   cursor: pointer;
+}
+
+.hoverPointer:hover {
+  background-color: #6161632e;
 }
