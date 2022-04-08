@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
 import { getAllRecruiters, deleteRecruiter } from "../store/recruiters";
 import styles from "../assets/styles/Recruiters.module.scss";
-import Swal from "sweetalert2";
 import Progress from "../commons/Progress"
 import { alertDeleteRecruiter } from "../utils/alerts";
 

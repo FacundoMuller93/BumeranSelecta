@@ -1,26 +1,27 @@
-import axios from "axios";
+import axios from "axios"
+import { alertNewRecruiter, alertExistRecruiter } from "../utils/alerts"
 
 export const allRecruitersServices = async () => {
   try {
-    const allRecruiters = await axios.get("http://localhost:3001/api/recruiter/");
-    return allRecruiters.data;
-  }
-  catch (error) {
+    const allRecruiters = await axios.get(
+      "http://localhost:3001/api/recruiter/"
+    )
+    return allRecruiters.data
+  } catch (error) {
     throw error
   }
-};
+}
 
-export const singleRecruiterServices = async (id) => {
+export const singleRecruiterServices = async id => {
   try {
     const singleRecruiter = await axios.get(
       `http://localhost:3001/api/recruiter/${id}`
-    );
-    return singleRecruiter.data;
-  }
-  catch (error) {
+    )
+    return singleRecruiter.data
+  } catch (error) {
     throw error
   }
-};
+}
 
 export const editRecruiterServices = async ({
   id,
@@ -42,25 +43,23 @@ export const editRecruiterServices = async ({
         area_rec: area_rec,
         rating: rating,
       }
-    );
-    return editRecruiter.data;
-  }
-  catch (error) {
+    )
+    return editRecruiter.data
+  } catch (error) {
     throw error
   }
-};
+}
 
-export const deleteRecruiterServices = async (id) => {
+export const deleteRecruiterServices = async id => {
   try {
     const deleteRecruiter = await axios.delete(
       `http://localhost:3001/api/recruiter/${id}`
-    );
-    return deleteRecruiter.data;
-  }
-  catch (error) {
+    )
+    return deleteRecruiter.data
+  } catch (error) {
     throw error
   }
-};
+}
 
 export const addRecruiterServices = async ({
   name,
@@ -68,6 +67,7 @@ export const addRecruiterServices = async ({
   country,
   description_rec,
   area_rec,
+  navigate
 }) => {
   try {
     const addRecruiter = await axios.post(
@@ -79,10 +79,12 @@ export const addRecruiterServices = async ({
         description_rec: description_rec,
         area_rec: area_rec,
       }
-    );
-    return addRecruiter.data;
+    )
+    alertNewRecruiter()
+    navigate("/Recruiters")
+    return addRecruiter.data
+  } catch (error) {
+    navigate("/Recruiters")
+    throw alertExistRecruiter()
   }
-  catch (error) {
-    throw error
-  }
-};
+}

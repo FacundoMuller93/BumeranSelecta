@@ -13,7 +13,7 @@ export const getAllRecruiters = createAsyncThunk(
   recruiterService.allRecruitersServices
 );
 
-export const addRecruiter = createAsyncThunk(
+export const addNewRecruiter = createAsyncThunk(
   "ADD_RECRUITER",
   recruiterService.addRecruiterServices
 );
@@ -83,15 +83,15 @@ const recruiterSlice = createSlice({
       state.loading = false;
       state.error = action.error.message;
     },
-    [addRecruiter.pending]: (state, action) => {
+    [addNewRecruiter.pending]: (state, action) => {
       state.loading = true;
     },
-    [addRecruiter.fulfilled]: (state, action) => {
+    [addNewRecruiter.fulfilled]: (state, action) => {
       state.data = [...state.data, action.payload];
       state.singleRecruiter = action.payload;
       state.loading = false;
     },
-    [addRecruiter.rejected]: (state, action) => {
+    [addNewRecruiter.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     },
