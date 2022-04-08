@@ -91,16 +91,20 @@ const Rating = () => {
           Información del reclutador
         </div>
         <Row className="mb-3">
-          <Form.Group className="col-md-6" controlId="formGridCity">
+          <Form.Group className="col-md-4" controlId="formGridCity">
             <Form.Label>Nombre</Form.Label>
             <Form.Control className="inputLogin rounded-pill text-center" value={recruiter?.name} />
           </Form.Group>
 
-          <Form.Group className="col-md-6" controlId="formGridCity">
+          <Form.Group className="col-md-4" controlId="formGridCity">
             <Form.Label>Apellido</Form.Label >
             <Form.Control className="inputLogin rounded-pill text-center" value={recruiter?.surname} />
           </Form.Group>
 
+          <Form.Group className="col-md-4" controlId="formGridCity">
+            <Form.Label>Busquedas activas</Form.Label >
+            <Form.Control className="inputLogin rounded-pill text-center" value={recruiter?.searchs.length} />
+          </Form.Group>
         </Row>
 
         <Row className="mb-3">
