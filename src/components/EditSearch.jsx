@@ -87,6 +87,7 @@ const EditSearch = () => {
           position: position.value,
           vacancies: parseInt(vacancies.value),
           lapse_search: lapse_search.value,
+          state_search: "Iniciada",
         })
       );
       dispatch(getAllSearch());
@@ -236,7 +237,7 @@ const EditSearch = () => {
             </Link>
 
             <Button
-              className=" rounded-pill px-5 mt-3 buttonLogin"
+              className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin"
               type="submit reset"
             >
               Cargar

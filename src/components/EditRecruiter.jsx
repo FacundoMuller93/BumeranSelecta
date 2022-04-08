@@ -74,7 +74,7 @@ const EditRecruiter = () => {
       iconColor: "#fff",
       timer: 2000,
       customClass: {
-        title: "title fs-4",
+        title: "title fs-4 pb-5",
       },
     });
     navigate("/recruiters");

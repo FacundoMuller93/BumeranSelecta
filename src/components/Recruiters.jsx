@@ -16,6 +16,7 @@ const Recruiters = () => {
   const handleClose = () => setShow(false);
 
   const handleShow = (recruiter) => {
+    console.log(recruiter);
     setSelected(recruiter);
     setShow(true);
   };
@@ -55,7 +56,7 @@ const Recruiters = () => {
 
       <div className="row my-5">
         <div className="col">
-          <table className="table bg-white rounded shadow-sm table-hover">
+          <table className="table bg-white rounded shadow-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -190,21 +191,16 @@ const Recruiters = () => {
               {
                 <Modal show={show} size="lg" onHide={handleClose}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Detalles del Reclutador</Modal.Title>
+                    <Modal.Title className="ms-auto">Detalles del Reclutador</Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>
-                    <div>Nombre: {`${selected.name} ${selected.surname}`}</div>
-                    <div>País: {selected.country}</div>
-                    <div>Área: {selected.rec_area}</div>
-                    <div>Búsquedas activas: {selected.searchs}</div>
-                    <div>Comentarios: {selected.description_rec}</div>
-                    <div>Calificación Promedio: {selected.rating}</div>
+                  <Modal.Body className="ps-5 py-4">
+                    <div className="pb-3">Nombre: {`${selected.name} ${selected.surname}`}</div>
+                    <div className="pb-3">País: {selected.country}</div>
+                    <div className="pb-3">Área: {selected.rec_area}</div>
+                    <div className="pb-3">Búsquedas activas: {selected.searchs}</div>
+                    <div className="pb-3">Comentarios: {selected.description_rec}</div>
+                    <div className="pb-3">Calificación Promedio: {selected.rating}</div>
                   </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Cerrar
-                    </Button>
-                  </Modal.Footer>
                 </Modal>
               }
             </tbody>
