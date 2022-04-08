@@ -37,7 +37,16 @@ exports.delete = (req, res) => {
 
 exports.getAll = (req, res) => {
   try {
-    Searchs.findAll({ include: Recruiters }).then((data) =>
+    Searchs.findAll(
+      {
+        include: Recruiters,
+
+        order: [['id', 'DESC']]
+      },
+
+
+
+    ).then((data) =>
       res.status(200).send(data)
     );
   } catch (error) {
@@ -108,15 +117,15 @@ exports.closed = (req, res) => {
 
 exports.editSearch = (req, res) => {
   const { id } = req.params
-  const {description_search, country, area_search, position, vacancies, lapse_search, recruiterId} = req.body
+  const { description_search, country, area_search, position, vacancies, lapse_search, recruiterId } = req.body
   try {
-    if (recruiterId){
+    if (recruiterId) {
       Searchs.update(req.body, {
         where: { id },
         returning: true,
         plain: true,
       })
-      .then(data => res.status(201).send(data))
+        .then(data => res.status(201).send(data))
     } else {
       Searchs.update(req.body, {
         where: { id },
@@ -129,7 +138,7 @@ exports.editSearch = (req, res) => {
         vacancies,
         lapse_search,
       })
-      .then(data => res.status(201).send(data))
+        .then(data => res.status(201).send(data))
     }
   } catch (error) {
     console.log("ERROR: ", error)
@@ -139,6 +148,7 @@ exports.editSearch = (req, res) => {
 
 exports.filterDate = (req, res) => {
   const { filter_start, filter_end } = req.body;
+  console.log("filter_start PARA FILTRO FECHA--------------->", filter_start)
   try {
     Searchs.findAll({
       where: {
@@ -175,7 +185,8 @@ exports.assignment = (req, res) => {
 
       },
 
-      order: [['rating', 'DESC']]
+      order: [['rating', 'DESC']],
+
 
     }).then((data) => res.status(200).send(data));
   } catch (error) {
