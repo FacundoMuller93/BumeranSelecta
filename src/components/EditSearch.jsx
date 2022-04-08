@@ -57,6 +57,7 @@ const EditSearch = () => {
             getAssignment({ country: country.value, area_search: area_ser.value })
         ).then((data) => setRecruiter(data.payload));
     }, [area_ser.value, country.value]);
+    console.log("estos son los reclutadores", recruiter)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,12 +72,13 @@ const EditSearch = () => {
         let state = false;
         if (recruiterInfo.id) data.push(start_date.value)
         data.forEach((element) => {
-            if (element == ""||element == null) {
+            if (element == "" || element == null) {
                 state = true;
             }
         });
         if (state) setValidation(false);
-        else { console.log("entra")
+        else {
+            console.log("entra")
             await dispatch(
                 editRecruiter({
                     id: id,
@@ -174,9 +176,20 @@ const EditSearch = () => {
                         </Form.Group>
                     </Row>
 
-                    <Button className=" rounded-pill px-5 mt-3 buttonLogin" type="submit reset">
-                        Cargar
-                    </Button>
+                    <div>
+                        <Link to="/searchs">
+                            <Button className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin">
+                                Volver
+                            </Button>{" "}
+                        </Link>
+
+                        <Button
+                            className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin"
+                            type="submit reset"
+                        >
+                            Cargar
+                        </Button>
+                    </div>
 
                 </Form>
             </div>
