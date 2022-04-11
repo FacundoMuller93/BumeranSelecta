@@ -10,6 +10,7 @@ router.get('/', searchControler.getAll);
 router.post('/filter_date',searchControler.filterDate)
 router.post('/assignment', searchControler.assignment)
 router.put('/end-search/:id',searchControler.endSearch)
+router.get('/dalete-rec/:id', searchControler.deleteRecruiter)
 
 //agregados por Facu
 router.get('/state/new', searchControler.new)
@@ -17,7 +18,5 @@ router.get('/state/started', searchControler.started)
 router.get('/state/presented', searchControler.presented)
 router.get('/state/revision', searchControler.revision)
 router.get('/state/closed', searchControler.closed)
-
-
 
 module.exports = router;

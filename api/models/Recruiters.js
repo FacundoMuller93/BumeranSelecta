@@ -31,13 +31,8 @@ Recruiters.init(
 
         },
         rating: {
-            type: DataTypes.DECIMAL(10, 1),
+            type: DataTypes.STRING,
             allowNull: true,
-            defaultValue: 1,
-            validate: {
-                max: 10,
-                min: 1
-            }
         },
         active_searchs: {
             type: DataTypes.INTEGER,

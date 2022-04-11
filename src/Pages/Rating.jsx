@@ -53,6 +53,7 @@ const Rating = () => {
         id: search.id,
         end_date: end_date.value,
         rating: rating * 2,
+        recruiterId : recruiter.id,
       }));
       navigate("/searchs");
     }

@@ -20,6 +20,8 @@ export const editRecruiter = createAsyncThunk("EDIT_SEARCH", searchService.editS
 
 export const endSearch = createAsyncThunk("END_SEARCH", searchService.endSearchSearchServices);
 
+export const deleteRecruiterSearch = createAsyncThunk("END_SEARCH", searchService.deleteRecruiterSearchServices);
+
 export const getNewSearchs = createAsyncThunk("GET_NEW", searchService.newSearchsServices);
 
 export const getStartedSearchs = createAsyncThunk("GET_STARTED", searchService.startedSearchsServices);
@@ -169,6 +171,21 @@ const searchSlice = createSlice({
             state.loading = false
         },
         [endSearch.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        },
+        [getAssignment.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        },
+        [deleteRecruiterSearch.pending]: (state, action) => {
+            state.loading = true
+        },
+        [deleteRecruiterSearch.fulfilled]: (state, action) => {
+            state.data = action.payload
+            state.loading = false
+        },
+        [deleteRecruiterSearch.rejected]: (state, action) => {
             state.loading = false
             state.error = action.error.message
         },
