@@ -206,7 +206,7 @@ export const endSearchSearchServices = async ({
 
 export const deleteRecruiterSearchServices = async (id) => {
   try {
-    axios.get(`http://localhost:3001/api/search/dalete-rec/${id}`)
+    axios.get(`http://localhost:3001/api/search/delete-rec/${id}`)
   } catch (error) {
     throw error
   }

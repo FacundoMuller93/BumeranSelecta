@@ -117,25 +117,76 @@ exports.closed = (req, res) => {
 
 exports.editSearch = (req, res) => {
   const { id } = req.params
-  const { description_search, country, area_search, position, vacancies, lapse_search, recruiterId } = req.body
+  const { description_search, country, area_search, position, vacancies, lapse_search, recruiterId, start_date } = req.body
   try {
     if (recruiterId) {
       let recruiterOld
-      Searchs.findByPk(id).then(data => recruiterOld = data.dataValues.recruiterId)
-      if (recruiterId != recruiterOld && recruiterOld != null) {  //al comienzo recruiterOld es null
-        res.sendStatus(200)
-      }
-      else {
-        Searchs.update(req.body, {
-          where: { id },
-          returning: true,
-          plain: true,
-        })
-          .then(data => res.status(201).send(data))
-      }
+      Searchs.findByPk(id).then(data => {
+        console.log("este es el recruiterOld", recruiterOld)
+        recruiterOld = data.dataValues.recruiterId
 
-    } else {
-      console.log("holaaaa")
+        if (recruiterId != recruiterOld && recruiterOld != null) {  // actualizacion del reclutador por otro 
+          console.log("entro al if", recruiterId)
+
+          Recruiters.update({ active_searchs: 0 },
+            {
+              where: { id: recruiterOld },
+            },
+          )
+          Searchs.update(
+            {
+              description_search,
+              country, area_search,
+              position, vacancies,
+              lapse_search,
+              recruiterId,
+              start_date,
+              state_search: "Iniciada"
+            },
+            {
+              where: { id },
+              returning: true,
+              plain: true,
+            })
+          Recruiters.update({ active_searchs: 1 },
+            {
+              where: { id: recruiterId },
+            },
+          )
+
+          res.sendStatus(200)
+        }
+        else {                          // se vincula por primera vez un reclutador a esa busqueda
+          console.log("entro al else")
+          Searchs.update(
+            {
+              description_search,
+              country, area_search,
+              position, vacancies,
+              lapse_search,
+              recruiterId,
+              start_date,
+              state_search: "Iniciada"
+            },
+            {
+              where: { id },
+              returning: true,
+              plain: true,
+            })
+          Recruiters.update({ active_searchs: 1 },
+            {
+              where: { id: recruiterId },
+            },
+          )
+            .then(data => res.status(201).send(data))
+        }
+      })
+      console.log("este es el reclutador anterior:", recruiterOld)
+      console.log("este es ele reclutador nuevo", recruiterId)
+
+
+    } else {  // actualización de datos sin el reclutador id
+      console.log("no hay recruiter id")
       Searchs.update(req.body, {
         where: { id },
         returning: true,
@@ -207,6 +258,7 @@ exports.endSearch = async (req, res) => {
       {
         end_date: end_date,
         recruiterId: null,
+        state_search: "Cerrada"
       },
       {
         where: { id: id }
@@ -216,7 +268,8 @@ exports.endSearch = async (req, res) => {
 
     const editRecruiter = await Recruiters.update(
       {
-        rating: rating
+        rating: rating,
+        active_searchs: 0,
       },
       {
         where: { id: recruiterId }
@@ -229,10 +282,32 @@ exports.endSearch = async (req, res) => {
   }
 };
 
-exports.deleteRecruiter = async (req, res) => {
+exports.unassign = async (req, res) => {
   const { id } = req.params
   try {
-    res.sendStatus(200)
+
+    Searchs.findByPk(id)
+      .then(data => {
+        let idRecruiter = data.dataValues.recruiterId
+
+        Searchs.update(
+          {
+            recruiterId: null,
+            state_search: "Nueva",
+          },
+          {
+            where: { id },
+            returning: true,
+            plain: true,
+          })
+        Recruiters.update({ active_searchs: 0 },
+          {
+            where: { id: idRecruiter },
+          },
+        )
+          .then(data => res.status(201).send(data))
+      })
+
   } catch (error) {
     console.log("ERROR: ", error)
   }

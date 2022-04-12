@@ -112,7 +112,7 @@ const EditSearch = () => {
             lapse_search.value,
         ];
         let state = false;
-        if (recruiterInfo.id) data.push(start_date.value)
+        if (recruiterInfo?.id) data.push(start_date.value)
         data.forEach((element) => {
             if (element == "" || element == null) {
                 state = true;
@@ -124,14 +124,13 @@ const EditSearch = () => {
             await dispatch(
                 editRecruiter({
                     id: id,
-                    recruiterId: recruiterInfo.id,
+                    recruiterId: recruiterInfo ? recruiterInfo.id: null,
                     description_search: description_ser.value,
                     country: country.value,
                     area_search: area_ser.value,
                     position: position.value,
                     vacancies: parseInt(vacancies.value),
                     lapse_search: lapse_search.value,
-                    state_search: "Iniciada",
                     start_date: start_date.value,
                 })
             );
