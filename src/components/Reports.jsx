@@ -21,7 +21,7 @@ const Reports = () => {
   },[])
   
   return (
-  <div>
+  <div className="min-vh-100">
     <div>Sección Reportes</div>
 
     <Dropdown>

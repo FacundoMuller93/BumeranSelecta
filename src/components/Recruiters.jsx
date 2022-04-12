@@ -42,7 +42,7 @@ const Recruiters = () => {
   };
 
   return (
-    <div className="container-fluid ps-4 pe-0 pe-lg-3">
+    <div className="container-fluid pe-lg-3">
       <div className="row d-flex align-items-center">
         <div className="col-12 text-center col-lg-3">
           <div className="pt-5 mb-5 fs-4 title">​Lista de Reclutadores</div>
@@ -60,7 +60,7 @@ const Recruiters = () => {
       </div>
 
       {/* Tabla */}
-      <div className="container-fluid pt-lg-4 pe-0 pe-md-3">
+      <div className="container-fluid pt-lg-4  pe-md-3">
         <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
           <div className="col-2 col-md-1 col-lg-1 text-start">
             <strong>#</strong>
@@ -69,7 +69,7 @@ const Recruiters = () => {
             <strong>Nombre y Apellido</strong>
           </div>
 
-          <div className="col-4 cols-md-2 col-lg-2 text-lg-start">
+          <div className="col-4 col-md-2 col-lg-2 text-lg-start">
             <strong>País</strong>
           </div>
           <div className="d-none d-md-block col-md-3 col-lg-4">
@@ -82,7 +82,7 @@ const Recruiters = () => {
 
         {recruiter.map((recruiter, i) => {
           return (
-            <div className={`row py-3 border border-1 title`}>
+            <div className={`row py-3 pe-1 border border-1 title`}>
               <div className="col-2 pb-3 col-md-1 col-lg-1 pb-lg-0">
                 {i + 1}
               </div>
@@ -146,7 +146,7 @@ const Recruiters = () => {
                     </Link>
                   </div>
 
-                  <div className="className col-3 col-lg-4">
+                  <div className="col-3 col-lg-4">
                     <i
                       onClick={(e) => handleDelete(e, recruiter.id)}
                       className={styles.pointerTrash}
