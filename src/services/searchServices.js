@@ -187,16 +187,26 @@ export const endSearchSearchServices = async ({
   id,
   end_date,
   rating,
+  recruiterId,
 }) => {
   try {
     const endSearch = await axios.put(`http://localhost:3001/api/search/end-search/${id}`,
       {
-        id:id,
+        id: id,
         end_date: end_date,
         rating: rating,
+        recruiterId: recruiterId,
       }
     )
     return endSearch.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const deleteRecruiterSearchServices = async (id) => {
+  try {
+    axios.get(`http://localhost:3001/api/search/dalete-rec/${id}`)
   } catch (error) {
     throw error
   }

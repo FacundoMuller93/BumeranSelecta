@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
 import {
     getAllSearch,
     getSingleSearch,
     editRecruiter,
     getAssignment,
+    deleteRecruiterSearch,
 } from "../store/searchs";
+import { getSingleRecruiter } from "../store/recruiters";
 import { useParams } from "react-router";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -18,6 +20,7 @@ import arr from "../hooks/array";
 import useInput from "../hooks/useInput";
 import "../assets/styles/SearchEdit.scss";
 import styles from "../assets/styles/Recruiters.module.scss";
+import { alertEditSearch } from "../utils/alerts"
 
 const EditSearch = () => {
     const navigate = useNavigate();
@@ -26,6 +29,8 @@ const EditSearch = () => {
     const [validation, setValidation] = useState(true);
     const [recruiterInfo, setRecruiterInfo] = useState({});
     const [recruiter, setRecruiter] = useState([]);
+    const [recruiterAssig, setRecruiterAssig] = useState()
+    const [date, setDate] = useState()
 
     const country = useInput();
     const area_ser = useInput();
@@ -34,30 +39,67 @@ const EditSearch = () => {
     const vacancies = useInput();
     const lapse_search = useInput();
     const start_date = useInput(null);
+    const recruiterId = useInput(null);
 
     useEffect(() => {
-        dispatch(getSingleSearch(id)).then((data) => {
-            country.setValue(data.payload.country);
-            area_ser.setValue(data.payload.area_search);
-            position.setValue(data.payload.position);
-            description_ser.setValue(data.payload.description_search);
-            vacancies.setValue(data.payload.vacancies);
-            lapse_search.setValue(data.payload.lapse_search);
-            return dispatch(
-                getAssignment({
-                    country: data.payload.country,
-                    area_search: data.payload.area_search,
-                })
-            ).then((data) => setRecruiter(data.payload));
-        });
+        dispatch(getSingleSearch(id))
+            .then((data) => {
+                country.setValue(data.payload.country);
+                area_ser.setValue(data.payload.area_search);
+                position.setValue(data.payload.position);
+                description_ser.setValue(data.payload.description_search);
+                vacancies.setValue(data.payload.vacancies);
+                lapse_search.setValue(data.payload.lapse_search);
+                recruiterId.setValue(data.payload.recruiterId)
+                return dispatch(
+                    getAssignment({
+                        country: data.payload.country,
+                        area_search: data.payload.area_search,
+                    })
+                )
+            })
     }, []);
 
     useEffect(() => {
-        dispatch(
-            getAssignment({ country: country.value, area_search: area_ser.value })
-        ).then((data) => setRecruiter(data.payload));
+        dispatch(getAssignment({ country: country.value, area_search: area_ser.value }))
+            .then((data) => setRecruiter(data.payload));
     }, [area_ser.value, country.value]);
-    console.log("estos son los reclutadores", recruiter)
+
+    useEffect(() => {
+        if (recruiterId.value) {
+            return dispatch(getSingleRecruiter(recruiterId.value))
+                .then(res => {
+                    setRecruiterAssig(res.payload)
+                })
+        }
+    }, [recruiterId.value])
+
+    useEffect(() => {
+        if (recruiterAssig?.id) {
+            let start
+            recruiterAssig.searchs?.forEach(i => { if (i.id == id) start = i.start_date });
+            setDate(start)
+        }
+    }, [recruiterAssig])
+
+    useEffect(() => {
+        if (recruiterInfo?.id) {
+            setRecruiterAssig(null)
+            start_date.setValue("")
+        }
+    }, [recruiterInfo])
+
+    const alert = () => {
+        if (recruiterAssig?.id||recruiterInfo?.id) alertEditSearch({
+            dispatch: dispatch,
+            searchId: id,
+            deleteRecruiterSearch: deleteRecruiterSearch,
+            setRecruiterAssig: setRecruiterAssig,
+            setRecruiterInfo: setRecruiterInfo,
+            start_date : start_date
+        })
+        console.log("este es el recruiter asignado ", recruiterAssig)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -109,7 +151,7 @@ const EditSearch = () => {
                     <Row className="mb-3">
                         <Form.Group className="col-md-4 top" controlId="formGridState">
                             <Form.Label>País</Form.Label>
-                            <Form.Select className={(country.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...country} placeholder={country.value}>
+                            <Form.Select className={(country.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...country} placeholder={country.value} onClick={() => alert()}>
                                 <option selected disabled value="" >Países</option>
                                 {arr.country.map(i => (
                                     <option >{i}</option>
@@ -119,7 +161,7 @@ const EditSearch = () => {
 
                         <Form.Group className="col-md-4 top" controlId="formGridState">
                             <Form.Label>Area</Form.Label>
-                            <Form.Select className={(area_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...area_ser}>
+                            <Form.Select className={(area_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} {...area_ser} onClick={() => alert()}>
                                 <option selected disabled value="" >Area</option>
                                 {arr.area.map(i => (
                                     <option >{i}</option>
@@ -154,28 +196,45 @@ const EditSearch = () => {
                             <Form.Label>Tiempo estimado de cierre</Form.Label>
                             <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} type={lapse_search.value ? "" : "date"} {...lapse_search} />
                         </Form.Group>
-
                     </Row>
                     <div className="pt-4 mb-3 fs-4 mx-5 title d-flex justify-content-center">
                         Reclutador asignado:
                     </div>
-                    <Row className="mb-3">
 
-                        <Form.Group className="col-md-4" controlId="formGridAddress1">
-                            <Form.Label>Nombre</Form.Label>
-                            <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo.name ? `${recruiterInfo.name} ${recruiterInfo.surname}` : null} placeholder="Nombre del reclutador" />
-                        </Form.Group>
+                    <>{!recruiterAssig ?
+                        <Row className="mb-3">
+                            <Form.Group className="col-md-4" controlId="formGridAddress1">
+                                <Form.Label>Nombre</Form.Label>
+                                <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo?.id ? `${recruiterInfo.name} ${recruiterInfo.surname}` : ""} placeholder="Nombre y apellido" />
+                            </Form.Group>
+                            <Form.Group className="col-md-4" controlId="formGridCity">
+                                <Form.Label>Valoración</Form.Label>
+                                <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo?.id ? recruiterInfo.rating : ""} placeholder="Valoración" />
+                            </Form.Group>
 
-                        <Form.Group className="col-md-4" controlId="formGridCity">
-                            <Form.Label>Valoración</Form.Label>
-                            <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo.rating} placeholder="Valoracion del reclutador" />
-                        </Form.Group>
-                        <Form.Group className="col-md-4" controlId="formGridCity">
-                            <Form.Label>Inicio de busqueda</Form.Label>
-                            <Form.Control className={(start_date.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} type={start_date.value ? "" : "date"} {...start_date} />
-                        </Form.Group>
-                    </Row>
+                            <Form.Group className="col-md-4" controlId="formGridCity">
+                                <Form.Label>Inicio de busqueda</Form.Label>
+                                <Form.Control className={(start_date.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} type={start_date.value ? "" : "date"} {...start_date} />
+                            </Form.Group>
+                        </Row>
 
+                        :
+                        <Row className="mb-3">
+                            <Form.Group className="col-md-4" controlId="formGridAddress1">
+                                <Form.Label>Nombre</Form.Label>
+                                <Form.Control className={(description_ser.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo.id ? `${recruiterInfo.name} ${recruiterInfo.surname}` : `${recruiterAssig.name} ${recruiterAssig.surname}`} />
+                            </Form.Group>
+                            <Form.Group className="col-md-4" controlId="formGridCity">
+                                <Form.Label>Valoración</Form.Label>
+                                <Form.Control className={(lapse_search.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={recruiterInfo.id ? recruiterInfo.rating : recruiterAssig.rating} placeholder="Valoración" />
+                            </Form.Group>
+                            <Form.Group className="col-md-4" controlId="formGridCity">
+                                <Form.Label>Inicio de busqueda</Form.Label>
+                                <Form.Control className={(start_date.value || validation) ? "inputLogin rounded-pill" : "err rounded-pill"} value={date} />
+                            </Form.Group>
+                        </Row>
+
+                    }</>
                     <div>
                         <Link to="/searchs">
                             <Button className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin">
@@ -190,9 +249,8 @@ const EditSearch = () => {
                             Cargar
                         </Button>
                     </div>
-
                 </Form>
-            </div>
+            </div >
             <div className="container-fluid px-5 containerTable">
                 <div className="row my-3">
                     <div className={styles.titleContainer}>
@@ -206,6 +264,7 @@ const EditSearch = () => {
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Apellido</th>
                                     <th scope="col">Areas</th>
+                                    <th scope="col">Busquedas activas</th>
                                     <th scope="col">Valoración</th>
                                     <th scope="col">Selección</th>
                                 </tr>
@@ -223,6 +282,7 @@ const EditSearch = () => {
                                                 <tr>{recruiter?.areas[1]}</tr>
                                                 <tr>{recruiter?.areas[2]}</tr> */}
                                             </td>
+                                            <td>{recruiter.searchs?.length}</td>
                                             <td>
                                                 {" "}
                                                 <Progress ranking={recruiter.rating} />
@@ -244,7 +304,7 @@ const EditSearch = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

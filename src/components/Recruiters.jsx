@@ -69,7 +69,7 @@ const Recruiters = () => {
             <strong>Nombre y Apellido</strong>
           </div>
 
-          <div className="col-4 col-md-2 col-lg-2 text-lg-start">
+          <div className="col-4 cols-md-2 col-lg-2 text-lg-start">
             <strong>País</strong>
           </div>
           <div className="d-none d-md-block col-md-3 col-lg-4">
