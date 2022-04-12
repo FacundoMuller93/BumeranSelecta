@@ -154,7 +154,7 @@ const Rating = () => {
           </Form.Group>
         </Row>
 
-        <Button className=" rounded-pill px-5 mt-3 buttonLogin" type="submit">Finalizar</Button>
+        <Button className="rounded-pill px-5 mt-3 mb-5 buttonLogin" type="submit">Finalizar</Button>
 
         <Overlay
           show={validationRating}
