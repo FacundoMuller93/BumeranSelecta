@@ -11,6 +11,7 @@ router.get('/revision',reportsControler.revision);
 router.get('/closed',reportsControler.closed);
 
 //retorna ranking reclutadores por área
-router.get('/recruitersArea', reportsControler.recruitersArea)
+router.post('/recruitersArea', reportsControler.recruitersArea)
+router.get('/topRecruiters', reportsControler.topRecruiters)
 
 module.exports = router;
