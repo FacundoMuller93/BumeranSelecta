@@ -29,13 +29,13 @@ const RegisterForm = () => {
         password: password.value,
       })
     );
-    alertNewUser()
+    alertNewUser();
     navigate("/");
   };
 
   return (
-    <div className="container d-flex flex-column align-items-center">
-      <div className="row mt-lg-5 mb-5 fs-4 title d-flex justify-content-center">
+    <div className="container mb-5 pb-5 d-flex flex-column align-items-center">
+      <div className="row mt-lg-3 mb-5 pb-5 fs-4 title d-flex justify-content-center">
         Crear una Cuenta
       </div>
 

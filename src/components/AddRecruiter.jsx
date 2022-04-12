@@ -1,54 +1,55 @@
-import React, { useState } from "react"
-import useInput from "../hooks/useInput"
-import { Link, useNavigate } from "react-router-dom"
-import { Button, Form } from "react-bootstrap"
-import styles from "../assets/styles/AddRecruiter.module.scss"
-import arr from "../hooks/array"
-import { addNewRecruiter } from "../store/recruiters"
-import { useDispatch } from "react-redux"
+import React, { useState } from "react";
+import useInput from "../hooks/useInput";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
+import styles from "../assets/styles/AddRecruiter.module.scss";
+import arr from "../hooks/array";
+import { addNewRecruiter } from "../store/recruiters";
+import { useDispatch } from "react-redux";
 
 const AddRecruiter = () => {
   //axios para crear producto
-  const name = useInput()
-  const surname = useInput()
-  const country = useInput()
-  const description_rec = useInput()
-  const area_rec = useInput()
-  const [validation, setValidation] = useState(true)
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const name = useInput();
+  const surname = useInput();
+  const country = useInput();
+  const description_rec = useInput();
+  const area_rec = useInput();
+  const [validation, setValidation] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let data = [
       name.value,
       surname.value,
       country.value,
       description_rec.value,
       area_rec.value,
-    ]
-    let state = false
-    data.forEach(element => {
+    ];
+    let state = false;
+    data.forEach((element) => {
       if (element == "") {
-        state = true
+        state = true;
       }
-    })
+    });
     if (state) {
-      setValidation(false)
-    } 
-    else {
-      dispatch(addNewRecruiter({
-        name: name.value,
-        surname: surname.value,
-        country: country.value,
-        description_rec: description_rec.value,
-        area_rec: area_rec.value,
-        navigate
-      }))
+      setValidation(false);
+    } else {
+      dispatch(
+        addNewRecruiter({
+          name: name.value,
+          surname: surname.value,
+          country: country.value,
+          description_rec: description_rec.value,
+          area_rec: area_rec.value,
+          navigate,
+        })
+      );
     }
-  }
+  };
 
-  if (!name) return <div></div>
+  if (!name) return <div></div>;
 
   return (
     <div className="container d-flex flex-column align-items-center">
@@ -115,7 +116,7 @@ const AddRecruiter = () => {
                 <option selected disabled value="">
                   Países
                 </option>
-                {arr.country.map(i => (
+                {arr.country.map((i) => (
                   <option>{i}</option>
                 ))}
               </Form.Select>
@@ -137,7 +138,7 @@ const AddRecruiter = () => {
                 <option selected disabled value="">
                   Area
                 </option>
-                {arr.area.map(i => (
+                {arr.area.map((i) => (
                   <option>{i}</option>
                 ))}
               </Form.Select>
@@ -163,7 +164,7 @@ const AddRecruiter = () => {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row mb-5 pb-4">
           <div className="col-6 text-end">
             <Link to="/recruiters">
               <Button className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin">
@@ -182,7 +183,7 @@ const AddRecruiter = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AddRecruiter
+export default AddRecruiter;
