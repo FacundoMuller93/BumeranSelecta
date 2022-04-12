@@ -1,5 +1,6 @@
 const { Searchs } = require("../models")
 const { Recruiters } = require("../models")
+const { Op }  = require("sequelize")
 
 
 //retornan número con cantidad búsquedas según estado
@@ -57,15 +58,32 @@ exports.closed = (req, res) => {
 // fin
 
 
-//ranking reclutadores por area
+//ranking reclutadores por area ordenados por rating
 exports.recruitersArea = (req, res) => {
+  const { areaValue } = req.body;
+  console.log(areaValue)
   try {
     Recruiters.findAll({
-      where: {area_rec : "Administración"
+      where: {
+        area_rec : {
+        [Op.like]: `%${areaValue}%`}
     },
       order:[ ["rating", "DESC"] ]
     }).then(
       (recruitersByArea) => {res.status(200).json(recruitersByArea)}
+    )
+ } catch (error) {
+   console.log("ERROR: ", error);
+ }
+}
+
+//Ranking General de Recruiters ordenados por rating
+exports.topRecruiters= (req, res) => {
+  try {
+    Recruiters.findAll({
+      order:[ ["rating", "DESC"] ]
+    }).then(
+      (topRecruiters) => {res.status(200).json(topRecruiters)}
     )
  } catch (error) {
    console.log("ERROR: ", error);
