@@ -37,7 +37,16 @@ exports.delete = (req, res) => {
 
 exports.getAll = (req, res) => {
   try {
-    Searchs.findAll({ include: Recruiters }).then((data) =>
+    Searchs.findAll(
+      {
+        include: Recruiters,
+
+        order: [['id', 'DESC']]
+      },
+
+
+
+    ).then((data) =>
       res.status(200).send(data)
     );
   } catch (error) {
@@ -113,7 +122,7 @@ exports.editSearch = (req, res) => {
     if (recruiterId) {
       let recruiterOld
       Searchs.findByPk(id).then(data => recruiterOld = data.dataValues.recruiterId)
-      if (recruiterId != recruiterOld && recruiterOld!=null) {  //al comienzo recruiterOld es null
+      if (recruiterId != recruiterOld && recruiterOld != null) {  //al comienzo recruiterOld es null
         res.sendStatus(200)
       }
       else {
@@ -148,6 +157,7 @@ exports.editSearch = (req, res) => {
 
 exports.filterDate = (req, res) => {
   const { filter_start, filter_end } = req.body;
+  console.log("filter_start PARA FILTRO FECHA--------------->", filter_start)
   try {
     Searchs.findAll({
       where: {

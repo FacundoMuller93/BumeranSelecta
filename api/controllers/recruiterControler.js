@@ -5,7 +5,7 @@ exports.add = (req, res) => {
   const { name, surname, country, description_rec, area_rec } = req.body
   try {
     Recruiter.findOrCreate({
-      where: { name },
+      where: { name, surname, country },
       defaults: {
         name,
         surname,
