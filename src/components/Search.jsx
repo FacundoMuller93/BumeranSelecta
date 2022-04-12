@@ -265,7 +265,7 @@ const Search = () => {
             <strong>Fecha de Cierre</strong>
           </div>
         </div>
-        {search.map((search, i) => {
+        {search?.map((search, i) => {
           return (
             <div
               className={`row py-3  border border-1 title ${styles.hoverPointer}`}
@@ -274,17 +274,16 @@ const Search = () => {
                 <div className="row">
                   <div className="col-1 col-md-1 col-lg-1">{i + 1}</div>
                   <div
-                    className={`col-1 ps-4 col-md-1 col-lg-1 ps-lg-4 ${
-                      search.state_search === "Nueva"
+                    className={`col-1 ps-4 col-md-1 col-lg-1 ps-lg-4 ${search.state_search === "Nueva"
                         ? "nueva"
                         : search.state_search === "Iniciada"
-                        ? "iniciada"
-                        : search.state_search === "Presentada"
-                        ? "presentada"
-                        : search.state_search === "Revision"
-                        ? "revision"
-                        : "#000"
-                    }`}
+                          ? "iniciada"
+                          : search.state_search === "Presentada"
+                            ? "presentada"
+                            : search.state_search === "Revision"
+                              ? "revision"
+                              : "#000"
+                      }`}
                   >
                     {search.state_search}
                   </div>
