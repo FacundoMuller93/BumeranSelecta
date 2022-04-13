@@ -1,11 +1,11 @@
 import axios from "axios"
 import { alertNewRecruiter, alertExistRecruiter } from "../utils/alerts"
 
-export const allRecruitersServices = async () => {
+export const allRecruitersServices = async ({ page }) => {
+  console.log("PAGE AX", page)
   try {
     const allRecruiters = await axios.get(
-      "http://localhost:3001/api/recruiter/"
-    )
+      `http://localhost:3001/api/recruiter/page/${page}`)
     return allRecruiters.data
   } catch (error) {
     throw error
@@ -67,7 +67,7 @@ export const addRecruiterServices = async ({
   country,
   description_rec,
   area_rec,
-  navigate
+  navigate,
 }) => {
   try {
     const addRecruiter = await axios.post(
