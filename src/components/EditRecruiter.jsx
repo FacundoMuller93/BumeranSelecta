@@ -166,7 +166,7 @@ const EditRecruiter = () => {
         </div>
 
         <div className="row d-flex justify-content-center">
-          <div className="col-lg-6">
+          <div className="col-lg-12">
             <Form.Group
               className="w-100 ps-lg-1 pb-3"
               controlId="formBasicEmail"
