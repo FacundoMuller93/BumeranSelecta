@@ -34,6 +34,8 @@ export const getClosedSearchs = createAsyncThunk("GET_CLOSED", searchService.clo
 
 export const getFilteredByDate = createAsyncThunk("GET_DATEFILTERED", searchService.filteredByDateSearchsServices);
 
+export const getFilteredByCountry = createAsyncThunk("GET_COUNTRYFILTERED", searchService.filteredByCountrySearchsServices);
+
 export const getAssignment = createAsyncThunk("GET_ ASSIGNMENT", searchService.assignmentSearchsServices)
 
 const searchSlice = createSlice({
@@ -186,6 +188,17 @@ const searchSlice = createSlice({
             state.loading = false
         },
         [deleteRecruiterSearch.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        },
+        [getFilteredByCountry.pending]: (state, action) => {
+            state.loading = true
+        },
+        [getFilteredByCountry.fulfilled]: (state, action) => {
+            state.data = action.payload
+            state.loading = false
+        },
+        [getFilteredByCountry.rejected]: (state, action) => {
             state.loading = false
             state.error = action.error.message
         },

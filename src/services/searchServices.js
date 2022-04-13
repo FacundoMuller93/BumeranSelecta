@@ -211,3 +211,15 @@ export const deleteRecruiterSearchServices = async (id) => {
     throw error
   }
 }
+
+export const filteredByCountrySearchsServices = async (country) => {
+  console.log(country)
+  try {
+    const filteredByCountry = await axios.post(`http://localhost:3001/api/search/filter_country`, {
+      country : country
+    })
+    return filteredByCountry.data
+  } catch (error) {
+    throw error
+  }
+}

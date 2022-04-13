@@ -73,7 +73,7 @@ const Recruiters = () => {
             <strong>País</strong>
           </div>
           <div className="d-none d-md-block col-md-3 col-lg-4">
-            <strong>Area</strong>
+            <strong>Área</strong>
           </div>
           <div className="d-none d-md-block col-md-3 col-lg-2">
             <strong>Rating</strong>

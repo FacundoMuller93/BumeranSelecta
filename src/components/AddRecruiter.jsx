@@ -136,7 +136,7 @@ const AddRecruiter = () => {
                 {...area_rec}
               >
                 <option selected disabled value="">
-                  Area
+                  Área
                 </option>
                 {arr.area.map((i) => (
                   <option>{i}</option>

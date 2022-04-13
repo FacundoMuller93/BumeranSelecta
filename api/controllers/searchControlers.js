@@ -312,3 +312,18 @@ exports.unassign = async (req, res) => {
     console.log("ERROR: ", error)
   }
 }
+
+exports.filterCountry = async (req, res) => {
+  const { country } = req.body;
+  try {
+    Searchs.findAll({
+      where: {
+        country : country
+      }
+    })
+    .then(filteredByCountry=> res.status(201).send(filteredByCountry))
+  }
+  catch (error) {
+    console.log("ERROR: ", error)
+  }
+}

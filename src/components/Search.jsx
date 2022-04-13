@@ -14,6 +14,8 @@ import {
   getFilteredByDate,
 } from "../store/searchs";
 import styles from "../assets/styles/Recruiters.module.scss";
+import { alertDeleteSearch } from "../utils/alerts";
+import { getFilteredByCountry } from "../store/searchs";
 
 const Search = () => {
   const [validation, setValidation] = useState(true);
@@ -50,27 +52,42 @@ const Search = () => {
   };
 
   const [selected, setSelected] = useState({});
-
   //
+
+
+  //dispatch y selector
   const dispatch = useDispatch();
 
   const search = useSelector((state) => state.search.data);
+  //
 
+
+  //carga de todas las búsquedas
   useEffect(() => {
     dispatch(getAllSearch());
   }, []);
 
+
   //eliminar busqueda
-  const handleDelete = async (e, searchId) => {
+  const handleDelete = (e, searchId) => {
     e.preventDefault();
-    await dispatch(deleteSearch(searchId));
-    dispatch(getAllSearch());
+    alertDeleteSearch({
+      dispatch,
+      deleteSearch,
+      searchId,
+      getAllSearch,
+    });
   };
 
+
+  //traer todas las búsquedas al cargar esta sección
   const handleAll = async () => {
     await dispatch(getAllSearch());
   };
+  //
 
+
+  //handles para filtrar por estado
   const handleNew = async () => {
     await dispatch(getNewSearchs());
   };
@@ -91,6 +108,10 @@ const Search = () => {
     await dispatch(getClosedSearchs());
   };
 
+  //
+
+
+  //filtrar por fechas
   const filterDate = async () => {
     await dispatch(
       getFilteredByDate({
@@ -99,6 +120,21 @@ const Search = () => {
       })
     );
   };
+  //
+
+  //filtro por país
+  // const [country, setCountry] = useState("")
+
+  //   useEffect(() => {
+  //     dispatch(getFilteredByCountry(country))
+  //   }, [country])
+
+  const handleFilterByCountry = (e, country) => {
+    e.preventDefault();
+    dispatch(getFilteredByCountry(country))
+  }
+  
+    //
 
   return (
     <div className="container-fluid ps-4 pe-0 pe-lg-3 min-vh-100">
@@ -177,8 +213,32 @@ const Search = () => {
           </div>
         </div>
 
+       
+
         <div className="col-12 col-md-12 col-lg-6 mt-3 mt-lg-1">
           <div className="row">
+
+           <div >
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic" className={`w-lg-25 px-5 px-md-4 px-lg-4 ${styles.addSearchBtn}`}>
+              Filtrar por País
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Argentina")}>Argentina</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Chile")}>Chile</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Colombia")}>Colombia</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Ecuador")}>Ecuador</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Colombia")}>Colombia</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "México")}>México</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Panamá")}>Panamá</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Perú")}>Perú</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Uruguay")}>Uruguay</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+
+
             <Form
               className={`${styles.form} row px-0 d-flex justify-content-md-center ps-lg-4 justify-content-lg-start`}
               onSubmit={handleSubmit}
@@ -315,7 +375,7 @@ const Search = () => {
                 <div className="row">
                   <div className="className col-3 col-lg-3 ps-0">
                     <Link to={`/rating/${search.id}`}>
-                      <i>
+                      <i title="Cerrar búsqueda">
                         <svg
                           width="24"
                           height="24"
