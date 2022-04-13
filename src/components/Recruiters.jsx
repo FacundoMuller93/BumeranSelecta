@@ -29,6 +29,7 @@ const Recruiters = () => {
       deleteRecruiter,
       userId,
       getAllRecruiters,
+      page: page
     })
   }
   
@@ -37,10 +38,7 @@ const Recruiters = () => {
   }, [page])
 
   if (!recruiter.filas) return <h1>No Data</h1>
-  
-  // console.log("RECRUT", recruiter)
-  // console.log("PAGE", page)
-  
+
   return (
     <>
     <div className="container-fluid pe-lg-3">

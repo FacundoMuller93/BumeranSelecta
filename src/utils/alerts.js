@@ -41,6 +41,7 @@ export const alertDeleteRecruiter = ({
   deleteRecruiter,
   userId,
   getAllRecruiters,
+  page
 }) => {
   return Swal.fire({
     iconHtml: `<i><svg width="70" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +76,7 @@ export const alertDeleteRecruiter = ({
           title: "title",
         },
       })
-      dispatch(getAllRecruiters())
+      dispatch(getAllRecruiters({page}))
     }
   })
 }
