@@ -67,7 +67,7 @@ const EditRecruiter = () => {
       .then((res) => res.data);
     Swal.fire({
       iconHtml: `<i><svg width="70" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86329 18C9.58729 18 9.32329 17.886 9.13429 17.685L4.27129 12.506C3.89229 12.104 3.91329 11.471 4.31529 11.093C4.71829 10.715 5.35129 10.735 5.72829 11.137L9.85329 15.528L18.2613 6.32599C18.6353 5.91699 19.2673 5.88999 19.6753 6.26199C20.0823 6.63399 20.1103 7.26699 19.7383 7.67399L10.6013 17.674C10.4143 17.88 10.1483 17.998 9.87029 18H9.86329Z" fill="#222B45"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86329 18C9.58729 18 9.32329 17.886 9.13429 17.685L4.27129 12.506C3.89229 12.104 3.91329 11.471 4.31529 11.093C4.71829 10.715 5.35129 10.735 5.72829 11.137L9.85329 15.528L18.2613 6.32599C18.6353 5.91699 19.2673 5.88999 19.6753 6.26199C20.0823 6.63399 20.1103 7.26699 19.7383 7.67399L10.6013 17.674C10.4143 17.88 10.1483 17.998 9.87029 18H9.86329Z" fill="#00ff00"/>
         </svg></i>`,
       title: "Los Cambios fueron Guardados",
       showConfirmButton: false,
@@ -84,7 +84,7 @@ const EditRecruiter = () => {
 
   return (
     <div className="container d-flex flex-column align-items-center">
-      <div className="row mt-lg-5 mb-5 fs-4 title d-flex justify-content-center">
+      <div className="row mt-lg-3 mb-3 fs-4 title d-flex justify-content-center">
         Editar Reclutador
       </div>
 
@@ -98,6 +98,9 @@ const EditRecruiter = () => {
               className="w-100 pe-lg-1 pb-3"
               controlId="formBasicEmail"
             >
+              <Form.Label className="w-100 text-center title">
+                Nombre
+              </Form.Label>
               <Form.Control
                 {...name}
                 placeholder="Nombre"
@@ -113,6 +116,9 @@ const EditRecruiter = () => {
               className="w-100 ps-lg-1 pb-3"
               controlId="formBasicEmail"
             >
+              <Form.Label className="w-100 text-center title">
+                Apellido
+              </Form.Label>
               <Form.Control
                 {...surname}
                 placeholder="Apellido"
@@ -130,6 +136,7 @@ const EditRecruiter = () => {
               className="w-100 pe-lg-1 pb-3"
               controlId="formBasicEmail"
             >
+              <Form.Label className="w-100 text-center title">País</Form.Label>
               <Form.Control
                 {...country}
                 placeholder="País"
@@ -144,6 +151,9 @@ const EditRecruiter = () => {
               className="w-100 pe-lg-1 pb-3"
               controlId="formBasicEmail"
             >
+              <Form.Label className="w-100 text-center title">
+                Descripción
+              </Form.Label>
               <Form.Control
                 {...description_rec}
                 placeholder="Descripción"
@@ -161,6 +171,7 @@ const EditRecruiter = () => {
               className="w-100 ps-lg-1 pb-3"
               controlId="formBasicEmail"
             >
+              <Form.Label className="w-100 text-center title">Área</Form.Label>
               <Form.Control
                 {...area_rec}
                 placeholder="Área"
@@ -210,7 +221,7 @@ const EditRecruiter = () => {
           <div className="col-6">
             <button
               type="submit"
-              className={`${styles.buttonsEditRecruiter} mt-5 w-lg-25 px-5 px-lg-5 `}
+              className={`${styles.buttonsEditRecruiter} mt-5 w-lg-25 px-5 px-lg-5`}
             >
               Aceptar
             </button>

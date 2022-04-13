@@ -15,6 +15,7 @@ import NotFound from './Pages/NotFound';
 import ForgotPassword from './components/ForgotPassword';
 import SpinnerComp from "./commons/Spinner";
 import EditSearch from "./components/EditSearch";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/forgotPass" element={<ForgotPassword/>}/>
         <Route path="*" element={<NotFound replace to="/" />} />
       </Routes>
+      <Footer />
     </div>
   );
 };

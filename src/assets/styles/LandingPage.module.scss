@@ -1,27 +1,25 @@
-.container{
-    display: flex;
-  
+.container {
+  display: flex;
 }
 
-.txtContainer{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+.txtContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
-.txt{
-    font-weight: 300;
+.txt {
+  font-weight: 300;
 }
 
-.message{
-    font-weight: 700
+.message {
+  font-weight: 700;
 }
 
-.secondContainer{
-    padding-top: 9%;
- 
+.secondContainer {
+  padding-top: 5%;
 }
 
-.picture{
-    max-width: 30%;
+.picture {
+  max-width: 30%;
 }
