@@ -61,7 +61,6 @@ exports.closed = (req, res) => {
 //ranking reclutadores por area ordenados por rating
 exports.recruitersArea = (req, res) => {
   const { areaValue } = req.body;
-  console.log(areaValue)
   try {
     Recruiters.findAll({
       where: {

@@ -12,11 +12,15 @@ router.post('/assignment', searchControler.assignment)
 router.put('/end-search/:id',searchControler.endSearch)
 router.get('/delete-rec/:id', searchControler.unassign)
 
-//agregados por Facu
+//filtrar por estado
 router.get('/state/new', searchControler.new)
 router.get('/state/started', searchControler.started)
 router.get('/state/presented', searchControler.presented)
 router.get('/state/revision', searchControler.revision)
 router.get('/state/closed', searchControler.closed)
+//
+
+//filtrar por país
+router.post('/filter_country', searchControler.filterCountry)
 
 module.exports = router;

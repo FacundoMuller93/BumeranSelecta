@@ -100,7 +100,7 @@ const AddSearchs = () => {
                   {...area_ser}
                 >
                   <option selected disabled value="">
-                    Area
+                    Área
                   </option>
                   {arr.area.map((i) => (
                     <option>{i}</option>
@@ -170,7 +170,7 @@ const AddSearchs = () => {
               className=" rounded-pill px-5 mt-3 buttonLogin"
               type="submit reset"
             >
-              Cargar
+              Crear
             </Button>
 
             <Row className="mt-4">
