@@ -52,7 +52,7 @@ const PaginationComp = ({ pagesTotal }) => {
 
   return (
     <>
-      <div className="PaginationComp mt-5 mb-4">
+      <div className="PaginationComp mt-5 mb-4 ">
         <Pagination size="lg">
           <Pagination.First
             onClick={() => {
