@@ -3,7 +3,6 @@ import axios from "axios"
 
 //reclutadores por área ordenados por rating
 export const getRecruitersPerArea = async (areaValue) => {
-    console.log(areaValue)
     try {
       const recruitersPerArea = await axios.post(
         "http://localhost:3001/api/reports/recruitersArea", {

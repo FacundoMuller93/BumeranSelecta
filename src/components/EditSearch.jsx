@@ -131,7 +131,7 @@ const EditSearch = () => {
             </Form.Group>
 
             <Form.Group className="col-md-4 top" controlId="formGridState">
-              <Form.Label>Area</Form.Label>
+              <Form.Label>Área</Form.Label>
               <Form.Select
                 className={
                   area_ser.value || validation
@@ -141,7 +141,7 @@ const EditSearch = () => {
                 {...area_ser}
               >
                 <option selected disabled value="">
-                  Area
+                  Área
                 </option>
                 {arr.area.map((i) => (
                   <option>{i}</option>
@@ -150,7 +150,7 @@ const EditSearch = () => {
             </Form.Group>
 
             <Form.Group className="col-md-4" controlId="formGridAddress2">
-              <Form.Label>Posicion</Form.Label>
+              <Form.Label>Posición</Form.Label>
               <Form.Control
                 className={
                   position.value || validation
@@ -165,7 +165,7 @@ const EditSearch = () => {
 
           <Row className="mb-3">
             <Form.Group className="col-md-4" controlId="formGridAddress1">
-              <Form.Label>Descripcìon</Form.Label>
+              <Form.Label>Descripción</Form.Label>
               <Form.Control
                 className={
                   description_ser.value || validation
@@ -243,7 +243,7 @@ const EditSearch = () => {
               />
             </Form.Group>
             <Form.Group className="col-md-4" controlId="formGridCity">
-              <Form.Label>Inicio de busqueda</Form.Label>
+              <Form.Label>Inicio de búsqueda</Form.Label>
               <Form.Control
                 className={
                   start_date.value || validation
@@ -288,7 +288,7 @@ const EditSearch = () => {
                   </th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Apellido</th>
-                  <th scope="col">Areas</th>
+                  <th scope="col">Áreas</th>
                   <th scope="col">Valoración</th>
                   <th scope="col">Selección</th>
                 </tr>
