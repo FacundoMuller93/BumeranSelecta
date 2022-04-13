@@ -2,7 +2,6 @@ import axios from "axios"
 import { alertNewRecruiter, alertExistRecruiter } from "../utils/alerts"
 
 export const allRecruitersServices = async ({ page }) => {
-  console.log("PAGE AX", page)
   try {
     const allRecruiters = await axios.get(
       `http://localhost:3001/api/recruiter/page/${page}`)

@@ -38,7 +38,7 @@ const recruiterSlice = createSlice({
   initialState: recruitersInitialState,
   extraReducers: {
     [getAllRecruiters.pending]: (state, action) => {
-      state.loading = true;
+      // state.loading = true;
     },
     [getAllRecruiters.fulfilled]: (state, action) => {
       state.data = action.payload;

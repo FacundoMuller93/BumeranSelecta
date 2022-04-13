@@ -49,8 +49,9 @@ exports.getAll = (req, res) => {
 
 exports.getById = (req, res) => {
   const { id } = req.params
+  console.log("ID_BCK", id)
   try {
-    Recruiter.findAndOne({ where: { id }, include: Searchs }).then(data =>
+    Recruiter.findOne({ where: { id }, include: Searchs }).then(data =>
       res.status(200).send(data)
     )
   } catch (error) {
