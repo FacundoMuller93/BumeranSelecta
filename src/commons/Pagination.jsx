@@ -10,11 +10,11 @@ const PaginationComp = ({ pagesTotal }) => {
   let active = page
   let num = 1
 
-  if (active > 10 && active < 20) num = 11
-  if (active > 20 && active < 30) num = 21
-  if (active > 30 && active < 40) num = 31
+  if (active > 10 && active < 21) num = 11
+  if (active > 20 && active < 31) num = 21
+  if (active > 30 && active < 41) num = 31
 
-  let numMult = num * 10
+  let numMult = num + 9
   if (numMult > pagesTotal) numMult = pagesTotal
   let items = []
 
