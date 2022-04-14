@@ -47,7 +47,7 @@ const Recruiters = () => {
             <div className="pt-5 mb-5 fs-4 title">Lista de Reclutadores</div>
           </div>
 
-          <div className="col-12 pb-5 text-center col-lg-3 ps-lg-0 pb-lg-0">
+          <div className="col-12 pb-5 text-end col-lg-8 ps-lg-0 pb-lg-0">
             <Link to="/AddRecruiter">
               <Button
                 className={`w-lg-25 mb-3 px-5  px-md-4  px-lg-5 pb-lg-1 mt-lg-2 mb-lg-3 ${styles.buttonDeleteRecruiter}`}
