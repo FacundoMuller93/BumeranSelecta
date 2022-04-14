@@ -35,31 +35,6 @@ exports.delete = (req, res) => {
   }
 }
 
-// exports.getAll = (req, res) => {
-//   const { page } = req.params
-//   const initialLimit = 25
-//   const cut = page >= 2 ? initialLimit * page - initialLimit : 0
-//   const getPagingData = (search, page, limit) => {
-//     const { count: totalItems, rows: filas } = search
-//     const currentPage = page ? +page : 0
-//     const totalPages = Math.ceil(totalItems / limit)
-//     return { totalItems, filas, totalPages, currentPage }
-//   }
-//   try {
-//     Searchs.findAndCountAll({
-//       include: Recruiters,
-//       order: [["id", "DESC"]],
-//       limit: initialLimit,
-//       offset: cut,
-//     }).then(data => {
-//       const response = getPagingData(data, page, initialLimit)
-//       res.status(200).send(response)
-//     })
-//   } catch (error) {
-//     console.log("ERROR: ", error)
-//   }
-// }
-
 exports.getId = (req, res) => {
   const { id } = req.params
   try {
@@ -98,46 +73,6 @@ exports.byState = (req, res) => {
     console.log("ERROR: ", error)
   }
 }
-
-// exports.started = (req, res) => {
-//   try {
-//     Searchs.findAll({ where: { state_search: "Iniciada" } }).then(
-//       startedSearchs => res.status(200).send(startedSearchs)
-//     )
-//   } catch (error) {
-//     console.log("ERROR: ", error)
-//   }
-// }
-
-// exports.presented = (req, res) => {
-//   try {
-//     Searchs.findAll({ where: { state_search: "Presentada" } }).then(
-//       presentedSearchs => res.status(200).send(presentedSearchs)
-//     )
-//   } catch (error) {
-//     console.log("ERROR: ", error)
-//   }
-// }
-
-// exports.revision = (req, res) => {
-//   try {
-//     Searchs.findAll({ where: { state_search: "Suspendida" } }).then(
-//       revisionSearchs => res.status(200).send(revisionSearchs)
-//     )
-//   } catch (error) {
-//     console.log("ERROR: ", error)
-//   }
-// }
-
-// exports.closed = (req, res) => {
-//   try {
-//     Searchs.findAll({ where: { state_search: "Cerrada" } }).then(
-//       closedSearchs => res.status(200).send(closedSearchs)
-//     )
-//   } catch (error) {
-//     console.log("ERROR: ", error)
-//   }
-// }
 
 exports.editSearch = (req, res) => {
   const { id } = req.params

@@ -22,6 +22,7 @@ const PaginationComp = ({ pagesTotal }) => {
   if (active > 50 && active < 56) num = 51
   if (active > 55 && active < 61) num = 56
   if (active > 60 && active < 66) num = 61
+  if (active > 65 && active < 71) num = 66
 
   let numMult = num + 4
   if (numMult > pagesTotal) numMult = pagesTotal

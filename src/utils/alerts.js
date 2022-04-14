@@ -93,7 +93,6 @@ export const alertDeleteSearch = ({
   dispatch,
   deleteSearch,
   searchId,
-  // getAllSearch,
   pageChange,
   getSearchsByState,
   page,
@@ -133,7 +132,6 @@ export const alertDeleteSearch = ({
         },
       });
     }
-    // dispatch(getAllSearch());
     dispatch(pageChange({ page: 1 }))
     dispatch(getSearchsByState({ page: page, state: estado }))
   });

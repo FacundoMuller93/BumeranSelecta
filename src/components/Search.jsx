@@ -4,13 +4,8 @@ import { Button, Form, Dropdown, Modal } from "react-bootstrap"
 import useInput from "../hooks/useInput"
 import { useSelector, useDispatch } from "react-redux"
 import {
-  // getAllSearch,
   deleteSearch,
   getSearchsByState,
-  // getStartedSearchs,
-  // getPresentedSearchs,
-  // getRevisionSearchs,
-  // getClosedSearchs,
   getFilteredByDate,
 } from "../store/searchs"
 import { pageChange } from "../store/page"
@@ -61,7 +56,6 @@ const Search = () => {
   //dispatch y selector
   const dispatch = useDispatch()
   const search = useSelector(state => state.search.data)
-  //
 
   //carga de todas las búsquedas
   useEffect(() => {
@@ -75,7 +69,6 @@ const Search = () => {
       dispatch,
       deleteSearch,
       searchId,
-      // getAllSearch,
       pageChange,
       getSearchsByState,
       page,
@@ -87,35 +80,7 @@ const Search = () => {
   const handleEstado = est => {
     dispatch(pageChange({ page: 1 }))
     setEstado(est)
-    // dispatch(getSearchsByState({ page: page, state: estado }))
-    // Promise.all([
-    // ])
   }
-  // await dispatch(getSearchsByState({page: page, state: "Todas"}));
-
-  //
-
-  //handles para filtrar por estado
-  // const handleNew = async () => {
-  //   await dispatch(getSearchsByState({page: page, state: "Nueva"}));
-  // };
-
-  // const handleStarted = async () => {
-  //   await dispatch(getStartedSearchs());
-  // };
-
-  // const handlePresented = async () => {
-  //   await dispatch(getPresentedSearchs());
-  // };
-
-  // const handleRevision = async () => {
-  //   await dispatch(getRevisionSearchs());
-  // };
-
-  // const handleClosed = async () => {
-  //   await dispatch(getClosedSearchs());
-  // };
-  //
 
   //filtrar por fechas
   const filterDate = async () => {
@@ -126,7 +91,6 @@ const Search = () => {
       })
     )
   }
-  //
 
   //filtro por país
   // const [country, setCountry] = useState("")
@@ -141,10 +105,6 @@ const Search = () => {
   }
 
   if (!search.filas) return <h1>No Data</h1>
-
-  console.log("ESTADO", estado)
-  console.log("SEARCH", search)
-  console.log("PAGE", page)
 
   return (
     <>
