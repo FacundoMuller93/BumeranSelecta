@@ -1,8 +1,8 @@
 import axios from "axios"
 
-export const allSearchServices = async () => {
+export const allSearchServices = async ({ page }) => {
   try {
-    const allSearch = await axios.get("http://localhost:3001/api/search")
+    const allSearch = await axios.get(`http://localhost:3001/api/search/page/${page}`)
     return allSearch.data
   } catch (error) {
     throw error
@@ -93,10 +93,10 @@ export const editSearchServices = async ({
   }
 }
 
-export const newSearchsServices = async () => {
+export const newSearchsServices = async ({page, state}) => {
   try {
     const pendingSearchs = await axios.get(
-      "http://localhost:3001/api/search/state/new"
+      `http://localhost:3001/api/search/state/${page}&${state}`
     )
     return pendingSearchs.data
   } catch (error) {

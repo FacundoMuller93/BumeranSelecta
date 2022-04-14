@@ -10,7 +10,7 @@ exports.add = (req, res) => {
     vacancies,
     lapse_search,
     recruiterId,
-  } = req.body;
+  } = req.body
   try {
     Searchs.create({
       country,
@@ -20,104 +20,133 @@ exports.add = (req, res) => {
       vacancies,
       lapse_search,
       recruiterId,
-    }).then((data) => res.status(201).send(data));
+    }).then(data => res.status(201).send(data))
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
-};
+}
 
 exports.delete = (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params
   try {
-    Searchs.destroy({ where: { id } }).then(() => res.sendStatus(202));
+    Searchs.destroy({ where: { id } }).then(() => res.sendStatus(202))
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
-};
+}
 
 exports.getAll = (req, res) => {
-  try {
-    Searchs.findAll(
-      {
-        include: Recruiters,
-
-        order: [['id', 'DESC']]
-      },
-
-
-
-    ).then((data) =>
-      res.status(200).send(data)
-    );
-  } catch (error) {
-    console.log("ERROR: ", error);
+  const { page } = req.params
+  const initialLimit = 25
+  const cut = page >= 2 ? initialLimit * page - initialLimit : 0
+  const getPagingData = (search, page, limit) => {
+    const { count: totalItems, rows: filas } = search
+    const currentPage = page ? +page : 0
+    const totalPages = Math.ceil(totalItems / limit)
+    return { totalItems, filas, totalPages, currentPage }
   }
-};
+  try {
+    Searchs.findAndCountAll({
+      include: Recruiters,
+      order: [["id", "DESC"]],
+      limit: initialLimit,
+      offset: cut,
+    }).then(data => {
+      const response = getPagingData(data, page, initialLimit)
+      res.status(200).send(response)
+    })
+  } catch (error) {
+    console.log("ERROR: ", error)
+  }
+}
 
 exports.getId = (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params
   try {
-    Searchs.findOne({ where: { id } }).then((data) =>
-      res.status(200).send(data)
-    );
+    Searchs.findOne({ where: { id } }).then(data => res.status(200).send(data))
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
-};
+}
 
-exports.new = (req, res) => {
-  try {
-    Searchs.findAll({ where: { state_search: "Nueva" } }).then((newSearchs) =>
-      res.status(200).send(newSearchs)
-    );
-  } catch (error) {
-    console.log("ERROR: ", error);
+exports.byState = (req, res) => {
+  const { page, state } = req.params
+  const initialLimit = 25
+  const cut = page >= 2 ? initialLimit * page - initialLimit : 0
+  const getPagingData = (search, page, limit) => {
+    const { count: totalItems, rows: filas } = search
+    const currentPage = page ? +page : 0
+    const totalPages = Math.ceil(totalItems / limit)
+    return { totalItems, filas, totalPages, currentPage }
   }
-};
+  try {
+    Searchs.findAndCountAll({ 
+      where: { state_search: state },
+      order: [["id", "DESC"]],
+      limit: initialLimit,
+      offset: cut, 
+    }).then(newSearchs =>{
+      const response = getPagingData(newSearchs, page, initialLimit)
+      res.status(200).send(response)
+      }
+    )
+  } catch (error) {
+    console.log("ERROR: ", error)
+  }
+}
 
 exports.started = (req, res) => {
   try {
     Searchs.findAll({ where: { state_search: "Iniciada" } }).then(
-      (startedSearchs) => res.status(200).send(startedSearchs)
-    );
+      startedSearchs => res.status(200).send(startedSearchs)
+    )
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
-};
+}
 
 exports.presented = (req, res) => {
   try {
     Searchs.findAll({ where: { state_search: "Presentada" } }).then(
-      (presentedSearchs) => res.status(200).send(presentedSearchs)
-    );
+      presentedSearchs => res.status(200).send(presentedSearchs)
+    )
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
-};
+}
 
 exports.revision = (req, res) => {
   try {
     Searchs.findAll({ where: { state_search: "Suspendida" } }).then(
-      (revisionSearchs) => res.status(200).send(revisionSearchs)
-    );
+      revisionSearchs => res.status(200).send(revisionSearchs)
+    )
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
-};
+}
 
 exports.closed = (req, res) => {
   try {
     Searchs.findAll({ where: { state_search: "Cerrada" } }).then(
-      (closedSearchs) => res.status(200).send(closedSearchs)
-    );
+      closedSearchs => res.status(200).send(closedSearchs)
+    )
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
-};
+}
 
 exports.editSearch = (req, res) => {
   const { id } = req.params
-  const { description_search, country, area_search, position, vacancies, lapse_search, recruiterId, start_date } = req.body
+  const {
+    description_search,
+    country,
+    area_search,
+    position,
+    vacancies,
+    lapse_search,
+    recruiterId,
+    start_date,
+  } = req.body
   try {
     if (recruiterId) {
       let recruiterOld
@@ -125,67 +154,75 @@ exports.editSearch = (req, res) => {
         console.log("este es el recruiterOld", recruiterOld)
         recruiterOld = data.dataValues.recruiterId
 
-        if (recruiterId != recruiterOld && recruiterOld != null) {  // actualizacion del reclutador por otro 
+        if (recruiterId != recruiterOld && recruiterOld != null) {
+          // actualizacion del reclutador por otro
           console.log("entro al if", recruiterId)
 
-          Recruiters.update({ active_searchs: 0 },
+          Recruiters.update(
+            { active_searchs: 0 },
             {
               where: { id: recruiterOld },
-            },
+            }
           )
           Searchs.update(
             {
               description_search,
-              country, area_search,
-              position, vacancies,
+              country,
+              area_search,
+              position,
+              vacancies,
               lapse_search,
               recruiterId,
               start_date,
-              state_search: "Iniciada"
+              state_search: "Iniciada",
             },
             {
               where: { id },
               returning: true,
               plain: true,
-            })
-          Recruiters.update({ active_searchs: 1 },
+            }
+          )
+          Recruiters.update(
+            { active_searchs: 1 },
             {
               where: { id: recruiterId },
-            },
+            }
           )
 
           res.sendStatus(200)
-        }
-        else {                          // se vincula por primera vez un reclutador a esa busqueda
+        } else {
+          // se vincula por primera vez un reclutador a esa busqueda
           console.log("entro al else")
           Searchs.update(
             {
               description_search,
-              country, area_search,
-              position, vacancies,
+              country,
+              area_search,
+              position,
+              vacancies,
               lapse_search,
               recruiterId,
               start_date,
-              state_search: "Iniciada"
+              state_search: "Iniciada",
             },
             {
               where: { id },
               returning: true,
               plain: true,
-            })
-          Recruiters.update({ active_searchs: 1 },
+            }
+          )
+          Recruiters.update(
+            { active_searchs: 1 },
             {
               where: { id: recruiterId },
-            },
-          )
-            .then(data => res.status(201).send(data))
+            }
+          ).then(data => res.status(201).send(data))
         }
       })
       console.log("este es el reclutador anterior:", recruiterOld)
       console.log("este es ele reclutador nuevo", recruiterId)
-
-
-    } else {  // actualización de datos sin el reclutador id
+    } else {
+      // actualización de datos sin el reclutador id
       console.log("no hay recruiter id")
       Searchs.update(req.body, {
         where: { id },
@@ -197,17 +234,15 @@ exports.editSearch = (req, res) => {
         position,
         vacancies,
         lapse_search,
-      })
-        .then(data => res.status(201).send(data))
+      }).then(data => res.status(201).send(data))
     }
   } catch (error) {
     console.log("ERROR: ", error)
   }
 }
 
-
 exports.filterDate = (req, res) => {
-  const { filter_start, filter_end } = req.body;
+  const { filter_start, filter_end } = req.body
   console.log("filter_start PARA FILTRO FECHA--------------->", filter_start)
   try {
     Searchs.findAll({
@@ -216,16 +251,14 @@ exports.filterDate = (req, res) => {
           {
             start_date: { [Op.between]: [filter_start, filter_end] },
             end_date: { [Op.between]: [filter_start, filter_end] },
-
-          }
-
+          },
         ],
       },
-    }).then((data) => res.status(200).send(data));
+    }).then(data => res.status(200).send(data))
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
-};
+}
 
 exports.assignment = (req, res) => {
   const { country, area_search } = req.body
@@ -242,11 +275,10 @@ exports.assignment = (req, res) => {
         ],
       },
       include: Searchs,
-      order: [['rating', 'DESC']]
-
-    }).then((data) => res.status(200).send(data));
+      order: [["rating", "DESC"]],
+    }).then(data => res.status(200).send(data))
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
 }
 
@@ -258,11 +290,11 @@ exports.endSearch = async (req, res) => {
       {
         end_date: end_date,
         recruiterId: null,
-        state_search: "Cerrada"
+        state_search: "Cerrada",
       },
       {
-        where: { id: id }
-      },
+        where: { id: id },
+      }
     )
     //res.status(200).send(editSearch)
 
@@ -272,58 +304,53 @@ exports.endSearch = async (req, res) => {
         active_searchs: 0,
       },
       {
-        where: { id: recruiterId }
+        where: { id: recruiterId },
       }
     )
     res.status(200).send(editRecruiter)
-
   } catch (error) {
-    console.log("ERROR: ", error);
+    console.log("ERROR: ", error)
   }
-};
+}
 
 exports.unassign = async (req, res) => {
   const { id } = req.params
   try {
+    Searchs.findByPk(id).then(data => {
+      let idRecruiter = data.dataValues.recruiterId
 
-    Searchs.findByPk(id)
-      .then(data => {
-        let idRecruiter = data.dataValues.recruiterId
-
-        Searchs.update(
-          {
-            recruiterId: null,
-            state_search: "Nueva",
-          },
-          {
-            where: { id },
-            returning: true,
-            plain: true,
-          })
-        Recruiters.update({ active_searchs: 0 },
-          {
-            where: { id: idRecruiter },
-          },
-        )
-          .then(data => res.status(201).send(data))
-      })
-
+      Searchs.update(
+        {
+          recruiterId: null,
+          state_search: "Nueva",
+        },
+        {
+          where: { id },
+          returning: true,
+          plain: true,
+        }
+      )
+      Recruiters.update(
+        { active_searchs: 0 },
+        {
+          where: { id: idRecruiter },
+        }
+      ).then(data => res.status(201).send(data))
+    })
   } catch (error) {
     console.log("ERROR: ", error)
   }
 }
 
 exports.filterCountry = async (req, res) => {
-  const { country } = req.body;
+  const { country } = req.body
   try {
     Searchs.findAll({
       where: {
-        country : country
-      }
-    })
-    .then(filteredByCountry=> res.status(201).send(filteredByCountry))
-  }
-  catch (error) {
+        country: country,
+      },
+    }).then(filteredByCountry => res.status(201).send(filteredByCountry))
+  } catch (error) {
     console.log("ERROR: ", error)
   }
 }

@@ -43,7 +43,7 @@ const searchSlice = createSlice({
     initialState: searchsInitialState, 
     extraReducers: {
         [getAllSearch.pending]: (state, action) => {
-            state.loading = true
+            // state.loading = true
         },
         [getAllSearch.fulfilled]: (state, action) => {
             state.data = action.payload

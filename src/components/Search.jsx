@@ -16,8 +16,10 @@ import {
 import styles from "../assets/styles/Recruiters.module.scss";
 import { alertDeleteSearch } from "../utils/alerts";
 import { getFilteredByCountry } from "../store/searchs";
+import PaginationComp from "../commons/Pagination"
 
 const Search = () => {
+  const page = useSelector(state => state.page)
   const [validation, setValidation] = useState(true);
   const start_date = useInput();
   const end_date = useInput();
@@ -54,19 +56,15 @@ const Search = () => {
   const [selected, setSelected] = useState({});
   //
 
-
   //dispatch y selector
   const dispatch = useDispatch();
-
   const search = useSelector((state) => state.search.data);
   //
 
-
   //carga de todas las búsquedas
   useEffect(() => {
-    dispatch(getAllSearch());
-  }, []);
-
+    dispatch(getAllSearch({page: page}));
+  }, [page]);
 
   //eliminar busqueda
   const handleDelete = (e, searchId) => {
@@ -82,14 +80,13 @@ const Search = () => {
 
   //traer todas las búsquedas al cargar esta sección
   const handleAll = async () => {
-    await dispatch(getAllSearch());
+    await dispatch(getAllSearch({page: page}));
   };
   //
 
-
   //handles para filtrar por estado
   const handleNew = async () => {
-    await dispatch(getNewSearchs());
+    await dispatch(getNewSearchs({page: page, state: "Nueva"}));
   };
 
   const handleStarted = async () => {
@@ -107,7 +104,6 @@ const Search = () => {
   const handleClosed = async () => {
     await dispatch(getClosedSearchs());
   };
-
   //
 
 
@@ -134,9 +130,12 @@ const Search = () => {
     dispatch(getFilteredByCountry(country))
   }
   
-    //
+  if (!search.filas) return <h1>No Data</h1>
+
+  console.log("SEARCHS", search)
 
   return (
+    <>
     <div className="container-fluid ps-4 pe-0 pe-lg-3 min-vh-100">
       <div className="row my-5 ms-lg-5">
         <div className="col-12 col-md-4 mx-md-auto col-lg-6">
@@ -325,7 +324,7 @@ const Search = () => {
             <strong>Fecha de Cierre</strong>
           </div>
         </div>
-        {search.map((search, i) => {
+        {search.filas.map((search, i) => {
           return (
             <div
               className={`row py-3  border border-1 title ${styles.hoverPointer}`}
@@ -486,6 +485,8 @@ const Search = () => {
         }
       </div>
     </div>
+    <PaginationComp pagesTotal={search.totalPages} />
+    </>
   );
 };
 
