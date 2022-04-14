@@ -84,14 +84,14 @@ const Rating = () => {
 
       <Form
         onSubmit={handleSubmit}
-        className=" mt-0 pt-lg-5 formLogin w-100"
+        className=" mt-3 pt-lg-5 formLogin w-100 mt-lg-0"
         id="formSearch"
       >
-        <div className=" mb-3 fs-5 mx-5 d-flex justify-content-center">
+        <div className=" mb-3 fs-5 d-flex justify-content-center">
           Información del reclutador
         </div>
-        <Row className="mb-3">
-          <Form.Group className="col-md-4" controlId="formGridCity">
+        <Row className="mb-lg-4">
+          <Form.Group className="col-12 mb-4 col-md-4" controlId="formGridCity">
             <Form.Label>Nombre</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -99,7 +99,7 @@ const Rating = () => {
             />
           </Form.Group>
 
-          <Form.Group className="col-md-4" controlId="formGridCity">
+          <Form.Group className="col-12 mb-4 col-md-4" controlId="formGridCity">
             <Form.Label>Apellido</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -107,7 +107,7 @@ const Rating = () => {
             />
           </Form.Group>
 
-          <Form.Group className="col-md-4" controlId="formGridCity">
+          <Form.Group className="col-12 mb-4 col-md-4" controlId="formGridCity">
             <Form.Label>Busquedas activas</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -117,7 +117,7 @@ const Rating = () => {
         </Row>
 
         <Row className="mb-3">
-          <Form.Group className="col-md-4" controlId="formGridCity">
+          <Form.Group className="col-12 mb-4 col-md-4" controlId="formGridCity">
             <Form.Label>País</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -125,7 +125,10 @@ const Rating = () => {
             />
           </Form.Group>
 
-          <Form.Group className="col-md-4" controlId="formGridCity">
+          <Form.Group
+            className=" col-12 mb-4 col-md-4"
+            controlId="formGridCity"
+          >
             <Form.Label>Area</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -133,7 +136,7 @@ const Rating = () => {
             />
           </Form.Group>
 
-          <Form.Group className="col-md-4" controlId="formGridCity">
+          <Form.Group className="col-12 mb-4 col-md-4" controlId="formGridCity">
             <Form.Label>Ranking</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -141,11 +144,15 @@ const Rating = () => {
             />
           </Form.Group>
         </Row>
+
         <div className="pt-2 mb-3 mt-5 mb-1 fs-5 mx-5 title d-flex justify-content-center">
           Información de la busqueda
         </div>
         <Row className="mb-3">
-          <Form.Group className="col-md-6" controlId="formGridAddress1">
+          <Form.Group
+            className="col-12 mb-4 col-md-6"
+            controlId="formGridAddress1"
+          >
             <Form.Label>Candidatos presentados</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -153,7 +160,7 @@ const Rating = () => {
             />
           </Form.Group>
 
-          <Form.Group className="col-md-6" controlId="formGridCity">
+          <Form.Group className="col-12 mb-4 col-md-6" controlId="formGridCity">
             <Form.Label>vacantes disponibles</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -161,8 +168,8 @@ const Rating = () => {
             />
           </Form.Group>
         </Row>
-        <Row className="mb-3 ">
-          <Form.Group className="col-md-4" controlId="formGridCity">
+        <Row className="mb-lg-3 ">
+          <Form.Group className="col-12 mb-4 col-md-4" controlId="formGridCity">
             <Form.Label>Inicio</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -170,7 +177,7 @@ const Rating = () => {
             />
           </Form.Group>
 
-          <Form.Group className="col-md-4" controlId="formGridCity">
+          <Form.Group className="col-12 mb-4 col-md-4" controlId="formGridCity">
             <Form.Label>Caducidad</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
@@ -178,7 +185,7 @@ const Rating = () => {
             />
           </Form.Group>
 
-          <Form.Group className="col-md-4" controlId="formGridCity">
+          <Form.Group className="col-12 mb-4 col-md-4" controlId="formGridCity">
             <Form.Label>Cierre</Form.Label>
             <Form.Control
               className={

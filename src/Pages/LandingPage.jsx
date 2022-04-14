@@ -3,9 +3,9 @@ import styles from "../assets/styles/LandingPage.module.scss";
 
 const LandingPage = () => {
   return (
-    <div className="container ">
+    <div className={styles.container}>
       <div
-        className={`row ${styles.secondContainer} d-flex justify-content-center mb-5`}
+        className={`row ${styles.secondContainer} d-flex justify-content-center`}
       >
         <div className={`col-lg-4 text-center`}>
           <img
@@ -19,15 +19,17 @@ const LandingPage = () => {
           <p className="lead fs-2 title text-center text-lg-start ">
             Encontramos el Candidato Ideal
           </p>
-          <p className={`${styles.message} text-center text-lg-start`}>
+          <p
+            className={`${styles.message} px-5 px-lg-0 text-center text-lg-start`}
+          >
             Somos la primera plataforma tecnológica aplicada a la selección de
             talento.
           </p>
-          <p>
+          <p className="px-5 px-lg-0">
             Vinculamos la tecnología con la mayor red de expertos de la región y
             la base de candidatos más amplia de Latinoamérica.
           </p>
-          <p>
+          <p className="px-5 px-lg-0">
             Reinventamos el reclutamiento por medio de procesos más
             transparentes, ágiles y asertivos; logrando una tasa de cierre mayor
             al 90%.
