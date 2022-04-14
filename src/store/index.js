@@ -15,7 +15,7 @@ import logger from "redux-logger";
 import userSlice from "./user"
 import recruiterSlice from "./recruiters"
 import searchSlice from "./searchs"
-
+import pageReducer from "./page"
 
 const persistConfig = {
   key: "root",
@@ -36,6 +36,7 @@ const store = configureStore({
     user: persistedReducer,
     recruiter: recruiterSlice,
     search: searchSlice,
+    page: pageReducer,
   },
 });
 

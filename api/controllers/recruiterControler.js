@@ -23,10 +23,25 @@ exports.add = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
+  const { page } = req.params
+  const initialLimit = 25
+  const cut = page >= 2 ? initialLimit * page - initialLimit : 0
+  const getPagingData = (recruiter, page, limit) => {
+    const { count: totalItems, rows: filas } = recruiter;
+    const currentPage = page ? +page : 0;
+    const totalPages = Math.ceil(totalItems / limit);
+    return { totalItems, filas, totalPages, currentPage };
+  }
   try {
-    Recruiter.findAll({ include: Searchs }).then(data =>
-      res.status(200).send(data)
-    )
+    Recruiter.findAndCountAll({
+      include: Searchs,
+      order: [["Id", "DESC"]],
+      limit: initialLimit,
+      offset: cut,
+    }).then(data => {
+      const response = getPagingData(data, page, initialLimit)
+      res.status(200).send(response)
+    })
   } catch (error) {
     console.log("ERROR: ", error)
   }
@@ -34,6 +49,7 @@ exports.getAll = (req, res) => {
 
 exports.getById = (req, res) => {
   const { id } = req.params
+  console.log("ID_BCK", id)
   try {
     Recruiter.findOne({ where: { id }, include: Searchs }).then(data =>
       res.status(200).send(data)

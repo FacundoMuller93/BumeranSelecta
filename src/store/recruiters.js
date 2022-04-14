@@ -3,7 +3,7 @@ import * as recruiterService from "../services/recruiterServices";
 
 const recruitersInitialState = {
   loading: false,
-  data: [],
+  data: {},
   singleRecruiter: {},
   error: "",
 };
@@ -38,7 +38,7 @@ const recruiterSlice = createSlice({
   initialState: recruitersInitialState,
   extraReducers: {
     [getAllRecruiters.pending]: (state, action) => {
-      state.loading = true;
+      // state.loading = true;
     },
     [getAllRecruiters.fulfilled]: (state, action) => {
       state.data = action.payload;
@@ -58,6 +58,7 @@ const recruiterSlice = createSlice({
     [getSingleRecruiter.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.error.message;
+      state.singleRecruiter = {}
     },
     [editRecruiter.pending]: (state, action) => {
       state.loading = true;

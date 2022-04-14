@@ -54,19 +54,16 @@ const Search = () => {
   const [selected, setSelected] = useState({});
   //
 
-
   //dispatch y selector
   const dispatch = useDispatch();
 
   const search = useSelector((state) => state.search.data);
   //
 
-
   //carga de todas las búsquedas
   useEffect(() => {
     dispatch(getAllSearch());
   }, []);
-
 
   //eliminar busqueda
   const handleDelete = (e, searchId) => {
@@ -79,13 +76,11 @@ const Search = () => {
     });
   };
 
-
   //traer todas las búsquedas al cargar esta sección
   const handleAll = async () => {
     await dispatch(getAllSearch());
   };
   //
-
 
   //handles para filtrar por estado
   const handleNew = async () => {
@@ -110,7 +105,6 @@ const Search = () => {
 
   //
 
-
   //filtrar por fechas
   const filterDate = async () => {
     await dispatch(
@@ -130,28 +124,30 @@ const Search = () => {
     //
 
   return (
-    <div className="container-fluid ps-4 pe-0 pe-lg-3 min-vh-100">
-      <div className="row my-5 ms-lg-5">
-        <div className="col-12 col-md-4 mx-md-auto col-lg-6">
-          <div className="row">
-            <div className="col-12 mb-4 ps-0 pe-0 text-center col-lg-4">
-              <div className={`fs-5 title mt-3`}>Lista de Busquedas</div>
-            </div>
-            <div
-              className={`${styles.filtersContainer} col-12 ms-5 ps-3 col-md-12 ms-md-4 ps-md-0 ms-lg-0 ps-lg-0 col-lg-4 px-lg-0`}
+    <div className={`container-fluid ${styles.container}`}>
+      <div className="row d-flex align-items-center">
+        <div className="col-12 justify-content-center text-center col-lg-3 d-flex justify-content-lg-end">
+          <div className="pt-5 mb-5 fs-4 title">Lista de Búsquedas</div>
+        </div>
+
+        <div className="col-12 pb-5 text-center col-lg-3 ps-lg-0 pb-lg-0">
+          <Link to="/addSearch">
+            <Button
+              className={`w-lg-25 mb-3 px-5  px-md-4  px-lg-5 pb-lg-1 mt-lg-2 mb-lg-3 ${styles.buttonDeleteRecruiter}`}
             >
-              <Link to="/addSearch">
-                <Button
-                  className={`w-lg-25 mb-3 px-5  px-md-4  px-lg-4 pb-lg-1 mb-lg-3 ${styles.addSearchBtn}`}
-                >
-                  Agregar Búsqueda
-                </Button>
-              </Link>{" "}
-            </div>
-            <div className="col-12 ms-5 ps-3  col-md-12 ms-md-4 ps-md-0  col-lg-2 mb-3 ms-lg-0">
+              Agregar Búsqueda
+            </Button>
+          </Link>{" "}
+        </div>
+      </div>
+
+      <div className="row d-flex justify-content-center align-items-center">
+        <div className="col-lg-6 d-flex justify-content-center">
+          <div className="row">
+            <div className="col-lg-6 text-center">
               <Dropdown>
                 <Dropdown.Toggle
-                  className={`w-lg-25 px-5 px-md-4 px-lg-4 ${styles.addSearchBtn}`}
+                  className={`w-lg-25 mb-3 px-5  px-md-4  px-lg-5 pb-lg-1 mb-lg-3 ${styles.addSearchBtn}`}
                   id="dropdown-basic"
                 >
                   Filtrar por Estado
@@ -203,92 +199,125 @@ const Search = () => {
                 </Dropdown.Menu>
               </Dropdown>
             </div>
-          </div>
-        </div>
 
-       
-
-        <div className="col-12 col-md-12 col-lg-6 mt-3 mt-lg-1">
-          <div className="row">
-
-           <div >
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic" className={`w-lg-25 px-5 px-md-4 px-lg-4 ${styles.addSearchBtn}`}>
-              Filtrar por País
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Argentina")}>Argentina</Dropdown.Item>
-              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Chile")}>Chile</Dropdown.Item>
-              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Colombia")}>Colombia</Dropdown.Item>
-              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Ecuador")}>Ecuador</Dropdown.Item>
-              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Colombia")}>Colombia</Dropdown.Item>
-              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "México")}>México</Dropdown.Item>
-              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Panamá")}>Panamá</Dropdown.Item>
-              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Perú")}>Perú</Dropdown.Item>
-              <Dropdown.Item onClick={(e) => handleFilterByCountry(e, "Uruguay")}>Uruguay</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-
-
-            <Form
-              className={`${styles.form} row px-0 d-flex justify-content-md-center ps-lg-4 justify-content-lg-start`}
-              onSubmit={handleSubmit}
-            >
-              <div className="col-3 mt-2 ps-5 col-md-1 px-md-0 text-center col-lg-1 title">
-                Inicio
-              </div>
-              <Form.Group
-                className="col-7 pb-3 col-md-3 ps-md-0 col-lg-3"
-                controlId="formGridCity"
-              >
-                <Form.Control
-                  className={
-                    start_date.value || validation
-                      ? "inputLogin rounded-pill"
-                      : "err rounded-pill"
-                  }
-                  {...start_date}
-                  type="date"
-                />
-              </Form.Group>
-              <div className="col-3 mt-2 ps-5 col-md-1 px-md-0 text-center col-lg-1 title">
-                Cierre
-              </div>
-              <Form.Group
-                className="col-7 col-md-3 ps-md-0 col-lg-3"
-                controlId="formGridCity"
-              >
-                <Form.Control
-                  className={
-                    end_date.value || validation
-                      ? "inputLogin rounded-pill"
-                      : "err rounded-pill"
-                  }
-                  {...end_date}
-                  type="date"
-                />
-              </Form.Group>
-
-              <div className="col-12 mt-3 ms-4 text-center col-lg-4 mt-lg-0 ms-lg-0 ps-lg-0 text-lg-start">
-                <Button
-                  className={`${styles.addSearchBtn} w-50 mt-3 mt-lg-0`}
-                  onClick={() => {
-                    filterDate();
-                  }}
+            <div className="col-lg-6 text-center">
+              <Dropdown>
+                <Dropdown.Toggle
+                  id="dropdown-basic"
+                  className={`w-lg-25 mb-3 px-5 px-md-4 px-lg-5 pb-lg-1 mb-lg-3 ${styles.addSearchBtn}`}
                 >
-                  Buscar
-                </Button>{" "}
-              </div>
-            </Form>
+                  Filtrar por País
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className={styles.carlAcutis}>
+                  <Dropdown.Item
+                    onClick={(e) => handleFilterByCountry(e, "Argentina")}
+                  >
+                    Argentina
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => handleFilterByCountry(e, "Chile")}
+                  >
+                    Chile
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => handleFilterByCountry(e, "Colombia")}
+                  >
+                    Colombia
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => handleFilterByCountry(e, "Ecuador")}
+                  >
+                    Ecuador
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => handleFilterByCountry(e, "Colombia")}
+                  >
+                    Colombia
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => handleFilterByCountry(e, "México")}
+                  >
+                    México
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => handleFilterByCountry(e, "Panamá")}
+                  >
+                    Panamá
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => handleFilterByCountry(e, "Perú")}
+                  >
+                    Perú
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={(e) => handleFilterByCountry(e, "Uruguay")}
+                  >
+                    Uruguay
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
           </div>
         </div>
+
+        <Form
+          className={`${styles.form} col-12 col-md-12 col-lg-6 mt-3 mt-lg-1`}
+          onSubmit={handleSubmit}
+        >
+          <div className="row">
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 title">
+              Inicio
+            </div>
+            <Form.Group
+              className="col-7 pb-3 col-md-4 ps-md-0 col-lg-3"
+              controlId="formGridCity"
+            >
+              <Form.Control
+                className={
+                  start_date.value || validation
+                    ? "inputLogin rounded-pill"
+                    : "err rounded-pill"
+                }
+                {...start_date}
+                type="date"
+              />
+            </Form.Group>
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center col-lg-1 title">
+              Cierre
+            </div>
+
+            <Form.Group
+              className="col-7 col-md-4 ps-md-0 col-lg-3"
+              controlId="formGridCity"
+            >
+              <Form.Control
+                className={
+                  end_date.value || validation
+                    ? "inputLogin rounded-pill"
+                    : "err rounded-pill"
+                }
+                {...end_date}
+                type="date"
+              />
+            </Form.Group>
+            <div className="col-12 mt-3 text-center pb-md-5 col-lg-4 mt-lg-0 ms-lg-0 ps-lg-0 pb-lg-0 text-lg-start">
+              <Button
+                className={`${styles.addSearchBtn} w-50 mt-3 mt-lg-0`}
+                onClick={() => {
+                  filterDate();
+                }}
+              >
+                Buscar
+              </Button>{" "}
+            </div>
+          </div>
+        </Form>
       </div>
 
       {/* Tabla */}
       <div className="container-fluid pt-lg-4 pe-0 pe-md-3">
-        <div className="row  text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
+        <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
           <div className="col-4 col-md-3 col-lg-1">
             <div className="row">
               <div className="col-1 col-md-1 col-lg-4">
@@ -321,7 +350,7 @@ const Search = () => {
         {search.map((search, i) => {
           return (
             <div
-              className={`row py-3  border border-1 title ${styles.hoverPointer}`}
+              className={`row py-3 border border-1 title ${styles.hoverPointer}`}
             >
               <div className="col-4 col-md-3 col-lg-1">
                 <div className="row">
@@ -368,7 +397,7 @@ const Search = () => {
                 <div className="row">
                   <div className="className col-3 col-lg-3 ps-0">
                     <Link to={`/rating/${search.id}`}>
-                      <i title="Cerrar búsqueda">
+                      <i>
                         <svg
                           width="24"
                           height="24"
@@ -380,7 +409,12 @@ const Search = () => {
                             fill-rule="evenodd"
                             clip-rule="evenodd"
                             d="M9.86329 18C9.58729 18 9.32329 17.886 9.13429 17.685L4.27129 12.506C3.89229 12.104 3.91329 11.471 4.31529 11.093C4.71829 10.715 5.35129 10.735 5.72829 11.137L9.85329 15.528L18.2613 6.32599C18.6353 5.91699 19.2673 5.88999 19.6753 6.26199C20.0823 6.63399 20.1103 7.26699 19.7383 7.67399L10.6013 17.674C10.4143 17.88 10.1483 17.998 9.87029 18H9.86329Z"
-                            fill={search.start_date ? "#00ff00" : "#222B45"}
+                            fill={
+                              search.state_search === "Cerrada" ||
+                              search.state_search === "Nueva"
+                                ? "#222B45"
+                                : "#00FF00"
+                            }
                           />
                         </svg>
                       </i>

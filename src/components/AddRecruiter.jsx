@@ -52,14 +52,16 @@ const AddRecruiter = () => {
   if (!name) return <div></div>;
 
   return (
-    <div className="container d-flex flex-column align-items-center">
-      <div className="row mt-lg-5 mb-5 fs-4 title d-flex justify-content-center">
+    <div
+      className={`container d-flex flex-column align-items-center ${styles.container}`}
+    >
+      <div className="row mt-5 fs-5 title d-flex justify-content-center">
         Agregar nuevo Reclutador
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="w-75 formLogin d-flex flex-column "
+        className="w-75 mt-5 formLogin d-flex flex-column "
       >
         <div className="row d-flex justify-content-center">
           <div className="col-12 col-lg-6">
@@ -136,7 +138,7 @@ const AddRecruiter = () => {
                 {...area_rec}
               >
                 <option selected disabled value="">
-                  Área
+                  Area
                 </option>
                 {arr.area.map((i) => (
                   <option>{i}</option>

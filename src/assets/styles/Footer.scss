@@ -39,19 +39,12 @@
 .arrowTop {
   position: fixed;
   background-color: #33333361;
-  left: 81.5rem;
-  bottom: 1rem;
+  right: 1%;
+  bottom: 1%;
   width: 2.5rem;
   height: 2.5rem;
   padding: 0.3rem;
 
-  @media (max-width: 768px) {
-    left: 44.5rem;
-  }
-
-  @media (max-width: 375px) {
-    left: 20.5rem;
-  }
   &:hover {
     background-color: #333333ea;
   }
