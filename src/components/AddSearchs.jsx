@@ -7,6 +7,7 @@ import Toast from "react-bootstrap/Toast";
 import { useDispatch } from "react-redux";
 import { getAllSearch, addSearch } from "../store/searchs";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import bumeranArriba from "../assets/img/bumeranArriba.png";
 import bumeranAbajo from "../assets/img/bumeranAbajo.png";
 
@@ -166,12 +167,23 @@ const AddSearchs = () => {
               </Form.Group>
             </Row>
 
-            <Button
-              className=" rounded-pill px-5 mt-3 buttonLogin"
-              type="submit reset"
-            >
-              Crear
-            </Button>
+            <div className="row mb-lg-5 pb-lg-4">
+              <div className="col-12 col-md-6 text-md-end  col-lg-6 text-lg-end">
+                <Link to="/searchs">
+                  <Button className="mt-4 w-lg-25 px-5 mt-lg-5 px-lg-5 buttonLogin">
+                    Volver
+                  </Button>{" "}
+                </Link>
+              </div>
+              <div className="col-12 text-center col-md-6 text-md-start col-lg-6 text-lg-start">
+                <button
+                  type="submit"
+                  className={`reset buttonsAddRecruiter mt-4 w-lg-25 px-5 mt-lg-5 px-lg-5 `}
+                >
+                  Crear
+                </button>
+              </div>
+            </div>
 
             <Row className="mt-4">
               <Col xs={6}>

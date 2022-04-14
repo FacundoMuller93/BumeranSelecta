@@ -26,8 +26,8 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center container-fluid">
-      <div className="row mb-5 pb-4">
+    <div className="d-flex justify-content-center container-fluid containerFooter">
+      <div className="row">
         <div className="col-6">
           <img
             className="mt-5 pt-5 ms-1 pe-5 d-none d-lg-block"
@@ -40,7 +40,7 @@ const LoginForm = () => {
       <div className="col-6">
         <Form
           onSubmit={handleSubmit}
-          className="text-center w-100 mt-lg-4 pt-5 ms-5 formLogin"
+          className="text-center w-100 mt-md-4 pt-md-5 ms-lg-5 formLogin"
         >
           <div className="pt-4 mb-5 fs-4 title">
             ¿Listo para encontrar el talento que estás buscando?​
@@ -67,7 +67,9 @@ const LoginForm = () => {
             className="mb-3"
             controlId="formBasicCheckbox"
           ></Form.Group>
-          <Link className="forgotPass" to="/forgotPass">Olvidé mi contraseña</Link>
+          <Link className="forgotPass" to="/forgotPass">
+            Olvidé mi contraseña
+          </Link>
           <Button type="submit" className="px-5 mt-3 buttonLogin">
             Enviar
           </Button>
