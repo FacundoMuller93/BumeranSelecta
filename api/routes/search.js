@@ -6,7 +6,7 @@ router.post('/add', searchControler.add);
 router.delete('/:id', searchControler.delete);
 router.get('/:id',searchControler.getId);
 router.put('/:id',searchControler.editSearch)
-router.get('/page/:page', searchControler.getAll);
+// router.get('/page/:page', searchControler.getAll);
 router.post('/filter_date',searchControler.filterDate)
 router.post('/assignment', searchControler.assignment)
 router.put('/end-search/:id',searchControler.endSearch)

@@ -1,13 +1,13 @@
 import axios from "axios"
 
-export const allSearchServices = async ({ page }) => {
-  try {
-    const allSearch = await axios.get(`http://localhost:3001/api/search/page/${page}`)
-    return allSearch.data
-  } catch (error) {
-    throw error
-  }
-}
+// export const allSearchServices = async ({ page }) => {
+//   try {
+//     const allSearch = await axios.get(`http://localhost:3001/api/search/page/${page}`)
+//     return allSearch.data
+//   } catch (error) {
+//     throw error
+//   }
+// }
 
 export const deleteSearchServices = async id => {
   try {
@@ -93,7 +93,7 @@ export const editSearchServices = async ({
   }
 }
 
-export const newSearchsServices = async ({page, state}) => {
+export const getSearchsByStateService = async ({page, state}) => {
   try {
     const pendingSearchs = await axios.get(
       `http://localhost:3001/api/search/state/${page}&${state}`
@@ -104,49 +104,49 @@ export const newSearchsServices = async ({page, state}) => {
   }
 }
 
-export const startedSearchsServices = async () => {
-  try {
-    const activeSearchs = await axios.get(
-      "http://localhost:3001/api/search/state/started"
-    )
-    return activeSearchs.data
-  } catch (error) {
-    throw error
-  }
-}
+// export const startedSearchsServices = async () => {
+//   try {
+//     const activeSearchs = await axios.get(
+//       "http://localhost:3001/api/search/state/started"
+//     )
+//     return activeSearchs.data
+//   } catch (error) {
+//     throw error
+//   }
+// }
 
-export const presentedSearchsServices = async () => {
-  try {
-    const suspendedSearchs = await axios.get(
-      "http://localhost:3001/api/search/state/presented"
-    )
-    return suspendedSearchs.data
-  } catch (error) {
-    throw error
-  }
-}
+// export const presentedSearchsServices = async () => {
+//   try {
+//     const suspendedSearchs = await axios.get(
+//       "http://localhost:3001/api/search/state/presented"
+//     )
+//     return suspendedSearchs.data
+//   } catch (error) {
+//     throw error
+//   }
+// }
 
-export const revisionSearchsServices = async () => {
-  try {
-    const suspendedSearchs = await axios.get(
-      "http://localhost:3001/api/search/state/revision"
-    )
-    return suspendedSearchs.data
-  } catch (error) {
-    throw error
-  }
-}
+// export const revisionSearchsServices = async () => {
+//   try {
+//     const suspendedSearchs = await axios.get(
+//       "http://localhost:3001/api/search/state/revision"
+//     )
+//     return suspendedSearchs.data
+//   } catch (error) {
+//     throw error
+//   }
+// }
 
-export const closedSearchsServices = async () => {
-  try {
-    const suspendedSearchs = await axios.get(
-      "http://localhost:3001/api/search/state/closed"
-    )
-    return suspendedSearchs.data
-  } catch (error) {
-    throw error
-  }
-}
+// export const closedSearchsServices = async () => {
+//   try {
+//     const suspendedSearchs = await axios.get(
+//       "http://localhost:3001/api/search/state/closed"
+//     )
+//     return suspendedSearchs.data
+//   } catch (error) {
+//     throw error
+//   }
+// }
 
 export const filteredByDateSearchsServices = async ({
   filter_start,

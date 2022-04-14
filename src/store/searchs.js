@@ -8,7 +8,7 @@ const searchsInitialState = {
     error: ""
 }
 
-export const getAllSearch = createAsyncThunk("GET_ALL_SEARCH", searchService.allSearchServices)
+// export const getAllSearch = createAsyncThunk("GET_ALL_SEARCH", searchService.allSearchServices)
 
 export const addSearch = createAsyncThunk("ADD_SEARCH", searchService.addSearchServices)
 
@@ -22,15 +22,15 @@ export const endSearch = createAsyncThunk("END_SEARCH", searchService.endSearchS
 
 export const deleteRecruiterSearch = createAsyncThunk("END_SEARCH", searchService.deleteRecruiterSearchServices);
 
-export const getNewSearchs = createAsyncThunk("GET_NEW", searchService.newSearchsServices);
+export const getSearchsByState = createAsyncThunk("GET_NEW", searchService.getSearchsByStateService);
 
-export const getStartedSearchs = createAsyncThunk("GET_STARTED", searchService.startedSearchsServices);
+// export const getStartedSearchs = createAsyncThunk("GET_STARTED", searchService.startedSearchsServices);
 
-export const getPresentedSearchs = createAsyncThunk("GET_PRESENTED", searchService.presentedSearchsServices);
+// export const getPresentedSearchs = createAsyncThunk("GET_PRESENTED", searchService.presentedSearchsServices);
 
-export const getRevisionSearchs = createAsyncThunk("GET_REVISION", searchService.revisionSearchsServices);
+// export const getRevisionSearchs = createAsyncThunk("GET_REVISION", searchService.revisionSearchsServices);
 
-export const getClosedSearchs = createAsyncThunk("GET_CLOSED", searchService.closedSearchsServices);
+// export const getClosedSearchs = createAsyncThunk("GET_CLOSED", searchService.closedSearchsServices);
 
 export const getFilteredByDate = createAsyncThunk("GET_DATEFILTERED", searchService.filteredByDateSearchsServices);
 
@@ -42,17 +42,17 @@ const searchSlice = createSlice({
     name: "search",
     initialState: searchsInitialState, 
     extraReducers: {
-        [getAllSearch.pending]: (state, action) => {
-            // state.loading = true
-        },
-        [getAllSearch.fulfilled]: (state, action) => {
-            state.data = action.payload
-            state.loading = false
-        },
-        [getAllSearch.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.error.message
-        },
+        // [getAllSearch.pending]: (state, action) => {
+        //     // state.loading = true
+        // },
+        // [getAllSearch.fulfilled]: (state, action) => {
+        //     state.data = action.payload
+        //     state.loading = false
+        // },
+        // [getAllSearch.rejected]: (state, action) => {
+        //     state.loading = false
+        //     state.error = action.error.message
+        // },
         [deleteSearch.pending]: (state, action) => {
             state.loading = true
         },
@@ -88,61 +88,61 @@ const searchSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
         },
-        [getNewSearchs.pending]: (state, action) => {
+        [getSearchsByState.pending]: (state, action) => {
             state.loading = true
         },
-        [getNewSearchs.fulfilled]: (state, action) => {
+        [getSearchsByState.fulfilled]: (state, action) => {
             state.data = action.payload
             state.loading = false
         },
-        [getNewSearchs.rejected]: (state, action) => {
+        [getSearchsByState.rejected]: (state, action) => {
             state.loading = false
             state.error = action.error.message
         },
-        [getStartedSearchs.pending]: (state, action) => {
-            state.loading = true
-        },
-        [getStartedSearchs.fulfilled]: (state, action) => {
-            state.data = action.payload
-            state.loading = false
-        },
-        [getStartedSearchs.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.error.message
-        },
-        [getPresentedSearchs.pending]: (state, action) => {
-            state.loading = true
-        },
-        [getPresentedSearchs.fulfilled]: (state, action) => {
-            state.data = action.payload
-            state.loading = false
-        },
-        [getPresentedSearchs.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.error.message
-        },
-        [getRevisionSearchs.pending]: (state, action) => {
-            state.loading = true
-        },
-        [getRevisionSearchs.fulfilled]: (state, action) => {
-            state.data = action.payload
-            state.loading = false
-        },
-        [getRevisionSearchs.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.error.message
-        },
-        [getClosedSearchs.pending]: (state, action) => {
-            state.loading = true
-        },
-        [getClosedSearchs.fulfilled]: (state, action) => {
-            state.data = action.payload
-            state.loading = false
-        },
-        [getClosedSearchs.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.error.message
-        },
+        // [getStartedSearchs.pending]: (state, action) => {
+        //     state.loading = true
+        // },
+        // [getStartedSearchs.fulfilled]: (state, action) => {
+        //     state.data = action.payload
+        //     state.loading = false
+        // },
+        // [getStartedSearchs.rejected]: (state, action) => {
+        //     state.loading = false
+        //     state.error = action.error.message
+        // },
+        // [getPresentedSearchs.pending]: (state, action) => {
+        //     state.loading = true
+        // },
+        // [getPresentedSearchs.fulfilled]: (state, action) => {
+        //     state.data = action.payload
+        //     state.loading = false
+        // },
+        // [getPresentedSearchs.rejected]: (state, action) => {
+        //     state.loading = false
+        //     state.error = action.error.message
+        // },
+        // [getRevisionSearchs.pending]: (state, action) => {
+        //     state.loading = true
+        // },
+        // [getRevisionSearchs.fulfilled]: (state, action) => {
+        //     state.data = action.payload
+        //     state.loading = false
+        // },
+        // [getRevisionSearchs.rejected]: (state, action) => {
+        //     state.loading = false
+        //     state.error = action.error.message
+        // },
+        // [getClosedSearchs.pending]: (state, action) => {
+        //     state.loading = true
+        // },
+        // [getClosedSearchs.fulfilled]: (state, action) => {
+        //     state.data = action.payload
+        //     state.loading = false
+        // },
+        // [getClosedSearchs.rejected]: (state, action) => {
+        //     state.loading = false
+        //     state.error = action.error.message
+        // },
         [getFilteredByDate.pending]: (state, action) => {
             state.loading = true
         },

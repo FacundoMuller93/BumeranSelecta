@@ -24,7 +24,7 @@ exports.add = (req, res) => {
 
 exports.getAll = (req, res) => {
   const { page } = req.params
-  const initialLimit = 25
+  const initialLimit = 20
   const cut = page >= 2 ? initialLimit * page - initialLimit : 0
   const getPagingData = (recruiter, page, limit) => {
     const { count: totalItems, rows: filas } = recruiter;
