@@ -123,17 +123,10 @@ const Search = () => {
   //
 
   //filtro por país
-  // const [country, setCountry] = useState("")
-
-  //   useEffect(() => {
-  //     dispatch(getFilteredByCountry(country))
-  //   }, [country])
-
   const handleFilterByCountry = (e, country) => {
     e.preventDefault();
     dispatch(getFilteredByCountry(country))
   }
-  
     //
 
   return (
