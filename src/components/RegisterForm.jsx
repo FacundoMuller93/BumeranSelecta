@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { sendRegisterRequest } from "../store/user";
 import { alertNewUser } from "../utils/alerts";
+import "../assets/styles/RegisterForm.scss";
 
 const RegisterForm = () => {
   const firstName = useInput();
@@ -34,8 +35,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="container mb-5 pb-5 d-flex flex-column align-items-center">
-      <div className="row mt-lg-3 mb-5 pb-5 fs-4 title d-flex justify-content-center">
+    <div className="container d-flex flex-column align-items-center footerContainer">
+      <div className="row mt-3 mt-lg-3 mb-lg-4 pb-5 fs-4 title d-flex justify-content-center">
         Crear una Cuenta
       </div>
 

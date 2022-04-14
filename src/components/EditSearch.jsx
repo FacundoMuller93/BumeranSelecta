@@ -93,16 +93,16 @@ const EditSearch = () => {
           start_date: start_date.value,
         })
       );
-      dispatch(getAllSearch());
+      // dispatch(getAllSearch());
       navigate("/searchs");
     }
   };
 
   return (
-    <div className="containerSearchEdit ">
+    <div className={`containerSearchEdit ${styles.container}`}>
       <div className="containerForm mt-2">
         <div className=" mb-0 fs-4 mx-5 title d-flex justify-content-center">
-          Editar de Busqueda
+          Editar Búsqueda
         </div>
         <Form
           onSubmit={handleSubmit}
@@ -131,7 +131,7 @@ const EditSearch = () => {
             </Form.Group>
 
             <Form.Group className="col-md-4 top" controlId="formGridState">
-              <Form.Label>Área</Form.Label>
+              <Form.Label>Area</Form.Label>
               <Form.Select
                 className={
                   area_ser.value || validation
@@ -141,7 +141,7 @@ const EditSearch = () => {
                 {...area_ser}
               >
                 <option selected disabled value="">
-                  Área
+                  Area
                 </option>
                 {arr.area.map((i) => (
                   <option>{i}</option>
@@ -150,7 +150,7 @@ const EditSearch = () => {
             </Form.Group>
 
             <Form.Group className="col-md-4" controlId="formGridAddress2">
-              <Form.Label>Posición</Form.Label>
+              <Form.Label>Posicion</Form.Label>
               <Form.Control
                 className={
                   position.value || validation
@@ -165,7 +165,7 @@ const EditSearch = () => {
 
           <Row className="mb-3">
             <Form.Group className="col-md-4" controlId="formGridAddress1">
-              <Form.Label>Descripción</Form.Label>
+              <Form.Label>Descripcìon</Form.Label>
               <Form.Control
                 className={
                   description_ser.value || validation
@@ -243,7 +243,7 @@ const EditSearch = () => {
               />
             </Form.Group>
             <Form.Group className="col-md-4" controlId="formGridCity">
-              <Form.Label>Inicio de búsqueda</Form.Label>
+              <Form.Label>Inicio de busqueda</Form.Label>
               <Form.Control
                 className={
                   start_date.value || validation
@@ -256,7 +256,7 @@ const EditSearch = () => {
             </Form.Group>
           </Row>
 
-          <div>
+          <div className="buttonsEditSearch">
             <Link to="/searchs">
               <Button className="mt-4 w-lg-25 px-5 px-lg-5 buttonLogin">
                 Volver
@@ -264,7 +264,7 @@ const EditSearch = () => {
             </Link>
 
             <Button
-              className="mt-4 w-lg-25 px-5 px-lg-5 buttonLogin"
+              className="mt-4 w-lg-25 px-5 px-lg-5 buttonsAddRecruiter"
               type="submit reset"
             >
               Cargar
@@ -272,6 +272,7 @@ const EditSearch = () => {
           </div>
         </Form>
       </div>
+
       <div className="container-fluid px-5 containerTable">
         <div className="row my-3">
           <div className={`${styles.titleContainer} pb-3`}>
@@ -283,12 +284,10 @@ const EditSearch = () => {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col" width="50">
-                    #
-                  </th>
+                  <th scope="col">#</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Apellido</th>
-                  <th scope="col">Áreas</th>
+                  <th scope="col">Areas</th>
                   <th scope="col">Valoración</th>
                   <th scope="col">Selección</th>
                 </tr>

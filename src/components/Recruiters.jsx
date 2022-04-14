@@ -1,56 +1,56 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
-import { Button, Modal } from "react-bootstrap"
-import { getAllRecruiters, deleteRecruiter } from "../store/recruiters"
-import styles from "../assets/styles/Recruiters.module.scss"
-import Progress from "../commons/Progress"
-import { alertDeleteRecruiter } from "../utils/alerts"
-import PaginationComp from "../commons/Pagination"
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Button, Modal } from "react-bootstrap";
+import { getAllRecruiters, deleteRecruiter } from "../store/recruiters";
+import styles from "../assets/styles/Recruiters.module.scss";
+import Progress from "../commons/Progress";
+import { alertDeleteRecruiter } from "../utils/alerts";
+import PaginationComp from "../commons/Pagination";
 
 const Recruiters = () => {
-  const dispatch = useDispatch()
-  const page = useSelector(state => state.page)
-  const recruiter = useSelector(state => state.recruiter.data)
-  
-  const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const [selected, setSelected] = useState({})
-  
-  const handleShow = recruiter => {
-    setSelected(recruiter)
-    setShow(true)
-  }
-  
+  const dispatch = useDispatch();
+  const page = useSelector((state) => state.page);
+  const recruiter = useSelector((state) => state.recruiter.data);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const [selected, setSelected] = useState({});
+
+  const handleShow = (recruiter) => {
+    setSelected(recruiter);
+    setShow(true);
+  };
+
   const handleDelete = (e, userId) => {
-    e.preventDefault()
+    e.preventDefault();
     alertDeleteRecruiter({
       dispatch,
       deleteRecruiter,
       userId,
       getAllRecruiters,
-      page: page
-    })
-  }
-  
-  useEffect(() => {
-    dispatch(getAllRecruiters({page: page}))
-  }, [page])
+      page: page,
+    });
+  };
 
-  if (!recruiter.filas) return <h1>No Data</h1>
+  useEffect(() => {
+    dispatch(getAllRecruiters({ page: page }));
+  }, [page]);
+
+  if (!recruiter.filas) return <h1>No Data</h1>;
 
   return (
     <>
-    <div className="container-fluid pe-lg-3">
-      <div className="row d-flex align-items-center">
-        <div className="col-12 text-center col-lg-3">
-          <div className="pt-5 mb-5 fs-4 title">​Lista de Reclutadores</div>
-        </div>
+      <div className={`container-fluid pe-lg-3 ${styles.container}`}>
+        <div className="row d-flex align-items-center">
+          <div className="col-12 justify-content-center text-center col-lg-3 d-flex justify-content-lg-end">
+            <div className="pt-5 mb-5 fs-4 title">Lista de Reclutadores</div>
+          </div>
 
-          <div className="col-12 pb-5 text-center col-lg-2 ps-lg-0 pb-lg-0">
-            <Link to="/addRecruiter">
+          <div className="col-12 pb-5 text-end col-lg-8 ps-lg-0 pb-lg-0">
+            <Link to="/AddRecruiter">
               <Button
-                className={`${styles.buttonsAddRecruiter} w-lg-25  px-5 px-lg-4`}
+                className={`w-lg-25 mb-3 px-5  px-md-4  px-lg-5 pb-lg-1 mt-lg-2 mb-lg-3 ${styles.buttonDeleteRecruiter}`}
               >
                 Agregar Reclutador
               </Button>
@@ -58,15 +58,15 @@ const Recruiters = () => {
           </div>
         </div>
 
-      {/* Tabla */}
-      <div className="container-fluid pt-lg-4  pe-md-3">
-        <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
-          <div className="col-2 col-md-1 col-lg-1 text-start">
-            <strong>#</strong>
-          </div>
-          <div className="col-6 col-md-3 col-lg-2 text-start">
-            <strong>Nombre y Apellido</strong>
-          </div>
+        {/* Tabla */}
+        <div className="container-fluid pt-lg-4  pe-md-3">
+          <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
+            <div className="col-2 col-md-1 col-lg-1 text-start">
+              <strong>#</strong>
+            </div>
+            <div className="col-6 col-md-3 col-lg-2 text-start">
+              <strong>Nombre y Apellido</strong>
+            </div>
 
             <div className="col-4 col-md-2 col-lg-2 text-lg-start">
               <strong>País</strong>
@@ -79,15 +79,15 @@ const Recruiters = () => {
             </div>
           </div>
 
-        {recruiter.filas.map((recruiter, i) => {
-          return (
-            <div className={`row py-3 pe-1 border border-1 title`}>
-              <div className="col-2 pb-3 col-md-1 col-lg-1 pb-lg-0">
-                {i + 1}
-              </div>
-              <div className="col-6 pb-3 col-md-3 col-lg-2 pb-lg-0 text-lg-start">
-                {`${recruiter.name}`} {`${recruiter.surname}`}
-              </div>
+          {recruiter.filas.map((recruiter, i) => {
+            return (
+              <div className={`row py-3 pe-1 border border-1 title`}>
+                <div className="col-2 pb-3 col-md-1 col-lg-1 pb-lg-0">
+                  {i + 1}
+                </div>
+                <div className="col-6 pb-3 col-md-3 col-lg-2 pb-lg-0 text-lg-start">
+                  {`${recruiter.name}`} {`${recruiter.surname}`}
+                </div>
 
                 <div className="col-4 col-md-2 col-lg-2 ps-lg-2">
                   {recruiter.country}
@@ -100,6 +100,7 @@ const Recruiters = () => {
                 </div>
                 <div className="col-4 d-lg-none"></div>
                 <div className="col-4 d-lg-none"></div>
+
                 <div className="col-4 col-md-3 ms-md-5 ps-md-5 pt-md-3 col-lg-1 pt-lg-0 ms-lg-0 ps-lg-0">
                   <div className="row justify-content-end">
                     <div className="className col-3 col-lg-4">
@@ -145,11 +146,11 @@ const Recruiters = () => {
                       </Link>
                     </div>
 
-                  <div className="col-3 col-lg-4">
-                    <i
-                      onClick={(e) => handleDelete(e, recruiter.id)}
-                      className={styles.pointerTrash}
-                      title="Eliminar reclutador"
+                    <div className="col-3 col-lg-4">
+                      <i
+                        onClick={(e) => handleDelete(e, recruiter.id)}
+                        className={styles.pointerTrash}
+                        title="Eliminar reclutador"
                       >
                         <svg
                           width="24"
@@ -170,7 +171,7 @@ const Recruiters = () => {
                   </div>
                 </div>
               </div>
-            )
+            );
           })}
           {
             <Modal show={show} size="lg" onHide={handleClose}>
@@ -201,7 +202,7 @@ const Recruiters = () => {
       </div>
       <PaginationComp pagesTotal={recruiter.totalPages} />
     </>
-  )
-}
+  );
+};
 
-export default Recruiters
+export default Recruiters;
