@@ -52,7 +52,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <div className="mb-5 pb-5 d-flex justify-content-center container-fluid">
+      <div className="d-flex justify-content-center container-fluid footerContainer">
         <img
           className="mt-5 pt-5 ms-1 pe-5 d-none d-lg-block"
           src="https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/contactos.png"
@@ -61,7 +61,7 @@ const ForgotPassword = () => {
         {!user.id ? (
           <Form
             onSubmit={handleEmailSubmit}
-            className="text-center mt-5 pt-5 ms-5 w-50 formLogin"
+            className="text-center mt-md-5 pt-md-5 ms-lg-5 w-lg-50 formLogin"
           >
             <div className="fs-5 title mt-5">Olvidé mi Contraseña</div>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -73,10 +73,7 @@ const ForgotPassword = () => {
               />
             </Form.Group>
 
-            <Form.Group
-              className="mb-3"
-              controlId="formBasicCheckbox"
-            ></Form.Group>
+            <Form.Group controlId="formBasicCheckbox"></Form.Group>
             <Button
               type="submit"
               className=" rounded-pill px-5 mt-3 buttonLogin"
@@ -100,10 +97,6 @@ const ForgotPassword = () => {
               />
             </Form.Group>
 
-            <Form.Group
-              className="mb-3"
-              controlId="formBasicCheckbox"
-            ></Form.Group>
             <Button
               type="submit"
               className=" rounded-pill px-5 mt-3 buttonLogin"

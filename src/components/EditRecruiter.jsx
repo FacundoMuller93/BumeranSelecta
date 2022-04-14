@@ -83,8 +83,10 @@ const EditRecruiter = () => {
   if (!recruiterInfo) return <div></div>;
 
   return (
-    <div className="container d-flex flex-column align-items-center">
-      <div className="row mt-lg-3 mb-3 fs-4 title d-flex justify-content-center">
+    <div
+      className={`container d-flex flex-column align-items-center ${styles.container}`}
+    >
+      <div className="row mt-3 mb-3 fs-4 title d-flex justify-content-center">
         Editar Reclutador
       </div>
 
@@ -166,7 +168,7 @@ const EditRecruiter = () => {
         </div>
 
         <div className="row d-flex justify-content-center">
-          <div className="col-lg-12">
+          <div className="col-lg-6">
             <Form.Group
               className="w-100 ps-lg-1 pb-3"
               controlId="formBasicEmail"
@@ -210,7 +212,7 @@ const EditRecruiter = () => {
           </Form.Group>
         </div> */}
 
-        <div className="row mb-5">
+        <div className="row">
           <div className="col-6 text-end">
             <Link to="/recruiters">
               <Button className="mt-5 w-lg-25 px-5 px-lg-5 buttonLogin">
