@@ -397,7 +397,7 @@ const Search = () => {
                 <div className="row">
                   <div className="className col-3 col-lg-3 ps-0">
                     <Link to={`/rating/${search.id}`}>
-                      <i>
+                      <i title="Cerrar búsqueda">
                         <svg
                           width="24"
                           height="24"
