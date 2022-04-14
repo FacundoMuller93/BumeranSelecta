@@ -148,24 +148,24 @@ const Search = () => {
 
   return (
     <>
-      <div className={`container-fluid ${styles.container}`}>
-        <div className="row d-flex align-items-center">
-          <div className="col-12 justify-content-center text-center col-lg-3 d-flex justify-content-lg-end">
-            <div className="pt-5 mb-5 fs-4 title">Lista de Búsquedas</div>
-          </div>
-
-          <div className="col-12 pb-5 text-center col-lg-3 ps-lg-0 pb-lg-0">
-            <Link to="/addSearch">
-              <Button
-                className={`w-lg-25 mb-3 px-5  px-md-4  px-lg-5 pb-lg-1 mt-lg-2 mb-lg-3 ${styles.buttonDeleteRecruiter}`}
-              >
-                Agregar Búsqueda
-              </Button>
-            </Link>{" "}
-          </div>
+    <div className={`container-fluid ${styles.container}`}>
+      <div className="row d-flex align-items-center  mb-lg-2">
+        <div className="col-12 justify-content-center text-center col-lg-3 d-flex justify-content-lg-end">
+          <div className="pt-5 mb-5 fs-4 title">Lista de Búsquedas</div>
         </div>
 
-        <div className="row d-flex justify-content-center align-items-center">
+        <div className="col-12 pb-5 text-end col-lg-8 ps-lg-0 pb-lg-0 pe-lg-0">
+          <Link to="/addSearch">
+            <Button
+              className={`w-lg-25 mb-3 px-5  px-md-4  px-lg-5 pb-lg-1 mt-lg-2 mb-lg-3 ${styles.buttonDeleteRecruiter}`}
+            >
+              Agregar Búsqueda
+            </Button>
+          </Link>{" "}
+        </div>
+        </div>
+
+        <div className="row d-flex justify-content-center align-items-center pb-lg-3">
           <div className="col-lg-6 d-flex justify-content-center">
             <div className="row">
               <div className="col-lg-6 text-center">
@@ -285,31 +285,31 @@ const Search = () => {
             </div>
           </div>
 
-          <Form
-            className={`${styles.form} col-12 col-md-12 col-lg-6 mt-3 mt-lg-1`}
-            onSubmit={handleSubmit}
-          >
-            <div className="row">
-              <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 title">
-                Inicio
-              </div>
-              <Form.Group
-                className="col-7 pb-3 col-md-4 ps-md-0 col-lg-3"
-                controlId="formGridCity"
-              >
-                <Form.Control
-                  className={
-                    start_date.value || validation
-                      ? "inputLogin rounded-pill"
-                      : "err rounded-pill"
-                  }
-                  {...start_date}
-                  type="date"
-                />
-              </Form.Group>
-              <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center col-lg-1 title">
-                Cierre
-              </div>
+        <Form
+          className={`${styles.form} col-12 col-md-12 col-lg-6 mt-3 mt-lg-1`}
+          onSubmit={handleSubmit}
+        >
+          <div className="row">
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 pe-lg-1 title">
+              Inicio
+            </div>
+            <Form.Group
+              className="col-7 pb-3 col-md-4 ps-md-0 col-lg-3"
+              controlId="formGridCity"
+            >
+              <Form.Control
+                className={
+                  start_date.value || validation
+                    ? "inputLogin rounded-pill"
+                    : "err rounded-pill"
+                }
+                {...start_date}
+                type="date"
+              />
+            </Form.Group>
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center col-lg-1 pe-lg-1 title">
+              Cierre
+            </div>
 
               <Form.Group
                 className="col-7 col-md-4 ps-md-0 col-lg-3"
