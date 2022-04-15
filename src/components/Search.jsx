@@ -98,7 +98,7 @@ const Search = () => {
     setCountry(cntry)
   }
 
-  if (!search.filas) return <h1>No Data</h1>
+  if (!search.filas) return <h1 className={styles.container}>No Data</h1>
 
   return (
     <>
@@ -249,7 +249,7 @@ const Search = () => {
           onSubmit={handleSubmit}
         >
           <div className="row">
-            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 title">
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 pe-lg-1 title">
               Inicio
             </div>
             <Form.Group
@@ -266,7 +266,7 @@ const Search = () => {
                 type="date"
               />
             </Form.Group>
-            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center col-lg-1 title">
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center pe-lg-1 col-lg-1 title">
               Cierre
             </div>
 

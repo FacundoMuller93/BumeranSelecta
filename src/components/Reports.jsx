@@ -21,58 +21,69 @@ const Reports = () => {
 
   return (
     <div className={`container`}>
-      <div>Sección Reportes</div>
+      <div className="row d-flex align-items-center">
+        <div className="col-12 justify-content-center text-center col-lg-1 d-flex justify-content-lg-end">
+          <div className="pt-5 mb-5 fs-4 title">Reportes</div>
+        </div>
 
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Seleccionar Área
-        </Dropdown.Toggle>
+        <div className="col-12 pb-5 text-end col-lg-11 ps-lg-0 pb-lg-0">
+          <Dropdown>
+            <Dropdown.Toggle
+              className={`w-lg-25 mb-3 px-5  px-md-4  px-lg-5 pb-lg-1 mt-lg-2 mb-lg-3 buttonDeleteRecruiter`}
+              id="dropdown-basic"
+            >
+              Seleccionar Área
+            </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          <Dropdown.Item onClick={() => setAreaValue("Administración")}>
-            Administración
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Comercial")}>
-            Comercial
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Producción")}>
-            Producción
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Oficios")}>
-            Oficios
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Tecnología")}>
-            Tecnología
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Logística")}>
-            Logística
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Gastronomía")}>
-            Gastronomía
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Recursos Humanos")}>
-            Recursos Humanos
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Salud")}>
-            Salud
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Ingenierías")}>
-            Ingenierías
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Atención al Cliente")}>
-            Atención al Cliente
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Marketing")}>
-            Marketing
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Construcción")}>
-            Construcción
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setAreaValue("Comercio Exterior")}>
-            Comercio Exterior
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+            <Dropdown.Menu className="w-25">
+              <Dropdown.Item onClick={() => setAreaValue("Administración")}>
+                Administración
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Comercial")}>
+                Comercial
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Producción")}>
+                Producción
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Oficios")}>
+                Oficios
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Tecnología")}>
+                Tecnología
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Logística")}>
+                Logística
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Gastronomía")}>
+                Gastronomía
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Recursos Humanos")}>
+                Recursos Humanos
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Salud")}>
+                Salud
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Ingenierías")}>
+                Ingenierías
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => setAreaValue("Atención al Cliente")}
+              >
+                Atención al Cliente
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Marketing")}>
+                Marketing
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Construcción")}>
+                Construcción
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setAreaValue("Comercio Exterior")}>
+                Comercio Exterior
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+      </div>
     </div>
   );
 };
