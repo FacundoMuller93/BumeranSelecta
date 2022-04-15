@@ -11,10 +11,7 @@ router.post('/assignment', searchControler.assignment)
 router.put('/end-search/:id',searchControler.endSearch)
 router.get('/delete-rec/:id', searchControler.unassign)
 
-//filtrar por estado
-router.get('/state/:page&:state', searchControler.byState)
-
-//filtrar por país
-router.post('/filter_country', searchControler.filterCountry)
+//filtrar por estado y país
+router.post('/list', searchControler.getList)
 
 module.exports = router;

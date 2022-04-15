@@ -5,13 +5,12 @@ import useInput from "../hooks/useInput"
 import { useSelector, useDispatch } from "react-redux"
 import {
   deleteSearch,
-  getSearchsByState,
+  getSearchsList,
   getFilteredByDate,
 } from "../store/searchs"
 import { pageChange } from "../store/page"
 import styles from "../assets/styles/Recruiters.module.scss"
 import { alertDeleteSearch } from "../utils/alerts"
-import { getFilteredByCountry } from "../store/searchs"
 import PaginationComp from "../commons/Pagination"
 
 const Search = () => {
@@ -20,6 +19,7 @@ const Search = () => {
   const start_date = useInput()
   const end_date = useInput()
   const [estado, setEstado] = useState("Todas")
+  const [country, setCountry] = useState("Todos")
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -51,7 +51,6 @@ const Search = () => {
   }
 
   const [selected, setSelected] = useState({})
-  //
 
   //dispatch y selector
   const dispatch = useDispatch()
@@ -59,8 +58,8 @@ const Search = () => {
 
   //carga de todas las búsquedas
   useEffect(() => {
-    dispatch(getSearchsByState({ page: page, state: estado }))
-  }, [page, estado])
+    dispatch(getSearchsList({ page: page, state: estado, country: country }))
+  }, [page, estado, country])
 
   //eliminar busqueda
   const handleDelete = (e, searchId) => {
@@ -70,9 +69,10 @@ const Search = () => {
       deleteSearch,
       searchId,
       pageChange,
-      getSearchsByState,
+      getSearchsList,
       page,
-      estado
+      estado,
+      country
     })
   }
 
@@ -92,16 +92,10 @@ const Search = () => {
     )
   }
 
-  //filtro por país
-  // const [country, setCountry] = useState("")
-
-  //   useEffect(() => {
-  //     dispatch(getFilteredByCountry(country))
-  //   }, [country])
-
-  const handleFilterByCountry = (e, country) => {
+  const handleFilterByCountry = (e, cntry) => {
     e.preventDefault()
-    dispatch(getFilteredByCountry(country))
+    dispatch(pageChange({ page: 1 }))
+    setCountry(cntry)
   }
 
   if (!search.filas) return <h1>No Data</h1>
@@ -159,7 +153,7 @@ const Search = () => {
                     >
                       Iniciadas
                     </Dropdown.Item>
-                    <Dropdown.Item
+                    {/* <Dropdown.Item
                       onClick={() => handleEstado("Presentada")}
                       href="#/action-3"
                       className="presentada title"
@@ -172,7 +166,7 @@ const Search = () => {
                       className="revision title"
                     >
                       En Revisión
-                    </Dropdown.Item>
+                    </Dropdown.Item> */}
                     <Dropdown.Item
                       onClick={() => handleEstado("Cerrada")}
                       href="#/action-4"
@@ -194,6 +188,11 @@ const Search = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu className={styles.carlAcutis}>
+                  <Dropdown.Item
+                      onClick={e => handleFilterByCountry(e, "Todos")}
+                    >
+                      Todos
+                    </Dropdown.Item>
                     <Dropdown.Item
                       onClick={e => handleFilterByCountry(e, "Argentina")}
                     >

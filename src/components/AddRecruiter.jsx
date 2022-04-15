@@ -6,9 +6,9 @@ import styles from "../assets/styles/AddRecruiter.module.scss";
 import arr from "../hooks/array";
 import { addNewRecruiter } from "../store/recruiters";
 import { useDispatch } from "react-redux";
+import { pageChange } from "../store/page";
 
 const AddRecruiter = () => {
-  //axios para crear producto
   const name = useInput();
   const surname = useInput();
   const country = useInput();
@@ -43,6 +43,8 @@ const AddRecruiter = () => {
           country: country.value,
           description_rec: description_rec.value,
           area_rec: area_rec.value,
+          dispatch,
+          pageChange,
           navigate,
         })
       );
