@@ -84,10 +84,14 @@ export const editSearchServices = async ({
   }
 }
 
-export const getSearchsByStateService = async ({page, state}) => {
+export const getSearchsListService = async ({page, state, country}) => {
   try {
-    const pendingSearchs = await axios.get(
-      `http://localhost:3001/api/search/state/${page}&${state}`
+    const pendingSearchs = await axios.post(
+      `http://localhost:3001/api/search/list`, {
+        page: page,
+        state: state,
+        country: country
+      }
     )
     return pendingSearchs.data
   } catch (error) {
@@ -154,18 +158,6 @@ export const endSearchSearchServices = async ({
 export const deleteRecruiterSearchServices = async (id) => {
   try {
     axios.get(`http://localhost:3001/api/search/delete-rec/${id}`)
-  } catch (error) {
-    throw error
-  }
-}
-
-export const filteredByCountrySearchsServices = async (country) => {
-  console.log(country)
-  try {
-    const filteredByCountry = await axios.post(`http://localhost:3001/api/search/filter_country`, {
-      country : country
-    })
-    return filteredByCountry.data
   } catch (error) {
     throw error
   }
