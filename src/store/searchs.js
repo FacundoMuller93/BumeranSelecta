@@ -46,8 +46,6 @@ const searchSlice = createSlice({
             state.loading = true
         },
         [addSearch.fulfilled]: (state, action) => {
-            state.data = [...state.data, action.payload]
-            state.singleSearch = action.payload
             state.loading = false
         },
         [addSearch.rejected]: (state, action) => {
