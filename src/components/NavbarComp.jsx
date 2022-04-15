@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../store/user";
 import styles from "../assets/styles/NavbarComp.module.scss";
 
+import { pageChange } from "../store/page";
+
 const NavbarComp = () => {
   const dispatch = useDispatch();
 
@@ -20,6 +22,9 @@ const NavbarComp = () => {
     dispatch(sendLogoutRequest());
   };
   
+const handlePageReset = () => {
+  dispatch(pageChange({ page: 1 }))
+}
 
   return (
     <Navbar expand="lg" sticky="top" bg="white">
@@ -46,12 +51,12 @@ const NavbarComp = () => {
               </Link>
             </Nav.Link>
             <Nav.Link to="/recruiters">
-              <Link className={styles.menu} to="/recruiters">
+              <Link className={styles.menu} to="/recruiters" onClick={()=>handlePageReset()}>
                 Reclutadores
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link className={styles.menu} to="/searchs">
+              <Link className={styles.menu} to="/searchs" onClick={()=>handlePageReset()}>
                 Búsquedas
               </Link>
             </Nav.Link>

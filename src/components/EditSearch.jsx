@@ -93,7 +93,7 @@ const EditSearch = () => {
           start_date: start_date.value,
         })
       );
-      dispatch(getAllSearch());
+      // dispatch(getAllSearch());
       navigate("/searchs");
     }
   };

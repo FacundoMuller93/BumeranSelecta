@@ -55,7 +55,7 @@ const AddSearchs = () => {
           lapse_search: lapse_search.value,
         })
       );
-      dispatch(getAllSearch());
+      // dispatch(getAllSearch());
       navigate("/searchs");
     }
   };
