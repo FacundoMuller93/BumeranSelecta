@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Toast from "react-bootstrap/Toast";
 import { useDispatch } from "react-redux";
-import { getAllSearch, addSearch } from "../store/searchs";
+import { addSearch } from "../store/searchs";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import bumeranArriba from "../assets/img/bumeranArriba.png";
@@ -14,6 +14,7 @@ import bumeranAbajo from "../assets/img/bumeranAbajo.png";
 import useInput from "../hooks/useInput";
 import "../assets/styles/Search.scss";
 import arr from "../hooks/array";
+import { pageChange } from "../store/page";
 
 const AddSearchs = () => {
   const [show, setShow] = useState(false);
@@ -55,7 +56,7 @@ const AddSearchs = () => {
           lapse_search: lapse_search.value,
         })
       );
-      // dispatch(getAllSearch());
+      dispatch(pageChange({ page: 1 }))
       navigate("/searchs");
     }
   };
