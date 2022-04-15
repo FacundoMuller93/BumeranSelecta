@@ -37,7 +37,7 @@ const Recruiters = () => {
     dispatch(getAllRecruiters({ page: page }));
   }, [page]);
 
-  if (!recruiter.filas) return <h1>No Data</h1>;
+  if (!recruiter.filas) return <h1 className={styles.container}>No Data</h1>;
 
   return (
     <>
