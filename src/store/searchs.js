@@ -8,7 +8,7 @@ const searchsInitialState = {
     error: ""
 }
 
-export const getSearchsByState = createAsyncThunk("GET_SEARCH", searchService.getSearchsByStateService);
+export const getSearchsList = createAsyncThunk("GET_SEARCH", searchService.getSearchsListService);
 
 export const addSearch = createAsyncThunk("ADD_SEARCH", searchService.addSearchServices)
 
@@ -23,8 +23,6 @@ export const endSearch = createAsyncThunk("END_SEARCH", searchService.endSearchS
 export const deleteRecruiterSearch = createAsyncThunk("END_SEARCH", searchService.deleteRecruiterSearchServices);
 
 export const getFilteredByDate = createAsyncThunk("GET_DATEFILTERED", searchService.filteredByDateSearchsServices);
-
-export const getFilteredByCountry = createAsyncThunk("GET_COUNTRYFILTERED", searchService.filteredByCountrySearchsServices);
 
 export const getAssignment = createAsyncThunk("GET_ ASSIGNMENT", searchService.assignmentSearchsServices)
 
@@ -67,18 +65,18 @@ const searchSlice = createSlice({
             state.loading = false;
             state.error = action.error.message;
         },
-        [getSearchsByState.pending]: (state, action) => {
+        [getSearchsList.pending]: (state, action) => {
             state.loading = true
         },
-        [getSearchsByState.fulfilled]: (state, action) => {
+        [getSearchsList.fulfilled]: (state, action) => {
             state.data = action.payload
             state.loading = false
         },
-        [getSearchsByState.rejected]: (state, action) => {
+        [getSearchsList.rejected]: (state, action) => {
             state.loading = false
             state.error = action.error.message
         },
-        [getFilteredByDate.pending]: (state, action) => {
+        [getSearchsList.pending]: (state, action) => {
             state.loading = true
         },
         [getFilteredByDate.fulfilled]: (state, action) => {
@@ -123,17 +121,6 @@ const searchSlice = createSlice({
             state.loading = false
         },
         [deleteRecruiterSearch.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.error.message
-        },
-        [getFilteredByCountry.pending]: (state, action) => {
-            state.loading = true
-        },
-        [getFilteredByCountry.fulfilled]: (state, action) => {
-            state.data = action.payload
-            state.loading = false
-        },
-        [getFilteredByCountry.rejected]: (state, action) => {
             state.loading = false
             state.error = action.error.message
         },

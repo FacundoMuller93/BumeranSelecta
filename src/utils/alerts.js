@@ -94,9 +94,10 @@ export const alertDeleteSearch = ({
   deleteSearch,
   searchId,
   pageChange,
-  getSearchsByState,
+  getSearchsList,
   page,
-  estado
+  estado,
+  country
 }) => {
   return Swal.fire({
     iconHtml: `<i><svg width="70" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +134,7 @@ export const alertDeleteSearch = ({
       });
     }
     dispatch(pageChange({ page: 1 }))
-    dispatch(getSearchsByState({ page: page, state: estado }))
+    dispatch(getSearchsList({ page: page, state: estado, country: country }))
   });
 };
 

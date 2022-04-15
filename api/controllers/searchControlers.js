@@ -44,8 +44,8 @@ exports.getId = (req, res) => {
   }
 }
 
-exports.byState = (req, res) => {
-  const { page, state } = req.params
+exports.getList = (req, res) => {
+  const { page, state, country } = req.body
   const initialLimit = 20
   const cut = page >= 2 ? initialLimit * page - initialLimit : 0
   const getPagingData = (search, page, limit) => {
@@ -54,13 +54,15 @@ exports.byState = (req, res) => {
     const totalPages = Math.ceil(totalItems / limit)
     return { totalItems, filas, totalPages, currentPage }
   }
-  const checkState = (state) => {
+  const checkWhere = (state, country) => {
+    if (state !== "Todas" && country !== "Todos") return { state_search: state, country: country }
     if (state !== "Todas") return { state_search: state }
+    if (country !== "Todos") return { country: country }
   }
   try {
     Searchs.findAndCountAll({ 
       include: Recruiters,
-      where: checkState(state),
+      where: checkWhere(state, country),
       order: [["id", "DESC"]],
       limit: initialLimit,
       offset: cut, 
@@ -276,19 +278,6 @@ exports.unassign = async (req, res) => {
         }
       ).then(data => res.status(201).send(data))
     })
-  } catch (error) {
-    console.log("ERROR: ", error)
-  }
-}
-
-exports.filterCountry = async (req, res) => {
-  const { country } = req.body
-  try {
-    Searchs.findAll({
-      where: {
-        country: country,
-      },
-    }).then(filteredByCountry => res.status(201).send(filteredByCountry))
   } catch (error) {
     console.log("ERROR: ", error)
   }
