@@ -125,12 +125,12 @@ const Search = () => {
 
   return (
     <div className={`container-fluid ${styles.container}`}>
-      <div className="row d-flex align-items-center  mb-lg-2">
+      <div className="row d-flex align-items-center">
         <div className="col-12 justify-content-center text-center col-lg-3 d-flex justify-content-lg-end">
           <div className="pt-5 mb-5 fs-4 title">Lista de Búsquedas</div>
         </div>
 
-        <div className="col-12 pb-5 text-end col-lg-8 ps-lg-0 pb-lg-0 pe-lg-0">
+        <div className="col-12 pb-5 text-center col-lg-3 ps-lg-0 pb-lg-0">
           <Link to="/addSearch">
             <Button
               className={`w-lg-25 mb-3 px-5  px-md-4  px-lg-5 pb-lg-1 mt-lg-2 mb-lg-3 ${styles.buttonDeleteRecruiter}`}
@@ -141,7 +141,7 @@ const Search = () => {
         </div>
       </div>
 
-      <div className="row d-flex justify-content-center align-items-center pb-lg-3">
+      <div className="row d-flex justify-content-center align-items-center">
         <div className="col-lg-6 d-flex justify-content-center">
           <div className="row">
             <div className="col-lg-6 text-center">
@@ -266,7 +266,7 @@ const Search = () => {
           onSubmit={handleSubmit}
         >
           <div className="row">
-            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 pe-lg-1 title">
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 title">
               Inicio
             </div>
             <Form.Group
@@ -283,7 +283,7 @@ const Search = () => {
                 type="date"
               />
             </Form.Group>
-            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center col-lg-1 pe-lg-1 title">
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center col-lg-1 title">
               Cierre
             </div>
 
@@ -396,31 +396,6 @@ const Search = () => {
               <div className="col-12 pt-4 ms-4 col-md-2 pt-md-0 col-lg-1 pt-lg-0 ms-lg-0">
                 <div className="row">
                   <div className="className col-3 col-lg-3 ps-0">
-                    <Link to={`/rating/${search.id}`}>
-                      <i title="Cerrar búsqueda">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M9.86329 18C9.58729 18 9.32329 17.886 9.13429 17.685L4.27129 12.506C3.89229 12.104 3.91329 11.471 4.31529 11.093C4.71829 10.715 5.35129 10.735 5.72829 11.137L9.85329 15.528L18.2613 6.32599C18.6353 5.91699 19.2673 5.88999 19.6753 6.26199C20.0823 6.63399 20.1103 7.26699 19.7383 7.67399L10.6013 17.674C10.4143 17.88 10.1483 17.998 9.87029 18H9.86329Z"
-                            fill={
-                              search.state_search === "Cerrada" ||
-                              search.state_search === "Nueva"
-                                ? "#222B45"
-                                : "#00FF00"
-                            }
-                          />
-                        </svg>
-                      </i>
-                    </Link>{" "}
-                  </div>
-                  <div className="className col-3 col-lg-3 ps-0">
                     <i
                       title="Ver detalles de búsqueda"
                       className={styles.pointerTrash}
@@ -458,6 +433,33 @@ const Search = () => {
                             clip-rule="evenodd"
                             d="M6.1026 15.8735L9.0796 15.6025L14.6796 9.99746L11.9836 7.30046L6.3666 12.9175L6.1026 15.8735ZM13.3236 5.96146L16.0186 8.65646L17.9656 6.70646L15.2716 4.01246L13.3236 5.96146ZM4.2926 17.6855C4.0826 17.4755 3.9776 17.1835 4.0036 16.8875L4.3826 12.7175C4.4246 12.2605 4.6266 11.8295 4.9526 11.5035L13.9486 2.50746C14.6506 1.80246 15.9236 1.83746 16.6646 2.57646L19.4026 5.31446L19.4036 5.31546C20.1686 6.08146 20.1996 7.29946 19.4716 8.02946L10.4746 17.0265C10.1496 17.3515 9.7186 17.5535 9.2606 17.5955L5.0906 17.9745C5.0606 17.9765 5.0306 17.9775 4.9996 17.9775C4.7366 17.9775 4.4816 17.8735 4.2926 17.6855V17.6855ZM19.9996 20.9775C19.9996 21.5275 19.5496 21.9775 18.9996 21.9775H4.9996C4.4506 21.9775 3.9996 21.5275 3.9996 20.9775C3.9996 20.4285 4.4506 19.9775 4.9996 19.9775H18.9996C19.5496 19.9775 19.9996 20.4285 19.9996 20.9775V20.9775Z"
                             fill="#ffc107"
+                          />
+                        </svg>
+                      </i>
+                    </Link>{" "}
+                  </div>
+                  <div className="className col-3 col-lg-3 ps-0">
+                    <Link to={search.state_search === "Cerrada" || search.state_search === "Nueva" 
+                    ? "" : `/rating/${search.id}`}>
+                      <i title={search.state_search === "Cerrada" || search.state_search === "Nueva" 
+                    ? "Esta búsqueda ya está cerrada": "Cerrar búsqueda"}>
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M9.86329 18C9.58729 18 9.32329 17.886 9.13429 17.685L4.27129 12.506C3.89229 12.104 3.91329 11.471 4.31529 11.093C4.71829 10.715 5.35129 10.735 5.72829 11.137L9.85329 15.528L18.2613 6.32599C18.6353 5.91699 19.2673 5.88999 19.6753 6.26199C20.0823 6.63399 20.1103 7.26699 19.7383 7.67399L10.6013 17.674C10.4143 17.88 10.1483 17.998 9.87029 18H9.86329Z"
+                            fill={
+                              search.state_search === "Cerrada" ||
+                              search.state_search === "Nueva"
+                                ? "grey"
+                                : "#00FF00"
+                            }
                           />
                         </svg>
                       </i>
