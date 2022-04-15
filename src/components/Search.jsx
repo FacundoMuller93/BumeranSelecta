@@ -103,7 +103,7 @@ const Search = () => {
   return (
     <>
     <div className={`container-fluid ${styles.container}`}>
-      <div className="row d-flex align-items-center  mb-lg-2">
+      <div className="row d-flex align-items-center mb-lg-2">
         <div className="col-12 justify-content-center text-center col-lg-3 d-flex justify-content-lg-end">
           <div className="pt-5 mb-5 fs-4 title">Lista de Búsquedas</div>
         </div>
@@ -249,7 +249,7 @@ const Search = () => {
           onSubmit={handleSubmit}
         >
           <div className="row">
-            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 pe-lg-1 title">
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 title">
               Inicio
             </div>
             <Form.Group
@@ -266,7 +266,7 @@ const Search = () => {
                 type="date"
               />
             </Form.Group>
-            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center col-lg-1 pe-lg-1 title">
+            <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center col-lg-1 title">
               Cierre
             </div>
 
@@ -376,39 +376,14 @@ const Search = () => {
                   {search.end_date}
                 </div>
 
-                <div className="col-12 pt-4 ms-4 col-md-2 pt-md-0 col-lg-1 pt-lg-0 ms-lg-0">
-                  <div className="row">
-                    <div className="className col-3 col-lg-3 ps-0">
-                      <Link to={`/rating/${search.id}`}>
-                        <i>
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              clip-rule="evenodd"
-                              d="M9.86329 18C9.58729 18 9.32329 17.886 9.13429 17.685L4.27129 12.506C3.89229 12.104 3.91329 11.471 4.31529 11.093C4.71829 10.715 5.35129 10.735 5.72829 11.137L9.85329 15.528L18.2613 6.32599C18.6353 5.91699 19.2673 5.88999 19.6753 6.26199C20.0823 6.63399 20.1103 7.26699 19.7383 7.67399L10.6013 17.674C10.4143 17.88 10.1483 17.998 9.87029 18H9.86329Z"
-                              fill={
-                                search.state_search === "Cerrada" ||
-                                search.state_search === "Nueva"
-                                  ? "#222B45"
-                                  : "#00FF00"
-                              }
-                            />
-                          </svg>
-                        </i>
-                      </Link>{" "}
-                    </div>
-                    <div className="className col-3 col-lg-3 ps-0">
-                      <i
-                        title="Ver detalles de búsqueda"
-                        className={styles.pointerTrash}
-                        onClick={() => handleShow(search)}
-                      >
+              <div className="col-12 pt-4 ms-4 col-md-2 pt-md-0 col-lg-1 pt-lg-0 ms-lg-0">
+                <div className="row">
+                  <div className="className col-3 col-lg-3 ps-0">
+                    <i
+                      title="Ver detalles de búsqueda"
+                      className={styles.pointerTrash}
+                      onClick={() => handleShow(search)}
+                    >
                         <svg
                           width="24"
                           height="24"
@@ -446,11 +421,40 @@ const Search = () => {
                         </i>
                       </Link>{" "}
                     </div>
+
+                    <div className="className col-3 col-lg-3 ps-0">
+                    <Link to={search.state_search === "Cerrada" || search.state_search === "Nueva" 
+                    ? "" : `/rating/${search.id}`}>
+                      <i title={search.state_search === "Cerrada" || search.state_search === "Nueva" 
+                    ? "Esta búsqueda ya está cerrada": "Cerrar búsqueda"}>
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M9.86329 18C9.58729 18 9.32329 17.886 9.13429 17.685L4.27129 12.506C3.89229 12.104 3.91329 11.471 4.31529 11.093C4.71829 10.715 5.35129 10.735 5.72829 11.137L9.85329 15.528L18.2613 6.32599C18.6353 5.91699 19.2673 5.88999 19.6753 6.26199C20.0823 6.63399 20.1103 7.26699 19.7383 7.67399L10.6013 17.674C10.4143 17.88 10.1483 17.998 9.87029 18H9.86329Z"
+                            fill={
+                              search.state_search === "Cerrada" ||
+                              search.state_search === "Nueva"
+                                ? "grey"
+                                : "#00FF00"
+                            }
+                          />
+                        </svg>
+                      </i>
+                    </Link>{" "}
+                  </div>
+
                     <div className="className col-3 col-lg-3 ps-0">
                       <i
                         onClick={e => handleDelete(e, search.id)}
                         className={styles.pointerTrash}
-                        title="Eliminar búsqueda"
+                        title="Eliminar búsqueda"             
                       >
                         <svg
                           width="24"
@@ -467,9 +471,9 @@ const Search = () => {
                           />
                         </svg>
                       </i>
-                    </div>
                   </div>
                 </div>
+              </div>
               </div>
             )
           })}

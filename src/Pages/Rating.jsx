@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
@@ -27,6 +27,7 @@ const Rating = () => {
   const [recruiter, setRecruiter] = useState();
   const [validation, setValidation] = useState(true);
   const [validationRating, setValidationRating] = useState(false);
+  const finalizar = useRef();
 
   useEffect(() => {
     dispatch(getSingleSearch(id)).then((sear) => {
@@ -200,7 +201,8 @@ const Rating = () => {
         </Row>
 
         <Button
-          className=" rounded-pill px-5 mt-3 mb-5 buttonLogin"
+          ref={finalizar}
+          className=" rounded-pill px-5 mt-lg-5 mb-5 buttonLogin"
           type="submit"
         >
           Finalizar
@@ -208,12 +210,12 @@ const Rating = () => {
 
         <Overlay
           show={validationRating}
-          target={null}
-          placement="bottom"
+          target={finalizar.current}
+          placement="top"
           containerPadding={20}
         >
           <Popover id="popover-contained">
-            <Popover.Body>
+            <Popover.Body className={styles.popover}>
               <strong>Califique al reclutador</strong>
             </Popover.Body>
           </Popover>

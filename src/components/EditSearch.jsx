@@ -97,6 +97,7 @@ const EditSearch = () => {
       navigate("/searchs");
     }
   };
+  
 
   return (
     <div className={`containerSearchEdit ${styles.container}`}>
