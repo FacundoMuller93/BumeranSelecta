@@ -97,7 +97,6 @@ const EditSearch = () => {
       navigate("/searchs");
     }
   };
-  
 
   return (
     <div className={`containerSearchEdit ${styles.container}`}>
@@ -210,6 +209,61 @@ const EditSearch = () => {
               />
             </Form.Group>
           </Row>
+
+          <div className="container-fluid  containerTable">
+            <div className="row my-3">
+              <div className={`${styles.titleContainer} pb-3`}>
+                <h3 className={`mt-3 fs-5 title ${styles.title}`}>
+                  Candidatos sugeridos:
+                </h3>
+              </div>
+              <div className="col w-100 ">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Apellido</th>
+                      <th scope="col">Areas</th>
+                      <th scope="col">Valoración</th>
+                      <th scope="col">Selección</th>
+                    </tr>
+                  </thead>
+                  <tbody className={styles.tbodyContainer}>
+                    {recruiter.map((recruiter, i) => {
+                      return (
+                        <tr className={styles.userContainer}>
+                          <th scope="row">{i + 1}</th>
+                          <td>{recruiter.name}</td>
+                          <td>{recruiter.surname}</td>
+                          <td>
+                            <tr>{recruiter.area_rec}</tr>
+                            {/* <tr>{recruiter.areas[0]}</tr>
+                                                <tr>{recruiter?.areas[1]}</tr>
+                                                <tr>{recruiter?.areas[2]}</tr> */}
+                          </td>
+                          <td>
+                            {" "}
+                            <Progress ranking={recruiter.rating} />
+                          </td>
+                          <td>
+                            <Form.Check
+                              className="inputRadio"
+                              name="group1"
+                              type="radio"
+                              id={1}
+                              onClick={() => setRecruiterInfo(recruiter)}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
           <div className="pt-2 mb-3 fs-4 mx-5 title d-flex justify-content-center">
             Reclutador asignado:
           </div>
@@ -272,60 +326,6 @@ const EditSearch = () => {
             </Button>
           </div>
         </Form>
-      </div>
-
-      <div className="container-fluid px-5 containerTable">
-        <div className="row my-3">
-          <div className={`${styles.titleContainer} pb-3`}>
-            <h3 className={`mt-3 fs-4 title ${styles.title}`}>
-              Candidatos sugeridos:
-            </h3>
-          </div>
-          <div className="col w-100 ">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Apellido</th>
-                  <th scope="col">Areas</th>
-                  <th scope="col">Valoración</th>
-                  <th scope="col">Selección</th>
-                </tr>
-              </thead>
-              <tbody className={styles.tbodyContainer}>
-                {recruiter.map((recruiter, i) => {
-                  return (
-                    <tr className={styles.userContainer}>
-                      <th scope="row">{i + 1}</th>
-                      <td>{recruiter.name}</td>
-                      <td>{recruiter.surname}</td>
-                      <td>
-                        <tr>{recruiter.area_rec}</tr>
-                        {/* <tr>{recruiter.areas[0]}</tr>
-                                                <tr>{recruiter?.areas[1]}</tr>
-                                                <tr>{recruiter?.areas[2]}</tr> */}
-                      </td>
-                      <td>
-                        {" "}
-                        <Progress ranking={recruiter.rating} />
-                      </td>
-                      <td>
-                        <Form.Check
-                          className="inputRadio"
-                          name="group1"
-                          type="radio"
-                          id={1}
-                          onClick={() => setRecruiterInfo(recruiter)}
-                        />
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
   );
