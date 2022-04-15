@@ -66,6 +66,8 @@ export const addRecruiterServices = async ({
   country,
   description_rec,
   area_rec,
+  dispatch,
+  pageChange,
   navigate,
 }) => {
   try {
@@ -80,6 +82,7 @@ export const addRecruiterServices = async ({
       }
     )
     alertNewRecruiter()
+    dispatch(pageChange({ page: 1 }))
     navigate("/Recruiters")
     return addRecruiter.data
   } catch (error) {
