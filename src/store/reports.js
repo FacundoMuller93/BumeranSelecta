@@ -3,7 +3,7 @@ import * as reportsService from "../services/reportsServices";
 
 const reportsInitialState = {
   loading: false,
-  data: {},
+  data: [],
   error: "",
   passChange: {},
 };
