@@ -10,6 +10,7 @@ import Progress from "../commons/Progress";
 import useInput from "../hooks/useInput";
 import "../assets/styles/SearchEdit.scss";
 import styles from "../assets/styles/StartSearch.module.scss";
+import { startSearch } from "../utils/alerts";
 
 const StartSearch = () => {
   const navigate = useNavigate();
@@ -58,7 +59,8 @@ const StartSearch = () => {
           recruiterId: recruiterInfo.id,
           state_search: "Iniciada",
           start_date: start_date.value,
-        })
+        }),
+        startSearch()
       );
       navigate("/searchs");
     

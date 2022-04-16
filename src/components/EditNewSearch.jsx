@@ -7,16 +7,14 @@ import {
 } from "../store/searchs";
 import { useParams } from "react-router";
 import { useNavigate, Link } from "react-router-dom";
-
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
-
-import Progress from "../commons/Progress";
 import arr from "../hooks/array";
 import useInput from "../hooks/useInput";
 import "../assets/styles/SearchEdit.scss";
 import styles from "../assets/styles/Recruiters.module.scss";
+import { editNewSearch } from "../utils/alerts";
 
 const EditNewSearch = () => {
   const navigate = useNavigate();
@@ -71,6 +69,7 @@ const EditNewSearch = () => {
           vacancies: parseInt(vacancies.value),
           lapse_search: lapse_search.value,
         }))
+        editNewSearch()
          navigate("/searchs");
   }
 
