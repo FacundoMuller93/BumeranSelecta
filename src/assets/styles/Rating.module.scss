@@ -22,24 +22,39 @@
   min-height: calc(100vh - 100px - 150px);
 }
 
-.btn {
-  background-color: rgb(233, 0, 102) !important;
-  border-color: rgb(233, 0, 102) !important;
-  border-radius: 8px !important;
-}
-
-.bg {
-  background-color: rgb(10, 38, 238) !important;
-  border-color: rgb(10, 38, 238) !important;
-  border-radius: 8px !important;
-}
-
 .totalCandidates {
   padding-top: 3%;
   padding-bottom: 2%;
 }
 
 .popover{
-  // border: 3px solid red !important;
   box-shadow: 2px 2px 2px 2px red !important;
+}
+
+.confirmBtn{
+  background-color: #fe0068 !important;
+  color: #ffffff;
+  border: none !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  height: 3rem;
+  border-radius: 100px 100px 100px 100px !important;
+
+  &:hover {
+    background-color: #fe0068;
+  }
+}
+
+.backBtn {
+  background-color: #0a26ee !important;
+  color: #ffffff;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  height: 3rem;
+  border-radius: 100px 100px 100px 100px !important;
+
+  &:hover {
+    background-color: #0a26ee;
+  }
 }

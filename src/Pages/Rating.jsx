@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useRef} from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useParams } from "react-router";
-
 import { FaStar } from "react-icons/fa";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
 import Overlay from "react-bootstrap/Overlay";
 import Popover from "react-bootstrap/Popover";
-
 import styles from "../assets/styles/Rating.module.scss";
 import { getSingleSearch, endSearch } from "../store/searchs";
 import { getSingleRecruiter } from "../store/recruiters";
 import useInput from "../hooks/useInput";
+import { pageChange } from "../store/page";
 
 const Rating = () => {
   const dispatch = useDispatch();
@@ -45,16 +44,21 @@ const Rating = () => {
       if (!rating) setValidationRating(true);
       if (rating) setValidationRating(false);
     } else {
-      dispatch(
+      await dispatch(
         endSearch({
           id: search.id,
           end_date: end_date.value,
           rating: rating * 2,
+          recruiterId: recruiter.id
         })
       );
+      dispatch(pageChange({ page: 1 }))
       navigate("/searchs");
     }
   };
+
+  if (!recruiter) return <div></div>
+  console.log(recruiter.id)
 
   return (
     <div className={styles.container}>
@@ -199,14 +203,26 @@ const Rating = () => {
             />
           </Form.Group>
         </Row>
+            
+
+        <div className={styles.btnContainer}>
+        <Link to="/searchs">
+        <Button
+          className={`rounded-pill px-5 mt-lg-5 mb-5 ${styles.backBtn}`}
+          type="submit"
+        >
+          Volver
+        </Button>
+        </Link>
 
         <Button
           ref={finalizar}
-          className=" rounded-pill px-5 mt-lg-5 mb-5 buttonLogin"
+          className={`rounded-pill px-5 mt-lg-5 mb-5 ${styles.confirmBtn}`}
           type="submit"
         >
           Finalizar
         </Button>
+        </div>
 
         <Overlay
           show={validationRating}
@@ -216,7 +232,7 @@ const Rating = () => {
         >
           <Popover id="popover-contained">
             <Popover.Body className={styles.popover}>
-              <strong>Califique al reclutador</strong>
+              <strong>Debe calificar al reclutador e ingresar fecha de cierre para continuar</strong>
             </Popover.Body>
           </Popover>
         </Overlay>
