@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllSearch,
   getSingleSearch,
   editRecruiter,
   getAssignment,
@@ -19,7 +18,7 @@ import useInput from "../hooks/useInput";
 import "../assets/styles/SearchEdit.scss";
 import styles from "../assets/styles/Recruiters.module.scss";
 
-const EditSearch = () => {
+const EditNewSearch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -57,29 +56,11 @@ const EditSearch = () => {
       getAssignment({ country: country.value, area_search: area_ser.value })
     ).then((data) => setRecruiter(data.payload));
   }, [area_ser.value, country.value]);
-  console.log("estos son los reclutadores", recruiter);
 
-  const handleSubmit = async (e) => {
+
+  const handleEdit = async (e)=> {
     e.preventDefault();
-    let data = [
-      country.value,
-      area_ser.value,
-      position.value,
-      description_ser.value,
-      vacancies.value,
-      lapse_search.value,
-    ];
-    let state = false;
-    if (recruiterInfo.id) data.push(start_date.value);
-    data.forEach((element) => {
-      if (element == "" || element == null) {
-        state = true;
-      }
-    });
-    if (state) setValidation(false);
-    else {
-      console.log("entra");
-      await dispatch(
+         await dispatch(
         editRecruiter({
           id: id,
           recruiterId: recruiterInfo.id,
@@ -89,17 +70,9 @@ const EditSearch = () => {
           position: position.value,
           vacancies: parseInt(vacancies.value),
           lapse_search: lapse_search.value,
-          state_search: "Iniciada",
-          start_date: start_date.value,
-        })
-      );
-      // dispatch(getAllSearch());
-      navigate("/searchs");
-    }
-  };
-
-  console.log(recruiterInfo)
-  console.log(recruiter)
+        }))
+         navigate("/searchs");
+  }
 
   return (
     <div className={`containerSearchEdit ${styles.container}`}>
@@ -108,7 +81,7 @@ const EditSearch = () => {
           Editar Búsqueda
         </div>
         <Form
-          onSubmit={handleSubmit}
+          onSubmit={handleEdit}
           className="pt-lg-4 formLogin w-100 font-sans-serif"
           id="formSearch"
         >
@@ -213,107 +186,6 @@ const EditSearch = () => {
             </Form.Group>
           </Row>
 
-          <div className="container-fluid  containerTable">
-            <div className="row my-3">
-              <div className={`${styles.titleContainer} pb-3`}>
-                <h3 className={`mt-3 fs-5 title ${styles.title}`}>
-                  Candidatos sugeridos:
-                </h3>
-              </div>
-              <div className="col w-100 ">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Apellido</th>
-                      <th scope="col">Areas</th>
-                      <th scope="col">Valoración</th>
-                      <th scope="col">Selección</th>
-                    </tr>
-                  </thead>
-                  <tbody className={styles.tbodyContainer}>
-                    {recruiter.map((recruiter, i) => {
-                      return (
-                        <tr className={styles.userContainer}>
-                          <th scope="row">{i + 1}</th>
-                          <td>{recruiter.name}</td>
-                          <td>{recruiter.surname}</td>
-                          <td>
-                            <tr>{recruiter.area_rec}</tr>
-                            {/* <tr>{recruiter.areas[0]}</tr>
-                                                <tr>{recruiter?.areas[1]}</tr>
-                                                <tr>{recruiter?.areas[2]}</tr> */}
-                          </td>
-                          <td>
-                            {" "}
-                            <Progress ranking={recruiter.rating} />
-                          </td>
-                          <td>
-                            <Form.Check
-                              className="inputRadio"
-                              name="group1"
-                              type="radio"
-                              id={1}
-                              onClick={() => setRecruiterInfo(recruiter)}
-                            />
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-2 mb-3 fs-4 mx-5 title d-flex justify-content-center">
-            Reclutador asignado:
-          </div>
-          <Row className="mb-3">
-            <Form.Group className="col-md-4" controlId="formGridAddress1">
-              <Form.Label>Nombre</Form.Label>
-              <Form.Control
-                className={
-                  description_ser.value || validation
-                    ? "inputLogin rounded-pill"
-                    : "err rounded-pill"
-                }
-                value={
-                  recruiterInfo.name
-                    ? `${recruiterInfo.name} ${recruiterInfo.surname}`
-                    : null
-                }
-                placeholder="Nombre del reclutador"
-              />
-            </Form.Group>
-
-            <Form.Group className="col-md-4" controlId="formGridCity">
-              <Form.Label>Valoración</Form.Label>
-              <Form.Control
-                className={
-                  lapse_search.value || validation
-                    ? "inputLogin rounded-pill"
-                    : "err rounded-pill"
-                }
-                value={recruiterInfo.rating}
-                placeholder="Valoracion del reclutador"
-              />
-            </Form.Group>
-            <Form.Group className="col-md-4" controlId="formGridCity">
-              <Form.Label>Inicio de busqueda</Form.Label>
-              <Form.Control
-                className={
-                  start_date.value || validation
-                    ? "inputLogin rounded-pill"
-                    : "err rounded-pill"
-                }
-                type={start_date.value ? "" : "date"}
-                {...start_date}
-              />
-            </Form.Group>
-          </Row>
-
           <div className="buttonsEditSearch">
             <Link to="/searchs">
               <Button className="mt-4 w-lg-25 px-5 px-lg-5 buttonLogin">
@@ -328,10 +200,12 @@ const EditSearch = () => {
               Editar
             </Button>
           </div>
-        </Form>
+
+          </Form>
+
       </div>
     </div>
   );
 };
 
-export default EditSearch;
+export default EditNewSearch;
