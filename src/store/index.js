@@ -16,6 +16,7 @@ import userSlice from "./user"
 import recruiterSlice from "./recruiters"
 import searchSlice from "./searchs"
 import pageReducer from "./page"
+import reportsSlice from "./reports"
 
 const persistConfig = {
   key: "root",
@@ -37,6 +38,7 @@ const store = configureStore({
     recruiter: recruiterSlice,
     search: searchSlice,
     page: pageReducer,
+    reports: reportsSlice,
   },
 });
 
