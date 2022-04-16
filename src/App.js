@@ -15,7 +15,9 @@ import NotFound from './Pages/NotFound';
 import ForgotPassword from './components/ForgotPassword';
 import SpinnerComp from "./commons/Spinner";
 import EditSearch from "./components/EditSearch";
+import EditNewSearch from "./components/EditNewSearch";
 import Footer from "./components/Footer";
+import StartSearch from "./components/StartSearch";
 
 const App = () => {
   return (
@@ -36,6 +38,8 @@ const App = () => {
         <Route path="/rating/:id" element={<Rating/>}/>
         <Route path="/forgotPass" element={<ForgotPassword/>}/>
         <Route path="*" element={<NotFound replace to="/" />} />
+        <Route path="/editNewSearch/:id" element={<EditNewSearch/>} />
+        <Route path="/startSearch/:id" element={<StartSearch/>} />
       </Routes>
       <Footer />
     </div>

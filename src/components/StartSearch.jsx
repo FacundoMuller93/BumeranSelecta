@@ -1,37 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllSearch,
-  getSingleSearch,
-  editRecruiter,
-  getAssignment,
-} from "../store/searchs";
+import React, { useEffect, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { getSingleSearch, editRecruiter, getAssignment } from "../store/searchs";
 import { useParams } from "react-router";
 import { useNavigate, Link } from "react-router-dom";
-
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
-import { Button } from "react-bootstrap";
-
+import { Button, Overlay, Popover } from "react-bootstrap";
 import Progress from "../commons/Progress";
-import arr from "../hooks/array";
 import useInput from "../hooks/useInput";
 import "../assets/styles/SearchEdit.scss";
-import styles from "../assets/styles/Recruiters.module.scss";
+import styles from "../assets/styles/StartSearch.module.scss";
 
-const EditSearch = () => {
+const StartSearch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
   const [validation, setValidation] = useState(true);
   const [recruiterInfo, setRecruiterInfo] = useState({});
   const [recruiter, setRecruiter] = useState([]);
+  const iniciar = useRef();
 
   const country = useInput();
   const area_ser = useInput();
   const position = useInput();
   const description_ser = useInput();
-  const vacancies = useInput();
   const lapse_search = useInput();
   const start_date = useInput(null);
 
@@ -40,8 +32,6 @@ const EditSearch = () => {
       country.setValue(data.payload.country);
       area_ser.setValue(data.payload.area_search);
       position.setValue(data.payload.position);
-      description_ser.setValue(data.payload.description_search);
-      vacancies.setValue(data.payload.vacancies);
       lapse_search.setValue(data.payload.lapse_search);
       return dispatch(
         getAssignment({
@@ -57,161 +47,32 @@ const EditSearch = () => {
       getAssignment({ country: country.value, area_search: area_ser.value })
     ).then((data) => setRecruiter(data.payload));
   }, [area_ser.value, country.value]);
-  console.log("estos son los reclutadores", recruiter);
 
-  const handleSubmit = async (e) => {
+
+  const handleStartSearch = async (e) => {
     e.preventDefault();
-    let data = [
-      country.value,
-      area_ser.value,
-      position.value,
-      description_ser.value,
-      vacancies.value,
-      lapse_search.value,
-    ];
-    let state = false;
-    if (recruiterInfo.id) data.push(start_date.value);
-    data.forEach((element) => {
-      if (element == "" || element == null) {
-        state = true;
-      }
-    });
-    if (state) setValidation(false);
-    else {
-      console.log("entra");
-      await dispatch(
+    if (!recruiterInfo.id || !start_date.value) return setValidation(false); 
+        await dispatch(
         editRecruiter({
           id: id,
           recruiterId: recruiterInfo.id,
-          description_search: description_ser.value,
-          country: country.value,
-          area_search: area_ser.value,
-          position: position.value,
-          vacancies: parseInt(vacancies.value),
-          lapse_search: lapse_search.value,
           state_search: "Iniciada",
           start_date: start_date.value,
         })
       );
-      // dispatch(getAllSearch());
       navigate("/searchs");
-    }
+    
   };
-
-  console.log(recruiterInfo)
-  console.log(recruiter)
 
   return (
     <div className={`containerSearchEdit ${styles.container}`}>
       <div className="containerForm mt-2">
-        <div className=" mb-0 fs-4 mx-5 title d-flex justify-content-center">
-          Editar Búsqueda
-        </div>
         <Form
-          onSubmit={handleSubmit}
+          onSubmit={handleStartSearch}
           className="pt-lg-4 formLogin w-100 font-sans-serif"
           id="formSearch"
         >
-          <Row className="mb-3">
-            <Form.Group className="col-md-4 top" controlId="formGridState">
-              <Form.Label>País</Form.Label>
-              <Form.Select
-                className={
-                  country.value || validation
-                    ? "inputLogin rounded-pill"
-                    : "err rounded-pill"
-                }
-                {...country}
-                placeholder={country.value}
-              >
-                <option selected disabled value="">
-                  Países
-                </option>
-                {arr.country.map((i) => (
-                  <option>{i}</option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-
-            <Form.Group className="col-md-4 top" controlId="formGridState">
-              <Form.Label>Area</Form.Label>
-              <Form.Select
-                className={
-                  area_ser.value || validation
-                    ? "inputLogin rounded-pill"
-                    : "err rounded-pill"
-                }
-                {...area_ser}
-              >
-                <option selected disabled value="">
-                  Area
-                </option>
-                {arr.area.map((i) => (
-                  <option>{i}</option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-
-            <Form.Group className="col-md-4" controlId="formGridAddress2">
-              <Form.Label>Posicion</Form.Label>
-              <Form.Control
-                className={
-                  position.value || validation
-                    ? "inputLogin rounded-pill"
-                    : "err rounded-pill"
-                }
-                {...position}
-                placeholder="Posición"
-              />
-            </Form.Group>
-          </Row>
-
-          <Row className="mb-3">
-            <Form.Group className="col-md-4" controlId="formGridAddress1">
-              <Form.Label>Descripcìon</Form.Label>
-              <Form.Control
-                className={
-                  description_ser.value || validation
-                    ? "inputLogin rounded-pill"
-                    : "err rounded-pill"
-                }
-                {...description_ser}
-                placeholder="Descripción"
-              />
-            </Form.Group>
-
-            <Form.Group className="col-md-4 top" controlId="formGridState">
-              <Form.Label>Vacantes</Form.Label>
-              <Form.Select
-                className={
-                  vacancies.value || validation
-                    ? "inputLogin rounded-pill"
-                    : "err rounded-pill"
-                }
-                {...vacancies}
-              >
-                <option selected disabled value="">
-                  Vacantes
-                </option>
-                {arr.vacancies().map((i) => (
-                  <option>{i}</option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-
-            <Form.Group className="col-md-4" controlId="formGridCity">
-              <Form.Label>Tiempo estimado de cierre</Form.Label>
-              <Form.Control
-                className={
-                  lapse_search.value || validation
-                    ? "inputLogin rounded-pill"
-                    : "err rounded-pill"
-                }
-                type={lapse_search.value ? "" : "date"}
-                {...lapse_search}
-              />
-            </Form.Group>
-          </Row>
+          <Row className="mb-3"></Row>
 
           <div className="container-fluid  containerTable">
             <div className="row my-3">
@@ -241,9 +102,6 @@ const EditSearch = () => {
                           <td>{recruiter.surname}</td>
                           <td>
                             <tr>{recruiter.area_rec}</tr>
-                            {/* <tr>{recruiter.areas[0]}</tr>
-                                                <tr>{recruiter?.areas[1]}</tr>
-                                                <tr>{recruiter?.areas[2]}</tr> */}
                           </td>
                           <td>
                             {" "}
@@ -322,16 +180,31 @@ const EditSearch = () => {
             </Link>
 
             <Button
+              ref={iniciar}
               className="mt-4 w-lg-25 px-5 px-lg-5 buttonsAddRecruiter"
               type="submit reset"
             >
-              Editar
+              Iniciar
             </Button>
+
+            <Overlay
+          show={validation ? false : true}
+          target={iniciar.current}
+          placement="top"
+          containerPadding={20}
+        >
+          <Popover id="popover-contained">
+            <Popover.Body className={styles.popover}>
+              <strong>Debe seleccionar un reclutador e indicar una fecha de inicio para continuar</strong>
+            </Popover.Body>
+          </Popover>
+        </Overlay>
           </div>
+          <Row />
         </Form>
       </div>
     </div>
   );
 };
 
-export default EditSearch;
+export default StartSearch;
