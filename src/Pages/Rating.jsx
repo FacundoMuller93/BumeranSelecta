@@ -13,6 +13,7 @@ import { getSingleSearch, endSearch } from "../store/searchs";
 import { getSingleRecruiter } from "../store/recruiters";
 import useInput from "../hooks/useInput";
 import { pageChange } from "../store/page";
+import { closeSearch } from "../utils/alerts";
 
 const Rating = () => {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const Rating = () => {
           recruiterId: recruiter.id
         })
       );
+      closeSearch()
       dispatch(pageChange({ page: 1 }))
       navigate("/searchs");
     }

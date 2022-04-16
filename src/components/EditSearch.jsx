@@ -8,16 +8,15 @@ import {
 } from "../store/searchs";
 import { useParams } from "react-router";
 import { useNavigate, Link } from "react-router-dom";
-
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import { Button } from "react-bootstrap";
-
 import Progress from "../commons/Progress";
 import arr from "../hooks/array";
 import useInput from "../hooks/useInput";
 import "../assets/styles/SearchEdit.scss";
 import styles from "../assets/styles/Recruiters.module.scss";
+import { editSearch} from "../utils/alerts";
 
 const EditSearch = () => {
   const navigate = useNavigate();
@@ -78,7 +77,6 @@ const EditSearch = () => {
     });
     if (state) setValidation(false);
     else {
-      console.log("entra");
       await dispatch(
         editRecruiter({
           id: id,
@@ -93,7 +91,7 @@ const EditSearch = () => {
           start_date: start_date.value,
         })
       );
-      // dispatch(getAllSearch());
+      editSearch()
       navigate("/searchs");
     }
   };

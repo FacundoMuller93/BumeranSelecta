@@ -35,14 +35,14 @@ const Search = () => {
 
   //Modal
   const [show, setShow] = useState(false);
+  const [selected, setSelected] = useState({});
 
   const handleClose = () => setShow(false);
   const handleShow = (search) => {
     setSelected(search);
     setShow(true);
   };
-
-  const [selected, setSelected] = useState({});
+   //
 
   //dispatch y selector
   const dispatch = useDispatch();
@@ -392,7 +392,7 @@ const Search = () => {
                   <div className="row">
 
 
-                    <div className="className col-3 col-lg-3 ps-0">
+                    <div className="col-3 col-lg-3 ps-0">
                       <i
                         title="Ver detalles de búsqueda"
                         className={styles.pointerTrash}
@@ -415,8 +415,8 @@ const Search = () => {
                       </i>
                     </div>
 
-                    <div className="className col-3 col-lg-3 ps-0">
-                      <Link to={handleEdit(search.state_search, search.id)}>
+                    <div className="col-3 col-lg-3 ps-0">
+                      <Link to={handleEdit(search.state_search, search.id)} className={search.state_search !== "Cerrada" ? "" : styles.cursorPointer}>
                         <i title={search.state_search !== "Cerrada" ? "Editar búsqueda" : "No puedes editar una búsqueda cerrada"}>
                           <svg
                             width="24"
@@ -436,17 +436,14 @@ const Search = () => {
                       </Link>{" "}
                     </div>
 
-                    <div className="className col-3 col-lg-3 ps-0">
+                    <div className="className col-3 col-lg-3 ps-0 ">
                       <Link
                         to={handleLink(search.state_search, search.id)
                         }
+                        className={search.state_search !== "Cerrada" ? "" : styles.cursorPointer}
                       >
                         <i
                           title={handleHovers(search.state_search)
-                            // search.state_search === "Cerrada" ||
-                            // search.state_search === "Nueva"
-                            //   ? "Esta búsqueda ya está cerrada"
-                            //   : "Cerrar búsqueda"
                           }
                         >
                           <svg
