@@ -1,5 +1,5 @@
 const { Searchs, Recruiters } = require("../models/")
-const { Op } = require("sequelize")
+const { Op, Sequelize } = require("sequelize")
 
 exports.add = (req, res) => {
   const {
@@ -60,16 +60,16 @@ exports.getList = (req, res) => {
     if (country !== "Todos") return { country: country }
   }
   try {
-    Searchs.findAndCountAll({ 
+    Searchs.findAndCountAll({
       include: Recruiters,
       where: checkWhere(state, country),
       order: [["id", "DESC"]],
       limit: initialLimit,
-      offset: cut, 
-    }).then(newSearchs =>{
+      offset: cut,
+    }).then(newSearchs => {
       const response = getPagingData(newSearchs, page, initialLimit)
       res.status(200).send(response)
-      }
+    }
     )
   } catch (error) {
     console.log("ERROR: ", error)
@@ -100,7 +100,7 @@ exports.editSearch = (req, res) => {
           console.log("entro al if", recruiterId)
 
           Recruiters.update(
-            { active_searchs: 0 },
+            { active_searchs: Sequelize.literal('active_searchs - 1') },
             {
               where: { id: recruiterOld },
             }
@@ -124,7 +124,7 @@ exports.editSearch = (req, res) => {
             }
           )
           Recruiters.update(
-            { active_searchs: 1 },
+            { active_searchs: Sequelize.literal('active_searchs + 1') },
             {
               where: { id: recruiterId },
             }
@@ -153,7 +153,7 @@ exports.editSearch = (req, res) => {
             }
           )
           Recruiters.update(
-            { active_searchs: 1 },
+            { active_searchs: Sequelize.literal('active_searchs + 1') },
             {
               where: { id: recruiterId },
             }
@@ -242,7 +242,7 @@ exports.endSearch = async (req, res) => {
     const editRecruiter = await Recruiters.update(
       {
         rating: rating,
-        active_searchs: 0,
+        active_searchs: Sequelize.literal('active_searchs - 1'),
       },
       {
         where: { id: recruiterId },
@@ -272,7 +272,7 @@ exports.unassign = async (req, res) => {
         }
       )
       Recruiters.update(
-        { active_searchs: 0 },
+        { active_searchs: Sequelize.literal('active_searchs - 1') },
         {
           where: { id: idRecruiter },
         }
