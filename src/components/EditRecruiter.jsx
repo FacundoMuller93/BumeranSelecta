@@ -19,7 +19,6 @@ const EditRecruiter = () => {
   }
 
   let recruiterId = parseInt(reducedURL);
-  console.log(recruiterId);
 
   //axios trayendo info del recruiter
 

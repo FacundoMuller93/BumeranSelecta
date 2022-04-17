@@ -2,14 +2,17 @@ import axios from "axios"
 
 
 //reclutadores por área ordenados por rating
-export const getRecruitersPerArea = async (areaValue) => {
+export const getRecruitersPerArea = async ({areaValue, country}) => {
     try {
       const recruitersPerArea = await axios.post(
         "http://localhost:3001/api/reports/recruitersArea", {
-            areaValue : areaValue}
+            areaValue : areaValue,
+            country: country
+          }
         
       )
-      return recruitersPerArea.data
+      console.log("Por Area", getRecruitersPerArea)
+      return recruitersPerArea.data.slice(0, 10)
     } catch (error) {
       throw error
     }
@@ -22,8 +25,9 @@ export const getRecruitersPerArea = async (areaValue) => {
       const topRecruiters = await axios.get(
         "http://localhost:3001/api/reports/topRecruiters"
       )
-      return topRecruiters.data
+      return topRecruiters.data.slice(0, 10)
     } catch (error) {
       throw error
     }
   }
+  
