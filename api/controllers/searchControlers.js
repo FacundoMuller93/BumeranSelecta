@@ -45,7 +45,7 @@ exports.getId = (req, res) => {
 }
 
 exports.getList = (req, res) => {
-  const { page, state, country } = req.body
+  const { page, state, country, filter_start, filter_end } = req.body
   const initialLimit = 20
   const cut = page >= 2 ? initialLimit * page - initialLimit : 0
   const getPagingData = (search, page, limit) => {
@@ -59,10 +59,26 @@ exports.getList = (req, res) => {
     if (state !== "Todas") return { state_search: state }
     if (country !== "Todos") return { country: country }
   }
+
+const checkDate = (filter_start, filter_end) => {
+  if (filter_start !== "" && filter_end !== "") return { [Op.and]: [
+    {start_date: { [Op.gte]: filter_start }, end_date: { [Op.lte]: filter_end}}
+  ] } 
+  if (filter_start !== "") return {start_date: { [Op.gte]: filter_start }}
+  if (filter_end !== "") return {end_date: { [Op.lte]: filter_end }}
+}
+
   try {
+    let stateAndCountry = checkWhere(state, country)
+    let startAndEndDate = checkDate(filter_start, filter_end)
+    stateAndCountry === undefined ? stateAndCountry = "" : stateAndCountry
+    startAndEndDate === undefined ? startAndEndDate = "" : startAndEndDate
+    console.log("STATE", stateAndCountry)
+    console.log("DATE", startAndEndDate)
     Searchs.findAndCountAll({
       include: Recruiters,
-      where: checkWhere(state, country),
+      where: Object.assign(stateAndCountry, startAndEndDate),
+      // where: stateAndCountry,
       order: [["id", "DESC"]],
       limit: initialLimit,
       offset: cut,
@@ -184,7 +200,7 @@ exports.editSearch = (req, res) => {
 
 exports.filterDate = (req, res) => {
   const { filter_start, filter_end } = req.body
-  console.log("filter_start PARA FILTRO FECHA--------------->", filter_start)
+  // console.log("filter_start PARA FILTRO FECHA--------------->", filter_start)
   try {
     Searchs.findAll({
       where: {

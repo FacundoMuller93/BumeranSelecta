@@ -42,7 +42,6 @@ const Search = () => {
     setSelected(search);
     setShow(true);
   };
-   //
 
   //dispatch y selector
   const dispatch = useDispatch();
@@ -75,14 +74,14 @@ const Search = () => {
   };
 
   //filtrar por fechas
-  const filterDate = async () => {
-    await dispatch(
-      getFilteredByDate({
-        filter_start: start_date.value,
-        filter_end: end_date.value,
-      })
-    );
-  };
+  // const filterDate = async () => {
+  //   await dispatch(
+  //     getFilteredByDate({
+  //       filter_start: start_date.value,
+  //       filter_end: end_date.value,
+  //     })
+  //   );
+  // };
 
   const handleFilterByCountry = (e, cntry) => {
     e.preventDefault();
@@ -125,6 +124,9 @@ const Search = () => {
 
 
   if (!search.filas) return <h1 className={styles.container}>No Data</h1>;
+
+  console.log("START_DATE", start_date)
+  console.log("END_DATE", end_date)
 
   return (
     <>
