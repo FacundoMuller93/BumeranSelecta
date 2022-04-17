@@ -85,7 +85,6 @@ export const editSearchServices = async ({
 }
 
 export const getSearchsListService = async ({page, state, country, filter_start, filter_end}) => {
-  console.log("filter_START", filter_start)
   try {
     const pendingSearchs = await axios.post(
       `http://localhost:3001/api/search/list`, {
