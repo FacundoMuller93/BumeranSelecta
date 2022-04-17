@@ -49,6 +49,7 @@ const recruiterSlice = createSlice({
       state.error = action.error.message;
     },
     [getSingleRecruiter.pending]: (state, action) => {
+      state.singleRecruiter = {}
       state.loading = true;
     },
     [getSingleRecruiter.fulfilled]: (state, action) => {
