@@ -84,7 +84,7 @@ const EditNewSearch = () => {
           className="pt-lg-4 formLogin w-100 font-sans-serif"
           id="formSearch"
         >
-          <Row className="mb-3">
+          <Row className="mb-4">
             <Form.Group className="col-md-4 top" controlId="formGridState">
               <Form.Label>País</Form.Label>
               <Form.Select
@@ -140,7 +140,7 @@ const EditNewSearch = () => {
 
           <Row className="mb-3">
             <Form.Group className="col-md-4" controlId="formGridAddress1">
-              <Form.Label>Descripcìon</Form.Label>
+              <Form.Label>Descripción</Form.Label>
               <Form.Control
                 className={
                   description_ser.value || validation

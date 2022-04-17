@@ -66,7 +66,7 @@ const AddSearchs = () => {
       <div className="containerSearch ">
         <div className="containerForm">
           <div className="pt-2 mb-2 fs-4 mx-5 title d-flex justify-content-center">
-            Ingreso de Busqueda
+            Ingreso de Búsqueda
           </div>
           <Form
             onSubmit={handleSubmit}
@@ -146,7 +146,7 @@ const AddSearchs = () => {
                   {...lapse_search}
                   type="date"
                 />
-                <div>Ingrese el plazo estimado de búsqueda</div>
+                <div className="text-muted">Ingrese el plazo estimado de búsqueda</div>
               </Form.Group>
 
               <Form.Group className="col-md-6 top" controlId="formGridState">
@@ -200,7 +200,7 @@ const AddSearchs = () => {
                       className="rounded me-2"
                       alt=""
                     />
-                    <strong className="me-auto">Busquedas</strong>
+                    <strong className="me-auto">Búsquedas</strong>
                   </Toast.Header>
                   <Toast.Body>La carga de datos fue exitosa</Toast.Body>
                 </Toast>

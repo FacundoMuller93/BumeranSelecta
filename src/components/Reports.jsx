@@ -5,17 +5,14 @@ import { getRecruitersPerArea, topRecruiters } from "../store/reports";
 import "../assets/styles/Reports.scss";
 import { useSelector } from "react-redux";
 import Progress from "../commons/Progress";
+import Carousel from "../Pages/Carousel"
 
 const Reports = () => {
   const dispatch = useDispatch();
   const reports = useSelector((state) => state.reports.data);
-  console.log("report es", reports);
   const [areaValue, setAreaValue] = useState("todas");
   const [country, setCountry] = useState("todos");
-  console.log("Pais", country);
-
-  console.log(areaValue);
-
+  
   useEffect(() => {
     dispatch(getRecruitersPerArea({ areaValue: areaValue, country: country }));
   }, [areaValue, country]);
@@ -27,6 +24,7 @@ const Reports = () => {
   if (!areaValue) return <h1 className="footerBotton">No Data</h1>;
   return (
     <>
+    <Carousel/>
       <div className={`container-fluid`}>
         <div className="row d-flex align-items-center mb-lg-2">
           <div className="col-12 justify-content-center text-center col-lg-4 d-flex justify-content-lg-end">
@@ -143,7 +141,7 @@ const Reports = () => {
       </div>
 
       {/* Tabla */}
-      <div className="container-fluid pt-lg-4  pe-md-3">
+      <div className="container-fluid pt-lg-4  pe-md-3 footerBotton">
         <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
           <div className="col-2 col-md-1 col-lg-1 text-start">
             <strong>#</strong>

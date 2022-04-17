@@ -45,7 +45,7 @@ exports.getId = (req, res) => {
 }
 
 exports.getList = (req, res) => {
-  const { page, state, country } = req.body
+  const { page, state, country, filter_start, filter_end } = req.body
   const initialLimit = 20
   const cut = page >= 2 ? initialLimit * page - initialLimit : 0
   const getPagingData = (search, page, limit) => {
@@ -55,22 +55,46 @@ exports.getList = (req, res) => {
     return { totalItems, filas, totalPages, currentPage }
   }
   const checkWhere = (state, country) => {
-    if (state !== "Todas" && country !== "Todos") return { state_search: state, country: country }
+    if (state !== "Todas" && country !== "Todos")
+      return { state_search: state, country: country }
     if (state !== "Todas") return { state_search: state }
     if (country !== "Todos") return { country: country }
   }
+  const checkDate = (filter_start, filter_end) => {
+    if (filter_start !== "" && filter_end !== "")
+      return {
+        start_date: { [Op.gte]: [filter_start] },
+        [Op.or]: [{ end_date: { [Op.lte]: filter_end } }, { end_date: null }],
+      }
+    if (filter_start !== "")
+      return {
+        start_date: { [Op.gte]: filter_start },
+        [Op.or]: [{ end_date: { [Op.gt]: filter_start } }, { end_date: null }],
+      }
+    if (filter_end !== "")
+      return {
+        [Op.or]: [
+          { end_date: { [Op.lte]: filter_end } },
+          { start_date: { [Op.lt]: filter_end } },
+        ],
+      }
+  }
+
   try {
+    let stateAndCountry = checkWhere(state, country)
+    let startAndEndDate = checkDate(filter_start, filter_end)
+    stateAndCountry === undefined ? (stateAndCountry = {}) : stateAndCountry
+    startAndEndDate === undefined ? (startAndEndDate = {}) : startAndEndDate
     Searchs.findAndCountAll({
       include: Recruiters,
-      where: checkWhere(state, country),
+      where: { [Op.and]: [Object.assign(stateAndCountry, startAndEndDate)] },
       order: [["id", "DESC"]],
       limit: initialLimit,
       offset: cut,
     }).then(newSearchs => {
       const response = getPagingData(newSearchs, page, initialLimit)
       res.status(200).send(response)
-    }
-    )
+    })
   } catch (error) {
     console.log("ERROR: ", error)
   }
@@ -100,7 +124,7 @@ exports.editSearch = (req, res) => {
           console.log("entro al if", recruiterId)
 
           Recruiters.update(
-            { active_searchs: Sequelize.literal('active_searchs - 1') },
+            { active_searchs: Sequelize.literal("active_searchs - 1") },
             {
               where: { id: recruiterOld },
             }
@@ -124,7 +148,7 @@ exports.editSearch = (req, res) => {
             }
           )
           Recruiters.update(
-            { active_searchs: Sequelize.literal('active_searchs + 1') },
+            { active_searchs: Sequelize.literal("active_searchs + 1") },
             {
               where: { id: recruiterId },
             }
@@ -153,7 +177,7 @@ exports.editSearch = (req, res) => {
             }
           )
           Recruiters.update(
-            { active_searchs: Sequelize.literal('active_searchs + 1') },
+            { active_searchs: Sequelize.literal("active_searchs + 1") },
             {
               where: { id: recruiterId },
             }
@@ -182,25 +206,6 @@ exports.editSearch = (req, res) => {
   }
 }
 
-exports.filterDate = (req, res) => {
-  const { filter_start, filter_end } = req.body
-  console.log("filter_start PARA FILTRO FECHA--------------->", filter_start)
-  try {
-    Searchs.findAll({
-      where: {
-        [Op.and]: [
-          {
-            start_date: { [Op.between]: [filter_start, filter_end] },
-            end_date: { [Op.between]: [filter_start, filter_end] },
-          },
-        ],
-      },
-    }).then(data => res.status(200).send(data))
-  } catch (error) {
-    console.log("ERROR: ", error)
-  }
-}
-
 exports.assignment = (req, res) => {
   const { country, area_search } = req.body
   console.log("--->", req.body)
@@ -210,7 +215,7 @@ exports.assignment = (req, res) => {
         [Op.and]: [
           {
             country: { [Op.eq]: [country] },
-            area_rec: { [Op.eq]: [area_search] },
+            area_rec: { [Op.substring]: [area_search] },
             active_searchs: { [Op.lt]: [3] },
           },
         ],
@@ -224,8 +229,7 @@ exports.assignment = (req, res) => {
 }
 
 exports.endSearch = async (req, res) => {
-  const { id, end_date, rating, recruiterId } = req.body
-  console.log(req.body)
+  const { id, end_date, rating, recruiterId, commentary } = req.body
   try {
     const editSearch = await Searchs.update(
       {
@@ -237,12 +241,11 @@ exports.endSearch = async (req, res) => {
         where: { id: id },
       }
     )
-    //res.status(200).send(editSearch)
-
     const editRecruiter = await Recruiters.update(
       {
         rating: rating,
         active_searchs: Sequelize.literal('active_searchs - 1'),
+        description_rec: commentary,
       },
       {
         where: { id: recruiterId },
@@ -272,7 +275,7 @@ exports.unassign = async (req, res) => {
         }
       )
       Recruiters.update(
-        { active_searchs: Sequelize.literal('active_searchs - 1') },
+        { active_searchs: Sequelize.literal("active_searchs - 1") },
         {
           where: { id: idRecruiter },
         }
