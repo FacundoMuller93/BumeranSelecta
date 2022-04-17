@@ -71,15 +71,15 @@ const StartSearch = () => {
       <div className="containerForm mt-2">
         <Form
           onSubmit={handleStartSearch}
-          className="pt-lg-4 formLogin w-100 font-sans-serif"
+          className="formLogin w-100 font-sans-serif"
           id="formSearch"
         >
           <Row className="mb-3"></Row>
 
           <div className="container-fluid  containerTable">
             <div className="row my-3">
-              <div className={`${styles.titleContainer} pb-3`}>
-                <h3 className={`mt-3 fs-5 title ${styles.title}`}>
+              <div className={`${styles.titleContainer} pb-4`}>
+                <h3 className={`fs-5 title ${styles.title}`}>
                   Candidatos sugeridos:
                 </h3>
               </div>
