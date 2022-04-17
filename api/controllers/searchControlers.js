@@ -210,7 +210,7 @@ exports.assignment = (req, res) => {
         [Op.and]: [
           {
             country: { [Op.eq]: [country] },
-            area_rec: { [Op.eq]: [area_search] },
+            area_rec: { [Op.substring]: [area_search] },
             active_searchs: { [Op.lt]: [3] },
           },
         ],

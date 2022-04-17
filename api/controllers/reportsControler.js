@@ -115,3 +115,52 @@ exports.topRecruiters = (req, res) => {
     console.log("ERROR: ", error);
   }
 };
+
+exports.searchState = (req, res) => {
+  try {
+    Searchs.count(
+      {
+        attributes: ['state_search'],
+        group: 'state_search',
+      }).then(result => res.send(result))
+
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+}
+
+exports.countState = (req, res) => {
+  try {
+    Searchs.count(
+      {
+        group: ['area_search', 'state_search'],
+      }).then(result => res.send(result))
+
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+}
+
+exports.countAssig = (req, res) => {
+  try {
+    Recruiters.count(
+      {
+        group: ['active_searchs'],
+      }).then(result => res.send(result))
+
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+}
+
+exports.counCountry = (req, res) => {
+  try {
+    Recruiters.count(
+      {
+        group: ['country'],
+      }).then(result => res.send(result))
+
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
+}
