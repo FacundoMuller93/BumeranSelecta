@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  // getAllSearch,
   getSingleSearch,
   editRecruiter,
   getAssignment,
@@ -96,8 +95,8 @@ const EditSearch = () => {
     }
   };
 
-  console.log(recruiterInfo)
-  console.log(recruiter)
+  console.log("SET_REC", recruiterInfo)
+  // console.log(recruiter)
 
   return (
     <div className={`containerSearchEdit ${styles.container}`}>
