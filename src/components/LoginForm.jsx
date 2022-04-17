@@ -26,7 +26,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center container-fluid containerFooter">
+    <div className="d-flex justify-content-center mt-5 container-fluid containerFooter">
       <div className="row">
         <div className="col-6">
           <img

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
 .containerFooter {
-  min-height: calc(100vh - 100px - 150px);
+  min-height: calc(100vh - 100px - 195px);
 }
 
 .title {
@@ -61,4 +61,8 @@
 .forgotPass {
   text-decoration: none;
   padding-right: 10%;
+}
+
+.footerContainer {
+  min-height: calc(100vh - 100px - 200px);
 }

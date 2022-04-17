@@ -3,7 +3,6 @@ import { Form, Button } from "react-bootstrap";
 import useInput from "../hooks/useInput";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import "../assets/styles/LoginForm.scss";
 
 import {
@@ -53,17 +52,19 @@ const ForgotPassword = () => {
   return (
     <>
       <div className="d-flex justify-content-center container-fluid footerContainer">
+        <div className="col-lg-3">
         <img
-          className="mt-5 pt-5 ms-1 pe-5 d-none d-lg-block"
+          className="pt-5 ms-1 pe-5 d-none d-lg-block"
           src="https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/contactos.png"
           alt=""
         />
+        </div>
         {!user.id ? (
           <Form
             onSubmit={handleEmailSubmit}
             className="text-center mt-md-5 pt-md-5 ms-lg-5 w-lg-50 formLogin"
           >
-            <div className="fs-5 title mt-5">Olvidé mi Contraseña</div>
+            <div className="fs-5 title">Olvidé mi Contraseña</div>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
                 {...email}
