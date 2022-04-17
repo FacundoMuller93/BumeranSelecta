@@ -35,7 +35,9 @@
     "saas": "^1.0.0",
     "sequelize": "^6.18.0",
     "sweetalert2": "^11.4.8",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "react-chartjs-2": "^4.1.0",
+    "chart.js": "^3.7.1"
   },
   "scripts": {
     "start": "concurrently 'npm run server' 'npm run client'",

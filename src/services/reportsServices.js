@@ -30,4 +30,49 @@ export const getRecruitersPerArea = async ({areaValue, country}) => {
       throw error
     }
   }
+
+
+export const getSearchBarService = async () => {
+  try {
+    const searchBar = await axios.get(
+      "http://localhost:3001/api/reports/count_state"
+    )
+    return searchBar.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getCountGlobalService = async () => {
+  try {
+    const searchPolar = await axios.get(
+      "http://localhost:3001/api/reports/count_global"
+    )
+    return searchPolar.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getCountAssigService = async () => {
+  try {
+    const countAssig = await axios.get(
+      "http://localhost:3001/api/reports/count_assig"
+    )
+    return countAssig.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getCountCountryService = async () => {
+  try {
+    const countCountry = await axios.get(
+      "http://localhost:3001/api/reports/count_country"
+    )
+    return countCountry.data
+  } catch (error) {
+    throw error
+  }
+}
   
