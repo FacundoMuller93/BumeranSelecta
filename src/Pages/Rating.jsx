@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { useParams } from "react-router";
@@ -21,6 +21,7 @@ const Rating = () => {
 
   const { id } = useParams();
   const end_date = useInput();
+  const commentary = useInput();
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const [search, setSearch] = useState();
@@ -50,17 +51,17 @@ const Rating = () => {
           id: search.id,
           end_date: end_date.value,
           rating: rating * 2,
-          recruiterId: recruiter.id
+          recruiterId: recruiter.id,
+          commentary: commentary.value
         })
       );
-      closeSearch()
-      dispatch(pageChange({ page: 1 }))
+      closeSearch();
+      dispatch(pageChange({ page: 1 }));
       navigate("/searchs");
     }
   };
 
-  if (!recruiter) return <div></div>
-  console.log(recruiter.id)
+  if (!recruiter) return <div></div>;
 
   return (
     <div className={styles.container}>
@@ -94,6 +95,23 @@ const Rating = () => {
         className=" mt-3 pt-lg-5 formLogin w-100 mt-lg-0"
         id="formSearch"
       >
+        <div className={`${styles.title}`}>
+          Ingrese un comentario en relación al proceso
+        </div>
+        <div className=" mb-3 fs-5 d-flex justify-content-center">
+        <Form.Group className="col-12 mb-4 col-md-4 " controlId="formGridCity">
+          <Form.Control
+            as="textarea"
+            rows={3}
+            className="inputLogin rounded-pill text-center"
+            {...commentary}
+          />
+              <Form.Text className="text-muted">
+      Opcional
+    </Form.Text>
+        </Form.Group>
+        </div>
+
         <div className=" mb-3 fs-5 d-flex justify-content-center">
           Información del reclutador
         </div>
@@ -115,7 +133,7 @@ const Rating = () => {
           </Form.Group>
 
           <Form.Group className="col-12 mb-4 col-md-4" controlId="formGridCity">
-            <Form.Label>Busquedas activas</Form.Label>
+            <Form.Label>Búsquedas activas</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
               value={recruiter?.searchs.length}
@@ -136,7 +154,7 @@ const Rating = () => {
             className=" col-12 mb-4 col-md-4"
             controlId="formGridCity"
           >
-            <Form.Label>Area</Form.Label>
+            <Form.Label>Área</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
               value={recruiter?.area_rec}
@@ -168,7 +186,7 @@ const Rating = () => {
           </Form.Group>
 
           <Form.Group className="col-12 mb-4 col-md-6" controlId="formGridCity">
-            <Form.Label>vacantes disponibles</Form.Label>
+            <Form.Label>Vacantes disponibles</Form.Label>
             <Form.Control
               className="inputLogin rounded-pill text-center"
               value={search?.vacancies}
@@ -205,25 +223,28 @@ const Rating = () => {
             />
           </Form.Group>
         </Row>
-            
 
         <div className={styles.btnContainer}>
-        <Link to="/searchs">
-        <Button
-          className={`rounded-pill px-5 mt-lg-5 mb-5 ${styles.backBtn}`}
-          type="submit"
-        >
-          Volver
-        </Button>
-        </Link>
+          <div>
+          <Link to="/searchs">
+            <Button
+              className={`rounded-pill px-5 mt-lg-5 mb-5 ${styles.backBtn}`}
+              type="submit"
+            >
+              Volver
+            </Button>
+          </Link>
+          </div>
 
-        <Button
-          ref={finalizar}
-          className={`rounded-pill px-5 mt-lg-5 mb-5 ${styles.confirmBtn}`}
-          type="submit"
-        >
-          Finalizar
-        </Button>
+          <div>     
+          <Button
+            ref={finalizar}
+            className={`rounded-pill px-5 mt-lg-5 mb-5 ${styles.confirmBtn}`}
+            type="submit"
+          >
+            Finalizar
+          </Button>
+          </div>
         </div>
 
         <Overlay
@@ -234,7 +255,10 @@ const Rating = () => {
         >
           <Popover id="popover-contained">
             <Popover.Body className={styles.popover}>
-              <strong>Debe calificar al reclutador e ingresar fecha de cierre para continuar</strong>
+              <strong>
+                Debe calificar al reclutador e ingresar fecha de cierre para
+                continuar
+              </strong>
             </Popover.Body>
           </Popover>
         </Overlay>
