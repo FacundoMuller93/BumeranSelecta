@@ -4,7 +4,7 @@ import axios from "axios";
 import useInput from "../hooks/useInput";
 import { Button, Form } from "react-bootstrap";
 import styles from "../assets/styles/EditRecruiter.module.scss";
-import Swal from "sweetalert2";
+import { alertEditRecruiter } from "../utils/alerts";
 
 const EditRecruiter = () => {
   //obtener id del usuario a partir de la url
@@ -64,18 +64,7 @@ const EditRecruiter = () => {
         status_rec: status_rec.value,
       })
       .then((res) => res.data);
-    Swal.fire({
-      iconHtml: `<i><svg width="70" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.86329 18C9.58729 18 9.32329 17.886 9.13429 17.685L4.27129 12.506C3.89229 12.104 3.91329 11.471 4.31529 11.093C4.71829 10.715 5.35129 10.735 5.72829 11.137L9.85329 15.528L18.2613 6.32599C18.6353 5.91699 19.2673 5.88999 19.6753 6.26199C20.0823 6.63399 20.1103 7.26699 19.7383 7.67399L10.6013 17.674C10.4143 17.88 10.1483 17.998 9.87029 18H9.86329Z" fill="#00ff00"/>
-        </svg></i>`,
-      title: "Los Cambios fueron Guardados",
-      showConfirmButton: false,
-      iconColor: "#fff",
-      timer: 2000,
-      customClass: {
-        title: "title fs-4 pb-5",
-      },
-    });
+    alertEditRecruiter()
     navigate("/recruiters");
   };
 
@@ -83,9 +72,9 @@ const EditRecruiter = () => {
 
   return (
     <div
-      className={`container d-flex flex-column align-items-center ${styles.container}`}
+      className={`container d-flex flex-column align-items-center mt-5 ${styles.container}`}
     >
-      <div className="row mt-3 mb-3 fs-4 title d-flex justify-content-center">
+      <div className="row mt-5 mb-5 fs-4 title d-flex justify-content-center">
         Editar Reclutador
       </div>
 
