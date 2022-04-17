@@ -143,7 +143,7 @@ const Reports = () => {
       </div>
 
       {/* Tabla */}
-      <div className="container-fluid pt-lg-4  pe-md-3">
+      <div className="container-fluid pt-lg-4  pe-md-3 footerBotton">
         <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
           <div className="col-2 col-md-1 col-lg-1 text-start">
             <strong>#</strong>
