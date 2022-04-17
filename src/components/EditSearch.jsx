@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllSearch,
   getSingleSearch,
   editRecruiter,
   getAssignment,
@@ -56,7 +55,7 @@ const EditSearch = () => {
       getAssignment({ country: country.value, area_search: area_ser.value })
     ).then((data) => setRecruiter(data.payload));
   }, [area_ser.value, country.value]);
-  console.log("estos son los reclutadores", recruiter);
+  // console.log("estos son los reclutadores", recruiter);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,8 +95,8 @@ const EditSearch = () => {
     }
   };
 
-  console.log(recruiterInfo)
-  console.log(recruiter)
+  console.log("SET_REC", recruiterInfo)
+  // console.log(recruiter)
 
   return (
     <div className={`containerSearchEdit ${styles.container}`}>
@@ -239,9 +238,6 @@ const EditSearch = () => {
                           <td>{recruiter.surname}</td>
                           <td>
                             <tr>{recruiter.area_rec}</tr>
-                            {/* <tr>{recruiter.areas[0]}</tr>
-                                                <tr>{recruiter?.areas[1]}</tr>
-                                                <tr>{recruiter?.areas[2]}</tr> */}
                           </td>
                           <td>
                             {" "}

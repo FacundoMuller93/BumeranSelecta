@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   deleteSearch,
   getSearchsList,
-  getFilteredByDate,
 } from "../store/searchs";
 import { pageChange } from "../store/page";
 import styles from "../assets/styles/Recruiters.module.scss";
@@ -21,18 +20,6 @@ const Search = () => {
   const [estado, setEstado] = useState("Todas");
   const [country, setCountry] = useState("Todos");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let data = [start_date.value, end_date.value];
-    let state = false;
-    data.forEach((element) => {
-      if (element == "") {
-        state = true;
-      }
-    });
-    if (state) setValidation(false);
-  };
-
   //Modal
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState({});
@@ -42,7 +29,6 @@ const Search = () => {
     setSelected(search);
     setShow(true);
   };
-   //
 
   //dispatch y selector
   const dispatch = useDispatch();
@@ -50,8 +36,8 @@ const Search = () => {
 
   //carga de todas las búsquedas
   useEffect(() => {
-    dispatch(getSearchsList({ page: page, state: estado, country: country }));
-  }, [page, estado, country]);
+    dispatch(getSearchsList({ page: page, state: estado, country: country, filter_start: start_date.value, filter_end: end_date.value }));
+  }, [page, estado, country, start_date.value, end_date.value]);
 
   //eliminar busqueda
   const handleDelete = (e, searchId) => {
@@ -72,16 +58,6 @@ const Search = () => {
   const handleEstado = (est) => {
     dispatch(pageChange({ page: 1 }));
     setEstado(est);
-  };
-
-  //filtrar por fechas
-  const filterDate = async () => {
-    await dispatch(
-      getFilteredByDate({
-        filter_start: start_date.value,
-        filter_end: end_date.value,
-      })
-    );
   };
 
   const handleFilterByCountry = (e, cntry) => {
@@ -258,7 +234,6 @@ const Search = () => {
 
           <Form
             className={`${styles.form} col-12 col-md-12 col-lg-6 mt-3 mt-lg-1`}
-            onSubmit={handleSubmit}
           >
             <div className="row">
               <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 pe-lg-1 title">
@@ -296,16 +271,6 @@ const Search = () => {
                   type="date"
                 />
               </Form.Group>
-              <div className="col-12 mt-3 text-center pb-md-5 col-lg-4 mt-lg-0 ms-lg-0 ps-lg-0 pb-lg-0 text-lg-start">
-                <Button
-                  className={`${styles.addSearchBtn} w-50 mt-3 mt-lg-0`}
-                  onClick={() => {
-                    filterDate();
-                  }}
-                >
-                  Buscar
-                </Button>{" "}
-              </div>
             </div>
           </Form>
         </div>

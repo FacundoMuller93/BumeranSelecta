@@ -22,8 +22,6 @@ export const endSearch = createAsyncThunk("END_SEARCH", searchService.endSearchS
 
 export const deleteRecruiterSearch = createAsyncThunk("END_SEARCH", searchService.deleteRecruiterSearchServices);
 
-export const getFilteredByDate = createAsyncThunk("GET_DATEFILTERED", searchService.filteredByDateSearchsServices);
-
 export const getAssignment = createAsyncThunk("GET_ ASSIGNMENT", searchService.assignmentSearchsServices)
 
 const searchSlice = createSlice({
@@ -76,14 +74,6 @@ const searchSlice = createSlice({
         },
         [getSearchsList.pending]: (state, action) => {
             state.loading = true
-        },
-        [getFilteredByDate.fulfilled]: (state, action) => {
-            state.data = action.payload
-            state.loading = false
-        },
-        [getFilteredByDate.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.error.message
         },
         [getAssignment.pending]: (state, action) => {
             state.loading = true

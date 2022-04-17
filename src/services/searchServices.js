@@ -84,34 +84,19 @@ export const editSearchServices = async ({
   }
 }
 
-export const getSearchsListService = async ({page, state, country}) => {
+export const getSearchsListService = async ({page, state, country, filter_start, filter_end}) => {
+  console.log("filter_START", filter_start)
   try {
     const pendingSearchs = await axios.post(
       `http://localhost:3001/api/search/list`, {
         page: page,
         state: state,
-        country: country
+        country: country,
+        filter_start: filter_start,
+        filter_end: filter_end
       }
     )
     return pendingSearchs.data
-  } catch (error) {
-    throw error
-  }
-}
-
-export const filteredByDateSearchsServices = async ({
-  filter_start,
-  filter_end,
-}) => {
-  try {
-    const filteredByDate = await axios.post(
-      "http://localhost:3001/api/search/filter_date",
-      {
-        filter_start: filter_start,
-        filter_end: filter_end,
-      }
-    )
-    return filteredByDate.data
   } catch (error) {
     throw error
   }
