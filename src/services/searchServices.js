@@ -124,6 +124,7 @@ export const endSearchSearchServices = async ({
   end_date,
   rating,
   recruiterId,
+  commentary,
 }) => {
   try {
     const endSearch = await axios.put(`http://localhost:3001/api/search/end-search/${id}`,
@@ -132,6 +133,7 @@ export const endSearchSearchServices = async ({
         end_date: end_date,
         rating: rating,
         recruiterId: recruiterId,
+        commentary: commentary,
       }
     )
     return endSearch.data

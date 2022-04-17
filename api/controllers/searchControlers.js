@@ -229,8 +229,7 @@ exports.assignment = (req, res) => {
 }
 
 exports.endSearch = async (req, res) => {
-  const { id, end_date, rating, recruiterId } = req.body
-  console.log(req.body)
+  const { id, end_date, rating, recruiterId, commentary } = req.body
   try {
     const editSearch = await Searchs.update(
       {
@@ -242,12 +241,11 @@ exports.endSearch = async (req, res) => {
         where: { id: id },
       }
     )
-    //res.status(200).send(editSearch)
-
     const editRecruiter = await Recruiters.update(
       {
         rating: rating,
-        active_searchs: Sequelize.literal("active_searchs - 1"),
+        active_searchs: Sequelize.literal('active_searchs - 1'),
+        description_rec: commentary,
       },
       {
         where: { id: recruiterId },
