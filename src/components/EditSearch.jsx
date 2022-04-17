@@ -24,7 +24,6 @@ const EditSearch = () => {
   const selectedRecruiter = useSelector(state => state.recruiter.singleRecruiter)
   const { id } = useParams();
   const [validation, setValidation] = useState(true);
-  // const [recruiterInfo, setRecruiterInfo] = useState({});
   const [recruiter, setRecruiter] = useState([]);
 
   const country = useInput();
@@ -61,7 +60,6 @@ const EditSearch = () => {
       getAssignment({ country: country.value, area_search: area_ser.value })
     ).then((data) => setRecruiter(data.payload));
   }, [area_ser.value, country.value, recruiterId.value]);
-  // console.log("estos son los reclutadores", recruiter);
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -96,9 +94,6 @@ const EditSearch = () => {
   }
 
   if(!selectedRecruiter.id) return <div></div>
-
-  // console.log("SET_REC", recruiterInfo)
-  // console.log(recruiter)
 
   return (
     <div className={`containerSearchEdit ${styles.container}`}>
