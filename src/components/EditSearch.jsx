@@ -1,65 +1,68 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import {
-  getAllSearch,
   getSingleSearch,
   editRecruiter,
   getAssignment,
-} from "../store/searchs";
-import { useParams } from "react-router";
-import { useNavigate, Link } from "react-router-dom";
-import Row from "react-bootstrap/Row";
-import Form from "react-bootstrap/Form";
-import { Button } from "react-bootstrap";
-import Progress from "../commons/Progress";
-import arr from "../hooks/array";
-import useInput from "../hooks/useInput";
-import "../assets/styles/SearchEdit.scss";
-import styles from "../assets/styles/Recruiters.module.scss";
+} from "../store/searchs"
+import { getSingleRecruiter } from "../store/recruiters"
+import { useParams } from "react-router"
+import { useNavigate, Link } from "react-router-dom"
+import Row from "react-bootstrap/Row"
+import Form from "react-bootstrap/Form"
+import { Button } from "react-bootstrap"
+import Progress from "../commons/Progress"
+import arr from "../hooks/array"
+import useInput from "../hooks/useInput"
+import "../assets/styles/SearchEdit.scss"
+import styles from "../assets/styles/Recruiters.module.scss"
 import { editSearch} from "../utils/alerts";
 
 const EditSearch = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const [validation, setValidation] = useState(true);
-  const [recruiterInfo, setRecruiterInfo] = useState({});
-  const [recruiter, setRecruiter] = useState([]);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const selectedRecruiter = useSelector(state => state.recruiter.singleRecruiter)
+  const { id } = useParams()
+  const [validation, setValidation] = useState(true)
+  const [recruiter, setRecruiter] = useState([])
 
-  const country = useInput();
-  const area_ser = useInput();
-  const position = useInput();
-  const description_ser = useInput();
-  const vacancies = useInput();
-  const lapse_search = useInput();
-  const start_date = useInput(null);
+  const country = useInput()
+  const area_ser = useInput()
+  const position = useInput()
+  const description_ser = useInput()
+  const vacancies = useInput()
+  const lapse_search = useInput()
+  const start_date = useInput()
+  const recruiterId = useInput()
 
-  useEffect(() => {
-    dispatch(getSingleSearch(id)).then((data) => {
-      country.setValue(data.payload.country);
-      area_ser.setValue(data.payload.area_search);
-      position.setValue(data.payload.position);
-      description_ser.setValue(data.payload.description_search);
-      vacancies.setValue(data.payload.vacancies);
-      lapse_search.setValue(data.payload.lapse_search);
-      return dispatch(
+  useEffect(async () => {
+    await dispatch(getSingleSearch(id)).then(data => {
+      country.setValue(data.payload.country)
+      area_ser.setValue(data.payload.area_search)
+      position.setValue(data.payload.position)
+      description_ser.setValue(data.payload.description_search)
+      vacancies.setValue(data.payload.vacancies)
+      lapse_search.setValue(data.payload.lapse_search)
+      start_date.setValue(data.payload.start_date)
+      recruiterId.setValue(data.payload.recruiterId)
+      dispatch(
         getAssignment({
           country: data.payload.country,
           area_search: data.payload.area_search,
         })
-      ).then((data) => setRecruiter(data.payload));
-    });
-  }, []);
+      ).then(data => setRecruiter(data.payload))
+    })
+  }, [])
 
-  useEffect(() => {
+  useEffect(async () => {
+    await dispatch(getSingleRecruiter(recruiterId.value))
     dispatch(
       getAssignment({ country: country.value, area_search: area_ser.value })
-    ).then((data) => setRecruiter(data.payload));
-  }, [area_ser.value, country.value]);
-  console.log("estos son los reclutadores", recruiter);
+    ).then(data => setRecruiter(data.payload))
+  }, [area_ser.value, country.value, recruiterId.value])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault()
     let data = [
       country.value,
       area_ser.value,
@@ -67,20 +70,14 @@ const EditSearch = () => {
       description_ser.value,
       vacancies.value,
       lapse_search.value,
-    ];
-    let state = false;
-    if (recruiterInfo.id) data.push(start_date.value);
-    data.forEach((element) => {
-      if (element == "" || element == null) {
-        state = true;
-      }
-    });
-    if (state) setValidation(false);
+    ]
+    let state = false
+    if (!selectedRecruiter.id || !start_date.value) return setValidation(false); 
     else {
       await dispatch(
         editRecruiter({
           id: id,
-          recruiterId: recruiterInfo.id,
+          recruiterId: selectedRecruiter.id,
           description_search: description_ser.value,
           country: country.value,
           area_search: area_ser.value,
@@ -94,16 +91,15 @@ const EditSearch = () => {
       editSearch()
       navigate("/searchs");
     }
-  };
+  }
 
-  console.log(recruiterInfo)
-  console.log(recruiter)
+  if(!selectedRecruiter.id) return <div></div>
 
   return (
     <div className={`containerSearchEdit ${styles.container}`}>
       <div className="containerForm mt-2">
         <div className=" mb-0 fs-4 mx-5 title d-flex justify-content-center">
-          Editar Búsqueda
+          Editar Búsqueda Iniciada
         </div>
         <Form
           onSubmit={handleSubmit}
@@ -125,7 +121,7 @@ const EditSearch = () => {
                 <option selected disabled value="">
                   Países
                 </option>
-                {arr.country.map((i) => (
+                {arr.country.map(i => (
                   <option>{i}</option>
                 ))}
               </Form.Select>
@@ -144,7 +140,7 @@ const EditSearch = () => {
                 <option selected disabled value="">
                   Area
                 </option>
-                {arr.area.map((i) => (
+                {arr.area.map(i => (
                   <option>{i}</option>
                 ))}
               </Form.Select>
@@ -191,7 +187,7 @@ const EditSearch = () => {
                 <option selected disabled value="">
                   Vacantes
                 </option>
-                {arr.vacancies().map((i) => (
+                {arr.vacancies().map(i => (
                   <option>{i}</option>
                 ))}
               </Form.Select>
@@ -239,9 +235,6 @@ const EditSearch = () => {
                           <td>{recruiter.surname}</td>
                           <td>
                             <tr>{recruiter.area_rec}</tr>
-                            {/* <tr>{recruiter.areas[0]}</tr>
-                                                <tr>{recruiter?.areas[1]}</tr>
-                                                <tr>{recruiter?.areas[2]}</tr> */}
                           </td>
                           <td>
                             {" "}
@@ -252,12 +245,12 @@ const EditSearch = () => {
                               className="inputRadio"
                               name="group1"
                               type="radio"
-                              id={1}
-                              onClick={() => setRecruiterInfo(recruiter)}
+                              id={i}
+                              onClick={() => dispatch(getSingleRecruiter(recruiter.id))}
                             />
                           </td>
                         </tr>
-                      );
+                      )
                     })}
                   </tbody>
                 </table>
@@ -278,8 +271,7 @@ const EditSearch = () => {
                     : "err rounded-pill"
                 }
                 value={
-                  recruiterInfo.name
-                    ? `${recruiterInfo.name} ${recruiterInfo.surname}`
+                  selectedRecruiter.name ? `${selectedRecruiter.name} ${selectedRecruiter.surname}`
                     : null
                 }
                 placeholder="Nombre del reclutador"
@@ -294,7 +286,7 @@ const EditSearch = () => {
                     ? "inputLogin rounded-pill"
                     : "err rounded-pill"
                 }
-                value={recruiterInfo.rating}
+                value={selectedRecruiter.rating}
                 placeholder="Valoracion del reclutador"
               />
             </Form.Group>
@@ -329,7 +321,7 @@ const EditSearch = () => {
         </Form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EditSearch;
+export default EditSearch
