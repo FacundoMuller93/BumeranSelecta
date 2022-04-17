@@ -106,6 +106,14 @@ const Search = () => {
     if (state === "Cerrada") return ""
   }
 
+  const handleStartDate = (start_date) => {
+    dispatch(pageChange({ page: 1 }))
+  }
+
+  const handleEndDate = (end_date) => {
+    dispatch(pageChange({ page: 1 }))
+  }
+
   if (!search.filas) return <h1 className={styles.container}>No Data</h1>
 
   return (
@@ -253,6 +261,7 @@ const Search = () => {
                   className={"inputLogin rounded-pill"}
                   {...start_date}
                   type="date"
+                  onClick={()=> handleStartDate()}
                 />
               </Form.Group>
               <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0 text-center pe-lg-1 col-lg-1 title">
@@ -267,6 +276,7 @@ const Search = () => {
                   className={"inputLogin rounded-pill"}
                   {...end_date}
                   type="date"
+                  onClick={()=> handleEndDate()}
                 />
               </Form.Group>
             </div>
