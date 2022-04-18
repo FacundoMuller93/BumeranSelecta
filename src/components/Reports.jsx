@@ -3,7 +3,7 @@ import { Dropdown } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { getRecruitersPerArea, topRecruiters } from "../store/reports";
 import "../assets/styles/Reports.scss";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import Progress from "../commons/Progress";
 import Carousel from "../Pages/Carousel"
 
