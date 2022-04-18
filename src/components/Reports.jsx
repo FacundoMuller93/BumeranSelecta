@@ -9,22 +9,25 @@ import Carousel from "../Pages/Carousel"
 
 const Reports = () => {
   const dispatch = useDispatch();
-  const reports = useSelector((state) => state.reports.data);
+  //const reports = useSelector((state) => state.reports.data);
   const [areaValue, setAreaValue] = useState("todas");
   const [country, setCountry] = useState("todos");
-  
+  const [reports, setReports] = useState()
+
   useEffect(() => {
     dispatch(getRecruitersPerArea({ areaValue: areaValue, country: country }));
   }, [areaValue, country]);
 
   useEffect(() => {
-    dispatch(topRecruiters());
+    dispatch(topRecruiters()).then(res => setReports(res.payload));
   }, []);
 
   if (!areaValue) return <h1 className="footerBotton">No Data</h1>;
+
   return (
+
     <>
-    <Carousel/>
+      <Carousel />
       <div className={`container-fluid`}>
         <div className="row d-flex align-items-center mb-lg-2">
           <div className="col-12 justify-content-center text-center col-lg-4 d-flex justify-content-lg-end">
@@ -141,49 +144,51 @@ const Reports = () => {
       </div>
 
       {/* Tabla */}
-      <div className="container-fluid pt-lg-4  pe-md-3 footerBotton">
-        <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
-          <div className="col-2 col-md-1 col-lg-1 text-start">
-            <strong>#</strong>
-          </div>
-          <div className="col-6 col-md-3 col-lg-2 text-start">
-            <strong>Nombre y Apellido</strong>
-          </div>
-
-          <div className="col-4 col-md-2 col-lg-2 text-lg-start">
-            <strong>País</strong>
-          </div>
-          <div className="d-none d-md-block col-md-3 col-lg-4">
-            <strong>Area</strong>
-          </div>
-          <div className="d-none d-md-block col-md-3 col-lg-2">
-            <strong>Rating</strong>
-          </div>
-        </div>
-
-        {reports.map((recruiter, i) => {
-          return (
-            <div className={`row py-3 pe-1 border border-1 title`}>
-              <div className="col-2 pb-3 col-md-1 col-lg-1 pb-lg-0">
-                {i + 1}
-              </div>
-              <div className="col-6 pb-3 col-md-3 col-lg-2 pb-lg-0 text-lg-start">
-                {`${recruiter.name}`} {`${recruiter.surname}`}
-              </div>
-
-              <div className="col-4 col-md-2 col-lg-2 ps-lg-2">
-                {recruiter.country}
-              </div>
-              <div className="d-none d-md-block col-md-3 col-lg-4 ps-lg-3">
-                {recruiter.area_rec}
-              </div>
-              <div className="d-none d-md-block col-md-3 text-center col-lg-2">
-                <Progress ranking={recruiter.rating} />
-              </div>
+      { reports ?
+        (<div className="container-fluid pt-lg-4  pe-md-3 footerBotton">
+          <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
+            <div className="col-2 col-md-1 col-lg-1 text-start">
+              <strong>#</strong>
             </div>
-          );
-        })}
-      </div>
+            <div className="col-6 col-md-3 col-lg-2 text-start">
+              <strong>Nombre y Apellido</strong>
+            </div>
+
+            <div className="col-4 col-md-2 col-lg-2 text-lg-start">
+              <strong>País</strong>
+            </div>
+            <div className="d-none d-md-block col-md-3 col-lg-4">
+              <strong>Area</strong>
+            </div>
+            <div className="d-none d-md-block col-md-3 col-lg-2">
+              <strong>Rating</strong>
+            </div>
+          </div>
+
+          {reports.map((recruiter, i) => {
+            return (
+              <div className={`row py-3 pe-1 border border-1 title`} key={i}>
+                <div className="col-2 pb-3 col-md-1 col-lg-1 pb-lg-0">
+                  {i + 1}
+                </div>
+                <div className="col-6 pb-3 col-md-3 col-lg-2 pb-lg-0 text-lg-start">
+                  {`${recruiter.name}`} {`${recruiter.surname}`}
+                </div>
+
+                <div className="col-4 col-md-2 col-lg-2 ps-lg-2">
+                  {recruiter.country}
+                </div>
+                <div className="d-none d-md-block col-md-3 col-lg-4 ps-lg-3">
+                  {recruiter.area_rec}
+                </div>
+                <div className="d-none d-md-block col-md-3 text-center col-lg-2">
+                  <Progress ranking={recruiter.rating} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        ) : null}
     </>
   );
 };
