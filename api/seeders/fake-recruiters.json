@@ -1,5 +1,4 @@
-[
-	{
+[{
 		"id" : 9,
 		"name" : "Frederich",
 		"surname" : "Dagnan",
@@ -6946,5 +6945,4 @@
 		"active_searchs" : 0,
 		"createdAt" : "2021-08-23 18:29:56",
 		"updatedAt" : "2022-04-18 03:10:00"
-	}
-]
+	}]

@@ -9,7 +9,7 @@ import Carousel from "../Pages/Carousel"
 
 const Reports = () => {
   const dispatch = useDispatch();
-  //const reports = useSelector((state) => state.reports.data);
+  // const reports = useSelector((state) => state.reports.data);
   const [areaValue, setAreaValue] = useState("todas");
   const [country, setCountry] = useState("todos");
   const [reports, setReports] = useState()
