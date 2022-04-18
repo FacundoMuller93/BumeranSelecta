@@ -29,7 +29,7 @@ exports.getAll = (req, res) => {
   const getPagingData = (recruiter, page, limit) => {
     const { count: totalItems, rows: filas } = recruiter;
     const currentPage = page ? +page : 0;
-    const totalPages = Math.ceil(totalItems / limit);
+    const totalPages = Math.floor(totalItems / limit);
     return { totalItems, filas, totalPages, currentPage };
   }
   try {
