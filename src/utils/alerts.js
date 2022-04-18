@@ -50,6 +50,7 @@ export const alertDeleteRecruiter = ({
   userId,
   getAllRecruiters,
   page,
+  pageChange
 }) => {
   return Swal.fire({
     iconHtml: `<i><svg width="70" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,6 +85,7 @@ export const alertDeleteRecruiter = ({
           title: "title",
         },
       });
+      dispatch(pageChange({ page: 1 }))
       dispatch(getAllRecruiters({ page }));
     }
   });
@@ -133,8 +135,10 @@ export const alertDeleteSearch = ({
         },
       });
     }
-    dispatch(pageChange({ page: 1 }))
-    dispatch(getSearchsList({ page: page, state: estado, country: country }))
+    Promise.all([
+      dispatch(pageChange({ page: 1 })),
+      dispatch(getSearchsList({ page: page, state: estado, country: country }))
+    ])
   });
 };
 
