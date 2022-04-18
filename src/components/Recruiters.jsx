@@ -182,18 +182,18 @@ const Recruiters = () => {
               </Modal.Header>
               <Modal.Body className="ps-5 py-4">
                 <div className="pb-3">
-                  Nombre: {`${selected.name} ${selected.surname}`}
+                  Nombre: {`${selected.name} ${selected?.surname}`}
                 </div>
-                <div className="pb-3">País: {selected.country}</div>
-                <div className="pb-3">Área: {selected.rec_area}</div>
+                <div className="pb-3">País: {selected?.country}</div>
+                <div className="pb-3">Área: {selected?.area_rec}</div>
                 <div className="pb-3">
-                  Búsquedas activas: {selected.searchs}
-                </div>
-                <div className="pb-3">
-                  Comentarios: {selected.description_rec}
+                  Búsquedas activas: {selected?.active_searchs}
                 </div>
                 <div className="pb-3">
-                  Calificación Promedio: {selected.rating}
+                  Comentarios: {selected?.description_rec}
+                </div>
+                <div className="pb-3">
+                  Calificación Promedio: {selected?.rating}
                 </div>
               </Modal.Body>
             </Modal>

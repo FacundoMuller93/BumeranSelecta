@@ -245,7 +245,7 @@ exports.endSearch = async (req, res) => {
       {
         rating: rating,
         active_searchs: Sequelize.literal('active_searchs - 1'),
-        description_rec: commentary,
+        description_rec: Sequelize.fn('CONCAT', Sequelize.col("description_rec"), "||" ,commentary),
       },
       {
         where: { id: recruiterId },
