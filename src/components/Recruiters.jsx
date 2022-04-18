@@ -7,6 +7,7 @@ import styles from "../assets/styles/Recruiters.module.scss";
 import Progress from "../commons/Progress";
 import { alertDeleteRecruiter } from "../utils/alerts";
 import PaginationComp from "../commons/Pagination";
+import { pageChange } from "../store/page"
 
 const Recruiters = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Recruiters = () => {
       userId,
       getAllRecruiters,
       page: page,
+      pageChange
     });
   };
 
