@@ -9,13 +9,13 @@ import Carousel from "../Pages/Carousel"
 
 const Reports = () => {
   const dispatch = useDispatch();
-  //const reports = useSelector((state) => state.reports.data);
+  //const report = useSelector((state) => state.reports.data);
   const [areaValue, setAreaValue] = useState("todas");
   const [country, setCountry] = useState("todos");
   const [reports, setReports] = useState()
 
   useEffect(() => {
-    dispatch(getRecruitersPerArea({ areaValue: areaValue, country: country }));
+    dispatch(getRecruitersPerArea({ areaValue: areaValue, country: country })).then(res => setReports(res.payload));
   }, [areaValue, country]);
 
   useEffect(() => {
@@ -144,7 +144,7 @@ const Reports = () => {
       </div>
 
       {/* Tabla */}
-      { reports ?
+      {reports ?
         (<div className="container-fluid pt-lg-4  pe-md-3 footerBotton">
           <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
             <div className="col-2 col-md-1 col-lg-1 text-start">
