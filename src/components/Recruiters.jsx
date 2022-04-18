@@ -37,7 +37,7 @@ const Recruiters = () => {
     dispatch(getAllRecruiters({ page: page }));
   }, [page]);
 
-  if (!recruiter.filas) return <h1 className={styles.container}>No Data</h1>;
+  if (!recruiter.filas) return <h1 className={styles.container}></h1>;
 
   return (
     <>
@@ -71,10 +71,13 @@ const Recruiters = () => {
             <div className="col-4 col-md-2 col-lg-2 text-lg-start">
               <strong>País</strong>
             </div>
-            <div className="d-none d-md-block col-md-3 col-lg-4">
-              <strong>Area</strong>
+            <div className="d-none d-md-block col-md-3 col-lg-3">
+              <strong>Área</strong>
             </div>
-            <div className="d-none d-md-block col-md-3 col-lg-2">
+            <div className="d-none d-md-block col-md-3 col-lg-1">
+              <strong>Búsquedas Activas</strong>
+            </div>
+            <div className="d-none d-md-block col-md-3 ms-lg-4 col-lg-1">
               <strong>Rating</strong>
             </div>
           </div>
@@ -92,16 +95,19 @@ const Recruiters = () => {
                 <div className="col-4 col-md-2 col-lg-2 ps-lg-2">
                   {recruiter.country}
                 </div>
-                <div className="d-none d-md-block col-md-3 col-lg-4 ps-lg-3">
+                <div className="d-none d-md-block col-md-3 col-lg-3 ps-lg-3">
                   {recruiter.area_rec}
                 </div>
-                <div className="d-none d-md-block col-md-3 text-center col-lg-2">
+                <div className="d-none d-md-block col-md-3 col-lg-1 ps-lg-3 text-center">
+                  {recruiter.active_searchs}
+                </div>
+                <div className="d-none d-md-block col-md-3 text-center col-lg-1 ms-lg-5">
                   <Progress ranking={recruiter.rating} />
                 </div>
                 <div className="col-4 d-lg-none"></div>
                 <div className="col-4 d-lg-none"></div>
 
-                <div className="col-4 col-md-3 ms-md-5 ps-md-5 pt-md-3 col-lg-1 pt-lg-0 ms-lg-0 ps-lg-0">
+                <div className="col-4 col-md-3 ms-md-5 ps-md-5 pt-md-3 col-lg-1 pt-lg-0 ms-lg-5 text-center  ps-lg-0">
                   <div className="row justify-content-end">
                     <div className="className col-3 col-lg-4">
                       <i
@@ -175,25 +181,25 @@ const Recruiters = () => {
           })}
           {
             <Modal show={show} size="lg" onHide={handleClose}>
-              <Modal.Header closeButton>
+              <Modal.Header closeButton className="bg-info text-white">
                 <Modal.Title className="ms-auto">
                   Detalles del Reclutador
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body className="ps-5 py-4">
                 <div className="pb-3">
-                  Nombre: {`${selected.name} ${selected?.surname}`}
+                  <strong>Nombre:</strong> {`${selected.name} ${selected.surname}`}
                 </div>
-                <div className="pb-3">País: {selected?.country}</div>
-                <div className="pb-3">Área: {selected?.area_rec}</div>
+                <div className="pb-3"><strong>País:</strong> {selected.country}</div>
+                <div className="pb-3"><strong>Área:</strong> {selected.area_rec}</div>
                 <div className="pb-3">
-                  Búsquedas activas: {selected?.active_searchs}
-                </div>
-                <div className="pb-3">
-                  Comentarios: {selected?.description_rec}
+                <strong>Búsquedas activas:</strong> {selected.active_searchs}
                 </div>
                 <div className="pb-3">
-                  Calificación Promedio: {selected?.rating}
+                <strong>Comentarios:</strong> {selected.description_rec}
+                </div>
+                <div className="pb-3">
+                <strong>Calificación Promedio:</strong> {selected.rating}
                 </div>
               </Modal.Body>
             </Modal>
