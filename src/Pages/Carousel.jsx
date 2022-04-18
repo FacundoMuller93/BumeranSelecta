@@ -85,7 +85,7 @@ const CarouselReport = () => {
     };
 
     return (
-        <Carousel variant="dark" >
+        <Carousel variant="dark" className="mt-5  marginBottom">
             {searchBar ? (
                 <Carousel.Item>
                     <img
@@ -103,7 +103,7 @@ const CarouselReport = () => {
                                         datasets: [
                                             {
                                                 type: 'bar',
-                                                label: 'Dataset 2',
+                                                label: 'Nuevas ',
                                                 backgroundColor: colorIniciada,
                                                 data: searchBar?.map(({ state_search }) => state_search.Nueva),
                                                 borderColor: 'white',
@@ -111,7 +111,7 @@ const CarouselReport = () => {
                                             },
                                             {
                                                 type: 'bar',
-                                                label: 'Dataset 3',
+                                                label: 'Iniciadas ',
                                                 backgroundColor: colorNueva,
                                                 data: searchBar?.map(({ state_search }) => state_search.Iniciada),
                                                 borderColor: 'white',
@@ -119,7 +119,7 @@ const CarouselReport = () => {
                                             },
                                             {
                                                 type: 'bar', //busquedas finalizadas por area
-                                                label: 'Dataset 3',
+                                                label: 'Finalizadas',
                                                 backgroundColor: colorFinalizada,
                                                 data: searchBar?.map(({ state_search }) => state_search.Cerrada),
                                                 borderWidth: 2,
@@ -236,22 +236,23 @@ const CarouselReport = () => {
                         <div className="title text-center fs-3">Reclutadores por país</div>
                         <div className="containerCarousel">
 
-
-                            <Chart type='bar' options={options} data={
-                                {
-                                    labels: recruiterBar?.map(({ country }) => country),
-                                    datasets: [
-                                        {
-                                            type: 'bar',
-                                            label: 'Dataset 5',
-                                            backgroundColor: '#FF8000',
-                                            data: recruiterBar?.map(({ count }) => count),
-                                            borderColor: 'white',
-                                            borderWidth: 2,
-                                        },
-                                    ],
-                                }
-                            } className="graphicBarAux" />
+                            <div className="aux">
+                                <Chart type='bar' options={options} data={
+                                    {
+                                        labels: recruiterBar?.map(({ country }) => country),
+                                        datasets: [
+                                            {
+                                                type: 'bar',
+                                                label: 'Reclutadores',
+                                                backgroundColor: '#FF8000',
+                                                data: recruiterBar?.map(({ count }) => count),
+                                                borderColor: 'white',
+                                                borderWidth: 2,
+                                            },
+                                        ],
+                                    }
+                                } className="graphicBarAux" />
+                            </div>
                         </div>
 
 

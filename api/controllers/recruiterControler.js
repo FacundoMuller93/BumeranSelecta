@@ -34,11 +34,12 @@ exports.getAll = (req, res) => {
   }
   try {
     Recruiter.findAndCountAll({
-      include: Searchs,
+      // include: Searchs,
       order: [["Id", "DESC"]],
       limit: initialLimit,
       offset: cut,
     }).then(data => {
+      console.log("DATA", data)
       const response = getPagingData(data, page, initialLimit)
       res.status(200).send(response)
     })
