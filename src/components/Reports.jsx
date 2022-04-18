@@ -157,10 +157,13 @@ const Reports = () => {
             <div className="col-4 col-md-2 col-lg-2 text-lg-start">
               <strong>País</strong>
             </div>
-            <div className="d-none d-md-block col-md-3 col-lg-4">
-              <strong>Area</strong>
+            <div className="d-none d-md-block col-md-3 col-lg-3">
+              <strong>Área</strong>
             </div>
             <div className="d-none d-md-block col-md-3 col-lg-2">
+              <strong>Búsquedas Activas</strong>
+            </div>
+            <div className="d-none d-md-block col-md-3 col-lg-2 ps-lg-1 ">
               <strong>Rating</strong>
             </div>
           </div>
@@ -178,10 +181,13 @@ const Reports = () => {
                 <div className="col-4 col-md-2 col-lg-2 ps-lg-2">
                   {recruiter.country}
                 </div>
-                <div className="d-none d-md-block col-md-3 col-lg-4 ps-lg-3">
+                <div className="d-none d-md-block col-md-3 col-lg-3 ps-lg-3">
                   {recruiter.area_rec}
                 </div>
-                <div className="d-none d-md-block col-md-3 text-center col-lg-2">
+                <div className="d-none d-md-block col-md-3 col-lg-2 text-lg-center ps-lg-3">
+                  {recruiter.active_searchs}
+                </div>
+                <div className="d-none d-md-block col-md-3 text-center col-lg-1 pe-lg-1 ms-lg-5">
                   <Progress ranking={recruiter.rating} />
                 </div>
               </div>

@@ -94,7 +94,7 @@ const CarouselReport = () => {
                         height={"450px"}
                     />
                     <Carousel.Caption bsPrefix={"containerCarouselSearch"}>
-                        <div className="title text-center fs-3">Búsqueda por areas y estados</div>
+                        <div className="title text-center pb-lg-4 fs-3">Búsqueda por areas y estados</div>
                         <div className="containerCarousel">
                             <div>
                                 <Chart type='bar' options={options} data={
@@ -148,7 +148,7 @@ const CarouselReport = () => {
                     />
                     <Carousel.Caption bsPrefix={"containerCarouselSearch"}>
 
-                        <div className="title text-center fs-3">Búsqueda por estados</div>
+                        <div className="title text-center pb-lg-4 fs-3">Búsqueda por estados</div>
                         <div className="containerCarousel">
 
                             <div >
@@ -189,7 +189,7 @@ const CarouselReport = () => {
                     />
                     <Carousel.Caption bsPrefix={"containerCarouselSearch"}>
 
-                        <div className="title text-center fs-3">Búsquedas asignadas por reclutador</div>
+                        <div className="title text-center pb-lg-4 fs-3">Búsquedas asignadas por reclutador</div>
                         <div className="containerCarousel">
                             <div >
                                 <PolarArea options={optionsPolar} data={
@@ -233,7 +233,7 @@ const CarouselReport = () => {
                     />
                     <Carousel.Caption bsPrefix={"containerCarouselSearch"}>
 
-                        <div className="title text-center fs-3">Reclutadores por país</div>
+                        <div className="title text-center fs-3 pb-lg-4">Reclutadores por país</div>
                         <div className="containerCarousel">
 
                             <div className="aux">
