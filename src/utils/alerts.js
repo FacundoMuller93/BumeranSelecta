@@ -135,10 +135,8 @@ export const alertDeleteSearch = ({
         },
       });
     }
-    Promise.all([
-      dispatch(pageChange({ page: 1 })),
+      dispatch(pageChange({ page: 1 }))
       dispatch(getSearchsList({ page: page, state: estado, country: country }))
-    ])
   });
 };
 
