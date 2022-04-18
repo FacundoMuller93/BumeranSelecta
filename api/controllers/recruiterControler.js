@@ -39,7 +39,6 @@ exports.getAll = (req, res) => {
       limit: initialLimit,
       offset: cut,
     }).then(data => {
-      console.log("DATA", data)
       const response = getPagingData(data, page, initialLimit)
       res.status(200).send(response)
     })
