@@ -5,7 +5,7 @@ export const LogicSearch = (dataGraphics) => {
         let states = obj.state_search
         let element = true
         data.map((elem, i) => { if (elem.area_search == obj.area_search) { state = i } })
-        if (state) data[state].state_search[states] = obj.count
+        if (state||(state===0)) data[state].state_search[states] = obj.count
         else {
             element = data.push({ area_search: obj.area_search, state_search: {} })
             data[element - 1].state_search[states] = obj.count

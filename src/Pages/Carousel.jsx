@@ -85,7 +85,7 @@ const CarouselReport = () => {
     };
 
     return (
-        <Carousel variant="dark" >
+        <Carousel variant="dark" className="mt-5  marginBottom">
             {searchBar ? (
                 <Carousel.Item>
                     <img
@@ -236,22 +236,23 @@ const CarouselReport = () => {
                         <div className="title text-center fs-3">Reclutadores por país</div>
                         <div className="containerCarousel">
 
-
-                            <Chart type='bar' options={options} data={
-                                {
-                                    labels: recruiterBar?.map(({ country }) => country),
-                                    datasets: [
-                                        {
-                                            type: 'bar',
-                                            label: 'Dataset 5',
-                                            backgroundColor: '#FF8000',
-                                            data: recruiterBar?.map(({ count }) => count),
-                                            borderColor: 'white',
-                                            borderWidth: 2,
-                                        },
-                                    ],
-                                }
-                            } className="graphicBarAux" />
+                            <div className="aux">
+                                <Chart type='bar' options={options} data={
+                                    {
+                                        labels: recruiterBar?.map(({ country }) => country),
+                                        datasets: [
+                                            {
+                                                type: 'bar',
+                                                label: 'Dataset 5',
+                                                backgroundColor: '#FF8000',
+                                                data: recruiterBar?.map(({ count }) => count),
+                                                borderColor: 'white',
+                                                borderWidth: 2,
+                                            },
+                                        ],
+                                    }
+                                } className="graphicBarAux" />
+                            </div>
                         </div>
 
 
