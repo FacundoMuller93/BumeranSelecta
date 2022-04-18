@@ -103,7 +103,7 @@ const CarouselReport = () => {
                                         datasets: [
                                             {
                                                 type: 'bar',
-                                                label: 'Dataset 2',
+                                                label: 'Nuevas ',
                                                 backgroundColor: colorIniciada,
                                                 data: searchBar?.map(({ state_search }) => state_search.Nueva),
                                                 borderColor: 'white',
@@ -111,7 +111,7 @@ const CarouselReport = () => {
                                             },
                                             {
                                                 type: 'bar',
-                                                label: 'Dataset 3',
+                                                label: 'Iniciadas ',
                                                 backgroundColor: colorNueva,
                                                 data: searchBar?.map(({ state_search }) => state_search.Iniciada),
                                                 borderColor: 'white',
@@ -119,7 +119,7 @@ const CarouselReport = () => {
                                             },
                                             {
                                                 type: 'bar', //busquedas finalizadas por area
-                                                label: 'Dataset 3',
+                                                label: 'Finalizadas',
                                                 backgroundColor: colorFinalizada,
                                                 data: searchBar?.map(({ state_search }) => state_search.Cerrada),
                                                 borderWidth: 2,
@@ -243,7 +243,7 @@ const CarouselReport = () => {
                                         datasets: [
                                             {
                                                 type: 'bar',
-                                                label: 'Dataset 5',
+                                                label: 'Reclutadores',
                                                 backgroundColor: '#FF8000',
                                                 data: recruiterBar?.map(({ count }) => count),
                                                 borderColor: 'white',
