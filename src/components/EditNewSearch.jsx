@@ -106,7 +106,7 @@ const EditNewSearch = () => {
             </Form.Group>
 
             <Form.Group className="col-md-4 top" controlId="formGridState">
-              <Form.Label>Area</Form.Label>
+              <Form.Label>Área</Form.Label>
               <Form.Select
                 className={
                   area_ser.value || validation
@@ -116,7 +116,7 @@ const EditNewSearch = () => {
                 {...area_ser}
               >
                 <option selected disabled value="">
-                  Area
+                  Área
                 </option>
                 {arr.area.map((i) => (
                   <option>{i}</option>
@@ -125,7 +125,7 @@ const EditNewSearch = () => {
             </Form.Group>
 
             <Form.Group className="col-md-4" controlId="formGridAddress2">
-              <Form.Label>Posicion</Form.Label>
+              <Form.Label>Posición</Form.Label>
               <Form.Control
                 className={
                   position.value || validation

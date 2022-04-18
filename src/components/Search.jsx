@@ -114,7 +114,7 @@ const Search = () => {
     dispatch(pageChange({ page: 1 }))
   }
 
-  if (!search.filas) return <h1 className={styles.container}>No Data</h1>
+  if (!search.filas) return <h1 className={styles.container}></h1>
 
   return (
     <>
@@ -250,7 +250,7 @@ const Search = () => {
             className={`${styles.form} col-12 col-md-12 col-lg-6 mt-3 mt-lg-1`}
           >
             <div className="row">
-              <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-1 pe-lg-1 title">
+              <div className="col-3 mt-2 ps-5 col-md-5 text-md-end px-md-0  text-center col-lg-3 pe-lg-1 title">
                 Inicio
               </div>
               <Form.Group
@@ -288,19 +288,19 @@ const Search = () => {
           <div className="row text-center sticky-top bg-light border-bottom border-2 border-dark py-3">
             <div className="col-4 col-md-3 col-lg-1">
               <div className="row">
-                <div className="col-1 col-md-1 col-lg-4">
+                <div className="col-1 col-md-1 col-lg-2">
                   <strong>#</strong>
                 </div>
-                <div className="col-1 ps-4 col-md-3 col-lg-8">
+                <div className="col-1 ps-4 col-md-3 col-lg-7">
                   <strong>Estado</strong>
                 </div>
               </div>
             </div>
-            <div className="col-4 col-md-1 col-lg-1">
+            <div className="col-4 col-md-1 col-lg-1 ps-lg-1">
               <strong>País</strong>
             </div>
-            <div className="d-none d-lg-block col-2">
-              <strong>Area</strong>
+            <div className="d-none d-lg-block col-2 ps-lg-1">
+              <strong>Área</strong>
             </div>
             <div className="col-4 col-md-6 col-lg-2">
               <strong>Posición</strong>
@@ -481,24 +481,24 @@ const Search = () => {
           })}
           {
             <Modal show={show} size="lg" onHide={handleClose}>
-              <Modal.Header closeButton>
+              <Modal.Header closeButton className="bg-info text-white">
                 <Modal.Title className="title ms-auto">
                   Detalles de Búsqueda
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body className="title ps-5 py-5">
-                <div className="pb-3">Posición: {selected.position}</div>
-                <div className="pb-3">País: {selected.country}</div>
-                <div className="pb-3">Área: {selected.area_search}</div>
+                <div className="pb-3"><strong>Posición:</strong> {selected.position}</div>
+                <div className="pb-3"><strong>País:</strong> {selected.country}</div>
+                <div className="pb-3"><strong>Área:</strong> {selected.area_search}</div>
                 <div className="pb-3">
-                  Descripción: {selected.description_search}
+                <strong>Descripción:</strong> {selected.description_search}
                 </div>
-                <div className="pb-3">Vacantes: {selected.vacancies}</div>
+                <div className="pb-3"><strong>Vacantes:</strong> {selected.vacancies}</div>
                 <div className="pb-3">
-                  Fecha de Inicio: {selected.start_date}
+                <strong>Fecha de Inicio:</strong> {selected.start_date}
                 </div>
-                <div className="pb-3">Fecha de Cierre: {selected.end_date}</div>
-                <div className="pb-3">Estado: {selected.state_search}</div>
+                <div className="pb-3"><strong>Fecha de Cierre:</strong> {selected.end_date}</div>
+                <div className="pb-3"><strong>Estado:</strong> {selected.state_search}</div>
               </Modal.Body>
             </Modal>
           }

@@ -138,7 +138,7 @@ const EditSearch = () => {
                 {...area_ser}
               >
                 <option selected disabled value="">
-                  Area
+                  Área
                 </option>
                 {arr.area.map(i => (
                   <option>{i}</option>
@@ -147,7 +147,7 @@ const EditSearch = () => {
             </Form.Group>
 
             <Form.Group className="col-md-4" controlId="formGridAddress2">
-              <Form.Label>Posicion</Form.Label>
+              <Form.Label>Posición</Form.Label>
               <Form.Control
                 className={
                   position.value || validation
@@ -221,7 +221,7 @@ const EditSearch = () => {
                       <th scope="col">#</th>
                       <th scope="col">Nombre</th>
                       <th scope="col">Apellido</th>
-                      <th scope="col">Areas</th>
+                      <th scope="col">Áreas</th>
                       <th scope="col">Valoración</th>
                       <th scope="col">Selección</th>
                     </tr>
