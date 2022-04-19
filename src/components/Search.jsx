@@ -55,6 +55,8 @@ const Search = () => {
       page,
       estado,
       country,
+      filter_start: start_date.value,
+      filter_end: end_date.value,
     })
   }
 
