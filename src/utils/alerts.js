@@ -138,7 +138,7 @@ export const alertDeleteSearch = ({
       });
     }
       dispatch(pageChange({ page: 1 }))
-      dispatch(getSearchsList({ page: page, state: estado, country: country, filter_start: filter_start, filter_end: filter_end}))
+      dispatch(getSearchsList({ page: page, state: estado, country: country, filter_start, filter_end }))
   });
 };
 
