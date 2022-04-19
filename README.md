@@ -11,6 +11,6 @@ ABM de búsquedas,
 filtros de búsquedas por estado y por rango de fechas,
 posibilidad de calificar a un reclutador al finalizar una búsqueda,
 asignar reclutadores a búsquedas, así como obtener recomendaciones de reclutadores según calificación promedio, ubicación y otros parámetros,
-sección de reportes que cuenta con datos útiles para el Administrador de la web.
+sección de reportes que cuenta con datos útiles como ranking de reclutadores general o por país/área, y gráficos varios donde pueden apreciarse otros datos de utilidad.
 
 Tecnologías usadas: Javascript, HTML, CSS, Redux, React, React Bootstrap, Sequelize, MySQL ,Express, NodeJS, React Icons, SASS, CSS modules, etc.
