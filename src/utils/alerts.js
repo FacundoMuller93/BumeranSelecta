@@ -101,7 +101,7 @@ export const alertDeleteSearch = ({
   estado,
   country,
   filter_start,
-  filter_end
+  filter_end,
 }) => {
   return Swal.fire({
     iconHtml: `<i><svg width="70" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
